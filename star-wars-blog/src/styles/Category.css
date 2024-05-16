@@ -1,0 +1,71 @@
+.app-category {
+    width: 80%;
+    min-height: 100vh;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: baseline;
+    align-items: center;
+    position: relative;
+    border: 1px solid yellow;
+}
+
+.prev-arrow-section  {
+    position: fixed;
+    left: 12%;
+    bottom: 40%;
+    cursor: pointer;
+    width: 80px;
+    height: 80px;
+}
+
+.prev-arrow-section:active {
+    outline: 4px solid white;
+    border-radius: 50%;
+}
+
+.next-arrow-section {
+    position: fixed;
+    right: 12%;
+    bottom: 40%;
+    cursor: pointer;
+    width: 80px;
+    height: 80px;
+}
+
+.next-arrow-section:active {
+    outline: 4px solid white;
+    border-radius: 50%;
+}
+
+.arrows {
+    width: 100%;
+    height: 100%;
+}
+
+.page-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: url(../assets/images/background03.webp) no-repeat center center fixed;
+    overflow: hidden;
+}
+
+.page-content h1 {
+    margin-top: 50px;
+    color: white;
+    cursor: default;
+}
+
+.card-list {
+    width: 80%;
+    padding: 5%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: flex-start;
+}
