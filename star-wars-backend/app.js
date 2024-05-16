@@ -7,13 +7,13 @@ const mongoose = require('mongoose')
 const path = require('path')
 const helmet = require('helmet')
 const rateLimit = require('express-rate-limit')
+const cors = require('cors')
 require('dotenv').config()
 
 /** Connexion à la base de données MongoDB */
 mongoose
     .connect(
-        `mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PASSWORD}@cluster-mon-vieux-grimo.7pht7gu.mongodb.net/?retryWrites=true&w=majority`,
-        { useNewUrlParser: true, useUnifiedTopology: true }
+        `mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PASSWORD}@maincluster.1a02zbk.mongodb.net/?retryWrites=true&w=majority&appName=MainCluster`,
     )
     .then(() => console.log('Connexion à MongoDB réussie !'))
     .catch(() => console.log('Connexion à MongoDB échouée !'))
