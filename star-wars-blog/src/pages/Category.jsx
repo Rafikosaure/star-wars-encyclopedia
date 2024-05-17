@@ -33,7 +33,7 @@ export default function Category() {
     // Calculer le nombre de dizaines d'articles (arrondi à l'excès)
     nbDozen.current = Math.ceil(info.total / 10)
 
-  }, [currentDatas.keyword, storedDozen, info.total, article])
+  }, [currentDatas.keyword, storedDozen, info.total])
 
 
 
