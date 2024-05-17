@@ -8,7 +8,7 @@ export default function Error404() {
   return (
     <div className='app'>
       <div className='error404-div'>
-        <img src={Error404Image} alt="Obiwan uses the Force on a stormtrooper" />
+        <img src={Error404Image} alt="Obiwan influences a weak mind with the Force." />
         <div className='overlay' />
         <h1>Ce ne sont pas ces droïdes-là que vous recherchez...</h1>
         <Link to='/' >Retour à la page d'Accueil</Link>

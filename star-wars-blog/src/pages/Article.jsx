@@ -21,7 +21,6 @@ export default function Article() {
     const currentDatas = Datas.find((item) => item._id === categoryId)
 
     
-
     useEffect(() => {
         if (currentDatas !== undefined) {
             // Récupération de l'article depuis l'API
