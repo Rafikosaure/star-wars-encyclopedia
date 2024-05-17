@@ -12,7 +12,7 @@ import Blog from './pages/Blog';
 import Discussion from './pages/Discussion';
 import Header from './components/Header';
 import Footer from './components/Footer';
-// import TestingPage from './pages/TestingPage';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -21,7 +21,6 @@ root.render(
       <Router>
         <Header />
           <Routes>
-            {/* <Route path='/testing-page' element={<TestingPage />} /> */}
             <Route path="/" element={<Home />} />
             <Route path="/category/:categoryId" element={<Category />} />
             <Route path='/article/:paramsIds' element={<Article />} />

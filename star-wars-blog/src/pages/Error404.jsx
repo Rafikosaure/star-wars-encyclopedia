@@ -10,7 +10,7 @@ export default function Error404() {
       <div className='error404-div'>
         <img src={Error404Image} alt="Obiwan influences a weak mind with the Force." />
         <div className='overlay' />
-        <h1>Ce ne sont pas ces droïdes-là que vous recherchez...</h1>
+        <h2>Ce ne sont pas ces droïdes-là que vous recherchez...</h2>
         <Link to='/' >Retour à la page d'Accueil</Link>
       </div>
       
