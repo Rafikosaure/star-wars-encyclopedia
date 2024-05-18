@@ -36,6 +36,7 @@ export default function Header() {
             <NavLink to="/category/13043736-7457-4a22-9218-4f9134f61b0c" onClick={(e) => dispatch(reinitializeDozen())}>organisations</NavLink>
             <NavLink to="/category/d4ac0725-f089-42c4-a76b-817764c5e0ab" onClick={(e) => dispatch(reinitializeDozen())}>espèces</NavLink>
             <NavLink to="/category/1812c326-e3a3-4a84-9a69-4dd64f5a298d" onClick={(e) => dispatch(reinitializeDozen())}>véhicules</NavLink>
+            <NavLink to="/forum" onClick={(e) => dispatch(reinitializeDozen())}>Forum</NavLink>
           </nav>
         </div>
         

@@ -26,7 +26,7 @@
     height: 100%;
 }
 
-.error404-div h2 {
+.error404-div h1 {
     z-index: 3;
     text-align: center;
     font-size: 36px;

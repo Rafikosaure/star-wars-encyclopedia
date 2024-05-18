@@ -18,6 +18,7 @@ export default function Article() {
     const categoryId = currentIds[0]
     const articleId = currentIds[1]
 
+    // Récupération de la catégorie de l'article
     const currentDatas = Datas.find((item) => item._id === categoryId)
 
     
@@ -30,9 +31,12 @@ export default function Article() {
                 updateRightPage(true)
                 setItem(data)
             })
+            // Gestion dans ce catch d'un articleId incorrect
             .catch(error => {
+                console.log(error)
                 navigate("*")
             })
+        // Gestion dans ce else d'une categoryId incorrecte
         } else {
             navigate("*")
         }
@@ -44,22 +48,24 @@ export default function Article() {
             {rightPage ? (
                 <div className='app'>
                     <div className='div-return'>
-                        <Link to={`/category/${categoryId}`} className='arrow-link'><img src={ReturnArrow} alt="Return to the last page" /></Link>
+                        <Link to={`/category/${categoryId}`} className='arrow-link'>
+                            <img src={ReturnArrow} alt="Return to the last page" />
+                        </Link>
                     </div>
                     <div className='presentation'>
                         {item && (
                             <>
-                            <div className='main-div'>
-                                <h1>{item.name.toLowerCase()}</h1>
-                                <div className='content'>
-                                    <div className='img-presentation'>
-                                        <img src={item.image} alt={item.name} />
-                                    </div>
-                                    <div className='description-div'>
-                                        <p>{item.description}</p>
+                                <div className='main-div'>
+                                    <h1>{item.name.toLowerCase()}</h1>
+                                    <div className='content'>
+                                        <div className='img-presentation'>
+                                            <img src={item.image} alt={item.name} />
+                                        </div>
+                                        <div className='description-div'>
+                                            <p>{item.description}</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                             </>
                         )}
                     </div>
