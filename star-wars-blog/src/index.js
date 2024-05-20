@@ -12,6 +12,7 @@ import Forum from './pages/Forum';
 import Discussion from './pages/Discussion';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import TestPage from './pages/TestPage';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -26,6 +27,7 @@ root.render(
             <Route path='/article/:paramsIds' element={<Article />} />
             <Route path='/forum' element={<Forum />} />
             <Route path='/discussion' element={<Discussion />} />
+            <Route path='/test' element={<TestPage />} />
             <Route path='*' element={<Error404 />} />
           </Routes>
         <Footer />
