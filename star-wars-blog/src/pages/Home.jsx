@@ -1,7 +1,7 @@
 import React from 'react'
 import '../styles/index.css'
 import '../styles/Home.css'
-import Datas from '../datas/LocalApi.json'
+import data from '../data/localApi.json'
 import Card from '../components/Card'
 
 export default function Home() {
@@ -20,7 +20,7 @@ export default function Home() {
         <div className='transition2' />
         <h2>catégories</h2>
         <div className='card-list'>
-          {Datas.map((item) => 
+          {data.map((item) => 
               <Card key={item._id} item={item} />
           )}
         </div>

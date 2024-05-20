@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import '../styles/Category.css'
 import Card from '../components/Card'
 import SearchBar from '../components/SearchBar'
-import Datas from '../datas/LocalApi.json'
+import data from '../data/localApi.json'
 import NextArrow from '../assets/images/next-arrow.webp'
 import BackArrow from '../assets/images/back-arrow.webp'
 import { useParams } from 'react-router-dom'
@@ -24,7 +24,7 @@ export default function Category() {
   const navigate = useNavigate()
 
   // Trouver les articles correspondant à la catégorie choisie
-  const currentDatas = Datas.find((item) => item._id === categoryId)
+  const currentDatas = data.find((item) => item._id === categoryId)
 
   useEffect(() => {
     // Gestion des mauvaises URLs

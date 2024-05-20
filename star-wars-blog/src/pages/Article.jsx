@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import '../styles/index.css'
 import '../styles/Article.css'
-import Datas from '../datas/LocalApi.json'
+import data from '../data/localApi.json'
 import ReturnArrow from '../assets/images/return-arrow.webp'
 import { Link } from 'react-router-dom'
 
@@ -19,7 +19,7 @@ export default function Article() {
     const articleId = currentIds[1]
 
     // Récupération de la catégorie de l'article
-    const currentDatas = Datas.find((item) => item._id === categoryId)
+    const currentDatas = data.find((item) => item._id === categoryId)
 
     
     useEffect(() => {

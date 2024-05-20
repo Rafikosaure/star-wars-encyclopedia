@@ -1,5 +1,5 @@
 import '../styles/SearchBar.css'
-import Datas from '../datas/LocalApi.json'
+import data from '../data/localApi.json'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
@@ -28,7 +28,7 @@ export default function SearchBar({ category }) {
   const onFormSubmit = (e) => {
     e.preventDefault()
     if (article) {
-      const currentData = Datas.find((item) => item.keyword === category)
+      const currentData = data.find((item) => item.keyword === category)
       const categoryId = currentData._id
       navigate(`/article/${categoryId}.${article._id}`)
     }
