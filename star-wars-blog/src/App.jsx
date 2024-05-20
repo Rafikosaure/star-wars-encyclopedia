@@ -13,19 +13,19 @@ import TestPage from './pages/TestPage';
 export default function App() {
   return (
     <>
-        <Router>
-            <Header />
-            <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/category/:categoryId" element={<Category />} />
-                <Route path='/article/:paramsIds' element={<Article />} />
-                <Route path='/forum' element={<Forum />} />
-                <Route path='/discussion' element={<Discussion />} />
-                <Route path='/test' element={<TestPage />} />
-                <Route path='*' element={<Error404 />} />
-            </Routes>
-            <Footer />
-        </Router>
+      <Router>
+          <Header />
+          <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/category/:categoryId" element={<Category />} />
+              <Route path='/article/:paramsIds' element={<Article />} />
+              <Route path='/forum' element={<Forum />} />
+              <Route path='/discussion' element={<Discussion />} />
+              <Route path='/test' element={<TestPage />} />
+              <Route path='*' element={<Error404 />} />
+          </Routes>
+          <Footer />
+      </Router>
     </>
   )
 }
