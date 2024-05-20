@@ -1,6 +1,7 @@
 const http = require('http')
 const app = require('./app')
-const { env } = require('./configuration/config.js')
+// const { env } = require('./configuration/config.js')
+require('dotenv').config()
 
 const normalizePort = (val) => {
     const port = parseInt(val, 10)
@@ -13,7 +14,7 @@ const normalizePort = (val) => {
     }
     return false
 }
-const port = normalizePort(env.PORT || '4000')
+const port = normalizePort(process.env.PORT || '4000')
 app.set('port', port)
 
 const errorHandler = (error) => {
