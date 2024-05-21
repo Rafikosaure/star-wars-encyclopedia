@@ -8,11 +8,10 @@ exports.translate = async (req, res) => {
         const translator = new deepl.Translator(authKey);
 
         // Définir la langue d'origine & la langue cible
-        const sourceLang = req.body.sourceLang
         const targetLang = req.body.targetLang
 
         const textToTranslate = req.body.text
-        const result = await translator.translateText(textToTranslate, sourceLang, targetLang);
+        const result = await translator.translateText(textToTranslate, null, targetLang);
         // console.log(result.text);
         res.status(200).json(result.text)
     } catch(error) {
