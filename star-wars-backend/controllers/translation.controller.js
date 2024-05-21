@@ -9,11 +9,10 @@ exports.translate = async (req, res) => {
 
         // Définir la langue d'origine & la langue cible
         const targetLang = req.body.targetLang
-
-        const textToTranslate = req.body.text
-        const result = await translator.translateText(textToTranslate, null, targetLang);
-        // console.log(result.text);
-        res.status(200).json(result.text)
+        const text = req.body.text
+        const translatedText = await translator.translateText(text, null, targetLang);
+        // console.log(translatedText)
+        res.status(200).json(translatedText.text)
     } catch(error) {
         res.status(500).json(error)
     }

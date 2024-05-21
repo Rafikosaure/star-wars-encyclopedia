@@ -1,6 +1,5 @@
 const http = require('http')
 const app = require('./app')
-// const { env } = require('./configuration/config.js')
 require('dotenv').config()
 
 const normalizePort = (val) => {

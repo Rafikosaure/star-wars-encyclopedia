@@ -12,6 +12,8 @@ export default function Article() {
 
     const [item, setItem] = useState()
     const [rightPage, updateRightPage] = useState(false)
+    // const [newName, setNewName] = useState()
+    // const [newDescription, setNewDescription] = useState()
     const navigate = useNavigate()
     const { paramsIds } = useParams()
     const currentIds = paramsIds.split('.')
@@ -42,6 +44,29 @@ export default function Article() {
         }
     }, [articleId, currentDatas, navigate])
 
+        
+
+    async function translateTexts(text) {
+        console.log('Texte en anglais :', text)
+        const object = {
+            targetLang: "FR",
+            text: text
+        }
+        await fetch('http://localhost:8080/translate', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(object)
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Dans la fonction de trad :', data)
+            return data
+        })
+        .catch(error => console.log(error))
+    }
+
 
     return (
         <>
@@ -56,6 +81,7 @@ export default function Article() {
                         {item && (
                             <>
                                 <div className='main-div'>
+                                    {/* <h1>{item.name.toLowerCase()}</h1> */}
                                     <h1>{item.name.toLowerCase()}</h1>
                                     <div className='content'>
                                         <div className='img-presentation'>
