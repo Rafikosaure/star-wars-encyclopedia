@@ -2,8 +2,6 @@ const express = require('express')
 const app = express()
 app.use(express.json())
 const mongoose = require('mongoose')
-// const stuffRoutes = require('./routes/stuff')
-// const userRoutes = require('./routes/user')
 const path = require('path')
 const helmet = require('helmet')
 const rateLimit = require('express-rate-limit')
@@ -39,7 +37,14 @@ app.use(
     })
 )
 
-// Les middlewares de nos routes
+
+// Routes de l'application
+const translateText = require('./routes/translation.routes')
+
+
+// Middlewares de nos routes
+app.use('/translate', translateText)
 app.use('/images', express.static(path.join(__dirname, 'images')))
+
 
 module.exports = app
