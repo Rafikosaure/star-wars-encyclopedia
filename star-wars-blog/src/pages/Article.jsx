@@ -12,7 +12,7 @@ export default function Article() {
 
     const [item, setItem] = useState()
     const [rightPage, updateRightPage] = useState(false)
-    // const [newName, setNewName] = useState()
+    const [translatedData, setTranslatedData] = useState()
     // const [newDescription, setNewDescription] = useState()
     const navigate = useNavigate()
     const { paramsIds } = useParams()
@@ -45,27 +45,31 @@ export default function Article() {
     }, [articleId, currentDatas, navigate])
 
         
-
-    async function translateTexts(text) {
-        console.log('Texte en anglais :', text)
-        const object = {
-            targetLang: "FR",
-            text: text
+    useEffect(() => {
+        if (item !== undefined) {
+            const object = {
+                // targetLang: "FR",
+                name: item.name,
+                description: item.description
+            }
+            if (!translatedData) {
+                fetch('http://localhost:8080/translate', {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(object)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('frontend data :', data)
+                    setTranslatedData(data)
+                })
+                .catch(error => console.log(error))
+            }
+            
         }
-        await fetch('http://localhost:8080/translate', {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(object)
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Dans la fonction de trad :', data)
-            return data
-        })
-        .catch(error => console.log(error))
-    }
+    })
 
 
     return (
@@ -81,14 +85,21 @@ export default function Article() {
                         {item && (
                             <>
                                 <div className='main-div'>
-                                    {/* <h1>{item.name.toLowerCase()}</h1> */}
-                                    <h1>{item.name.toLowerCase()}</h1>
+                                    {translatedData ? (
+                                        <h1>{translatedData.name}</h1>
+                                    ) : (
+                                        <h1>{item.name.toLowerCase()}</h1>  
+                                    )}
                                     <div className='content'>
                                         <div className='img-presentation'>
                                             <img src={item.image} alt={item.name} />
                                         </div>
                                         <div className='description-div'>
-                                            <p>{item.description}</p>
+                                            {translatedData ? (
+                                                <p>{translatedData.description}</p>
+                                            ) : (
+                                                <p>{item.description}</p>  
+                                            )}                                            
                                         </div>
                                     </div>
                                 </div>
