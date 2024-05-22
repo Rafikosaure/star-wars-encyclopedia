@@ -18,8 +18,10 @@ export default function SearchBar({ category }) {
     if (search.length > 0) {
       fetch(`https://starwars-databank-server.vercel.app/api/v1/${category}/name/${search}`)
       .then(response => response.json())
-      .then(data => setArticle(data[0]))
-      .then(data => dispatch(saveAnArticle(article, { test: false })))
+      .then(data => {
+        setArticle(data[0])
+        dispatch(saveAnArticle(article, { test: false }))
+      })
     }
 
   }, [category, search, dispatch, article])
