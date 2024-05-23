@@ -81,7 +81,10 @@
     font-size: 22px;
     text-align: justify;
     font-weight: bold;
-    color: yellow;
     line-height: 45px;
     cursor: default;
+}
+
+.description-div p {
+    color: yellow;
 }

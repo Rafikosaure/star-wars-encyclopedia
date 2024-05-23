@@ -1,7 +1,9 @@
 .collapse-main {
     width: 50%;
+    height: fit-content;
     display: flex;
     justify-content: center;
+    align-items: center;
     flex-direction: column;
     margin-top: 35px;
     margin-bottom: 35px;
@@ -12,23 +14,15 @@
     justify-content: center;
     align-items: center;
     height: 50px;
-    width: 100%;
-    color: white;
+    width: calc(100% - 2px);
     background-color: black;
-    position: relative;
-}
-
-.collapse-bar-open {
+    outline: 1px solid white;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
 }
 
-.collapse-bar-close {
-    border-radius: 10px;
-    transition: border-radius 0ms 500ms;
-}
-
 .collapse-title {
+    color: white;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -39,45 +33,18 @@
     margin-top: 0;
 }
 
-.collapse-button {
-    position: absolute;
-    right: 3%;
-    width: 45px;
-    height: 45px;
-    background-color: white;
-    background: url(../assets/images/arrow_down.webp) no-repeat center center;
-}
-
-.button-open {
-    transform: rotate(-180deg);
-    transition: transform 250ms ease-in-out;
-}
-
-.button-close {
-    transform: rotate(0deg);
-    transition: transform 250ms ease-in-out;
-}
-
 .collapse-div-text {
-    background-color: lightsteelblue;
+    background-color: white;
+    height: 300px;
+    overflow: scroll;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
-    max-height: 0;
-    overflow: hidden;
-}
-
-.text-visible {
-    max-height: 1000px;
-    transition: 500ms max-height ease-in;
-}
-
-.text-hidden {
-    max-height: 0;
-    transition: 500ms max-height ease-out;
 }
 
 p {
+    color: black;
     text-align: justify;
+    padding-top: 10px;
     padding-left: 5%;
     padding-right: 5%;
 }
