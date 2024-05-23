@@ -40,8 +40,26 @@
     background: url(../assets/images/arrow_down.webp) no-repeat center center;
 }
 
+.button-open {
+    transform: rotate(-180deg);
+    transition: transform 250ms ease-in-out;
+}
+
+.button-close {
+    transform: rotate(0deg);
+    transition: transform 250ms ease-in-out;
+}
+
 .collapse-div-text {
     background-color: lightsteelblue;
+}
+
+.text-visible {
+    display: flex;
+}
+
+.text-hidden {
+    display: none;
 }
 
 p {
