@@ -15,9 +15,17 @@
     width: 100%;
     color: white;
     background-color: black;
+    position: relative;
+}
+
+.collapse-bar-open {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-    position: relative;
+}
+
+.collapse-bar-close {
+    border-radius: 10px;
+    transition: border-radius 0ms 500ms;
 }
 
 .collapse-title {
@@ -52,14 +60,20 @@
 
 .collapse-div-text {
     background-color: lightsteelblue;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    max-height: fit-content;
+    overflow: hidden;
 }
 
 .text-visible {
-    display: flex;
+    max-height: 1000px;
+    transition: 500ms max-height ease-in;
 }
 
 .text-hidden {
-    display: none;
+    max-height: 0;
+    transition: 500ms max-height ease-out;
 }
 
 p {
