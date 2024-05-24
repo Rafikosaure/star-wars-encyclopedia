@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
+import Login from './pages/Login'
 import Category from './pages/Category';
 import Error404 from './pages/Error404';
 import Article from "./pages/Article"
@@ -17,6 +18,7 @@ export default function App() {
           <Header />
           <Routes>
               <Route path="/" element={<Home />} />
+              <Route path='/login' element={<Login />} />
               <Route path="/category/:categoryId" element={<Category />} />
               <Route path='/article/:paramsIds' element={<Article />} />
               <Route path='/forum' element={<Forum />} />
