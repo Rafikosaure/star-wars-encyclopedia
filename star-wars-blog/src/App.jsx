@@ -18,7 +18,7 @@ export default function App() {
           <Header />
           <Routes>
               <Route path="/" element={<Home />} />
-              <Route path='/login' element={<Auth />} />
+              <Route path='/auth' element={<Auth />} />
               <Route path="/category/:categoryId" element={<Category />} />
               <Route path='/article/:paramsIds' element={<Article />} />
               <Route path='/forum' element={<Forum />} />
