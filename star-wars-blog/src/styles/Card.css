@@ -11,6 +11,19 @@
     transition-duration: 1s;
 }
 
+.card-home {
+    animation: fadein 1s;
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
 .card:hover {
     border: 2px solid white;
 }
