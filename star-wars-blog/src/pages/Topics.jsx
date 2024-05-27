@@ -14,14 +14,8 @@ export default function Topics() {
     <div className='app topics'>
       <div>
         <h1 className='topics-page-title'>{currentTopics.title}</h1>
-        <div>
-            
-        </div>
-        <div>
-            posts de chaque topic
-        </div>
-        <div>
-            posts de chaque topic
+        <div className='topics-list'>
+            appel à la base de données
         </div>
       </div>
     </div>
