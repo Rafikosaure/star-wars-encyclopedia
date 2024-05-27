@@ -59,12 +59,16 @@
 
 .card-name-div {
     width: 90%;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
 }
 
 .card-name {
+    text-align: center;
     font-size: 22px;
+    height: fit-content;
     color: white;
-    margin-top: 5px;
+    margin-top: 0;
     margin-bottom: 5px;
 }
