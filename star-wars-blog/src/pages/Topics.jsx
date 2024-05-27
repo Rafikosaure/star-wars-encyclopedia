@@ -8,15 +8,12 @@ import topicData from '../data/localTopics.json'
 export default function Topics() {
 
     const { topicsId } = useParams()
-    console.log(topicsId)
     const currentTopics = topicData.find((topic) => topic._id === topicsId)
-    console.log(currentTopics)
-
 
   return (
     <div className='app topics'>
       <div>
-        <h1 className='topics-page-title'>blabla</h1>
+        <h1 className='topics-page-title'>{currentTopics.title}</h1>
         <div>
             
         </div>
