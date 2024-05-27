@@ -3,9 +3,13 @@ import '../styles/index.css'
 import '../styles/Forum.css'
 import Code from '../components/Code'
 import topics from '../data/localTopics.json'
+import { useNavigate } from 'react-router-dom'
 
 
 export default function Forum() {
+
+  const navigate = useNavigate()
+
   return (
     <div className='app forum'>
       <div className='forum-overlay'/>
@@ -16,10 +20,10 @@ export default function Forum() {
           <Code />
         </div>
         <div className='forum-div-topics'>
-          <h2>Discussions</h2>
+          <h2>Thématiques</h2>
           {topics.map((topic) => 
-            <div className='div-topic'>
-              <h3 key={topic._id} >{topic.title}</h3>
+            <div className='div-topic' key={topic._id} onClick={() => navigate(`/topics/${topic._id}`)}>
+              <h3>{topic.title}</h3>
             </div>
           )}
         </div>    
