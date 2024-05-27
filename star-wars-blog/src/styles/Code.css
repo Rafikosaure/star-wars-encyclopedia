@@ -31,20 +31,21 @@
     font-family: Arial, Helvetica, sans-serif;
     margin-bottom: 0;
     margin-top: 0;
+    cursor: default;
 }
 
 .collapse-div-text {
     background-color: white;
     height: 300px;
-    overflow: scroll;
+    width: 100%;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
 }
 
-p {
+object {
+    width: 99%;
+    height: 100%;
     color: black;
     text-align: justify;
-    padding-top: 10px;
-    padding-left: 5%;
-    padding-right: 5%;
+    padding-left: 1%;
 }

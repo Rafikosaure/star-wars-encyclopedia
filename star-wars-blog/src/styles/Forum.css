@@ -2,6 +2,8 @@
     background: url(../assets/images/forum.webp) no-repeat center center fixed;
     background-size: 110% auto;
     position: relative;
+    color: white;
+    height: 1300px;
 }
 
 .forum-overlay {
@@ -31,14 +33,50 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.chart-text {
-    color: white;
+    cursor: default;
 }
 
 .forum-title {
-    color: white;
     font-family: 'Starjedi';
     margin-top: 50px;
+    cursor: default;
+}
+
+.forum-div-topics {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid yellow;
+    border-radius: 10px;
+    width: 50%;
+    background-color: black;
+}
+
+.forum-div-topics h2 {
+    width: 100%;
+    text-align: center;
+    color: yellow;
+    font-family: 'Starjedi';
+    padding-bottom: 10px;
+    cursor: default;
+}
+
+.div-topic {
+    width: 100%;
+    height: 65px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all, .4s;
+}
+
+.div-topic:hover {
+    text-align: center;
+    background-color: white;
+    color: black;
+    font-size: 20px;
 }
