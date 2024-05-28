@@ -6,16 +6,18 @@ const fs = require('fs')
 require('dotenv').config()
 
 /** Enregistre un nouvel utilisateur dans la base de données */
-exports.signup = (req, res, next) => {
+exports.register = (req, res, next) => {
 
     /** Traitement de l'image mémorisée avec le module sharp */
-    const { buffer, originalname } = req.file
-    const timestamp = Date.now()
-    const name = originalname.split(' ').join('_')
-    const ref = `${name}-${timestamp}.webp`
-    const path = `./images/${ref}`
-    sharp(buffer).resize(450).webp().toFile(path)
-
+    if (req.file) {
+        const { buffer, originalname } = req.file
+        const timestamp = Date.now()
+        const name = originalname.split(' ').join('_')
+        const ref = `${name}-${timestamp}.webp`
+        const path = `./images/${ref}`
+        sharp(buffer).resize(450).webp().toFile(path)
+    }
+    
     bcrypt
         .hash(req.body.password, parseInt(process.env.NB_HASH))
         .then((hash) => {
