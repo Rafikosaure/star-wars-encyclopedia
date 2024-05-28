@@ -12,10 +12,11 @@ export default function Topics() {
 
   return (
     <div className='app topics'>
-      <div>
+      <div className='topics-overlay' />
+      <div className='topics-main'>
         <h1 className='topics-page-title'>{currentTopics.title}</h1>
         <div className='topics-list'>
-            appel à la base de données
+            appel à la bdd
         </div>
       </div>
     </div>

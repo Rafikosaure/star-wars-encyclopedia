@@ -9,6 +9,7 @@ import Topics from './pages/Topics';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import TestPage from './pages/TestPage';
+import Post from './pages/Post';
 
 
 export default function App() {
@@ -23,6 +24,7 @@ export default function App() {
               <Route path='/article/:paramsIds' element={<Article />} />
               <Route path='/forum' element={<Forum />} />
               <Route path='/topics/:topicsId' element={<Topics />} />
+              <Route path='/post/:postId' element={<Post />} />
               <Route path='/test' element={<TestPage />} />
               <Route path='*' element={<Error404 />} />
           </Routes>

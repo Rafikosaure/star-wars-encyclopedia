@@ -1,8 +1,9 @@
 .forum {
     background: url(../assets/images/forum.webp) no-repeat center center fixed;
+    background-size: cover;
     position: relative;
     color: white;
-    height: 1300px;
+    min-height: 1300px;
 }
 
 .forum-overlay {
