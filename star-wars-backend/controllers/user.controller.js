@@ -55,14 +55,19 @@ exports.login = (req, res, next) => {
                                     'Paire identifiant/mot de passe incorrecte !',
                             })
                         } else {
-                            res.status(200).json({
-                                userId: user._id,
-                                token: jwt.sign(
-                                    { userId: user._id },
-                                    process.env.TOKEN,
-                                    { expiresIn: '24h' }
-                                ),
-                            })
+                            const token = jwt.sign(
+                                // Charge utile du token
+                                { id: user.id },
+                                // Clé secrète
+                                process.env.TOKEN,
+                                // Options du token
+                                { expiresIn: "24h" }
+                            );
+                            // envoi du token (cookie HTTPOnly)
+                            res
+                            .cookie("access_token", token, { httpOnly: true })
+                            .status(200)
+                            .json(user);
                         }
                     })
                     .catch((error) => {
