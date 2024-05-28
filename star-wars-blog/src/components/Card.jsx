@@ -16,29 +16,33 @@ export default function Card({ item, categoryId }) {
   const paramsIds = `${categoryId}.${itemId}`
 
   return (
-    <div className='card'>
+    <>
       {location.pathname !== "/" ? (
-        <Link className='card-link' to={`/article/${paramsIds}`}>
-          <div className='card-image'>
-            <img src={item.image} alt={item.name} />
-          </div>
-          <div className='card-name-div'>
-            <p className="card-name">{item.name.toLowerCase()}</p>
-          </div>
-        </Link>
+        <div className='card card-home'>
+          <Link className='card-link' to={`/article/${paramsIds}`}>
+            <div className='card-image'>
+              <img src={item.image} alt={item.name} />
+            </div>
+            <div className='card-name-div'>
+              <p className="card-name">{item.name.toLowerCase()}</p>
+            </div>
+          </Link>
+        </div>
       ) : (
-        <Link className='card-link' 
-          to={`/category/${itemId}`}
-          onClick={(e) => {dispatch(reinitializeDozen())}}
-          >
-          <div className='card-image'>
-            <img src={item.image} alt={item.title} />
-          </div>
-          <div className='card-name-div'>
-            <p className="card-name">{item.title.toLowerCase()}</p>
-          </div>
-        </Link>
+        <div className='card'>  
+          <Link className='card-link' 
+            to={`/category/${itemId}`}
+            onClick={(e) => {dispatch(reinitializeDozen())}}
+            >
+            <div className='card-image'>
+              <img src={item.image} alt={item.title} />
+            </div>
+            <div className='card-name-div'>
+              <p className="card-name">{item.title.toLowerCase()}</p>
+            </div>
+          </Link>
+        </div>  
       )}
-    </div>
+    </>
   )
 }

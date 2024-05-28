@@ -78,7 +78,7 @@ export default function Article() {
                 <div className='presentation'>
                     {item && (
                         <>
-                            <div className='main-div'>
+                            <div className='main-div showing-data'>
                                 {translatedData ? (
                                     <h1>{translatedData.name}</h1>
                                 ) : (

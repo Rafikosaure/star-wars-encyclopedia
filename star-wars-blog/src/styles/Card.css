@@ -11,6 +11,19 @@
     transition-duration: 1s;
 }
 
+.card-home {
+    animation: fadein 1s;
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
 .card:hover {
     border: 2px solid white;
 }
@@ -46,12 +59,16 @@
 
 .card-name-div {
     width: 90%;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
 }
 
 .card-name {
+    text-align: center;
     font-size: 22px;
+    height: fit-content;
     color: white;
-    margin-top: 5px;
+    margin-top: 0;
     margin-bottom: 5px;
 }
