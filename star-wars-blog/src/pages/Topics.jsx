@@ -14,7 +14,7 @@ export default function Topics() {
     <div className='app topics'>
       <div className='topics-overlay' />
       <div className='topics-main'>
-        <h1 className='topics-page-title'>{currentTopics.title}</h1>
+        <h1 className='topics-page-title'>{currentTopics.title.toLowerCase()}</h1>
         <div className='topics-list'>
             appel à la bdd
         </div>
