@@ -15,7 +15,25 @@ export default function RegisterForm() {
     const title = 'Inscription'
 
     const onSubmit = (data) => {
-        console.log(data)
+        if (data.picture.length > 0) {
+            const newUrl = URL.createObjectURL(data.picture[0]);
+            data.picture = newUrl
+        } else {
+            delete data.picture
+        }
+        // console.log(data)
+        fetch("http://localhost:8080/auth/register", {
+            method: "POST",
+            // body: JSON.stringify({ email: email, password: password }),
+            body: JSON.stringify(data),
+            headers: {"Accept": "application/json", "Content-Type": "application/json"}
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data)
+            dispatch(updateRegisterState(false))
+        })
+        .catch(error => console.error(error));
     }
 
     const isValidIcon = (value) => {
@@ -33,7 +51,7 @@ export default function RegisterForm() {
             <input type="text" className='login-form-input' name='name' placeholder='Entrez votre nom...' {...register("name")} onFocus={(e) => e.target.placeholder = ""} onBlur={(e) => e.target.placeholder = 'Entrez votre nom...'} required/>
             <input type="email" className='login-form-input' name='email' placeholder='Entrez votre email...' {...register("email")} onFocus={(e) => e.target.placeholder = ""} onBlur={(e) => e.target.placeholder = 'Entrez votre email...'} required/>
             <input type="password" className='login-form-input' name='password' placeholder='Entrez votre mot de passe...' {...register("password")} onFocus={(e) => e.target.placeholder = ""} onBlur={(e) => e.target.placeholder = 'Entrez votre mot de passe...'} required/>
-            <input type="file" id="file" name="file" accept=".png, .jpg, .jpeg" {...register("picture")} onChange={(e) => isValidIcon(e.target.value)} required/>
+            <input type="file" id="file" name="file" accept=".png, .jpg, .jpeg" {...register("picture")} onChange={(e) => isValidIcon(e.target.value)}/>
             <label htmlFor="file">Choisissez une image de profil<img src={isValid} alt="Upload is valid" className={`input-valid-img ${fileIsLoad}`} /></label>
             <button type='submit'>S'inscrire</button>
         </form>
