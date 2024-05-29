@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import '../styles/Header.css'
 import Logo from '../assets/images/logo.webp'
 import { NavLink } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { reinitializeDozen } from '../redux/slices/dozenSlice'
+import Emoji from '../assets/images/EmojiBlitzBobaFett1.webp'
+import { useNavigate } from 'react-router-dom'
 
 
 export default function Header() {
@@ -12,6 +14,8 @@ export default function Header() {
   // du store redux servant à réinitialiser à 1 la dizaine 
   // d'articles affichés lors d'un clic sur une NavLink:
   const dispatch = useDispatch()
+  const [logged, setLogged] = useState(false)
+  const navigate = useNavigate()
 
   return (
     <div className='header'>
@@ -38,6 +42,16 @@ export default function Header() {
             <NavLink to="/category/1812c326-e3a3-4a84-9a69-4dd64f5a298d" onClick={(e) => dispatch(reinitializeDozen())}>véhicules</NavLink>
             <NavLink to="/forum" onClick={(e) => dispatch(reinitializeDozen())}>Forum</NavLink>
           </nav>
+          <div className='header-div-connection'>
+            {logged ? (
+              <>
+              <img src={Emoji} alt="Profil de l'utilisateur" />
+              <p className='connection-link'>Déconnexion</p>
+              </>
+            ) : (
+              <p onClick={() => navigate('/auth')} className='connection-link-unlogged'>Se connecter</p>
+            )}
+          </div>
         </div>
         
       </div>
