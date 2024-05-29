@@ -3,15 +3,28 @@ import '../styles/Auth.css'
 import { useForm } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
 import { updateRegisterState } from '../redux/slices/registerSlice'
+import { useNavigate } from 'react-router-dom'
 
 export default function LoginForm() {
 
     const { register, handleSubmit } = useForm()
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const title = 'Connexion'
 
     const onSubmit = (data) => {
-        console.log(data)
+        // console.log(data)
+        fetch("http://localhost:8080/auth/login", {
+            method: "POST",
+            body: JSON.stringify(data),
+            headers: {"Accept": "application/json", "Content-Type": "application/json"}
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data)
+            navigate("/")
+        })
+        .catch(error => console.error(error));
     }
 
   return (
