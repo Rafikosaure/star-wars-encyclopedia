@@ -21,10 +21,8 @@ export default function RegisterForm() {
         } else {
             delete data.picture
         }
-        // console.log(data)
         fetch("http://localhost:8080/auth/register", {
             method: "POST",
-            // body: JSON.stringify({ email: email, password: password }),
             body: JSON.stringify(data),
             headers: {"Accept": "application/json", "Content-Type": "application/json"}
         })
