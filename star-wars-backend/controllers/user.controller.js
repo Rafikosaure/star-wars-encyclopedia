@@ -79,3 +79,12 @@ exports.login = (req, res, next) => {
             res.status(500).json({ error })
         })
 }
+
+// exports.logout = (req, res, next) => {
+//     try {
+//         // res.clearCookie('access_token')
+//         res.status(200).json({ message: 'OK!' })
+//     } catch(error) {
+//         req.status(500).json({ error })
+//     }
+// }

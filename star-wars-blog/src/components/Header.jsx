@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
 import '../styles/Header.css'
+import { useState } from 'react'
 import Logo from '../assets/images/logo.webp'
 import { NavLink } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
@@ -10,13 +10,12 @@ import { useNavigate } from 'react-router-dom'
 
 export default function Header() {
 
-  // Cette objet "dispatch" permet d'appeler la fonction
-  // du store redux servant à réinitialiser à 1 la dizaine 
-  // d'articles affichés lors d'un clic sur une NavLink:
   const dispatch = useDispatch()
-  const [logged, setLogged] = useState(false)
   const navigate = useNavigate()
-
+  const [logged, setLogged] = useState(false)
+  
+  
+  
   return (
     <div className='header'>
       <div className='navbar'>

@@ -4,7 +4,7 @@ require('dotenv').config({path: '../.env'})
 // const { env } = require('../configuration/config.js')
 
 
-export const verifyToken = (req, res, next) => {
+exports.verifyToken = (req, res, next) => {
     // Récupère le jeton (token) JWT à partir des cookies de la requête
     const token = req.cookies.access_token;
 

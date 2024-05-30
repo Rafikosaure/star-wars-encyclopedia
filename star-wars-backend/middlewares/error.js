@@ -1,5 +1,5 @@
 // Fonction servant à créer les messages d'erreur
-export const createError = (status, message) => {
+exports.createError = (status, message) => {
 
     // Crée une nouvelle instance d'erreur vide
     const error = new Error()

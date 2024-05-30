@@ -3,6 +3,7 @@ import dozenManager from './slices/dozenSlice'
 import articleReducer from './slices/articleSlice'
 import registerManager from "./slices/registerSlice";
 
+
 export default configureStore({
     reducer: {
         dozenManager: dozenManager,

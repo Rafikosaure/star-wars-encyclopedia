@@ -6,6 +6,7 @@ const path = require('path')
 const helmet = require('helmet')
 const rateLimit = require('express-rate-limit')
 const cors = require('cors')
+const cookieParser = require('cookie-parser')
 
 require('dotenv').config()
 
@@ -18,7 +19,13 @@ mongoose
     .catch(() => console.log('Connexion à MongoDB échouée !'))
 
 // Gestion des erreurs CORS
-app.use(cors())
+app.use(cors({
+    origin: 'http://localhost:3000',
+    credentials: true
+}))
+
+// Utilisation du cookie-parser
+app.use(cookieParser())
 
 // Application d'un rate-limit
 app.use(
