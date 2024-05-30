@@ -1,20 +1,25 @@
 import '../styles/Header.css'
-import { useState } from 'react'
+import { useEffect } from 'react'
 import Logo from '../assets/images/logo.webp'
 import { NavLink } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { reinitializeDozen } from '../redux/slices/dozenSlice'
 import Emoji from '../assets/images/EmojiBlitzBobaFett1.webp'
 import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { selectloggedUserState } from '../redux/slices/loggedUserSlice'
+// import { updateLoggedUser } from '../redux/slices/loggedUserSlice'
 
 
 export default function Header() {
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const [logged, setLogged] = useState(false)
+  const loggedUser = useSelector(selectloggedUserState)
   
-  
+  useEffect(() => {
+    console.log(loggedUser)
+  }, [loggedUser])
   
   return (
     <div className='header'>
@@ -42,7 +47,7 @@ export default function Header() {
             <NavLink to="/forum" onClick={(e) => dispatch(reinitializeDozen())}>Forum</NavLink>
           </nav>
           <div className='header-div-connection'>
-            {logged ? (
+            {loggedUser ? (
               <>
               <img src={Emoji} alt="Profil de l'utilisateur" />
               <p className='connection-link'>Déconnexion</p>
