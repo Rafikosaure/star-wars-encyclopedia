@@ -1,4 +1,4 @@
-const { createError } = require('./error')
+const { createError } = require('./error.js')
 const jwt = require('jsonwebtoken')
 require('dotenv').config({path: '../.env'})
 // const { env } = require('../configuration/config.js')

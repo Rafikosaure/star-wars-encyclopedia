@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+
 const initialState = {
   logged: false
 }
@@ -9,11 +10,7 @@ export const loggedUserSlice = createSlice({
   initialState,
   reducers: {
     updateLoggedUser: (state, action) => {
-      if (state.logged) {
-        state.logged = false
-      } else {
-        state.logged = true
-      }
+      state.logged = action.payload
     }
   }
 });

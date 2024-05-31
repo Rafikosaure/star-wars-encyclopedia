@@ -80,11 +80,20 @@ exports.login = (req, res, next) => {
         })
 }
 
-// exports.logout = (req, res, next) => {
-//     try {
-//         // res.clearCookie('access_token')
-//         res.status(200).json({ message: 'OK!' })
-//     } catch(error) {
-//         req.status(500).json({ error })
-//     }
-// }
+exports.logged = (req, res, next) => {
+    User.findOne({ _id: req.user.id })
+    .then((user) => res.status(200).json(user))
+    .catch((error) => res.status(404).json({ error }))
+}
+
+exports.logout = (req, res, next) => {
+    try {
+        res.clearCookie('access_token', {
+            httpOnly: true,
+            expires: new Date(0)
+        })
+        res.status(200).json({ message: 'Utilisateur déconnecté !' })
+    } catch(error) {
+        req.status(500).json({ error })
+    }
+}

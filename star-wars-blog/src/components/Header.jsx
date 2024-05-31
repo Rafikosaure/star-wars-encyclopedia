@@ -1,5 +1,5 @@
 import '../styles/Header.css'
-import { useEffect } from 'react'
+// import { useEffect } from 'react'
 import Logo from '../assets/images/logo.webp'
 import { NavLink } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
@@ -7,8 +7,8 @@ import { reinitializeDozen } from '../redux/slices/dozenSlice'
 import Emoji from '../assets/images/EmojiBlitzBobaFett1.webp'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import { selectloggedUserState } from '../redux/slices/loggedUserSlice'
-// import { updateLoggedUser } from '../redux/slices/loggedUserSlice'
+import { updateLoggedUser, selectloggedUserState } from '../redux/slices/loggedUserSlice'
+import { useEffect } from 'react'
 
 
 export default function Header() {
@@ -18,8 +18,37 @@ export default function Header() {
   const loggedUser = useSelector(selectloggedUserState)
   
   useEffect(() => {
-    console.log(loggedUser)
-  }, [loggedUser])
+    fetch('http://localhost:8080/auth/logged', {
+      credentials: "include"
+    })
+    .then(response => response.json())
+    .then(data => {
+      // console.log(data)
+      dispatch(updateLoggedUser(true))
+    })
+    .catch(error => {
+      // console.log(error)
+      dispatch(updateLoggedUser(false))
+    })
+  }, [loggedUser, dispatch])
+  
+  
+  const logout = () => {
+    fetch('http://localhost:8080/auth/logout', {
+      method: "POST",
+      headers: {"Accept": "application/json", "Content-Type": "application/json"},
+      credentials: "include"
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log(data)
+      dispatch(updateLoggedUser(false))
+    })
+    .catch(error => console.log(error))
+  }
+
+
+
   
   return (
     <div className='header'>
@@ -47,13 +76,13 @@ export default function Header() {
             <NavLink to="/forum" onClick={(e) => dispatch(reinitializeDozen())}>Forum</NavLink>
           </nav>
           <div className='header-div-connection'>
-            {loggedUser ? (
+            {loggedUser === false ? (
+              <p onClick={() => navigate('/auth')} className='connection-link'>Se connecter</p>
+            ) : (
               <>
               <img src={Emoji} alt="Profil de l'utilisateur" />
-              <p className='connection-link'>Déconnexion</p>
+              <p onClick={() => logout()} className='connection-link-logout'>Déconnexion</p>
               </>
-            ) : (
-              <p onClick={() => navigate('/auth')} className='connection-link-unlogged'>Se connecter</p>
             )}
           </div>
         </div>

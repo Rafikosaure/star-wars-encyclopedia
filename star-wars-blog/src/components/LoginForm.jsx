@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
 import { updateRegisterState } from '../redux/slices/registerSlice'
 import { useNavigate } from 'react-router-dom'
+import { updateLoggedUser } from '../redux/slices/loggedUserSlice'
 
 export default function LoginForm() {
     
@@ -23,9 +24,14 @@ export default function LoginForm() {
         })
         .then(response => response.json())
         .then(data => {
+            // console.log(data)
+            dispatch(updateLoggedUser(true))
             navigate("/")
         })
-        .catch(error => console.error(error));
+        .catch(error => {
+            // console.error(error)
+            dispatch(updateLoggedUser(false))
+        });
     }
 
   return (
