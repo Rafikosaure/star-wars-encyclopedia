@@ -7,7 +7,7 @@ const router = express.Router()
 /** Routes d'inscription & de connexion pour un utilisateur */
 router.post('/register', multer, userCtrl.register)
 router.post('/login', userCtrl.login)
-router.get('/logged', auth.verifyToken, userCtrl.logged)
 router.post('/logout', auth.verifyToken, userCtrl.logout)
+router.get('/logged', auth.verifyToken, userCtrl.logged)
 
 module.exports = router
