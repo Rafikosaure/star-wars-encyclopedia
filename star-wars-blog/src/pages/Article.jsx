@@ -41,28 +41,26 @@ export default function Article() {
 
         
     useEffect(() => {
-        if (item) {
+        if (item && !translatedData) {
             const object = {
                 targetLang: "FR",
                 name: item.name,
                 description: item.description
             }
-            if (!translatedData) {
-                fetch('http://localhost:8080/translate', {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify(object)
-                })
-                .then(response => response.json())
-                .then(data => {
-                    console.log('frontend data :', data)
-                    setTranslatedData(data)
-                })
-                .catch(error => console.log(error))
-            }
-            
+
+            fetch('http://localhost:8080/translate', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(object)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('frontend data :', data)
+                setTranslatedData(data)
+            })
+            .catch(error => console.log(error))
         }
     })
 
