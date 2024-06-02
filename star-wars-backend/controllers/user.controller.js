@@ -80,12 +80,14 @@ exports.login = (req, res, next) => {
         })
 }
 
+// Vérifie si un utilisateur est connecté
 exports.logged = (req, res, next) => {
     User.findOne({ _id: req.user.id })
     .then((user) => res.status(200).json(user))
     .catch((error) => res.status(404).json({ error }))
 }
 
+// Déconnexion d'un utilisateur
 exports.logout = (req, res, next) => {
     try {
         res.clearCookie('access_token', {
