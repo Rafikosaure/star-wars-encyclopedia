@@ -33,6 +33,7 @@
 
 .footer-content h3 {
     cursor: default;
+    text-transform: lowercase;
 }
 
 .footer-content ul li {
