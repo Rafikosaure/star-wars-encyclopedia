@@ -90,6 +90,10 @@
     cursor: pointer;
 }
 
+.connection-link:hover, .connection-link-logout:hover {
+    color: yellow;
+}
+
 .connection-link {
     margin-top: 25px;
     font-size: 16px;
