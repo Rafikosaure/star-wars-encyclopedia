@@ -2,7 +2,7 @@ import React from 'react'
 import '../styles/index.css'
 import '../styles/Forum.css'
 import Code from '../components/Code'
-import topics from '../data/localTopics.json'
+import topicCategories from '../data/localTopicCategories.json'
 import { useNavigate } from 'react-router-dom'
 
 
@@ -23,7 +23,7 @@ export default function Forum() {
         </div>
         <div className='forum-div-topics'>
           <h2>{forumTitle2.toLowerCase()}</h2>
-          {topics.map((topic) => 
+          {topicCategories.map((topic) => 
             <div className='div-topic' key={topic._id} onClick={() => navigate(`/topics/${topic._id}`)}>
               <h3>{topic.title}</h3>
             </div>

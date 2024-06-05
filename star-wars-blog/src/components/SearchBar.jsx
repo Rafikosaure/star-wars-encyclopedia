@@ -1,5 +1,5 @@
 import '../styles/SearchBar.css'
-import data from '../data/localApi.json'
+import data from '../data/localApiCategories.json'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'

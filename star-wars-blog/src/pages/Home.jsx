@@ -1,7 +1,7 @@
 import React from 'react'
 import '../styles/index.css'
 import '../styles/Home.css'
-import data from '../data/localApi.json'
+import data from '../data/localApiCategories.json'
 import Card from '../components/Card'
 
 

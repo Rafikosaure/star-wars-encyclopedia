@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import '../styles/index.css'
 import '../styles/Article.css'
-import data from '../data/localApi.json'
+import data from '../data/localApiCategories.json'
 import ReturnArrow from '../assets/images/return-arrow.webp'
 import { Link } from 'react-router-dom'
 
