@@ -1,21 +1,24 @@
 import '../styles/Header.css'
 // import { useEffect } from 'react'
 import Logo from '../assets/images/logo.webp'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { reinitializeDozen } from '../redux/slices/dozenSlice'
 import Emoji from '../assets/images/EmojiBlitzBobaFett1.webp'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { updateLoggedUser, selectloggedUserState } from '../redux/slices/loggedUserSlice'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+
 
 
 export default function Header() {
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const location = useLocation()
   const loggedUser = useSelector(selectloggedUserState)
+  const [userData, setUserData] = useState()
   
   useEffect(() => {
     fetch('http://localhost:8080/auth/logged', {
@@ -23,7 +26,8 @@ export default function Header() {
     })
     .then(response => response.json())
     .then(data => {
-      // console.log(data)
+      console.log(data)
+      setUserData(data)
       dispatch(updateLoggedUser(true))
     })
     .catch(error => {
@@ -43,6 +47,9 @@ export default function Header() {
     .then(data => {
       // console.log(data)
       dispatch(updateLoggedUser(false))
+      if (location.pathname === `/account/${userData._id}`) {
+        navigate('/')
+      }
     })
     .catch(error => console.log(error))
   }
@@ -80,7 +87,7 @@ export default function Header() {
               <p onClick={() => navigate('/auth')} className='connection-link'>Se connecter</p>
             ) : (
               <>
-              <img src={Emoji} alt="Profil de l'utilisateur" />
+              <img onClick={() => navigate(`/account/${userData._id}`)} src={Emoji} alt="Profil de l'utilisateur" />
               <p onClick={() => logout()} className='connection-link-logout'>Déconnexion</p>
               </>
             )}
