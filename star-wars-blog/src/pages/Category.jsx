@@ -88,17 +88,17 @@ export default function Category() {
                 ) : (
                   <Card key={article._id} item={article.value} categoryId={categoryId} />
                 )
-              }           
+              }
             </div>
             <div className='dozen-indicator'>{`${storedDozen} / ${nbDozen.current}`}</div>
         </div>
-        
         <div className='next-arrow-section' 
           style={{display: storedDozen >= nbDozen.current || article.value ? 'none' : 'flex'}} 
           onClick={nextPage}
         >
           <img className='arrows' src={NextArrow} alt="next arrow" />
         </div>
+        
       </div>
       ) : null}
     </>
