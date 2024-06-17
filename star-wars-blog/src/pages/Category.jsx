@@ -35,7 +35,7 @@ export default function Category() {
       // Récupérer les informations depuis l'API
       fetch(`https://starwars-databank-server.vercel.app/api/v1/${currentDatas.keyword}?page=${storedDozen}`)
       .then(response => response.json())
-      .then(data => {setInfo(data.info); setItems(data.data)})
+      .then(data => {setInfo(data.info); setItems(data.data); console.log(info)})
       .catch((error) => console.log(error))
 
       // Calculer le nombre de dizaines d'articles (arrondi à l'excès)
@@ -90,6 +90,7 @@ export default function Category() {
                 )
               }           
             </div>
+            <div className='dozen-indicator'>{`${storedDozen} / ${nbDozen.current}`}</div>
         </div>
         
         <div className='next-arrow-section' 

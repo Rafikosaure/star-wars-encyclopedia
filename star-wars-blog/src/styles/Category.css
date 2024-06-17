@@ -60,6 +60,23 @@
     cursor: default;
 }
 
+.dozen-indicator {
+    position: fixed;
+    bottom: 50px;
+    background-color: black;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 14px;
+    width: 11%;
+    min-width: 140px;
+    height: 40px;
+    outline: 2px solid white;
+    text-align: center;
+    line-height: 36px;
+    cursor: default;
+}
+
 .card-list {
     width: 80%;
     padding: 5%;
