@@ -1,14 +1,14 @@
 import '../styles/Header.css'
-// import { useEffect } from 'react'
 import Logo from '../assets/images/logo.webp'
-import { NavLink, useLocation } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
+import { updateLoggedUser } from '../redux/slices/loggedUserSlice.js'
 import { reinitializeDozen } from '../redux/slices/dozenSlice'
 import Emoji from '../assets/images/EmojiBlitzBobaFett1.webp'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import { updateLoggedUser, selectloggedUserState } from '../redux/slices/loggedUserSlice'
-import { useEffect, useState } from 'react'
+import { selectLoggedState } from '../redux/slices/loggedUserSlice.js'
+import { useEffect } from 'react'
 
 
 
@@ -16,9 +16,7 @@ export default function Header() {
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const location = useLocation()
-  const loggedUser = useSelector(selectloggedUserState)
-  const [userData, setUserData] = useState()
+  const isLogged = useSelector(selectLoggedState)
   
   useEffect(() => {
     fetch('http://localhost:8080/auth/logged', {
@@ -27,17 +25,18 @@ export default function Header() {
     .then(response => response.json())
     .then(data => {
       console.log(data)
-      setUserData(data)
       dispatch(updateLoggedUser(true))
     })
     .catch(error => {
-      // console.log(error)
+      console.log(error)
       dispatch(updateLoggedUser(false))
     })
-  }, [loggedUser, dispatch])
+  }, [isLogged, dispatch])
+    
+
   
-  
-  const logout = () => {
+  const logout = (e) => {
+    e.preventDefault()
     fetch('http://localhost:8080/auth/logout', {
       method: "POST",
       headers: {"Accept": "application/json", "Content-Type": "application/json"},
@@ -45,17 +44,11 @@ export default function Header() {
     })
     .then(response => response.json())
     .then(data => {
-      // console.log(data)
+      console.log(data)
       dispatch(updateLoggedUser(false))
-      if (location.pathname === `/account/${userData._id}`) {
-        navigate('/')
-      }
     })
     .catch(error => console.log(error))
   }
-
-
-
   
   return (
     <div className='header'>
@@ -83,12 +76,12 @@ export default function Header() {
             <NavLink to="/forum" onClick={() => dispatch(reinitializeDozen())}>Forum</NavLink>
           </nav>
           <div className='header-div-connection'>
-            {loggedUser === false ? (
+            {!isLogged ? (
               <p onClick={() => navigate('/auth')} className='connection-link'>Se connecter</p>
             ) : (
               <>
-              <img onClick={() => navigate(`/account/${userData._id}`)} src={Emoji} alt="Profil de l'utilisateur" />
-              <p onClick={() => logout()} className='connection-link-logout'>Déconnexion</p>
+              <img onClick={() => navigate(`/account`)} src={Emoji} alt="Profil de l'utilisateur" />
+              <p onClick={(e) => logout(e)} className='connection-link-logout'>Déconnexion</p>
               </>
             )}
           </div>

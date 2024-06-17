@@ -24,7 +24,7 @@ export default function App() {
               <Route path='/article/:paramsIds' element={<Article />} />
               <Route path='/forum' element={<Forum />} />
               <Route path='/topics/:topicCategoryId' element={<Topics />} />
-              <Route path='/account/:userId' element={<Account />} />
+              <Route path='/account' element={<Account />} />
               <Route path='/test' element={<TestPage />} />
               <Route path='*' element={<Error404 />} />
           </Routes>

@@ -24,12 +24,12 @@ export default function LoginForm() {
         })
         .then(response => response.json())
         .then(data => {
-            // console.log(data)
+            console.log(data)
             dispatch(updateLoggedUser(true))
             navigate("/")
         })
         .catch(error => {
-            // console.error(error)
+            console.error(error)
             dispatch(updateLoggedUser(false))
         });
     }
