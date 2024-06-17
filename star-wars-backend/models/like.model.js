@@ -1,0 +1,13 @@
+const mongoose = require("mongoose");
+
+
+const likeSchema = new mongoose.Schema({
+    // likeType: { type: mongoose.Schema.Types.ObjectId, enum: ["Post", "Comment"], require: true },
+    post: { type: mongoose.Schema.Types.ObjectId, ref: "Post", require: true },
+    user: { type: mongoose.Schema.Types.ObjectId, ref: "User", require: true },
+    createdAt: {
+        timestamps: { createdAt: true }
+    }
+});
+
+module.exports = mongoose.model("Like", likeSchema);

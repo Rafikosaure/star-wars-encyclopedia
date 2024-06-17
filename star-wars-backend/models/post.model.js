@@ -8,10 +8,6 @@ const postSchema = new mongoose.Schema({
         id: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "User"
-        },
-        username: {
-            type: String,
-            required: true
         }
     },
     comments: [
@@ -19,7 +15,16 @@ const postSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: "Comment"
         }
-    ]
+    ],
+    likes: [
+        { 
+            type: mongoose.Schema.Types.ObjectId, 
+            ref: "Like" 
+        }
+    ],
+    createdAt: {
+        timestamps: { createdAt: true }
+    }
 });
 
 module.exports = mongoose.model("Post", postSchema);
