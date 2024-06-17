@@ -2,31 +2,35 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const User = require('../models/user.model.js')
 const sharp = require('sharp')
-const fs = require('fs')
 require('dotenv').config()
 
 /** Enregistre un nouvel utilisateur dans la base de données */
 exports.register = (req, res, next) => {
 
+    const userObject = req.body
+    console.log(userObject)
+
     /** Traitement de l'image mémorisée avec le module sharp */
-    if (req.file) {
-        const { buffer, originalname } = req.file
+    if (req.body.picture) {
+        const { buffer, originalname } = req.body.picture
+        console.log("Jusqu'ici tout va bien...", req.body.picture.originalname)
         const timestamp = Date.now()
         const name = originalname.split(' ').join('_')
         const ref = `${name}-${timestamp}.webp`
         const path = `./images/${ref}`
         sharp(buffer).resize(450).webp().toFile(path)
+        profilePicture = `${req.protocol}://${req.get('host')}/images/${ref}`
     }
     
     bcrypt
         .hash(req.body.password, parseInt(process.env.NB_HASH))
         .then((hash) => {
             const user = new User({
-                name: req.body.name,
-                picture: req.body.picture,
-                email: req.body.email,
+                name: userObject.name,
+                picture: profilePicture,
+                email: userObject.email,
                 password: hash,
-                isAdmin: req.body.isAdmin
+                isAdmin: userObject.isAdmin
             })
             user.save()
                 .then(() =>
