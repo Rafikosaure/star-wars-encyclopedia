@@ -90,7 +90,7 @@ export default function Category() {
                 )
               }
             </div>
-            <div className='dozen-indicator'>{`${storedDozen} / ${nbDozen.current}`}</div>
+            <div className='dozen-indicator' style={{display: article.value ? 'none' : 'block'}}>{`${storedDozen} / ${nbDozen.current}`}</div>
         </div>
         <div className='next-arrow-section' 
           style={{display: storedDozen >= nbDozen.current || article.value ? 'none' : 'flex'}} 
