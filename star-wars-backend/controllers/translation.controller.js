@@ -8,18 +8,18 @@ exports.translate = async (req, res) => {
         const translator = new deepl.Translator(authKey)
 
         // Récupérer la langue cible & les données à traduire
-        // const targetLang = req.body.targetLang
-        // const name = req.body.name
-        // const description = req.body.description
+        const targetLang = req.body.targetLang
+        const name = req.body.name
+        const description = req.body.description
 
         // Traduction des données dans la langue cible
-        // const newName = await translator.translateText(name, null, targetLang)
-        // const newDescription = await translator.translateText(description, null, targetLang)
+        const newName = await translator.translateText(name, null, targetLang)
+        const newDescription = await translator.translateText(description, null, targetLang)
 
-        // res.status(200).json({
-        //     name: newName,
-        //     description: newDescription
-        // })
+        res.status(200).json({
+            name: newName,
+            description: newDescription
+        })
     } catch(error) {
         res.status(500).json(error)
     }

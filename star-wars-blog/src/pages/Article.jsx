@@ -11,7 +11,9 @@ import { Link } from 'react-router-dom'
 export default function Article() {
 
     const [item, setItem] = useState()
-    const [translatedData, setTranslatedData] = useState()
+    // const [translatedData, setTranslatedData] = useState()
+    const [translatedName, setTranslatedName] = useState()
+    const [translatedDescription, setTranslatedDescription] = useState()
     const navigate = useNavigate()
     const { paramsIds } = useParams()
     const currentIds = paramsIds.split('.')
@@ -41,7 +43,7 @@ export default function Article() {
 
         
     useEffect(() => {
-        if (item && !translatedData) {
+        if (item && !translatedName && !translatedDescription) {
             const object = {
                 targetLang: "FR",
                 name: item.name,
@@ -57,8 +59,9 @@ export default function Article() {
             })
             .then(response => response.json())
             .then(data => {
-                console.log('frontend data :', data)
-                setTranslatedData(data)
+                setTranslatedName(data.name.text.replace(/^"|"$/g, ""))
+                setTranslatedDescription(data.description.text.replace(/^"|"$/g, ""))
+                
             })
             .catch(error => console.log(error))
         }
@@ -76,25 +79,27 @@ export default function Article() {
                 <div className='presentation'>
                     {item && (
                         <>
+                            {translatedName && translatedDescription && (
                             <div className='main-div showing-data'>
-                                {translatedData ? (
-                                    <h1>{translatedData.name}</h1>
+                                {translatedName ? (
+                                    <h1>{translatedName.toLowerCase()}</h1>
                                 ) : (
-                                    <h1>{item.name.toLowerCase()}</h1>  
+                                    <h1>{item.name.toLowerCase()}</h1>
                                 )}
                                 <div className='content'>
                                     <div className='img-presentation'>
                                         <img src={item.image} alt={item.name} />
                                     </div>
                                     <div className='description-div'>
-                                        {translatedData ? (
-                                            <p>{translatedData.description}</p>
+                                        {translatedDescription ? (
+                                            <p>{translatedDescription}</p>
                                         ) : (
                                             <p>{item.description}</p>  
-                                        )}                                            
+                                        )}
                                     </div>
                                 </div>
                             </div>
+                            )}
                         </>
                     )}
                 </div>
