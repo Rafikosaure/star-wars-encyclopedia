@@ -35,7 +35,7 @@ export default function Category() {
       // Récupérer les informations depuis l'API
       fetch(`https://starwars-databank-server.vercel.app/api/v1/${currentDatas.keyword}?page=${storedDozen}`)
       .then(response => response.json())
-      .then(data => {setInfo(data.info); setItems(data.data); console.log(info)})
+      .then(data => {setInfo(data.info); setItems(data.data)})
       .catch((error) => console.log(error))
 
       // Calculer le nombre de dizaines d'articles (arrondi à l'excès)
