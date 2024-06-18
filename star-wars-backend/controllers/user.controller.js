@@ -6,14 +6,14 @@ require('dotenv').config()
 
 /** Enregistre un nouvel utilisateur dans la base de données */
 exports.register = (req, res, next) => {
-
+    
     const userObject = req.body
-    console.log(userObject)
+    let profilePicture = ""
 
     /** Traitement de l'image mémorisée avec le module sharp */
-    if (req.body.picture) {
-        const { buffer, originalname } = req.body.picture
-        console.log("Jusqu'ici tout va bien...", req.body.picture.originalname)
+    if (req.file) {
+        const { buffer, originalname } = req.file
+        console.log("Jusqu'ici tout va bien...", req.file.originalname)
         const timestamp = Date.now()
         const name = originalname.split(' ').join('_')
         const ref = `${name}-${timestamp}.webp`
@@ -23,7 +23,7 @@ exports.register = (req, res, next) => {
     }
     
     bcrypt
-        .hash(req.body.password, parseInt(process.env.NB_HASH))
+        .hash(userObject.password, parseInt(process.env.NB_HASH))
         .then((hash) => {
             const user = new User({
                 name: userObject.name,

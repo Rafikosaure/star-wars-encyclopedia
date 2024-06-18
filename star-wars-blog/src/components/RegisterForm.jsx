@@ -10,31 +10,35 @@ import { updateRegisterState } from '../redux/slices/registerSlice'
 export default function RegisterForm() {
 
     const [fileIsLoad, updateFileIsLoad] = useState('display-none')
-    // const [file, setFile] = useState()
     const { register, handleSubmit } = useForm()
     const dispatch = useDispatch()
     const title = 'Inscription'
 
     const onSubmit = (data) => {
+        const formData = new FormData();
         if (data.picture.length > 0) {
-            const newUrl = URL.createObjectURL(data.picture[0]);
-            data.picture = newUrl
+            formData.append('picture', data.picture[0])
+            delete data.picture
         } else {
             delete data.picture
         }
-        // const bodyFormData = new FormData();
-        // bodyFormData.append('user', JSON.stringify(data));
-        // bodyFormData.append('image', file);
+        formData.append('name', data.name)
+        formData.append('email', data.email)
+        formData.append('password', data.password)
+        console.log(formData)
         
 
         fetch("http://localhost:8080/auth/register", {
             method: "POST",
-            body: JSON.stringify(data),
-            headers: {"Accept": "application/json", "Content-Type": "application/json"}
+            body: formData
+            // headers: {
+            //     "Accept": "application/json", 
+            //     "Content-Type": "multipart/form-data"
+            // }
         })
         .then(response => response.json())
         .then(data => {
-            console.log(data)
+            // console.log(data)
             dispatch(updateRegisterState(false))
         })
         .catch(error => console.error(error));
