@@ -12,7 +12,7 @@ exports.translateTexts = async (req, res) => {
         const targetLang = req.body.targetLang
         const name = req.body.name
         const description = req.body.description
-
+        
         // Traduction des données dans la langue cible
         const newName = await translator.translateText(name, sourceLang, targetLang)
         const newDescription = await translator.translateText(description, sourceLang, targetLang)
@@ -35,10 +35,9 @@ exports.translateName = async (req, res) => {
         const sourceLang = req.body.sourceLang
         const targetLang = req.body.targetLang
         const name = req.body.name
-
+        
         // Traduction des données dans la langue cible
         const newName = await translator.translateText(name, sourceLang, targetLang)
-
         res.status(200).json({
             name: newName,
         })

@@ -20,8 +20,9 @@ export default function SearchBar({ category }) {
       .then(response => response.json())
       .then(data => {
         setArticle(data[0])
-        dispatch(saveAnArticle(article, { test: false }))
+        dispatch(saveAnArticle(article))
       })
+      .catch(error => console.log(error))
     }
 
   }, [category, search, dispatch, article])

@@ -19,22 +19,26 @@ export default function Card({ item, categoryId }) {
 
 
   useEffect(() => {
-    const object = {
-      sourceLang: "EN",
-      targetLang: "FR",
-      name: item.name
-    }
-    fetch('http://localhost:8080/translate/name', {
-      method: "POST",
-      headers: {
-          "Content-Type": "application/json"
-      },
-      body: JSON.stringify(object)
-    })
-    .then(response => response.json())
-    .then(data => setTranslatedName(data.name.text.replace(/^"|"$/g, "")))
-    .catch(error => console.log(error))
-  }, [item.name, translatedName])
+      const object = {
+        sourceLang: "EN",
+        targetLang: "FR",
+        name: item.name
+      }
+      fetch('http://localhost:8080/translate/name', {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(object)
+      })
+      .then(response => response.json())
+      .then(data => {
+        // console.log(data.name)
+        setTranslatedName(data.name.text.replace(/^"|"$/g, ""))
+      })
+      .catch(error => console.log(error))
+    }, [item.name, translatedName])
+    
 
 
   return (
