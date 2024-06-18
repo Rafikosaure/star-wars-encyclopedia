@@ -15,7 +15,7 @@ export default function SearchBar({ category }) {
 
 
   useEffect(() => {
-    if (search.length > 0) {
+    if (search) {
       fetch(`https://starwars-databank-server.vercel.app/api/v1/${category}/name/${search}`)
       .then(response => response.json())
       .then(data => {
@@ -34,16 +34,18 @@ export default function SearchBar({ category }) {
       targetLang: "EN-US",
       name: text
     }
-    fetch('http://localhost:8080/translate/name', {
-      method: "POST",
-      headers: {
-          "Content-Type": "application/json"
-      },
-      body: JSON.stringify(object)
-    })
-    .then(response => response.json())
-    .then(data => setSearch(data.name.text.replace(/^"|"$/g, "")))
-    .catch(error => console.log(error))
+    if (text) {
+      fetch('http://localhost:8080/translate/name', {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(object)
+      })
+      .then(response => response.json())
+      .then(data => setSearch(data.name.text.replace(/^"|"$/g, "")))
+      .catch(error => console.log(error))
+    }
   }
 
 

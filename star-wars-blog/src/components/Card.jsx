@@ -19,6 +19,7 @@ export default function Card({ item, categoryId }) {
 
 
   useEffect(() => {
+    if (location.pathname !== "/") {
       const object = {
         sourceLang: "EN",
         targetLang: "FR",
@@ -37,7 +38,9 @@ export default function Card({ item, categoryId }) {
         setTranslatedName(data.name.text.replace(/^"|"$/g, ""))
       })
       .catch(error => console.log(error))
-    }, [item.name, translatedName])
+    }
+      
+    }, [item.name, translatedName, location])
     
 
 
