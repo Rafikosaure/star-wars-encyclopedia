@@ -1,10 +1,11 @@
 const express = require('express')
-const translate = require('../controllers/translation.controller')
+const translate = require('../controllers/translation.controller.js')
 const router = express.Router()
 
 
 // Routes pour les traductions de texte
-router.post('/', translate.translate)
+router.post('/', translate.translateTexts)
+router.post('/name', translate.translateName)
 
 
 

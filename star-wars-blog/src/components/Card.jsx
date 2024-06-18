@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useState } from 'react'
 import '../styles/Card.css'
 import { Link, useLocation } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
@@ -14,6 +15,27 @@ export default function Card({ item, categoryId }) {
   const location = useLocation()
   const itemId = item._id
   const paramsIds = `${categoryId}.${itemId}`
+  const [translatedName, setTranslatedName] = useState()
+
+
+  useEffect(() => {
+    const object = {
+      sourceLang: "EN",
+      targetLang: "FR",
+      name: item.name
+    }
+    fetch('http://localhost:8080/translate/name', {
+      method: "POST",
+      headers: {
+          "Content-Type": "application/json"
+      },
+      body: JSON.stringify(object)
+    })
+    .then(response => response.json())
+    .then(data => setTranslatedName(data.name.text.replace(/^"|"$/g, "")))
+    .catch(error => console.log(error))
+  }, [item.name, translatedName])
+
 
   return (
     <>
@@ -24,7 +46,9 @@ export default function Card({ item, categoryId }) {
               <img src={item.image} alt={item.name} />
             </div>
             <div className='card-name-div'>
-              <p className="card-name">{item.name.toLowerCase()}</p>
+              {translatedName && (
+                  <p className="card-name">{translatedName}</p> 
+              )}
             </div>
           </Link>
         </div>

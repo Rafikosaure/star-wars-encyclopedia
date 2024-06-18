@@ -33,8 +33,8 @@ app.use(cookieParser())
 app.use(
     rateLimit({
         windowMs: 60 * 1000,
-        max: 100,
-        message: 'Vous avez atteint la limite de 100 requêtes par minute !',
+        max: 500,
+        message: 'Vous avez atteint la limite de 500 requêtes par minute !',
         headers: true,
     })
 )

@@ -45,6 +45,7 @@ export default function Article() {
     useEffect(() => {
         if (item && !translatedName && !translatedDescription) {
             const object = {
+                sourceLang: "EN",
                 targetLang: "FR",
                 name: item.name,
                 description: item.description
