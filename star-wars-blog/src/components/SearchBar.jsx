@@ -27,6 +27,25 @@ export default function SearchBar({ category }) {
   }, [category, search, dispatch, article])
   
   
+  const translateSearch = (text) => {
+    const object = {
+      sourceLang: "FR",
+      targetLang: "EN-US",
+      name: text
+    }
+    fetch('http://localhost:8080/translate/name', {
+      method: "POST",
+      headers: {
+          "Content-Type": "application/json"
+      },
+      body: JSON.stringify(object)
+    })
+    .then(response => response.json())
+    .then(data => setSearch(data.name.text.replace(/^"|"$/g, "")))
+    .catch(error => console.log(error))
+  }
+
+
   const onFormSubmit = (e) => {
     e.preventDefault()
     if (article) {
@@ -40,7 +59,7 @@ export default function SearchBar({ category }) {
   return (
     <div className='search-bar'>
       <form className='search-form' onSubmit={(e) => onFormSubmit(e)}>
-        <input type="text" name="search-input" id="search-input" className='search-input' placeholder='Débutez une recherche...' onChange={e => setSearch(e.target.value)} onFocus={(e) => e.target.placeholder = ""} onBlur={(e) => e.target.placeholder = "Débutez une recherche..."} />
+        <input type="text" name="search-input" id="search-input" className='search-input' placeholder='Débutez une recherche...' onChange={e => translateSearch(e.target.value)} onFocus={(e) => e.target.placeholder = ""} onBlur={(e) => e.target.placeholder = "Débutez une recherche..."} />
       </form>
     </div>
   )
