@@ -71,16 +71,25 @@
     text-align: center;
 }
 
-.header-div-connection img {
+.header-div-logged-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 45px;
     height: 45px;
     background-color: black;
     outline: 2px solid yellow;
     border-radius: 50%;
     cursor: pointer;
+    overflow: hidden;
 }
 
-.header-div-connection img:hover {
+.header-div-logged-image img {
+    width: auto;
+    height: 100%;
+}
+
+.header-div-logged-image:hover {
     outline: 2px solid white;
 }
 

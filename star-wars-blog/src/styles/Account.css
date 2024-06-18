@@ -29,27 +29,30 @@
 }
 
 .account-data {
+    margin-top: 50px;
     color: black;
     gap: 40px;
     width: 50%;
     padding: 10px;
-    background-color: gainsboro;
-    opacity: 0.5;
-    border-radius: 5px;
+    background: rgba(220, 220, 220, .5);
+    border-radius: 8px;
 }
 
 .account-user-picture {
     width: 100px;
     height: 100px;
     overflow: hidden;
-    outline: 2px solid black;
+    outline: 5px solid gainsboro;
     border-radius: 50%;
-    background-color: gainsboro;
+    background-color: lightgray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .account-user-picture img {
-    width: 100%;
-    height: auto;
+    width: auto;
+    height: 100%;
 }
 
 .account-user-detail {

@@ -8,6 +8,7 @@ import { updateLoggedUser } from '../redux/slices/loggedUserSlice'
 import { useNavigate } from 'react-router-dom'
 import '../styles/index.css'
 import '../styles/Account.css'
+import DefaultAvatar from '../assets/images/EmojiBlitzBobaFett1.webp'
 
 
 export default function Account() {
@@ -23,7 +24,7 @@ export default function Account() {
     })
     .then(response => response.json())
     .then(data => {
-      console.log(data)
+      // console.log(data)
       dispatch(updateLoggedUser(true))
       setUserData(data)
     })
@@ -35,8 +36,6 @@ export default function Account() {
   }, [isLogged, dispatch, navigate])
 
 
-  console.log(userData)
-
   return (
     <div className='app account-page'>
         <div className='account-overlay' />
@@ -45,7 +44,12 @@ export default function Account() {
           <>
             <h1 className='account-title'>{`Bienvenue, ${userData.name} !`}</h1>
             <div className='account-data'>
-              <div className='account-user-picture'><img src={userData.picture} alt='avatar' /></div>
+              {userData.picture !== "" ? (
+                <div className='account-user-picture'><img src={userData.picture} alt='avatar' /></div>
+              ) : (
+                <div className='account-user-picture'><img src={DefaultAvatar} alt='avatar' /></div>
+              )}
+              
               <div className='account-user-detail'><p className='account-user-key'>Pseudonyme :</p><p className='account-user-value'>{userData.name}</p></div>
               <div className='account-user-detail'><p className='account-user-key'>Email :</p><p className='account-user-value'>{userData.email}</p></div>
             </div>

@@ -4,11 +4,12 @@ import { NavLink } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { updateLoggedUser } from '../redux/slices/loggedUserSlice.js'
 import { reinitializeDozen } from '../redux/slices/dozenSlice'
-import Emoji from '../assets/images/EmojiBlitzBobaFett1.webp'
+import DefaultAvatar from '../assets/images/EmojiBlitzBobaFett1.webp'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { selectLoggedState } from '../redux/slices/loggedUserSlice.js'
 import { useEffect } from 'react'
+import { useState } from 'react'
 
 
 
@@ -16,6 +17,7 @@ export default function Header() {
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const [loggedUser, setLoggedUser] = useState()
   const isLogged = useSelector(selectLoggedState)
   
   useEffect(() => {
@@ -24,11 +26,12 @@ export default function Header() {
     })
     .then(response => response.json())
     .then(data => {
-      console.log(data)
+      // console.log(data)
+      setLoggedUser(data)
       dispatch(updateLoggedUser(true))
     })
     .catch(error => {
-      console.log(error)
+      // console.log(error)
       dispatch(updateLoggedUser(false))
     })
   }, [isLogged, dispatch])
@@ -80,7 +83,19 @@ export default function Header() {
               <p onClick={() => navigate('/auth')} className='connection-link'>Se connecter</p>
             ) : (
               <>
-              <img onClick={() => navigate(`/account`)} src={Emoji} alt="Profil de l'utilisateur" />
+              {loggedUser && (
+                <>
+                {loggedUser.picture !== "" ? (
+                  <div className='header-div-logged-image' onClick={() => navigate(`/account`)}>
+                    <img src={loggedUser.picture} alt="Profil de l'utilisateur" />
+                  </div>
+                ) : (
+                  <div className='header-div-logged-image' onClick={() => navigate(`/account`)}>
+                    <img src={DefaultAvatar} alt="Profil de l'utilisateur" />
+                  </div>
+                )}
+                </>                
+              )}
               <p onClick={(e) => logout(e)} className='connection-link-logout'>Déconnexion</p>
               </>
             )}
