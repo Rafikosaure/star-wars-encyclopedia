@@ -18,11 +18,12 @@
     cursor: pointer;
     width: 80px;
     height: 80px;
+    border-radius: 50%;
+    overflow: hidden;
 }
 
 .prev-arrow-section:active {
     outline: 4px solid white;
-    border-radius: 50%;
 }
 
 .next-arrow-section {
@@ -32,11 +33,12 @@
     cursor: pointer;
     width: 80px;
     height: 80px;
+    border-radius: 50%;
+    overflow: hidden;
 }
 
 .next-arrow-section:active {
     outline: 4px solid white;
-    border-radius: 50%;
 }
 
 .arrows {
