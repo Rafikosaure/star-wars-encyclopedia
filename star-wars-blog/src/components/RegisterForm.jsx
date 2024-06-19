@@ -31,10 +31,6 @@ export default function RegisterForm() {
         fetch("http://localhost:8080/auth/register", {
             method: "POST",
             body: formData
-            // headers: {
-            //     "Accept": "application/json", 
-            //     "Content-Type": "multipart/form-data"
-            // }
         })
         .then(response => response.json())
         .then(data => {
