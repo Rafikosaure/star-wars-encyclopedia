@@ -103,3 +103,52 @@ exports.logout = (req, res, next) => {
         req.status(500).json({ error })
     }
 }
+
+// Modification des données d'un utilisateur
+exports.modifyUser = (req, res, next) => {
+    
+    let userObject = {}
+    let profilePicture = ""
+
+    /** Deux possibilités : la requête contient un fichier image ou non */
+    if (req.file) {
+        /** Traitement de l'image avec le module sharp */
+        const { buffer, originalname } = req.file
+        const timestamp = Date.now()
+        const name = originalname.split(' ').join('_')
+        const ref = `${name}-${timestamp}.webp`
+        const path = `./images/${ref}`
+        sharp(buffer).resize(450).webp().toFile(path)
+        profilePicture = `${req.protocol}://${req.get('host')}/images/${ref}`
+    }
+
+    // Construction de notre nouvel utilisateur
+    userObject = {
+        name: req.body.name,
+        picture: profilePicture,
+        email: req.body.email,
+        password: req.body.password,
+        isAdmin: req.body.isAdmin
+    }
+
+    // Récupérer l'ID de l'utilisateur à mettre à jour
+    const id = req.params.id
+
+    // Vérifier si l'utilisateur existe
+    const checkIsExiste = req.user.id === id
+
+    if(checkIsExiste){
+        // Si l'utilisateur existe, le mettre à jour
+        User.findByIdAndUpdate(
+                { _id: id }, 
+                userObject,
+                { new: true }
+        )
+        .then(data => {
+            console.log(data)
+            res.status(200).json(data)
+        })
+    } else {
+        res.status(404).json({ message: 'user not found !'})
+    }
+}
