@@ -3,11 +3,13 @@ import Logo from '../assets/images/logo.webp'
 import { NavLink } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { updateLoggedUser } from '../redux/slices/loggedUserSlice.js'
+import { updateLoadedUser } from '../redux/slices/loadedUserSlice.js'
 import { reinitializeDozen } from '../redux/slices/dozenSlice'
 import DefaultAvatar from '../assets/images/EmojiBlitzBobaFett1.webp'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { selectLoggedState } from '../redux/slices/loggedUserSlice.js'
+import { selectLoadedState } from '../redux/slices/loadedUserSlice.js'
 import { useEffect } from 'react'
 import { useState } from 'react'
 
@@ -19,23 +21,28 @@ export default function Header() {
   const navigate = useNavigate()
   const [loggedUser, setLoggedUser] = useState()
   const isLogged = useSelector(selectLoggedState)
+  const isLoaded = useSelector(selectLoadedState)
   
+
   useEffect(() => {
-    fetch('http://localhost:8080/user/logged', {
-      credentials: "include"
-    })
-    .then(response => response.json())
-    .then(data => {
-      // console.log(data)
-      setLoggedUser(data)
-      dispatch(updateLoggedUser(true))
-    })
-    .catch(error => {
-      // console.log(error)
-      dispatch(updateLoggedUser(false))
-    })
+    if (!isLoaded) {
+      fetch('http://localhost:8080/user/logged', {
+        credentials: "include"
+      })
+      .then(response => response.json())
+      .then(data => {
+        // console.log(data)
+        setLoggedUser(data)
+        dispatch(updateLoggedUser(true))
+        dispatch(updateLoadedUser(true))
+      })
+      .catch(error => {
+        // console.log(error)
+        dispatch(updateLoggedUser(false))
+      })
+    }
     
-  }, [isLogged, dispatch])
+  }, [isLogged, dispatch, isLoaded])
     
 
   

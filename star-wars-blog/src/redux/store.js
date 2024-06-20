@@ -3,6 +3,7 @@ import dozenManager from './slices/dozenSlice'
 import articleReducer from './slices/articleSlice'
 import registerManager from "./slices/registerSlice";
 import loggedReducer from './slices/loggedUserSlice';
+import loadedReducer from "./slices/loadedUserSlice";
 
 
 export default configureStore({
@@ -10,6 +11,7 @@ export default configureStore({
         dozenManager: dozenManager,
         article: articleReducer,
         registerValue: registerManager,
-        loggedReducer: loggedReducer
+        loggedReducer: loggedReducer,
+        loadedReducer: loadedReducer
     }
 })

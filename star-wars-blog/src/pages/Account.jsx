@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux'
 import { selectLoggedState } from '../redux/slices/loggedUserSlice'
 import { useDispatch } from 'react-redux'
 import { updateLoggedUser } from '../redux/slices/loggedUserSlice'
+import { updateLoadedUser } from '../redux/slices/loadedUserSlice'
 import { useNavigate } from 'react-router-dom'
 import '../styles/index.css'
 import '../styles/Account.css'
@@ -71,17 +72,18 @@ export default function Account() {
     formData.append('name', data.name)
     formData.append('email', data.email)
     formData.append('password', data.password)
-    console.log(formData)
+    // console.log(formData)
 
     fetch(`http://localhost:8080/user/update/${userData._id}`, {
-        method: "PUT",
-        body: formData,
-        credentials: 'include'
+      method: "PUT",
+      body: formData,
+      credentials: 'include'
     })
     .then(response => response.json())
     .then(data => {
-        console.log(data)
-        setUserData(data)
+      // console.log(data)
+      setUserData(data)
+      dispatch(updateLoadedUser(false))
     })
     .catch(error => console.error(error));
   }
