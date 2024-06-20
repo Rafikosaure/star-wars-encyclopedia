@@ -25,10 +25,10 @@ export default function RegisterForm() {
         formData.append('name', data.name)
         formData.append('email', data.email)
         formData.append('password', data.password)
-        console.log(formData)
+        // console.log(formData)
         
 
-        fetch("http://localhost:8080/auth/register", {
+        fetch("http://localhost:8080/user/register", {
             method: "POST",
             body: formData
         })

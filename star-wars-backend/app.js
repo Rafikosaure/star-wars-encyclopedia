@@ -54,7 +54,7 @@ const userRoutes = require('./routes/user.routes')
 
 // Middlewares de nos routes
 app.use('/translate', translateText)
-app.use('/auth', userRoutes)
+app.use('/user', userRoutes)
 app.use('/images', express.static(path.join(__dirname, 'images')))
 
 

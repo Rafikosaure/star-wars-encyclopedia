@@ -16,7 +16,7 @@ export default function LoginForm() {
 
     const onSubmit = (data) => {
         // console.log(data)
-        fetch("http://localhost:8080/auth/login", {
+        fetch("http://localhost:8080/user/login", {
             method: "POST",
             body: JSON.stringify(data),
             headers: {"Accept": "application/json", "Content-Type": "application/json"},

@@ -21,7 +21,7 @@ export default function Header() {
   const isLogged = useSelector(selectLoggedState)
   
   useEffect(() => {
-    fetch('http://localhost:8080/auth/logged', {
+    fetch('http://localhost:8080/user/logged', {
       credentials: "include"
     })
     .then(response => response.json())
@@ -40,14 +40,14 @@ export default function Header() {
   
   const logout = (e) => {
     e.preventDefault()
-    fetch('http://localhost:8080/auth/logout', {
+    fetch('http://localhost:8080/user/logout', {
       method: "POST",
       headers: {"Accept": "application/json", "Content-Type": "application/json"},
       credentials: "include"
     })
     .then(response => response.json())
     .then(data => {
-      console.log(data)
+      // console.log(data)
       dispatch(updateLoggedUser(false))
     })
     .catch(error => console.log(error))
