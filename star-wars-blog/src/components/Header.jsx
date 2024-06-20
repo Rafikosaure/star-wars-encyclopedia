@@ -34,6 +34,7 @@ export default function Header() {
       // console.log(error)
       dispatch(updateLoggedUser(false))
     })
+    
   }, [isLogged, dispatch])
     
 
