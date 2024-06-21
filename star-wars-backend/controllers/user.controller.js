@@ -163,6 +163,7 @@ exports.modifyUser = (req, res, next) => {
             if (userObject.picture === "") {
                 userObject.picture = initialUser.picture
             }
+            userObject.isAdmin = initialUser.isAdmin
             console.log('Données du nouvel user :', userObject)
             
             // Mise à jour des données
