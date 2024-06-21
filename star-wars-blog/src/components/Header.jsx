@@ -57,6 +57,7 @@ export default function Header() {
     .then(data => {
       // console.log(data)
       dispatch(updateLoggedUser(false))
+      dispatch(updateLoadedUser(false))
     })
     .catch(error => console.log(error))
   }
