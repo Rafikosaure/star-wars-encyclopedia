@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const User = require('../models/user.model.js')
 const sharp = require('sharp')
+const fs = require('fs')
 require('dotenv').config()
 
 // Enregistre un nouvel utilisateur dans la base de données
@@ -170,7 +171,21 @@ exports.modifyUser = (req, res, next) => {
                 userObject,
                 { new: true }
             )
-            .then(user => res.status(200).json(user))
+            .then(user => {
+                res.status(200).json(user)
+
+                // Suppression de l'image obsolète si une nouvelle image a été chargée
+                if (req.file) {
+                    const filename = initialUser.picture.split('/images/')[1]
+                    fs.unlink(`images/${filename}`, (err) => {
+                        if (err) {
+                            console.log(err)
+                        } else {
+                            console.log('Image obsolète supprimée !')
+                        }
+                    })
+                }
+            })
             .catch(error => console.log(error))
         })
         .catch(error => res.status(404).json(error))
