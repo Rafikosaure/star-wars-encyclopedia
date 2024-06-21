@@ -12,7 +12,7 @@ import { selectLoggedState } from '../redux/slices/loggedUserSlice.js'
 import { selectLoadedState } from '../redux/slices/loadedUserSlice.js'
 import { useEffect } from 'react'
 import { useState } from 'react'
-
+import { toast } from 'sonner'
 
 
 export default function Header() {
@@ -58,6 +58,7 @@ export default function Header() {
       // console.log(data)
       dispatch(updateLoggedUser(false))
       dispatch(updateLoadedUser(false))
+      toast("Vous êtes déconnecté !")
     })
     .catch(error => console.log(error))
   }

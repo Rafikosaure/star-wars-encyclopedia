@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux'
 import { updateRegisterState } from '../redux/slices/registerSlice'
 import { useNavigate } from 'react-router-dom'
 import { updateLoggedUser } from '../redux/slices/loggedUserSlice'
+import { toast } from 'sonner'
 
 export default function LoginForm() {
     
@@ -27,6 +28,7 @@ export default function LoginForm() {
             // console.log(data)
             dispatch(updateLoggedUser(true))
             navigate("/")
+            toast("Vous êtes connecté !")
         })
         .catch(error => {
             console.error(error)

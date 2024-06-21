@@ -12,7 +12,7 @@ import '../styles/Account.css'
 import DefaultAvatar from '../assets/images/EmojiBlitzBobaFett1.webp'
 import { useForm } from 'react-hook-form'
 import PictureIsValid from '../assets/images/is_valid.webp'
-
+import { toast } from 'sonner'
 
 
 export default function Account() {
@@ -78,6 +78,7 @@ export default function Account() {
       // setDisabled(true)
       updateFileIsLoad("display-none")
       dispatch(updateLoadedUser(false))
+      toast("Mise à jour effectuée !")
     })
     .catch(error => console.error(error));
   }

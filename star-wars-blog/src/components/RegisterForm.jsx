@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form'
 import isValid from '../assets/images/is_valid.webp'
 import { useDispatch } from 'react-redux'
 import { updateRegisterState } from '../redux/slices/registerSlice'
+import { toast } from 'sonner';
 
 
 export default function RegisterForm() {
@@ -36,6 +37,7 @@ export default function RegisterForm() {
         .then(data => {
             // console.log(data)
             dispatch(updateRegisterState(false))
+            toast("Utilisateur enregistré !")
         })
         .catch(error => console.error(error));
     }
