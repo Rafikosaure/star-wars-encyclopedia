@@ -74,7 +74,7 @@ export default function Account() {
     formData.append('password', data.password)
     // console.log(formData)
 
-    fetch(`http://localhost:8080/user/update/${userData._id}`, {
+    fetch(`http://localhost:8080/user/update`, {
       method: "PUT",
       body: formData,
       credentials: 'include'

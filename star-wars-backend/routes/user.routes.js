@@ -9,6 +9,6 @@ router.post('/register', multer, userCtrl.register)
 router.post('/login', userCtrl.login)
 router.post('/logout', auth.verifyToken, userCtrl.logout)
 router.get('/logged', auth.verifyToken, userCtrl.logged)
-router.put('/update/:id', auth.verifyToken, multer, userCtrl.modifyUser)
+router.put('/update', auth.verifyToken, multer, userCtrl.modifyUser)
 
 module.exports = router

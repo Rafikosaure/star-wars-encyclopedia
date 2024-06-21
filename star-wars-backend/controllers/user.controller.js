@@ -133,11 +133,15 @@ exports.modifyUser = (req, res, next) => {
 
     console.log('Données de la requête :', userObject)
 
-    // Récupérer l'ID de l'utilisateur à mettre à jour
-    const id = req.params.id
-
     // Vérifier si l'utilisateur à mettre à jour existe dans la bdd
-    const checkIsExiste = req.user.id === id
+    let checkIsExiste = false;
+    if (req.user.id) {
+        checkIsExiste = true;
+    } else {
+        res.status(404).json({
+            message: "Utilisateur non-trouvé !"
+        })
+    }
 
     // Trouver les données de l'utilisateur à mettre à jour
     if (checkIsExiste) {
@@ -162,7 +166,7 @@ exports.modifyUser = (req, res, next) => {
             
             // Mise à jour des données
             User.findByIdAndUpdate(
-                { _id: id }, 
+                { _id: req.user.id }, 
                 userObject,
                 { new: true }
             )
