@@ -57,6 +57,7 @@ export default function Header() {
     .then(data => {
       // console.log(data)
       dispatch(updateLoggedUser(false))
+      setLoggedUser()
       dispatch(updateLoadedUser(false))
       toast("Vous êtes déconnecté !")
     })
