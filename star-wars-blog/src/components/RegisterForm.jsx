@@ -37,7 +37,7 @@ export default function RegisterForm() {
         .then(data => {
             // console.log(data)
             dispatch(updateRegisterState(false))
-            toast("Utilisateur enregistré !")
+            toast("Compte utilisateur créé !")
         })
         .catch(error => console.error(error));
     }
