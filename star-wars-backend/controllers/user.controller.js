@@ -108,6 +108,7 @@ exports.logout = (req, res, next) => {
 // Modification des données d'un utilisateur
 exports.modifyUser = async (req, res) => {
 
+    // Création d'une variable pour l'URL de l'image de profil
     let profilePicture = ""
 
     // Deux possibilités : la requête contient un fichier image ou non
@@ -131,21 +132,15 @@ exports.modifyUser = async (req, res) => {
         isAdmin: false
     }
     
+    // Récupération des données de l'utilisateur initial
     const initialUser = await User.findById(req.user.id)
     if (!initialUser) {
         res.status(404).json({
             message: "User not found!"
         })
     }
-    
-    console.log('Anciennes données :', initialUser)
-    console.log('Données de la requête :', userObject)
 
-
-    // User.findById(req.user.id)
-    // .then(initialUser => {
-    //     console.log('initialUser :', initialUser)
-
+    // Filtre des données non-renseignées
     if (userObject.name === "") {
         userObject.name = initialUser.name
     }
@@ -155,26 +150,15 @@ exports.modifyUser = async (req, res) => {
     if (userObject.picture === "") {
         userObject.picture = initialUser.picture
     }
-        // } else {
-        //     initialPicture = initialUser.picture
-        //     console.log("URL de l'image d'origine :", initialPicture)
-        // }
     if (userObject.password === "") {
-            // Cryptage du nouveau mot de passe
         userObject.password = initialUser.password
-            // console.log("Password initial :", initialUser.password)
-            // console.log("Pas de changement de password :", userObject.password)
     } else {
         const newPassword = await bcrypt.hash(userObject.password, parseInt(process.env.NB_HASH))
-        console.log('New password :', newPassword)
         userObject.password = newPassword
     }
-            // .then(newPassword => userObject.password = newPassword)
-                // console.log("Nouveau password créé :", newPassword)
-                // console.log('Changement de password :', userObject.password)
     userObject.isAdmin = initialUser.isAdmin
-    console.log('userObject :', userObject)
     
+    // Mise à jour des données
     const newUser = await User.findByIdAndUpdate(
         { _id: req.user.id },
         userObject,
@@ -185,7 +169,6 @@ exports.modifyUser = async (req, res) => {
             message: "Data update failed!"
         })
     }
-    console.log("newUser :", newUser)
 
     // Suppression de l'image obsolète si une nouvelle image a été chargée
     if (req.file && initialUser.picture !== "") {
@@ -198,6 +181,8 @@ exports.modifyUser = async (req, res) => {
             }
         })
     }
+    
+    // Envoi de l'utilisateur mis à jour dans la réponse
     res.status(200).json(newUser)
 }
 
