@@ -25,10 +25,14 @@ export default function LoginForm() {
         })
         .then(response => response.json())
         .then(data => {
-            // console.log(data)
-            dispatch(updateLoggedUser(true))
-            navigate("/")
-            toast("Vous êtes connecté !")
+            console.log(data)
+            if (data.message) {
+                toast("Identifiants incorrects !")
+            } else {
+                dispatch(updateLoggedUser(true))
+                navigate("/")
+                toast("Vous êtes connecté !")
+            }
         })
         .catch(error => {
             console.error(error)
