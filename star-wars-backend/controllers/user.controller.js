@@ -181,61 +181,7 @@ exports.modifyUser = async (req, res) => {
             }
         })
     }
-    
+
     // Envoi de l'utilisateur mis à jour dans la réponse
     res.status(200).json(newUser)
 }
-
-
-
-
-
-
-
-    // // Trouver les données de l'utilisateur à mettre à jour
-    // if (checkIsExiste) {
-    //     User.findById(req.user.id)
-    //     .then(data => {
-    //         const initialUser = data
-
-            
-    //         if (userObject.password === "") {
-    //             console.log("Champ mot de passe vide :", userObject.password)
-    //             userObject.password = initialUser.password
-    //             // console.log("Si pas de mise à jour du password :", userObject.password)
-    //         }
-    //         // ici
-    //                 console.log('Nouveau mot de passe :', userObject.password)
-    //                 console.log('Nouvel User avant enregistrement :', userObject)
-    //                 // Mise à jour des données
-    //                 User.findByIdAndUpdate(
-    //                     { _id: req.user.id }, 
-    //                     userObject,
-    //                     { new: true }
-    //                 )
-    //                 .then(user => {
-    //                     console.log('Nouvel User après mise à jour :', user)
-    //                     res.status(200).json(user)
-    //                     // Suppression de l'image obsolète si une nouvelle image a été chargée
-    //                     if (req.file) {
-    //                         const filename = initialUser.picture.split('/images/')[1]
-    //                         fs.unlink(`images/${filename}`, (err) => {
-    //                             if (err) {
-    //                                 console.log(err)
-    //                             } else {
-    //                                 console.log('Image obsolète supprimée !')
-    //                             }
-    //                         })
-    //                     }
-    //                     })
-    //                 .catch((error) => res.status(500).json(error))
-    //             })
-    //             .catch(error => console.log(error))
-    //         }
-    //     })
-    //     .catch(error => res.status(404).json(error))
-    // } else {
-    //     res.status(404).json({
-    //         message: "User not found!"
-    //     })
-    // }
