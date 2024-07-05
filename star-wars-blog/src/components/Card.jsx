@@ -25,7 +25,7 @@ export default function Card({ item, categoryId }) {
         targetLang: "FR",
         name: item.name
       }
-      fetch('http://localhost:8080/translate/name', {
+      fetch('http://localhost:8000/translate/name', {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

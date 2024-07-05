@@ -26,7 +26,7 @@ export default function Header() {
 
   useEffect(() => {
     if (!isLoaded) {
-      fetch('http://localhost:8080/user/logged', {
+      fetch('http://localhost:8000/user/logged', {
         credentials: "include"
       })
       .then(response => response.json())
@@ -48,7 +48,7 @@ export default function Header() {
   
   const logout = (e) => {
     e.preventDefault()
-    fetch('http://localhost:8080/user/logout', {
+    fetch('http://localhost:8000/user/logout', {
       method: "POST",
       headers: {"Accept": "application/json", "Content-Type": "application/json"},
       credentials: "include"

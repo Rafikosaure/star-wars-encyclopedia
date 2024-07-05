@@ -26,7 +26,7 @@ export default function Account() {
 
 
   useEffect(() => {
-    fetch('http://localhost:8080/user/logged', {
+    fetch('http://localhost:8000/user/logged', {
       credentials: "include"
     })
     .then(response => response.json())
@@ -65,7 +65,7 @@ export default function Account() {
     formData.append('password', data.password)
     // console.log(formData)
 
-    fetch(`http://localhost:8080/user/update`, {
+    fetch(`http://localhost:8000/user/update`, {
       method: "PUT",
       body: formData,
       credentials: 'include'

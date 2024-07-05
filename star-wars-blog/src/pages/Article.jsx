@@ -51,7 +51,7 @@ export default function Article() {
                 description: item.description
             }
 
-            fetch('http://localhost:8080/translate', {
+            fetch('http://localhost:8000/translate', {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

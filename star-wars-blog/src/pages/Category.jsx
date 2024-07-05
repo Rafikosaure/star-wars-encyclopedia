@@ -91,7 +91,9 @@ export default function Category() {
               }
             </div>
             <div className='dozen-indicator' style={{display: article.value ? 'none' : 'block'}}>
-              {nbDozen.current && storedDozen && (`${storedDozen} / ${nbDozen.current}`)}
+              {!isNaN(nbDozen.current) && !isNaN(storedDozen) ? (
+                `${storedDozen} / ${nbDozen.current}`
+              ) : null }
             </div>
         </div>
         <div className='next-arrow-section' 

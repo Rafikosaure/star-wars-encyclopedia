@@ -35,7 +35,7 @@ export default function SearchBar({ category }) {
       name: text
     }
     if (text) {
-      fetch('http://localhost:8080/translate/name', {
+      fetch('http://localhost:8000/translate/name', {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
