@@ -6,7 +6,7 @@ const fs = require('fs')
 require('dotenv').config()
 
 // Enregistre un nouvel utilisateur dans la base de données
-exports.register = (req, res, next) => {
+exports.register = (req, res) => {
     
     const userObject = req.body
     let profilePicture = ""
@@ -43,7 +43,7 @@ exports.register = (req, res, next) => {
 }
 
 // Connecte un utilisateur à son compte si ses identifiants sont corrects
-exports.login = (req, res, next) => {
+exports.login = (req, res) => {
     User.findOne({ email: req.body.email })
         .then((user) => {
             if (user === null) {
@@ -86,14 +86,14 @@ exports.login = (req, res, next) => {
 }
 
 // Vérifie si un utilisateur est connecté
-exports.logged = (req, res, next) => {
+exports.logged = (req, res) => {
     User.findOne({ _id: req.user.id })
     .then((user) => res.status(200).json(user))
     .catch((error) => res.status(404).json({ error }))
 }
 
 // Déconnexion d'un utilisateur
-exports.logout = (req, res, next) => {
+exports.logout = (req, res) => {
     try {
         res.clearCookie('access_token', {
             httpOnly: true,
@@ -184,4 +184,111 @@ exports.modifyUser = async (req, res) => {
 
     // Envoi de l'utilisateur mis à jour dans la réponse
     res.status(200).json(newUser)
+}
+
+// Suppression d'un utilisateur via son id
+exports.deleteById = async (req, res) => {
+    try {
+        const id = req.user.id;
+        const user = await User.findById(id);
+    
+        if (!user) {
+        return res.status(404).json({ message: "User not found" });
+        }
+    
+        if (!user._id.equals(req.user.id)) {
+        return res.status(403).json({
+            message: "User doesn't have permission to delete another user",
+        });
+        }
+
+        // Récupération de l'url de l'image de profil de l'utilisateur
+        const picture = user.picture
+    
+        // Déconnexion : suppression du cookie
+        res.clearCookie('access_token', {
+            httpOnly: true,
+            expires: new Date(0)
+        })
+
+        // Suppression de l'utilisateur dans la base de données
+        await User.findByIdAndDelete(id);
+
+        // Suppression de l'image de profil de l'utilisateur
+        if (picture !== "") {
+            const filename = picture.split('/images/')[1]
+            fs.unlink(`images/${filename}`, (error) => {
+                if (error) {
+                    console.log(error)
+                } else {
+                    console.log('Image obsolète supprimée !')
+                }
+            })
+        }
+
+        res.status(200).json({ message: "User has been deleted" });
+    } catch (error) {
+        res.status(500).json({ error: "Error in deleting user" });
+    }
+}
+
+// Suppression d'un utillsateur par l'Administrateur du site
+exports.authDeleteById = async (req, res) => {
+    try {
+        // Vérifie qu'il s'agit d'une action de l'administateur du site
+        const adminId = req.user.id
+        const admin = await User.findById(adminId)
+        if (!admin.isAdmin) {
+            return res.status(500).json({ message: "You haven't the rights for delete another user" })
+        }
+
+        // Trouve l'utilisateur à supprimer
+        const id = req.body.id;
+        const user = await User.findById(id);
+    
+        if (!user) {
+        return res.status(404).json({ message: "User not found" });
+        }
+    
+        if (!user._id.equals(id)) {
+        return res.status(403).json({
+            message: "User doesn't have permission to delete another user",
+        });
+        }
+
+        // Récupération de l'url de l'image de profil de l'utilisateur
+        const picture = user.picture
+    
+        // Déconnexion : suppression du cookie
+        res.clearCookie('access_token', {
+            httpOnly: true,
+            expires: new Date(0)
+        })
+
+        // Suppression de l'utilisateur dans la base de données
+        await User.findByIdAndDelete(id);
+
+        // Suppression de l'image de profil de l'utilisateur
+        if (picture !== "") {
+            const filename = picture.split('/images/')[1]
+            fs.unlink(`images/${filename}`, (error) => {
+                if (error) {
+                    console.log(error)
+                } else {
+                    console.log('Image obsolète supprimée !')
+                }
+            })
+        }
+
+        res.status(200).json({ message: "User has been deleted" });
+    } catch (error) {
+        res.status(500).json({ error: "Error in deleting user" });
+    }
+}
+
+// Récupère tous les utilisateurs
+exports.getAllUsers = (req, res) => {
+    User.find()
+        .then((users) => res.status(200).json(users))
+        .catch((error) => res.status(400).json({ error }))
 }
