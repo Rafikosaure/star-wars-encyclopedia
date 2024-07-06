@@ -121,7 +121,7 @@ input:-webkit-autofill:focus {
     -webkit-text-fill-color: #555555 !important;
 }
 
-.account-form-update input {
+.account-form-update input, .account-form-delete-section input {
     border: none;
     border-radius: 20px;
     width: 94%;
@@ -133,7 +133,7 @@ input:-webkit-autofill:focus {
     background-color: white;
 }
 
-.account-form-update input:focus {
+.account-form-update input:focus, .account-form-delete-section input:focus {
     outline: 1px solid gainsboro;
 }
 
@@ -179,7 +179,7 @@ input:-webkit-autofill:focus {
     display: flex;
 }
 
-.account-submit-button {
+.account-submit-button, .delete-user {
     font-family: Arial, Helvetica, sans-serif;
     border: none;
     outline: none;
@@ -195,7 +195,26 @@ input:-webkit-autofill:focus {
     cursor: pointer;
 }
 
-.account-submit-button:active, .account-submit-button:hover {
+.account-submit-button:active, .account-submit-button:hover, .delete-user:hover, .delete-user:active {
     outline: 4px solid gainsboro;
     border-radius: 20px;
+}
+
+.account-delete-section {
+    gap: 40px;
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.account-form-delete-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    align-items: center;
 }
