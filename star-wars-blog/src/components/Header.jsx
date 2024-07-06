@@ -39,6 +39,7 @@ export default function Header() {
       .catch(error => {
         // console.log(error)
         dispatch(updateLoggedUser(false))
+        setLoggedUser()
       })
     }
     
