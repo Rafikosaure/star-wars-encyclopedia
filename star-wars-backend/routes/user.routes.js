@@ -10,5 +10,8 @@ router.post('/login', userCtrl.login)
 router.post('/logout', auth.verifyToken, userCtrl.logout)
 router.get('/logged', auth.verifyToken, userCtrl.logged)
 router.put('/update', auth.verifyToken, multer, userCtrl.modifyUser)
+router.get('/getAll', auth.verifyToken, userCtrl.getAllUsers)
+router.delete('/authDeleteById', auth.verifyToken, userCtrl.authDeleteById)
+router.delete('/deleteById', auth.verifyToken, userCtrl.deleteById)
 
 module.exports = router
