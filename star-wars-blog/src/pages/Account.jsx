@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
@@ -12,6 +12,7 @@ import '../styles/Account.css'
 import DefaultAvatar from '../assets/images/EmojiBlitzBobaFett1.webp'
 import { useForm } from 'react-hook-form'
 import PictureIsValid from '../assets/images/is_valid.webp'
+import UserData from '../components/UserData'
 import { toast } from 'sonner'
 
 
@@ -20,9 +21,28 @@ export default function Account() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [userData, setUserData] = useState()
+  const [allUsers, setAllUsers] = useState()
   const isLogged = useSelector(selectLoggedState)
   const [fileIsLoad, updateFileIsLoad] = useState('display-none')
+  const [allowDeletion, setAllowDeletion] = useState(false)
   const { register, handleSubmit, reset } = useForm()
+
+
+  // Récupérer les utilisateurs du site
+const getAllUsers = useCallback(() => {
+  if (!allUsers) {
+    fetch('http://localhost:8000/user/getAll', {
+      credentials: 'include'
+    })
+    .then(response => response.json())
+    .then(data => {
+      setAllUsers(data.filter((user) => user.isAdmin !== true))
+      // console.log('Tous les utilisateurs :', data)
+    })
+    .catch(error => console.log(error))
+  }
+    
+  }, [allUsers])
 
 
   useEffect(() => {
@@ -33,13 +53,17 @@ export default function Account() {
     .then(data => {
       dispatch(updateLoggedUser(true))
       setUserData(data)
+      if (data.isAdmin) {
+        getAllUsers()
+      }
     })
     .catch(error => {
       console.log(error)
       dispatch(updateLoggedUser(false))
       navigate("/")
     })
-  }, [isLogged, dispatch, navigate])
+
+  }, [isLogged, dispatch, navigate, getAllUsers])
 
 
   const isValidIcon = (value) => {
@@ -51,7 +75,7 @@ export default function Account() {
   }
 
 
-  const onSubmit = (data) => {
+  const modifyData = (data) => {
     // console.log(data)
     const formData = new FormData();
     if (data.picture.length > 0) {
@@ -83,6 +107,32 @@ export default function Account() {
     .catch(error => console.error(error));
   }
 
+  const validateEmail = (email) => {
+    if (email === userData.email) {
+      setAllowDeletion(true)
+    } else {
+      setAllowDeletion(false)
+    }
+  }
+
+  const deleteCurrentUser = (e) => {
+    e.preventDefault()
+    fetch('http://localhost:8000/user/deleteById', {
+      method: "DELETE",
+      credentials: 'include'
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log(data)
+      dispatch(updateLoggedUser(false))
+      dispatch(updateLoadedUser(false))
+      toast('Compte utilisateur supprimé !')
+      navigate('/')
+    })
+    .catch(error => console.log(error))
+  }
+    
+    
   return (
     <div className='app account-page'>
       <div className='account-overlay' />
@@ -104,7 +154,7 @@ export default function Account() {
               <div className='account-form-update-section'>
                 <h2>Mettre à jour vos infos ?</h2>
                 <div>
-                  <form className='account-form-update' autoComplete='off' onSubmit={handleSubmit(onSubmit)} >
+                  <form className='account-form-update' autoComplete='off' onSubmit={handleSubmit(modifyData)} >
                     <input type="text" name='name' placeholder='Modifiez votre nom...' {...register("name", {required: false})} onFocus={(e) => e.target.placeholder = ""} onBlur={(e) => e.target.placeholder = 'Modifiez votre nom...'}/>
                     <input type="email" name='email' placeholder='Modifiez votre email...' {...register("email", {required: false})} onFocus={(e) => e.target.placeholder = ""} onBlur={(e) => e.target.placeholder = 'Modifiez votre email...'}/>
                     <input type="password" name='password' placeholder='Modifiez votre mot de passe...' {...register("password", {required: false})} onFocus={(e) => e.target.placeholder = ""} onBlur={(e) => e.target.placeholder = 'Modifiez votre mot de passe...'}/>
@@ -113,6 +163,30 @@ export default function Account() {
                     <button className='account-submit-button' type='submit'>Mettre à jour</button>
                   </form>
                 </div>
+              </div>
+              <div className='account-section-separator'/>
+              <div>
+                {!userData.isAdmin ? (
+                <>
+                  <h2 className='account-profile-title'>Suppression du compte</h2>
+                  <div className='account-delete-section'>
+                    <form className='account-form-delete-section' onSubmit={(e) => e.preventDefault()}>
+                      <input type="text" onChange={(e) => validateEmail(e.target.value)} placeholder='Entrez votre email...' onFocus={(e) => e.target.placeholder = ""} onBlur={(e) => e.target.placeholder = 'Entrez votre email...'} />
+                    </form>
+                    {allowDeletion ? (
+                      <button className='delete-user' onClick={(e) => deleteCurrentUser(e)}>Supprimer mon compte</button>
+                    ) : null}
+                  </div>
+                </>
+                ) : (
+                  <>
+                    <h2 className='account-profile-title'>Gestion des utilisateurs</h2>
+                    {allUsers && (
+                      allUsers.map((user) => 
+                        <UserData key={user._id} user={user} />
+                    ))}
+                  </>
+                )}
               </div>
             </div>
             </>
