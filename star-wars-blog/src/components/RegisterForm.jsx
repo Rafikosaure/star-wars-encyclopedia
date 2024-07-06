@@ -26,7 +26,7 @@ export default function RegisterForm() {
         formData.append('name', data.name)
         formData.append('email', data.email)
         formData.append('password', data.password)
-        // console.log(formData)
+        // console.log('CLIENT', formData)
         
 
         fetch("http://localhost:8000/user/register", {
