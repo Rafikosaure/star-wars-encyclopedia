@@ -13,6 +13,7 @@ import { selectLoadedState } from '../redux/slices/loadedUserSlice.js'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import { toast } from 'sonner'
+import BurgerMenu from './BurgerMenu.jsx'
 
 
 export default function Header() {
@@ -113,7 +114,7 @@ export default function Header() {
             )}
           </div>
         </div>
-        
+        <BurgerMenu />
       </div>
     </div>
   )
