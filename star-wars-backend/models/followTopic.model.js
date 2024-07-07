@@ -2,14 +2,12 @@ const mongoose = require("mongoose");
 
 
 const followTopicSchema = new mongoose.Schema({
-    title: {
-        id: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Topic"
-        }
+    topicId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Topic"
     },
     users: [
-        { 
+        {
             type: mongoose.Schema.Types.ObjectId, 
             ref: "User" 
         }
