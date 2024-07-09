@@ -18,6 +18,7 @@
     background-size: 110%, 110%;
     background-position: 50%, 50%;
     border: 1px solid yellow;
+    position: relative;
     /* border-bottom: 5px solid yellow; */
 }
 
@@ -46,7 +47,8 @@
 }
 
 .link-logo img {
-    width: 100%;
+    /* width: 100%; */
+    width: 110px;
     height: auto;
 }
 
@@ -60,7 +62,7 @@
 }
 
 .burger-menu {
-    display: none;
+    display: flex;
 }
 
 .header-div-connection {
@@ -124,22 +126,24 @@
 .title-and-links h1 {
     font-family: 'Starjout';
     color: white;
-    font-size: 46px;
+    font-size: 40px;
     height: 50%;
     margin-left: 10px;
     margin-bottom: 0;
     margin-top: 0;
     margin-right: 0;
     cursor: default;
+    max-width: 630px;
 }
 
 .title-and-links nav {
     height: 50%;
     margin-left: 10px;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     gap: 3%;
-    font-size: 22px;
+    font-size: 20px;
 }
 
 nav a {
@@ -156,21 +160,73 @@ nav a.active {
 
 
 
-/* RESPONSIVE DESIGN : MOBILE */
-@media only screen and (max-width: 767px) {
-    .navbar {
-        overflow: hidden;
+/************** Partie Responsive Design **************/
+/******************************************************/
+
+/* Ici : media queries pour la première partie tablette */
+@media screen and (max-width: 1580px) {
+
+    .link-logo {
+        display: none;
+    }
+
+    .title-and-links nav {
+        display: none;
+    }
+
+    .title-and-links h1 {
+        position: absolute;
+        top: 0;
+        width: 77%;
+        height: 50%;
+        margin-left: 20px;
     }
 
     .link-logo {
         display: none;
     }
 
-    .burger-menu {
-        display: flex;
-        background-color: aqua;
+    .header-div-connection {
+        right: 40px;
+        top: 70px;
+    }
+}
+
+
+/* Ici : media queries pour la seconde partie tablette */
+@media screen and (max-width: 1023px) {
+    .link-logo {
+        display: none;
     }
 
+    .title-and-links nav {
+        display: none;
+    }
+
+    .title-and-links h1 {
+        position: absolute;
+        font-size: 36px;
+        width: 60%;
+        margin-left: 10px;
+        line-height: 32px;
+    }
+}
+
+
+/* Ici : media queries pour la seconde partie tablette */
+@media screen and (max-width: 991px) {
+    .connection-link, .connection-link-logout {
+        font-size: 12px;
+    }
+
+    .header-div-connection {
+        right: 20px;
+        top: 70px;
+    }
+}
+
+/* Ici : media queries pour la partie mobile */
+@media only screen and (max-width: 767px) {
     .title-and-links h1 {
         position: absolute;
         top: 0;
@@ -179,29 +235,5 @@ nav a.active {
         height: 50%;
         margin-left: 10px;
         line-height: 24px;
-    }
-
-    .title-and-links nav {
-        display: none;
-        /* position: absolute;
-        top: 95px;
-        font-size: 12px;
-        flex-wrap: wrap;
-        height: fit-content;
-        line-height: 8px;
-        margin-left: 10px;
-        margin-right: 10px;
-        align-items: center;
-        justify-content: baseline;
-        gap: 20px; */
-    }    
-
-    .header-div-connection {
-        right: 10px;
-        top: 0;
-    }
-
-    .connection-link {
-        font-size: 12px;
     }
 }

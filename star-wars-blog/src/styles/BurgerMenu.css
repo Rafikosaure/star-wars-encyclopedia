@@ -6,27 +6,31 @@
     display: none;
 }
 
-/* RESPONSIVE DESIGN : MOBILE */
-@media only screen and (max-width: 767px) {
+/************** Partie Responsive Design **************/
+/******************************************************/
+
+/* Ici : media queries pour la première partie tablette */
+@media screen and (max-width: 1580px) {
     .burger-menu {
         position: absolute;
         z-index: 2;
+        gap: 20px;
         top: 130px;
         padding-top: 15px;
         padding-bottom: 15px;
-        padding-left: 10px;
-        margin-left: 10px;
+        padding-left: 15px;
+        padding-right: 30px;
         display: flex;
         border: 1px solid white;
         background-color: black;
         overflow: visible;
         flex-direction: column;
-        width: 200px;
+        width: fit-content;
         height: fit-content;
-        gap: 15px;
     }
 
     .burger-menu a {
+        font-size: 22px;
         color: white;
         text-decoration: none;
         margin-left: 5px;
@@ -43,7 +47,7 @@
 
     .hamburger-menu-icon {
         position: absolute;
-        margin-left: 10px;
+        margin-left: 20px;
         top: 90px;
         display: flex;
         justify-content: center;
@@ -57,5 +61,34 @@
     .hamburger-menu-icon img {
         width: 60px;
         height: 100%;
+    }
+}
+
+
+/* Ici : media queries pour la seconde partie tablette */
+@media screen and (max-width: 1023px) {
+    .hamburger-menu-icon {
+        margin-left: 10px;
+    }
+
+    .burger-menu a {
+        font-size: 18px;
+    }
+}
+
+
+/* Ici : media queries pour la seconde partie tablette */
+@media screen and (max-width: 991px) {
+    
+}
+
+/* Ici : media queries pour la partie mobile */
+@media only screen and (max-width: 767px) {
+    .burger-menu {
+        margin-left: 10px;
+    }
+
+    .burger-menu a {
+        font-size: 14px;
     }
 }
