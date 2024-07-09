@@ -290,5 +290,7 @@ exports.authDeleteById = async (req, res) => {
 exports.getAllUsers = (req, res) => {
     User.find()
         .then((users) => res.status(200).json(users))
-        .catch((error) => res.status(400).json({ error }))
+        .catch((error) => res.status(500).json({
+            message: "Users not found"
+        }))
 }
