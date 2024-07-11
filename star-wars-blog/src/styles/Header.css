@@ -66,6 +66,7 @@
     flex-direction: row-reverse;
     justify-content: center;
     position: absolute;
+    margin-right: 20px;
     right: 30px;
     top: 10px;
     height: fit-content;
@@ -188,7 +189,6 @@ nav a.active {
         justify-content: space-around;
         top: 70px;
         font-size: 16px;
-        background-color: aqua;
     }
 
     .title-and-links h1 {
@@ -198,6 +198,10 @@ nav a.active {
         width: 77%;
         height: 50%;
         margin-left: 83px;
+    }
+
+    .header-div-connection {
+        margin-right: 0;
     }
 
     .connection-link, .connection-link-logout {
