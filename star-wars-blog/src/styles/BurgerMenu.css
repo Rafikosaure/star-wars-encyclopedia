@@ -11,6 +11,18 @@
 
 /* Ici : media queries pour la première partie tablette */
 @media screen and (max-width: 1580px) {
+    .navlink-display-none {
+        display: none;
+    }
+
+    .navlink-display-flex {
+        display: flex;
+    }
+}
+
+
+/* Ici : media queries pour la seconde partie tablette */
+@media screen and (max-width: 1023px) {
     .burger-menu {
         position: absolute;
         z-index: 2;
@@ -30,24 +42,16 @@
     }
 
     .burger-menu a {
-        font-size: 22px;
+        font-size: 18px;
         color: white;
         text-decoration: none;
         margin-left: 5px;
         text-transform: lowercase;
     }
 
-    .navlink-display-none {
-        display: none;
-    }
-
-    .navlink-display-flex {
-        display: flex;
-    }
-
     .hamburger-menu-icon {
         position: absolute;
-        margin-left: 20px;
+        margin-left: 10px;
         top: 90px;
         display: flex;
         justify-content: center;
@@ -61,18 +65,6 @@
     .hamburger-menu-icon img {
         width: 60px;
         height: 100%;
-    }
-}
-
-
-/* Ici : media queries pour la seconde partie tablette */
-@media screen and (max-width: 1023px) {
-    .hamburger-menu-icon {
-        margin-left: 10px;
-    }
-
-    .burger-menu a {
-        font-size: 18px;
     }
 }
 
