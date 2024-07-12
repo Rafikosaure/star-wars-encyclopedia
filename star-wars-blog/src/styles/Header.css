@@ -4,7 +4,6 @@
     margin-left: auto;
     margin-right: auto;
     background-color: black;
-    border: 1px solid black;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -19,7 +18,6 @@
     background-position: 50%, 50%;
     border: 1px solid yellow;
     position: relative;
-    /* border-bottom: 5px solid yellow; */
 }
 
 .link-logo {
@@ -47,7 +45,6 @@
 }
 
 .link-logo img {
-    /* width: 100%; */
     width: 110px;
     height: auto;
 }
@@ -130,7 +127,6 @@
     margin-top: 0;
     margin-right: 0;
     cursor: default;
-    max-width: 630px;
 }
 
 .title-and-links nav {
@@ -177,7 +173,6 @@ nav a.active {
     }
     
     .link-logo img {
-        /* width: 100%; */
         width: 50px;
         height: 50px;
     }
@@ -195,7 +190,6 @@ nav a.active {
         position: absolute;
         top: 0;
         font-size: 35px;
-        width: 77%;
         height: 50%;
         margin-left: 83px;
     }
@@ -223,7 +217,6 @@ nav a.active {
     .title-and-links h1 {
         position: absolute;
         font-size: 36px;
-        width: 60%;
         margin-left: 10px;
         line-height: 32px;
     }
@@ -237,6 +230,10 @@ nav a.active {
 
 /* Ici : media queries pour la seconde partie tablette */
 @media screen and (max-width: 991px) {
+    .header {
+        width: 100%;
+    }
+
     .header-div-connection {
         right: 20px;
         top: 70px;
@@ -244,14 +241,4 @@ nav a.active {
 }
 
 /* Ici : media queries pour la partie mobile */
-@media only screen and (max-width: 767px) {
-    .title-and-links h1 {
-        position: absolute;
-        top: 0;
-        font-size: 24px;
-        width: 60%;
-        height: 50%;
-        margin-left: 10px;
-        line-height: 24px;
-    }
-}
+/* @media only screen and (max-width: 767px) {} */
