@@ -25,7 +25,7 @@ export default function LoginForm() {
         })
         .then(response => response.json())
         .then(data => {
-            console.log(data)
+            // console.log(data)
             if (data.message) {
                 toast("Identifiants incorrects !")
             } else {

@@ -38,6 +38,7 @@
     width: 50%;
     height: fit-content;
     padding: 20px;
+    padding-bottom: 40px;
     background: rgba(220, 220, 220, .5);
     border-radius: 8px;
 }
@@ -208,7 +209,6 @@ input:-webkit-autofill:focus {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-bottom: 40px;
 }
 
 .account-form-delete-section {

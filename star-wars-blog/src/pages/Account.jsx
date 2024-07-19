@@ -117,7 +117,7 @@ const getAllUsers = useCallback(() => {
 
   const deleteCurrentUser = (e) => {
     e.preventDefault()
-    fetch('http://localhost:8000/user/deleteById', {
+    fetch(`http://localhost:8000/user/deleteById`, {
       method: "DELETE",
       credentials: 'include'
     })

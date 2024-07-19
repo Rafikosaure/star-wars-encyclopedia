@@ -243,7 +243,7 @@ exports.authDeleteById = async (req, res) => {
         }
 
         // Trouve l'utilisateur à supprimer
-        const id = req.body.id;
+        const id = req.params.id;
         const user = await User.findById(id);
     
         if (!user) {
@@ -258,12 +258,6 @@ exports.authDeleteById = async (req, res) => {
 
         // Récupération de l'url de l'image de profil de l'utilisateur
         const picture = user.picture
-    
-        // Déconnexion : suppression du cookie
-        res.clearCookie('access_token', {
-            httpOnly: true,
-            expires: new Date(0)
-        })
 
         // Suppression de l'utilisateur dans la base de données
         await User.findByIdAndDelete(id);
