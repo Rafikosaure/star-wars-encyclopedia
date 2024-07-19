@@ -9,9 +9,6 @@ const { getAllUsers } = require('../controllers/user.controller.js')
 const User = require('../models/user.model.js');
 
 
-
-
-
 jest.mock('../models/user.model.js');
 describe('getAllUsers', () => {
   let req, res;
