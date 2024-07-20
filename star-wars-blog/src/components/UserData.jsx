@@ -26,8 +26,10 @@ export default function UserData({ user }) {
                 dispatch(reloadUsersArrayFunction())
                 toast('Compte utilisateur supprimé !')
             } else if (data.message === "User not found") {
+                dispatch(reloadUsersArrayFunction())
                 toast('Utilisateur inexistant !')
             } else {
+                dispatch(reloadUsersArrayFunction())
                 toast('Echec de la suppression !')
             }
             
