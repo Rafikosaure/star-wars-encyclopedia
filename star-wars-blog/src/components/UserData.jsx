@@ -21,7 +21,7 @@ export default function UserData({ user }) {
         })
         .then(response => response.json())
         .then(data => {
-            console.log(data)
+            // console.log(data)
             if (data.message === "User has been deleted") {
                 dispatch(reloadUsersArrayFunction())
                 toast('Compte utilisateur supprimé !')

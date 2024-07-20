@@ -64,8 +64,8 @@ export default function Account() {
     .then(response => response.json())
     .then(data => {
       setAllUsers(data.filter((user) => user.isAdmin !== true))
-      console.log('Tous les utilisateurs :', data)
-      console.log('Utilisateurs actuels :', allUsers)
+      // console.log('Tous les utilisateurs :', data)
+      // console.log('Utilisateurs actuels :', allUsers)
     })
     .catch(error => console.log(error))
   
@@ -120,7 +120,7 @@ export default function Account() {
     })
     .then(response => response.json())
     .then(data => {
-      console.log(data)
+      // console.log(data)
       dispatch(updateLoggedUser(false))
       dispatch(updateLoadedUser(false))
       toast('Compte utilisateur supprimé !')
