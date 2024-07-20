@@ -53,6 +53,17 @@
 /************** Partie Responsive Design **************/
 /******************************************************/
 
+/* Ici : media queries pour la seconde partie desktop */
+@media screen and (max-width: 1380px) {
+    .footer-content h3 {
+        font-size: 16px;
+    }
+
+    .footer-content ul li {
+        font-size: 14px;
+    }
+}
+
 /* Ici : media queries pour la seconde partie tablette */
 @media screen and (max-width: 991px) {
     .footer {
