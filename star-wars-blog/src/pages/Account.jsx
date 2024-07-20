@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux'
 import { updateLoggedUser } from '../redux/slices/loggedUserSlice'
 import { updateLoadedUser } from '../redux/slices/loadedUserSlice'
 import { selectReloadUsersState } from '../redux/slices/reloadUsersArray'
+import { reloadUsersArrayFunction } from '../redux/slices/reloadUsersArray'
 import { useNavigate } from 'react-router-dom'
 import '../styles/index.css'
 import '../styles/Account.css'
@@ -99,6 +100,7 @@ export default function Account() {
       // setDisabled(true)
       updateFileIsLoad("display-none")
       dispatch(updateLoadedUser(false))
+      dispatch(reloadUsersArrayFunction())
       toast("Mise à jour effectuée !")
     })
     .catch(error => console.error(error));
@@ -123,6 +125,7 @@ export default function Account() {
       // console.log(data)
       dispatch(updateLoggedUser(false))
       dispatch(updateLoadedUser(false))
+      dispatch(reloadUsersArrayFunction())
       toast('Compte utilisateur supprimé !')
       navigate('/')
     })
