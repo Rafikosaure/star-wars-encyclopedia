@@ -5,6 +5,7 @@
     height: 600px;
     padding-top: 100px;
     cursor: default;
+    overflow: hidden;
 }
 
 .welcome-message {
