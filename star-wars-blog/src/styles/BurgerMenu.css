@@ -18,6 +18,10 @@
     .navlink-display-flex {
         display: flex;
     }
+
+    .navlink-display-flex:hover, .navlink-display-flex:focus, .navlink-display-flex:active {
+        color: yellow;
+    }
 }
 
 
