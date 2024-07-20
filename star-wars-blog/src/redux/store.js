@@ -4,6 +4,7 @@ import articleReducer from './slices/articleSlice'
 import registerManager from "./slices/registerSlice";
 import loggedReducer from './slices/loggedUserSlice';
 import loadedReducer from "./slices/loadedUserSlice";
+import reloadUsersReducer from "./slices/reloadUsersArray";
 
 
 export default configureStore({
@@ -12,6 +13,7 @@ export default configureStore({
         article: articleReducer,
         registerValue: registerManager,
         loggedReducer: loggedReducer,
-        loadedReducer: loadedReducer
+        loadedReducer: loadedReducer,
+        reloadUsersArray: reloadUsersReducer
     }
 })

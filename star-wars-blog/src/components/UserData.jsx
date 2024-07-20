@@ -1,5 +1,6 @@
 import React from 'react'
-// import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { reloadUsersArrayFunction } from '../redux/slices/reloadUsersArray'
 import DefaultAvatar from '../assets/images/EmojiBlitzBobaFett1.webp'
 import Delete from '../assets/images/delete.webp'
 import '../styles/UserData.css'
@@ -9,7 +10,8 @@ import { toast } from 'sonner'
 
 export default function UserData({ user }) {
 
-    // const [fadeOut, setFadeOut] = useState('')
+    const dispatch = useDispatch()
+
 
     const deleteUser = (e) => {
         e.preventDefault()
@@ -21,20 +23,16 @@ export default function UserData({ user }) {
         .then(data => {
             console.log(data)
             if (data.message === "User has been deleted") {
+                dispatch(reloadUsersArrayFunction())
                 toast('Compte utilisateur supprimé !')
+            } else if (data.message === "User not found") {
+                toast('Utilisateur inexistant !')
             } else {
                 toast('Echec de la suppression !')
             }
             
         })
     }
-
-    // const actionToDeleteUser = (e) => {
-    //     e.preventDefault()
-    //     setFadeOut('fade-out')
-    //     setTimeout(deleteUser, 1000)
-    //     setFadeOut('')
-    // }
 
 
   return (

@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
@@ -6,6 +6,7 @@ import { selectLoggedState } from '../redux/slices/loggedUserSlice'
 import { useDispatch } from 'react-redux'
 import { updateLoggedUser } from '../redux/slices/loggedUserSlice'
 import { updateLoadedUser } from '../redux/slices/loadedUserSlice'
+import { selectReloadUsersState } from '../redux/slices/reloadUsersArray'
 import { useNavigate } from 'react-router-dom'
 import '../styles/index.css'
 import '../styles/Account.css'
@@ -26,23 +27,7 @@ export default function Account() {
   const [fileIsLoad, updateFileIsLoad] = useState('display-none')
   const [allowDeletion, setAllowDeletion] = useState(false)
   const { register, handleSubmit, reset } = useForm()
-
-
-  // Récupérer les utilisateurs du site
-const getAllUsers = useCallback(() => {
-  if (!allUsers) {
-    fetch('http://localhost:8000/user/getAll', {
-      credentials: 'include'
-    })
-    .then(response => response.json())
-    .then(data => {
-      setAllUsers(data.filter((user) => user.isAdmin !== true))
-      // console.log('Tous les utilisateurs :', data)
-    })
-    .catch(error => console.log(error))
-  }
-    
-  }, [allUsers])
+  const reloadUsers = useSelector(selectReloadUsersState)
 
 
   useEffect(() => {
@@ -53,9 +38,6 @@ const getAllUsers = useCallback(() => {
     .then(data => {
       dispatch(updateLoggedUser(true))
       setUserData(data)
-      if (data.isAdmin) {
-        getAllUsers()
-      }
     })
     .catch(error => {
       console.log(error)
@@ -63,7 +45,7 @@ const getAllUsers = useCallback(() => {
       navigate("/")
     })
 
-  }, [isLogged, dispatch, navigate, getAllUsers])
+  }, [isLogged, dispatch, navigate])
 
 
   const isValidIcon = (value) => {
@@ -73,6 +55,21 @@ const getAllUsers = useCallback(() => {
       updateFileIsLoad('display-none')
     }
   }
+
+
+  useEffect(() => {
+    fetch('http://localhost:8000/user/getAll', {
+      credentials: 'include'
+    })
+    .then(response => response.json())
+    .then(data => {
+      setAllUsers(data.filter((user) => user.isAdmin !== true))
+      console.log('Tous les utilisateurs :', data)
+      console.log('Utilisateurs actuels :', allUsers)
+    })
+    .catch(error => console.log(error))
+  
+  }, [reloadUsers, allUsers])
 
 
   const modifyData = (data) => {
