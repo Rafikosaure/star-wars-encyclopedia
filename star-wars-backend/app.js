@@ -50,11 +50,23 @@ app.use(
 // Routes de l'application
 const translateText = require('./routes/translation.routes')
 const userRoutes = require('./routes/user.routes')
+const postRoutes = require('./routes/post.routes')
+const categoryRoutes = require('./routes/category.routes')
+const topicRoutes = require('./routes/topic.routes')
+const commentRoutes = require('./routes/comment.routes')
+const followTopicRoutes = require('./routes/followTopic.routes')
+const likeRoutes = require('./routes/like.routes')
 
 
 // Middlewares de nos routes
 app.use('/translate', translateText)
 app.use('/user', userRoutes)
+app.use('/post', postRoutes)
+app.use('/category', categoryRoutes)
+app.use('/topic', topicRoutes)
+app.use('/comment', commentRoutes)
+app.use('/followTopic', followTopicRoutes)
+app.use('/like', likeRoutes)
 app.use('/images', express.static(path.join(__dirname, 'images')))
 
 
