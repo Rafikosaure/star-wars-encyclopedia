@@ -1,11 +1,12 @@
 const express = require('express')
+const auth = require('../middlewares/auth.js')
 const categoryCtrl = require('../controllers/category.controller.js')
 const router = express.Router()
 
 
 /** Routes de gestion des catégories de sujets du forum */
 
-// router.post('/register', multer, userCtrl.register)
+router.post('/createCategory', auth.verifyToken, categoryCtrl.createCategory)
 // router.post('/login', userCtrl.login)
 // router.post('/logout', auth.verifyToken, userCtrl.logout)
 // router.get('/logged', auth.verifyToken, userCtrl.logged)
