@@ -29,7 +29,7 @@ export default function Account() {
   const [allowDeletion, setAllowDeletion] = useState(false)
   const { register, handleSubmit, reset } = useForm()
   const reloadUsers = useSelector(selectReloadUsersState)
-
+  
 
   useEffect(() => {
     fetch('http://localhost:8000/user/logged', {
@@ -132,6 +132,7 @@ export default function Account() {
     .catch(error => console.log(error))
   }
     
+  
     
   return (
     <div className='app account-page'>
@@ -165,7 +166,7 @@ export default function Account() {
                 </div>
               </div>
               <div className='account-section-separator'/>
-              <div>
+              <div>             
                 {!userData.isAdmin ? (
                 <>
                   <h2 className='account-profile-title'>Suppression du compte</h2>
