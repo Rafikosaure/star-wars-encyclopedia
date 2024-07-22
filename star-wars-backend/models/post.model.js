@@ -22,9 +22,7 @@ const postSchema = new mongoose.Schema({
             ref: "Like" 
         }
     ],
-    createdAt: {
-        timestamps: { createdAt: true }
-    }
+    createdAt: { type: Date, default: Date.now }
 });
 
 module.exports = mongoose.model("Post", postSchema);

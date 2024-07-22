@@ -10,10 +10,7 @@ const topicSchema = new mongoose.Schema({
             ref: "Post"
         }
     ],
-    createdAt: {
-        timestamps: { createdAt: true }
-    }
-
+    createdAt: { type: Date, default: Date.now }
 });
 
 module.exports = mongoose.model("Topic", topicSchema);

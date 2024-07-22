@@ -12,9 +12,7 @@ const followTopicSchema = new mongoose.Schema({
             ref: "User" 
         }
     ],
-    createdAt: {
-        timestamps: { createdAt: true }
-    }
+    createdAt: { type: Date, default: Date.now }
 });
 
 module.exports = mongoose.model("FollowTopic", followTopicSchema);
