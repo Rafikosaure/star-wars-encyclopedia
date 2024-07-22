@@ -13,3 +13,11 @@ exports.createCategory = (req, res) => {
         .then(() => res.status(201).json({ message: 'Catégorie créée !' }))
         .catch(() => res.status(400).json({ message: 'Echec de la création de la catégorie !' }))
 }
+
+exports.getCategories = (req, res) => {
+    Category.find()
+        .then((categories) => res.status(200).json(categories))
+        .catch((error) => res.status(500).json({
+            message: "Categories not found"
+        }))
+}
