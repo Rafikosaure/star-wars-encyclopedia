@@ -9,12 +9,6 @@ const commentSchema = new mongoose.Schema({
             ref: "User"
         }
     },
-    // likes: [
-    //     { 
-    //         type: mongoose.Schema.Types.ObjectId, 
-    //         ref: "Like" 
-    //     }
-    // ],
     createdAt: { type: Date, default: Date.now }
 });
 
