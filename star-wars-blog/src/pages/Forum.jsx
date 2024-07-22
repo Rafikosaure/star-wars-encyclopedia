@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react'
 import '../styles/index.css'
 import '../styles/Forum.css'
 import Code from '../components/Code'
-// import topicCategories from '../data/localTopicCategories.json'
 import { useNavigate } from 'react-router-dom'
 
 
@@ -19,7 +18,7 @@ export default function Forum() {
     fetch('http://localhost:8000/category/getCategories')
       .then(response => response.json())
       .then(data => {
-        console.log(data)
+        // console.log(data)
         setCategories(data)
       })
       .catch(error => console.log(error))
