@@ -1,30 +1,29 @@
 import React from 'react'
-// import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import '../styles/index.css'
 import '../styles/Topics.css'
-// import { useParams } from 'react-router-dom'
-// import topicCategoriesData from '../data/localTopicCategories.json'
+import { useParams } from 'react-router-dom'
 
 
 export default function Topics() {
 
-  // const { topicsCategoryId } = useParams()
-  // const [categories, setCategories] = useState()
+  const { topicsCategoryId } = useParams()
+  const [topics, setTopics] = useState()
 
-
-  // useEffect(() => {
-  //   fetch('http://localhost:8000/category/getCategories')
-  //     .then(response => response.json())
-  //     .then(data => {
-  //       console.log(data)
-  //       setCategories(data)
-  //     })
-  //     .catch(error => console.log(error))
-
-  // }, [])
   
 
-    // const currentTopicCategory = topicCategoriesData.find((topicCategory) => topicCategory._id === topicCategoryId)
+
+
+  useEffect(() => {
+    fetch(`http://localhost:8000/topic/getTopics/${topicsCategoryId}`)
+      .then(response => response.json())
+      .then(data => {
+        console.log(data)
+        setTopics(data)
+      })
+      .catch(error => console.log(error))
+  }, [topicsCategoryId])
+
 
   return (
     <div className='app topics'>
