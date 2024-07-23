@@ -4,6 +4,14 @@ const Post = require('../models/post.model.js')
 require('dotenv').config()
 
 
+exports.getAllTopics = (req, res) => {
+    Topic.find()
+        .then((topics) => res.status(200).json(topics))
+        .catch((error) => res.status(500).json({
+            message: "Topics not found"
+        }))
+}
+
 
 exports.createTopic = async (req, res) => {
 
