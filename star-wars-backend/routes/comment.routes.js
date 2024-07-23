@@ -6,7 +6,7 @@ const router = express.Router()
 
 /** Routes de création et de gestion globale des messages des posts */
 
-// router.post('/register', multer, userCtrl.register)
+router.post('/createComment', commentCtrl.createComment)
 // router.post('/login', userCtrl.login)
 // router.post('/logout', auth.verifyToken, userCtrl.logout)
 // router.get('/logged', auth.verifyToken, userCtrl.logged)
