@@ -6,7 +6,7 @@ const router = express.Router()
 
 /** Routes de création et de gestion des sujets dans le forum */
 
-// router.post('/register', multer, userCtrl.register)
+router.post('/createTopic/:id', auth.verifyToken, topicCtrl.createTopic)
 // router.post('/login', userCtrl.login)
 // router.post('/logout', auth.verifyToken, userCtrl.logout)
 // router.get('/logged', auth.verifyToken, userCtrl.logged)
