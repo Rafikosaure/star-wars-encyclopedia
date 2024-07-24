@@ -9,28 +9,18 @@ import TopicCard from '../components/TopicCard'
 export default function Topics() {
 
   const { topicsCategoryId } = useParams()
-  const [currentCategory, setCurrentCategory] = useState()
+  const [currentCategoryTitle, setCurrentCategoryTitle] = useState()
   const [topics, setTopics] = useState()
-  
 
-  useEffect(() => {
-    fetch('http://localhost:8000/category/getCategories')
-    .then(response => response.json())
-    .then(data => {
-      // console.log(data)
-      setCurrentCategory(data.find((category) => category._id === topicsCategoryId))
-    })
-    .catch(error => console.log(error))
-
-  }, [topicsCategoryId])
 
 
   useEffect(() => {
-    fetch(`http://localhost:8000/topic/getTopics/${topicsCategoryId}`)
+    fetch(`http://localhost:8000/topic/getTopicsByCategory/${topicsCategoryId}`)
       .then(response => response.json())
       .then(data => {
-        console.log(data)
-        setTopics(data)
+        // console.log(data)
+        setCurrentCategoryTitle(data.title)
+        setTopics(data.topics)
       })
       .catch(error => console.log(error))
 
@@ -41,8 +31,8 @@ export default function Topics() {
     <div className='app topics'>
       <div className='topics-overlay' />
       <div className='topics-main'>
-        {currentCategory && (
-          <h1 className='topics-page-title'>{currentCategory.title.toLowerCase()}</h1>
+        {currentCategoryTitle && (
+          <h1 className='topics-page-title'>{currentCategoryTitle.toLowerCase()}</h1>
         )}
         <div className='topics-list'>
             {topics && 
