@@ -3,15 +3,26 @@ import { useState, useEffect } from 'react'
 import '../styles/index.css'
 import '../styles/Topics.css'
 import { useParams } from 'react-router-dom'
+import TopicCard from '../components/TopicCard'
 
 
 export default function Topics() {
 
   const { topicsCategoryId } = useParams()
+  const [currentCategory, setCurrentCategory] = useState()
   const [topics, setTopics] = useState()
-
   
 
+  useEffect(() => {
+    fetch('http://localhost:8000/category/getCategories')
+    .then(response => response.json())
+    .then(data => {
+      // console.log(data)
+      setCurrentCategory(data.find((category) => category._id === topicsCategoryId))
+    })
+    .catch(error => console.log(error))
+
+  }, [topicsCategoryId])
 
 
   useEffect(() => {
@@ -22,16 +33,23 @@ export default function Topics() {
         setTopics(data)
       })
       .catch(error => console.log(error))
-  }, [topicsCategoryId])
 
+  }, [topicsCategoryId])
+  
 
   return (
     <div className='app topics'>
       <div className='topics-overlay' />
       <div className='topics-main'>
-        {/* <h1 className='topics-page-title'>{currentTopicCategory.title.toLowerCase()}</h1> */}
+        {currentCategory && (
+          <h1 className='topics-page-title'>{currentCategory.title.toLowerCase()}</h1>
+        )}
         <div className='topics-list'>
-            appel à la bdd
+            {topics && 
+              (topics.map((topic, index) => 
+                <TopicCard key={index} topic={topic} />
+              ))
+            }
         </div>
       </div>
     </div>
