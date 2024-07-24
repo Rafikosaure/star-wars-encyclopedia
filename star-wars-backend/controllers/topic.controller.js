@@ -4,12 +4,28 @@ const Post = require('../models/post.model.js')
 require('dotenv').config()
 
 
-exports.getAllTopics = (req, res) => {
-    Topic.find()
-        .then((topics) => res.status(200).json(topics))
-        .catch((error) => res.status(500).json({
-            message: "Topics not found"
-        }))
+exports.getTopicsByCategory = async (req, res) => {
+    
+    // Trouver la catégorie via son id
+    const categoryId = req.params.id
+
+    // Vérifier si la catégorie n'est pas undefind
+    if (!categoryId) res.status(404).json({
+        message: "Identifiant incorrect !"
+    })
+
+    // Trouver les topics liés à cette catégorie
+    const currentCategoryWithTopics = await Category.findById(categoryId).populate("topics")
+
+    // Vérifier que les données ne sont pas undefined
+    if (!currentCategoryWithTopics) res.status(404).json({
+        message: "Category not found!"
+    })
+    
+    // Envoyer la catégorie ainsi que le tableau des topics
+    res.status(200).json(
+        currentCategoryWithTopics
+    )
 }
 
 
