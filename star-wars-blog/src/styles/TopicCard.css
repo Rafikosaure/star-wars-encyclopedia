@@ -1,0 +1,41 @@
+.topic-card-main {
+    width: 80%;
+    height: 90px;
+    overflow: hidden;
+    border: 2px solid white;
+    border-radius: 10px;
+    background-color: #00004C;
+    font-family: Arial, Helvetica, sans-serif;
+    transition: all, .4s;
+}
+
+.topic-card-link {
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.topic-card-content {
+    display: flex;
+    flex-direction: column;
+    padding-left: 3%;
+    padding-right: 3%;
+    gap: 10px;
+    color: white;
+}
+
+.topic-card-content h1 {
+    font-size: 20px;
+    margin: 0;
+}
+
+.topic-card-content p {
+    font-size: 14px;
+    margin: 0;
+}
+
+.topic-card-main:hover {
+    background-color: black;
+}
