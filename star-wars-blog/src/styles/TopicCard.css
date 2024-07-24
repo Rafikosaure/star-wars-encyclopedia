@@ -4,17 +4,29 @@
     overflow: hidden;
     border: 2px solid white;
     border-radius: 10px;
-    background-color: black;
     font-family: Arial, Helvetica, sans-serif;
-    transition: all, .4s;
+    position: relative;
+}
+
+.topic-card-banner {
+    width: 110%;
+    background-position: center;
+    position: absolute;
 }
 
 .topic-card-link {
+    position: absolute;
     width: 100%;
     height: 100%;
     text-decoration: none;
     display: flex;
     align-items: center;
+    background-color: black;
+    transition: all 0.4s;
+}
+
+.topic-card-link:hover {
+    background-color: transparent;
 }
 
 .topic-card-content {
@@ -36,6 +48,6 @@
     margin: 0;
 }
 
-.topic-card-main:hover {
+/* .topic-card-main:hover {
     background-color: #00004C;
-}
+} */
