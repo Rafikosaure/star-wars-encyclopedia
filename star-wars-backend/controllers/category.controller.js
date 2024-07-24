@@ -3,6 +3,7 @@ const User = require('../models/user.model.js')
 require('dotenv').config()
 
 
+// Créer une catégorie de topics
 exports.createCategory = (req, res) => {
     User.findById(req.user.id)
         .then(user => {
@@ -14,6 +15,8 @@ exports.createCategory = (req, res) => {
         .catch(() => res.status(400).json({ message: 'Echec de la création de la catégorie !' }))
 }
 
+
+// Récupérer le tableau des catégories de la bdd
 exports.getCategories = (req, res) => {
     Category.find()
         .then((categories) => res.status(200).json(categories))
