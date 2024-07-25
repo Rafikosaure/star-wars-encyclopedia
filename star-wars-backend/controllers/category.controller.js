@@ -20,7 +20,16 @@ exports.createCategory = (req, res) => {
 exports.getCategories = (req, res) => {
     Category.find()
         .then((categories) => res.status(200).json(categories))
-        .catch((error) => res.status(500).json({
-            message: "Categories not found"
+        .catch((error) => res.status(404).json({
+            message: "Categories not found!"
+        }))
+}
+
+// Récupérer toutes les catégories avec leurs topics
+exports.getAllCategoriesWithTopics = (req, res) => {
+    Category.find().populate('topics')
+        .then((data) => res.status(200).json(data))
+        .catch((error) => res.status(404).json({
+            message: "Data not found!"
         }))
 }
