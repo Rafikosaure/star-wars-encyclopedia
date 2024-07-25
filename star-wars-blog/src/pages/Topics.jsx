@@ -1,47 +1,51 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import '../styles/index.css'
 import '../styles/Topics.css'
 import { useParams } from 'react-router-dom'
 import TopicCard from '../components/TopicCard'
+import { useSelector } from 'react-redux'
+import { selectForumData } from '../redux/slices/forumSlice'
 
 
 export default function Topics() {
 
   const { topicsCategoryId } = useParams()
-  const [currentCategoryTitle, setCurrentCategoryTitle] = useState()
-  const [topics, setTopics] = useState()
-
-
+  const navigate = useNavigate()
+  const forumData = useSelector(selectForumData)
+  const [currentData, setCurrentData] = useState()
 
   useEffect(() => {
-    fetch(`http://localhost:8000/topic/getTopicsByCategory/${topicsCategoryId}`)
-      .then(response => response.json())
-      .then(data => {
-        // console.log(data)
-        setCurrentCategoryTitle(data.title)
-        setTopics(data.topics)
-      })
-      .catch(error => console.log(error))
+    // Trouver les articles correspondant à la catégorie choisie 
+    // & gestion des urls incorrectes
+    if (forumData && topicsCategoryId) {
+      setCurrentData(forumData.find((category) => category._id === topicsCategoryId))
+    } else {
+      navigate("*")
+    }
 
-  }, [topicsCategoryId])
+  }, [currentData, navigate, topicsCategoryId, forumData])
   
 
   return (
     <div className='app topics'>
       <div className='topics-overlay' />
-      <div className='topics-main'>
-        {currentCategoryTitle && (
-          <h1 className='topics-page-title'>{currentCategoryTitle.toLowerCase()}</h1>
+      {currentData ? (
+        <div className='topics-main'>
+        {currentData.title && (
+          <h1 className='topics-page-title'>{currentData.title.toLowerCase()}</h1>
         )}
         <div className='topics-list'>
-            {topics && 
-              (topics.map((topic, index) => 
-                <TopicCard key={index} topic={topic} />
-              ))
-            }
+          {currentData.topics && 
+            (currentData.topics.map((topic, index) => 
+              <TopicCard key={index} topic={topic} />
+            ))
+          }
         </div>
       </div>
+      ) : null}
+      
     </div>
   )
 }
