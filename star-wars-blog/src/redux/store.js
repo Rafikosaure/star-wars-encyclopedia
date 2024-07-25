@@ -6,6 +6,7 @@ import loggedReducer from './slices/loggedUserSlice';
 import loadedReducer from "./slices/loadedUserSlice";
 import reloadUsersReducer from "./slices/reloadUsersArray";
 import forumDataReducer from './slices/forumSlice';
+import topicDataReducer from './slices/topicSlice'
 
 
 export default configureStore({
@@ -16,6 +17,7 @@ export default configureStore({
         loggedReducer: loggedReducer,
         loadedReducer: loadedReducer,
         reloadUsersArray: reloadUsersReducer,
-        forumDataReducer: forumDataReducer
+        forumDataReducer: forumDataReducer,
+        topicDataReducer: topicDataReducer
     }
 })
