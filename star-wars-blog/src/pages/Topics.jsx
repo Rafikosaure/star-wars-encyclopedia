@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux'
 import { selectForumData } from '../redux/slices/forumSlice'
 
 
+
 export default function Topics() {
 
   const { topicsCategoryId } = useParams()
@@ -16,17 +17,16 @@ export default function Topics() {
   const forumData = useSelector(selectForumData)
   const [currentData, setCurrentData] = useState()
 
+
   useEffect(() => {
     // Trouver les articles correspondant à la catégorie choisie 
     // & gestion des urls incorrectes
     if (forumData && topicsCategoryId) {
       setCurrentData(forumData.find((category) => category._id === topicsCategoryId))
     } else {
-      navigate("*")
+      navigate("/forum")
     }
-
   }, [currentData, navigate, topicsCategoryId, forumData])
-  
 
   return (
     <div className='app topics'>
