@@ -8,7 +8,7 @@ import Forum from './pages/Forum';
 import Topics from './pages/Topics';
 import Header from './components/Header';
 import Footer from './components/Footer';
-// import TestPage from './pages/TestPage';
+import Topic from './pages/Topic'
 import Account from './pages/Account';
 
 
@@ -25,7 +25,7 @@ export default function App() {
               <Route path='/forum' element={<Forum />} />
               <Route path='/topics/:topicsCategoryId' element={<Topics />} />
               <Route path='/account' element={<Account />} />
-              {/* <Route path='/test' element={<TestPage />} /> */}
+              <Route path='/topic/:topicId' element={<Topic />} />
               <Route path='*' element={<Error404 />} />
           </Routes>
           <Footer />
