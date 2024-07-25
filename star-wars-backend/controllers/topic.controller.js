@@ -6,7 +6,7 @@ require('dotenv').config()
 
 exports.getTopicsByCategory = async (req, res) => {
     
-    // Trouver la catégorie via son id
+    // Récupérer l'id de la catégorie courante
     const categoryId = req.params.id
 
     // Vérifier si la catégorie n'est pas undefind
