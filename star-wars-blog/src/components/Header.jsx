@@ -77,7 +77,7 @@ export default function Header() {
               ? 'link-logo link-logo-disabled'
               : 'link-logo link-logo-enabled'
               }>
-              <img src={Logo} alt="logo" />
+              <img src={Logo} alt="logo" title="Page d'accueil" />
         </NavLink>
         <div className='title-and-links'>
           <h1>Star Wars Encyclopedia</h1>
@@ -99,7 +99,7 @@ export default function Header() {
               {loggedUser && (
                 <>
                 {loggedUser.picture !== "" ? (
-                  <div className='header-div-logged-image' onClick={() => navigate(`/account`)}>
+                  <div className='header-div-logged-image' title='Compte utilisateur' onClick={() => navigate(`/account`)}>
                     <img src={loggedUser.picture} alt="Profil de l'utilisateur" />
                   </div>
                 ) : (
