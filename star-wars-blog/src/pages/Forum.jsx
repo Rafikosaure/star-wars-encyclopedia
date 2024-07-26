@@ -1,11 +1,10 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
 import '../styles/index.css'
 import '../styles/Forum.css'
 import Code from '../components/Code'
 import { useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
-import { saveForumData } from '../redux/slices/forumSlice'
+import { useSelector } from 'react-redux'
+import { selectForumData } from '../redux/slices/forumSlice'
 
 
 
@@ -14,20 +13,7 @@ export default function Forum() {
   const navigate = useNavigate()
   const forumTitle1 = "Bienvenue dans le forum !"
   const forumTitle2 = "Thématiques"
-  const [categoriesAndTopics, setCategoriesAndTopics] = useState()
-  const dispatch = useDispatch()
-  
-
-  useEffect(() => {
-    fetch('http://localhost:8000/category/getAllCategoriesWithTopics')
-    .then(response => response.json())
-    .then(data => {
-      // console.log(data)
-      setCategoriesAndTopics(data)
-      dispatch(saveForumData(data))
-    })
-    .catch(error => console.log(error))
-  }, [dispatch])
+  const categoriesAndTopics = useSelector(selectForumData)
 
 
   return (

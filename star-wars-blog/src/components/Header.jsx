@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { selectLoggedState } from '../redux/slices/loggedUserSlice.js'
 import { selectLoadedState } from '../redux/slices/loadedUserSlice.js'
+import { saveForumData } from '../redux/slices/forumSlice.js'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import { toast } from 'sonner'
@@ -46,6 +47,16 @@ export default function Header() {
     
   }, [isLogged, dispatch, isLoaded])
     
+
+  useEffect(() => {
+    fetch('http://localhost:8000/category/getAllCategoriesWithTopics')
+    .then(response => response.json())
+    .then(data => {
+      // console.log(data)
+      dispatch(saveForumData(data))
+    })
+    .catch(error => console.log(error))
+  }, [dispatch])
 
   
   const logout = (e) => {
