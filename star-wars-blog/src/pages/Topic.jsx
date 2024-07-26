@@ -31,15 +31,15 @@ export default function Topic() {
     return (
         <div className='app topic'>
             <div className='topic-overlay' />
-            {topicsData && (
+            {currentTopicData && (
                 <div className='topic-content'>
-                    <h1 className='topic-title'>Topic-title</h1>
+                    <h1 className='topic-title'>{currentTopicData.title}</h1>
                     {currentTopicData && (
-                        <div className='topic-list'>
-                            {currentTopicData.posts.map((post, index) => (
-                                <PostCard key={index} index={index} post={post}/>
-                            ))}
-                        </div>
+                    <div className='topic-list'>
+                        {currentTopicData.posts.map((post, index) => (
+                            <PostCard key={index} index={index} post={post}/>
+                        ))}
+                    </div>
                     )}
                 </div>
             )}
