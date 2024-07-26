@@ -2,18 +2,18 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {}
 
-export const topicSlice = createSlice({
-  name: 'topicData',
+export const topicsSlice = createSlice({
+  name: 'topicsData',
   initialState,
   reducers: {
-    saveTopicData: (state, action) => {
+    saveTopicsData: (state, action) => {
         state.value = action.payload
     }
   }
 });
 
-export const { saveTopicData } = topicSlice.actions;
+export const { saveTopicsData } = topicsSlice.actions;
 
-export const selectTopicData = (state) => state.topicDataReducer.value
+export const selectTopicsData = (state) => state.topicsDataReducer.value
 
-export default topicSlice.reducer;
+export default topicsSlice.reducer;
