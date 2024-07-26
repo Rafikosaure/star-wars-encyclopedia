@@ -1,3 +1,45 @@
 .topic {
-    background-color: pink;
+    background: url(../assets/images/star-wars-dialog.webp) no-repeat center center fixed;
+    background-size: cover;
+    position: relative;
+    height: 100vh;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+}
+
+.topic-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: 0.6;
+}
+
+.topic-content {
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.topic-title {
+    color: white;
+    height: fit-content;
+    font-family: 'Starjedi';
+    margin-top: 50px;
+    cursor: default;
+    width: 70%;
+    text-align: center;
+}
+
+.topic-list {
+    margin-top: 50px;
+    height: fit-content;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
