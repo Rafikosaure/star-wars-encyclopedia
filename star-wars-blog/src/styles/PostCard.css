@@ -1,0 +1,76 @@
+.post-card-main {
+    position: relative;
+    width: 80%;
+    height: 240px;
+    outline: 2px solid white;
+    border-radius: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: black;
+}
+
+.post-card-overlay {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    background: url('../assets/images/dashboard.webp') no-repeat center center;
+    background-size: cover;
+    opacity: .2;
+    border-radius: 10px;
+}
+
+.post-card-content {
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    color: white;
+}
+
+.post-card-content p {
+    margin-left: 15px;
+    font-size: 16px;
+}
+
+.post-card-author {
+    margin-left: 15px;
+    display: flex;
+    position: relative;
+}
+
+.post-card-author-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-width: 100px;
+}
+
+.post-card-author-div {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    outline: 1px solid white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.post-card-author-div img {
+    height: 110%;
+    width: auto;
+}
+
+.post-card-author h2 {
+    font-size: 16px;
+}
+
+.post-card-message {
+    position: absolute;
+    left: 140px;
+    top: -20px;
+    height: 180px;
+    width: auto;
+    font-size: 14px;
+    margin-right: 40px;
+}
