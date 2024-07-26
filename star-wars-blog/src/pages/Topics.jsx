@@ -12,21 +12,28 @@ import { selectForumData } from '../redux/slices/forumSlice'
 
 export default function Topics() {
 
+  const forumData = useSelector(selectForumData)
   const { topicsCategoryId } = useParams()
   const navigate = useNavigate()
-  const forumData = useSelector(selectForumData)
   const [currentData, setCurrentData] = useState()
 
-
+  
   useEffect(() => {
-    // Trouver les articles correspondant à la catégorie choisie 
-    // & gestion des urls incorrectes
-    if (forumData && topicsCategoryId) {
-      setCurrentData(forumData.find((category) => category._id === topicsCategoryId))
-    } else {
-      navigate("/forum")
+    // Attendre que les data soient chargées
+    if (forumData) {
+      // Vérifier la validité de l'id de la catégorie
+      const verifyId = forumData.find((category) => category._id === topicsCategoryId)
+      if (verifyId) {
+        // Si l'id est valide : trouver les articles correspondant à la catégorie
+        setCurrentData(forumData.find((category) => category._id === topicsCategoryId))
+      } else {
+        // Sinon, redirection vers l'entrée du forum
+        navigate("/forum")
+      }
     }
-  }, [currentData, navigate, topicsCategoryId, forumData])
+    
+
+  }, [currentData, navigate, forumData, topicsCategoryId])
 
   return (
     <div className='app topics'>
