@@ -1,5 +1,6 @@
 const Post = require('../models/post.model.js')
 const Topic = require('../models/topic.model.js')
+const User = require('../models/user.model.js')
 require('dotenv').config()
 
 
@@ -56,4 +57,28 @@ exports.getPostsByTopicId = async (req, res) => {
     res.status(200).json(
         currentTopicWithPosts
     )
+}
+
+
+// Récupérer l'utillisateur d'un post
+exports.getPostUser = async (req, res) => {
+    
+    // Récupérer l'id de l'utilisateur du post
+    const userId = req.params.id
+
+    // Vérifier si l'id est valide
+    if (!userId) res.status(404).json({
+        message: "Identifiant incorrect !"
+    })
+
+    // Récupérer l'utilisateur du post avec son id
+    const currentUser = await User.findById(userId)
+
+    // Vérifier que l'on a bien reçu un résultat valide
+    if (!currentUser) res.status(404).json({
+        message: "User not found!"
+    })
+    
+    // Renvoyer en réponse l'utilisateur courant
+    res.status(200).json(currentUser)
 }
