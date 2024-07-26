@@ -4,6 +4,21 @@ const Post = require('../models/post.model.js')
 require('dotenv').config()
 
 
+exports.getTopicsAndPosts = async (req, res) => {
+
+    // Chercher tous les topics avec leurs posts
+    const topicsWithPosts = await Topic.find().populate('posts')
+
+    // Vérifier si les données sont valides
+    if (!topicsWithPosts) res.status(404).json({
+        message: "Topics not found!"
+    })
+
+    // Renvoyer l'objet récupéré en réponse
+    res.status(200).json(topicsWithPosts)
+}
+
+
 exports.getTopicsByCategory = async (req, res) => {
     
     // Récupérer l'id de la catégorie courante
