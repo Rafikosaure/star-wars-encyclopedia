@@ -11,6 +11,7 @@ import { useSelector } from 'react-redux'
 import { selectLoggedState } from '../redux/slices/loggedUserSlice.js'
 import { selectLoadedState } from '../redux/slices/loadedUserSlice.js'
 import { saveForumData } from '../redux/slices/forumSlice.js'
+import { saveTopicsData } from '../redux/slices/topicSlice.js'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import { toast } from 'sonner'
@@ -27,6 +28,7 @@ export default function Header() {
   
 
   useEffect(() => {
+    // Vérifier la connexion d'un utilisateur
     if (!isLoaded) {
       fetch('http://localhost:8000/user/logged', {
         credentials: "include"
@@ -49,6 +51,7 @@ export default function Header() {
     
 
   useEffect(() => {
+    // Récupérer les catégories du forum avec leurs topics
     fetch('http://localhost:8000/category/getAllCategoriesWithTopics')
     .then(response => response.json())
     .then(data => {
@@ -58,7 +61,21 @@ export default function Header() {
     .catch(error => console.log(error))
   }, [dispatch])
 
+
+  // Récupérer les topics du forum avec leurs posts
+  useEffect(() => {
+    fetch(`http://localhost:8000/topic/getTopicsAndPosts`)
+    .then(response => response.json())
+    .then((data) => {
+      console.log(data)
+      dispatch(saveTopicsData(data))
+    })
+    .catch(error => console.log(error))
+
+  }, [dispatch])
   
+
+  // Fonction de déconnexion d'un utilisateur
   const logout = (e) => {
     e.preventDefault()
     fetch('http://localhost:8000/user/logout', {
@@ -77,6 +94,8 @@ export default function Header() {
     .catch(error => console.log(error))
   }
   
+
+
   return (
     <div className='header'>
       <div className='navbar'>

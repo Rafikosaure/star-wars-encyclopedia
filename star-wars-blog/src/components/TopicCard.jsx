@@ -1,28 +1,11 @@
 import React from 'react'
-import { useEffect } from 'react'
 import '../styles/TopicCard.css'
 import { Link } from 'react-router-dom'
 import StarsSky from '../assets/images/ciel_nuit_banniere.webp'
-import { useDispatch } from 'react-redux'
-import { saveTopicData } from '../redux/slices/topicSlice'
 
 
 
 export default function TopicCard({ topic }) {
-
-    const dispatch = useDispatch()
-
-    useEffect(() => {
-        fetch(`http://localhost:8000/post/getPostsByTopicId/${topic._id}`)
-        .then(response => response.json())
-        .then((data) => {
-          // console.log(data)
-          dispatch(saveTopicData(data))
-        })
-        .catch(error => console.log(error))
-    
-    }, [dispatch, topic])
-
 
     return (
         <div className='topic-card-main'>
@@ -33,7 +16,6 @@ export default function TopicCard({ topic }) {
                     <p>{topic.description}</p>
                 </div>
             </Link>
-            
         </div>
     )
 }
