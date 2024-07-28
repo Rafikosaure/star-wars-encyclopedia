@@ -7,7 +7,6 @@ import { useParams } from 'react-router-dom'
 import TopicCard from '../components/TopicCard'
 import { useSelector } from 'react-redux'
 import { selectForumData } from '../redux/slices/forumSlice'
-import { toast } from 'sonner'
 
 
 export default function Topics() {
@@ -28,8 +27,7 @@ export default function Topics() {
         setCurrentData(forumData.find((category) => category._id === topicsCategoryId))
       } else {
         // Sinon, redirection vers l'entrée du forum
-        navigate("/forum")
-        toast("Page inexistante !")
+        navigate("*")
       }
     }
     

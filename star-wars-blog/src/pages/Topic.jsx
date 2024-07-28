@@ -5,7 +5,6 @@ import { selectTopicsData } from '../redux/slices/topicSlice'
 import { useParams } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import PostCard from '../components/PostCard'
-import { toast } from 'sonner'
 
 
 export default function Topic() {
@@ -19,8 +18,7 @@ export default function Topic() {
         if (topicsData) {
             const verifyId = topicsData.find((item) => item._id === topicId)
             if (!verifyId) {
-                navigate("/forum")
-                toast("Page inexistante !")
+                navigate("*")
             }
             setCurrentTopicData(topicsData.find((topicData) => topicData._id === topicId))
         }
