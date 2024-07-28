@@ -2,18 +2,21 @@ import '../styles/Header.css'
 import Logo from '../assets/images/logo.webp'
 import { NavLink } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { updateLoggedUser } from '../redux/slices/loggedUserSlice.js'
+import { updateIsLoggedUser } from '../redux/slices/isLoggedUserSlice.js'
 import { updateLoadedUser } from '../redux/slices/loadedUserSlice.js'
 import { reinitializeDozen } from '../redux/slices/dozenSlice'
 import DefaultAvatar from '../assets/images/EmojiBlitzBobaFett1.webp'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import { selectLoggedState } from '../redux/slices/loggedUserSlice.js'
+import { selectIsLoggedState } from '../redux/slices/isLoggedUserSlice.js'
 import { selectLoadedState } from '../redux/slices/loadedUserSlice.js'
+import { saveForumData } from '../redux/slices/forumSlice.js'
+import { saveTopicsData } from '../redux/slices/topicSlice.js'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import { toast } from 'sonner'
 import BurgerMenu from './BurgerMenu.jsx'
+import { updateUserLog } from '../redux/slices/loggedUserSlice.js'
 
 
 export default function Header() {
@@ -21,12 +24,13 @@ export default function Header() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [loggedUser, setLoggedUser] = useState()
-  const isLogged = useSelector(selectLoggedState)
+  const isLogged = useSelector(selectIsLoggedState)
   const isLoaded = useSelector(selectLoadedState)
   
 
   useEffect(() => {
-    if (!isLoaded) {
+    // Vérifier la connexion d'un utilisateur
+    if (!isLoaded && isLogged) {
       fetch('http://localhost:8000/user/logged', {
         credentials: "include"
       })
@@ -34,12 +38,13 @@ export default function Header() {
       .then(data => {
         // console.log(data)
         setLoggedUser(data)
-        dispatch(updateLoggedUser(true))
+        dispatch(updateUserLog(data))
+        dispatch(updateIsLoggedUser(true))
         dispatch(updateLoadedUser(true))
       })
       .catch(error => {
         // console.log(error)
-        dispatch(updateLoggedUser(false))
+        dispatch(updateIsLoggedUser(false))
         setLoggedUser()
       })
     }
@@ -47,7 +52,32 @@ export default function Header() {
   }, [isLogged, dispatch, isLoaded])
     
 
+  useEffect(() => {
+    // Récupérer les catégories du forum avec leurs topics
+    fetch('http://localhost:8000/category/getAllCategoriesWithTopics')
+    .then(response => response.json())
+    .then(data => {
+      // console.log(data)
+      dispatch(saveForumData(data))
+    })
+    .catch(error => console.log(error))
+  }, [dispatch])
+
+
+  // Récupérer les topics du forum avec leurs posts
+  useEffect(() => {
+    fetch(`http://localhost:8000/topic/getTopicsAndPosts`)
+    .then(response => response.json())
+    .then((data) => {
+      // console.log(data)
+      dispatch(saveTopicsData(data))
+    })
+    .catch(error => console.log(error))
+
+  }, [dispatch])
   
+
+  // Fonction de déconnexion d'un utilisateur
   const logout = (e) => {
     e.preventDefault()
     fetch('http://localhost:8000/user/logout', {
@@ -58,7 +88,7 @@ export default function Header() {
     .then(response => response.json())
     .then(data => {
       // console.log(data)
-      dispatch(updateLoggedUser(false))
+      dispatch(updateIsLoggedUser(false))
       setLoggedUser()
       dispatch(updateLoadedUser(false))
       toast("Vous êtes déconnecté !")
@@ -66,6 +96,8 @@ export default function Header() {
     .catch(error => console.log(error))
   }
   
+
+
   return (
     <div className='header'>
       <div className='navbar'>
@@ -77,7 +109,7 @@ export default function Header() {
               ? 'link-logo link-logo-disabled'
               : 'link-logo link-logo-enabled'
               }>
-              <img src={Logo} alt="logo" />
+              <img src={Logo} alt="logo" title="Page d'accueil" />
         </NavLink>
         <div className='title-and-links'>
           <h1>Star Wars Encyclopedia</h1>
@@ -99,7 +131,7 @@ export default function Header() {
               {loggedUser && (
                 <>
                 {loggedUser.picture !== "" ? (
-                  <div className='header-div-logged-image' onClick={() => navigate(`/account`)}>
+                  <div className='header-div-logged-image' title='Compte utilisateur' onClick={() => navigate(`/account`)}>
                     <img src={loggedUser.picture} alt="Profil de l'utilisateur" />
                   </div>
                 ) : (

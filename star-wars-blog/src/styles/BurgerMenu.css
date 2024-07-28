@@ -18,6 +18,10 @@
     .navlink-display-flex {
         display: flex;
     }
+
+    .navlink-display-flex:hover, .navlink-display-flex:focus, .navlink-display-flex:active {
+        color: yellow;
+    }
 }
 
 
@@ -26,8 +30,8 @@
     .burger-menu {
         position: absolute;
         z-index: 2;
-        gap: 20px;
         top: 130px;
+        gap: 20px;
         padding-top: 15px;
         padding-bottom: 15px;
         padding-left: 15px;

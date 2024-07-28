@@ -20,6 +20,7 @@
     position: relative;
 }
 
+
 .link-logo {
     width: 110px;
     height: auto;
@@ -94,7 +95,7 @@
 
 .connection-link-logout {
     display: flex;
-    margin-right: 8px;
+    margin-right: 14px;
     font-size: 16px;
     font-weight: bold;
     text-decoration: underline;
@@ -130,14 +131,14 @@
 }
 
 .title-and-links nav {
-    max-width: 100%;
+    width: 99%;
     height: 50%;
     margin-left: 10px;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 3%;
-    font-size: 20px;
+    gap: 2.2%;
+    font-size: 18px;
 }
 
 nav a {
@@ -157,8 +158,8 @@ nav a.active {
 /************** Partie Responsive Design **************/
 /******************************************************/
 
-/* Ici : media queries pour la première partie tablette */
-@media screen and (max-width: 1580px) {
+/* Ici : media queries pour la seconde partie desktop */
+@media screen and (max-width: 1380px) {
     .link-logo {
         position: absolute;
         z-index: 3;
@@ -171,7 +172,7 @@ nav a.active {
         transition-property: all;
         transition-duration: .5s;
     }
-    
+
     .link-logo img {
         width: 50px;
         height: 50px;
@@ -200,11 +201,11 @@ nav a.active {
 
     .connection-link, .connection-link-logout {
         font-size: 14px;
-    }
+    }    
 }
 
 
-/* Ici : media queries pour la seconde partie tablette */
+/* Ici : media queries pour la première partie tablette */
 @media screen and (max-width: 1023px) {
     .link-logo {
         display: none;

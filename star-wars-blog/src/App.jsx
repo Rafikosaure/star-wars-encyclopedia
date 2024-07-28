@@ -8,8 +8,9 @@ import Forum from './pages/Forum';
 import Topics from './pages/Topics';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import TestPage from './pages/TestPage';
+import Topic from './pages/Topic'
 import Account from './pages/Account';
+import TestPage from './pages/TestPage';
 
 
 export default function App() {
@@ -23,9 +24,10 @@ export default function App() {
               <Route path="/category/:categoryId" element={<Category />} />
               <Route path='/article/:paramsIds' element={<Article />} />
               <Route path='/forum' element={<Forum />} />
-              <Route path='/topics/:topicCategoryId' element={<Topics />} />
+              <Route path='/topics/:topicsCategoryId' element={<Topics />} />
               <Route path='/account' element={<Account />} />
-              <Route path='/test' element={<TestPage />} />
+              <Route path='/topic/:topicId' element={<Topic />} />
+              <Route path='/testPage' element={<TestPage />} />
               <Route path='*' element={<Error404 />} />
           </Routes>
           <Footer />

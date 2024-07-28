@@ -1,11 +1,15 @@
-import React, { useCallback } from 'react'
+import React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { selectLoggedState } from '../redux/slices/loggedUserSlice'
+import { selectIsLoggedState } from '../redux/slices/isLoggedUserSlice'
 import { useDispatch } from 'react-redux'
-import { updateLoggedUser } from '../redux/slices/loggedUserSlice'
+import { updateIsLoggedUser } from '../redux/slices/isLoggedUserSlice'
 import { updateLoadedUser } from '../redux/slices/loadedUserSlice'
+import { selectReloadUsersState } from '../redux/slices/reloadUsersArray'
+import { reloadUsersArrayFunction } from '../redux/slices/reloadUsersArray'
+import { selectLoggedUser } from '../redux/slices/loggedUserSlice'
+import { updateUserLog } from '../redux/slices/loggedUserSlice'
 import { useNavigate } from 'react-router-dom'
 import '../styles/index.css'
 import '../styles/Account.css'
@@ -20,50 +24,40 @@ export default function Account() {
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const [userData, setUserData] = useState()
+  // const [userData, setUserData] = useState()
   const [allUsers, setAllUsers] = useState()
-  const isLogged = useSelector(selectLoggedState)
+  const isLogged = useSelector(selectIsLoggedState)
   const [fileIsLoad, updateFileIsLoad] = useState('display-none')
   const [allowDeletion, setAllowDeletion] = useState(false)
   const { register, handleSubmit, reset } = useForm()
-
-
-  // Récupérer les utilisateurs du site
-const getAllUsers = useCallback(() => {
-  if (!allUsers) {
-    fetch('http://localhost:8000/user/getAll', {
-      credentials: 'include'
-    })
-    .then(response => response.json())
-    .then(data => {
-      setAllUsers(data.filter((user) => user.isAdmin !== true))
-      // console.log('Tous les utilisateurs :', data)
-    })
-    .catch(error => console.log(error))
-  }
-    
-  }, [allUsers])
+  const reloadUsers = useSelector(selectReloadUsersState)
+  const userData = useSelector(selectLoggedUser)
 
 
   useEffect(() => {
-    fetch('http://localhost:8000/user/logged', {
-      credentials: "include"
-    })
-    .then(response => response.json())
-    .then(data => {
-      dispatch(updateLoggedUser(true))
-      setUserData(data)
-      if (data.isAdmin) {
-        getAllUsers()
-      }
-    })
-    .catch(error => {
-      console.log(error)
-      dispatch(updateLoggedUser(false))
+    if (!isLogged) {
       navigate("/")
-    })
+    }
 
-  }, [isLogged, dispatch, navigate, getAllUsers])
+  }, [isLogged, navigate])
+
+
+  // useEffect(() => {
+  //   fetch('http://localhost:8000/user/logged', {
+  //     credentials: "include"
+  //   })
+  //   .then(response => response.json())
+  //   .then(data => {
+  //     dispatch(updateIsLoggedUser(true))
+  //     setUserData(data)
+  //   })
+  //   .catch(error => {
+  //     console.log(error)
+  //     dispatch(updateIsLoggedUser(false))
+  //     navigate("/")
+  //   })
+
+  // }, [isLogged, dispatch, navigate])
 
 
   const isValidIcon = (value) => {
@@ -73,6 +67,26 @@ const getAllUsers = useCallback(() => {
       updateFileIsLoad('display-none')
     }
   }
+
+
+  useEffect(() => {
+    if (!reloadUsers || !allUsers) {
+      fetch('http://localhost:8000/user/getAll', {
+        credentials: 'include'
+      })
+      .then(response => response.json())
+      .then(data => {
+        setAllUsers(data.filter((user) => user.isAdmin !== true))
+        dispatch(reloadUsersArrayFunction(true))
+        // console.log('Tous les utilisateurs :', data)
+        // console.log('Utilisateurs actuels :', allUsers)
+      })
+      .catch(error => {
+        console.log(error)
+        dispatch(reloadUsersArrayFunction(true))
+      })
+    }
+  }, [reloadUsers, allUsers, dispatch])
 
 
   const modifyData = (data) => {
@@ -97,11 +111,12 @@ const getAllUsers = useCallback(() => {
     .then(response => response.json())
     .then(data => {
       // console.log(data)
-      setUserData(data)
+      dispatch(updateUserLog(data))
       reset()
       // setDisabled(true)
       updateFileIsLoad("display-none")
       dispatch(updateLoadedUser(false))
+      dispatch(reloadUsersArrayFunction())
       toast("Mise à jour effectuée !")
     })
     .catch(error => console.error(error));
@@ -117,21 +132,24 @@ const getAllUsers = useCallback(() => {
 
   const deleteCurrentUser = (e) => {
     e.preventDefault()
-    fetch('http://localhost:8000/user/deleteById', {
+    fetch(`http://localhost:8000/user/deleteById`, {
       method: "DELETE",
       credentials: 'include'
     })
     .then(response => response.json())
     .then(data => {
-      console.log(data)
-      dispatch(updateLoggedUser(false))
+      // console.log(data)
+      dispatch(updateIsLoggedUser(false))
+      dispatch(updateUserLog({}))
       dispatch(updateLoadedUser(false))
+      dispatch(reloadUsersArrayFunction())
       toast('Compte utilisateur supprimé !')
       navigate('/')
     })
     .catch(error => console.log(error))
   }
     
+  
     
   return (
     <div className='app account-page'>
@@ -165,7 +183,7 @@ const getAllUsers = useCallback(() => {
                 </div>
               </div>
               <div className='account-section-separator'/>
-              <div>
+              <div>             
                 {!userData.isAdmin ? (
                 <>
                   <h2 className='account-profile-title'>Suppression du compte</h2>

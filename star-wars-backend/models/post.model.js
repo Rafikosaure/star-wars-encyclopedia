@@ -8,7 +8,8 @@ const postSchema = new mongoose.Schema({
         id: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "User"
-        }
+        },
+        name: { type: String, required: true }
     },
     comments: [
         {
@@ -22,9 +23,7 @@ const postSchema = new mongoose.Schema({
             ref: "Like" 
         }
     ],
-    createdAt: {
-        timestamps: { createdAt: true }
-    }
+    createdAt: { type: Date, default: Date.now }
 });
 
 module.exports = mongoose.model("Post", postSchema);

@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
 import { updateRegisterState } from '../redux/slices/registerSlice'
 import { useNavigate } from 'react-router-dom'
-import { updateLoggedUser } from '../redux/slices/loggedUserSlice'
+import { updateIsLoggedUser } from '../redux/slices/isLoggedUserSlice'
 import { toast } from 'sonner'
 
 export default function LoginForm() {
@@ -25,18 +25,18 @@ export default function LoginForm() {
         })
         .then(response => response.json())
         .then(data => {
-            console.log(data)
+            // console.log(data)
             if (data.message) {
                 toast("Identifiants incorrects !")
             } else {
-                dispatch(updateLoggedUser(true))
+                dispatch(updateIsLoggedUser(true))
                 navigate("/")
                 toast("Vous êtes connecté !")
             }
         })
         .catch(error => {
             console.error(error)
-            dispatch(updateLoggedUser(false))
+            dispatch(updateIsLoggedUser(false))
         });
     }
 

@@ -15,7 +15,7 @@ export default function BurgerMenu() {
     const [isOpen, setIsOpen] = useState(false)
 
 
-    const openOrCloseMenu = (e) => {
+    const openOrCloseButton = (e) => {
         e.preventDefault()
         if (isOpen) {
             setIsOpen(false)
@@ -31,7 +31,7 @@ export default function BurgerMenu() {
 
   return (
     <>
-        <div className='hamburger-menu-icon' onClick={(e) => openOrCloseMenu(e)}>
+        <div className='hamburger-menu-icon' onClick={(e) => openOrCloseButton(e)}>
             <img src={Menu} alt="menu hamburger" />
         </div>
         {isOpen ? (

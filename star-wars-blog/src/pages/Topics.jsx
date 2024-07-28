@@ -1,24 +1,57 @@
 import React from 'react'
+import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import '../styles/index.css'
 import '../styles/Topics.css'
 import { useParams } from 'react-router-dom'
-import topicCategoriesData from '../data/localTopicCategories.json'
+import TopicCard from '../components/TopicCard'
+import { useSelector } from 'react-redux'
+import { selectForumData } from '../redux/slices/forumSlice'
 
 
 export default function Topics() {
 
-    const { topicCategoryId } = useParams()
-    const currentTopicCategory = topicCategoriesData.find((topicCategory) => topicCategory._id === topicCategoryId)
+  const forumData = useSelector(selectForumData)
+  const { topicsCategoryId } = useParams()
+  const navigate = useNavigate()
+  const [currentData, setCurrentData] = useState()
+
+  
+  useEffect(() => {
+    // Attendre que les data soient chargées
+    if (forumData) {
+      // Vérifier la validité de l'id de la catégorie
+      const verifyId = forumData.find((category) => category._id === topicsCategoryId)
+      if (verifyId) {
+        // Si l'id est valide : trouver les articles correspondant à la catégorie
+        setCurrentData(forumData.find((category) => category._id === topicsCategoryId))
+      } else {
+        // Sinon, redirection vers l'entrée du forum
+        navigate("*")
+      }
+    }
+    
+
+  }, [currentData, navigate, forumData, topicsCategoryId])
 
   return (
     <div className='app topics'>
       <div className='topics-overlay' />
-      <div className='topics-main'>
-        <h1 className='topics-page-title'>{currentTopicCategory.title.toLowerCase()}</h1>
+      {currentData ? (
+        <div className='topics-main'>
+        {currentData.title && (
+          <h1 className='topics-page-title'>{currentData.title.toLowerCase()}</h1>
+        )}
         <div className='topics-list'>
-            appel à la bdd
+          {currentData.topics && 
+            (currentData.topics.map((topic, index) => 
+              <TopicCard key={index} topic={topic} />
+            ))
+          }
         </div>
       </div>
+      ) : null}
+      
     </div>
   )
 }

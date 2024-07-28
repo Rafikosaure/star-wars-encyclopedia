@@ -1,23 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-
-const initialState = {
-  logged: false
-}
+const initialState = {}
 
 export const loggedUserSlice = createSlice({
   name: 'loggedUser',
   initialState,
   reducers: {
-    updateLoggedUser: (state, action) => {
-      state.logged = action.payload
+    updateUserLog: (state, action) => {
+        state.value = action.payload
     }
   }
 });
 
-export const { updateLoggedUser } = loggedUserSlice.actions;
+export const { updateUserLog } = loggedUserSlice.actions;
 
-export const selectLoggedState = (state) => state.loggedReducer.logged
+export const selectLoggedUser = (state) => state.userLogReducer.value
 
 export default loggedUserSlice.reducer;
 

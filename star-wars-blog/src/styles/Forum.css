@@ -42,7 +42,7 @@
     cursor: default;
 }
 
-.forum-div-topics {
+.forum-div-categories {
     margin-top: 50px;
     display: flex;
     flex-direction: column;
@@ -54,7 +54,7 @@
     background-color: black;
 }
 
-.forum-div-topics h2 {
+.forum-div-categories h2 {
     width: 100%;
     text-align: center;
     color: yellow;
@@ -63,7 +63,7 @@
     cursor: default;
 }
 
-.div-topic {
+.div-category {
     width: 100%;
     height: 65px;
     display: flex;
@@ -74,7 +74,7 @@
     transition: all, .4s;
 }
 
-.div-topic:hover {
+.div-category:hover {
     text-align: center;
     background-color: white;
     color: black;
