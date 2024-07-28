@@ -10,11 +10,7 @@ export const reloadUsersSlice = createSlice({
   initialState,
   reducers: {
     reloadUsersArrayFunction: (state, action) => {
-      if (state.reload) {
-        state.reload = false
-      } else {
-        state.reload = true
-      }
+      state.reload = action.payload
     }
   }
 });
