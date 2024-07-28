@@ -23,13 +23,13 @@ export default function UserData({ user }) {
         .then(data => {
             // console.log(data)
             if (data.message === "User has been deleted") {
-                dispatch(reloadUsersArrayFunction())
+                dispatch(reloadUsersArrayFunction(false))
                 toast('Compte utilisateur supprimé !')
             } else if (data.message === "User not found") {
-                dispatch(reloadUsersArrayFunction())
+                dispatch(reloadUsersArrayFunction(false))
                 toast('Utilisateur inexistant !')
             } else {
-                dispatch(reloadUsersArrayFunction())
+                dispatch(reloadUsersArrayFunction(false))
                 toast('Echec de la suppression !')
             }
             

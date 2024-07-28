@@ -2,13 +2,13 @@ import '../styles/Header.css'
 import Logo from '../assets/images/logo.webp'
 import { NavLink } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { updateLoggedUser } from '../redux/slices/loggedUserSlice.js'
+import { updateIsLoggedUser } from '../redux/slices/isLoggedUserSlice.js'
 import { updateLoadedUser } from '../redux/slices/loadedUserSlice.js'
 import { reinitializeDozen } from '../redux/slices/dozenSlice'
 import DefaultAvatar from '../assets/images/EmojiBlitzBobaFett1.webp'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import { selectLoggedState } from '../redux/slices/loggedUserSlice.js'
+import { selectIsLoggedState } from '../redux/slices/isLoggedUserSlice.js'
 import { selectLoadedState } from '../redux/slices/loadedUserSlice.js'
 import { saveForumData } from '../redux/slices/forumSlice.js'
 import { saveTopicsData } from '../redux/slices/topicSlice.js'
@@ -16,6 +16,7 @@ import { useEffect } from 'react'
 import { useState } from 'react'
 import { toast } from 'sonner'
 import BurgerMenu from './BurgerMenu.jsx'
+import { updateUserLog } from '../redux/slices/loggedUserSlice.js'
 
 
 export default function Header() {
@@ -23,13 +24,13 @@ export default function Header() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [loggedUser, setLoggedUser] = useState()
-  const isLogged = useSelector(selectLoggedState)
+  const isLogged = useSelector(selectIsLoggedState)
   const isLoaded = useSelector(selectLoadedState)
   
 
   useEffect(() => {
     // Vérifier la connexion d'un utilisateur
-    if (!isLoaded) {
+    if (!isLoaded && isLogged) {
       fetch('http://localhost:8000/user/logged', {
         credentials: "include"
       })
@@ -37,12 +38,13 @@ export default function Header() {
       .then(data => {
         // console.log(data)
         setLoggedUser(data)
-        dispatch(updateLoggedUser(true))
+        dispatch(updateUserLog(data))
+        dispatch(updateIsLoggedUser(true))
         dispatch(updateLoadedUser(true))
       })
       .catch(error => {
         // console.log(error)
-        dispatch(updateLoggedUser(false))
+        dispatch(updateIsLoggedUser(false))
         setLoggedUser()
       })
     }
@@ -67,7 +69,7 @@ export default function Header() {
     fetch(`http://localhost:8000/topic/getTopicsAndPosts`)
     .then(response => response.json())
     .then((data) => {
-      console.log(data)
+      // console.log(data)
       dispatch(saveTopicsData(data))
     })
     .catch(error => console.log(error))
@@ -86,7 +88,7 @@ export default function Header() {
     .then(response => response.json())
     .then(data => {
       // console.log(data)
-      dispatch(updateLoggedUser(false))
+      dispatch(updateIsLoggedUser(false))
       setLoggedUser()
       dispatch(updateLoadedUser(false))
       toast("Vous êtes déconnecté !")
