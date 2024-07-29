@@ -8,6 +8,32 @@
     flex-direction: column;
 }
 
+.topic-div-return {
+    position: absolute;
+    z-index: 2;
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+}
+
+.arrow-link {
+    margin-left: 15px;
+    margin-top: 20px;
+    width: 80px;
+    height: 80px;
+    border-radius: 100%;
+    background-color: black;
+}
+
+.arrow-link:hover {
+    filter: invert(1);
+}
+
+.arrow-link img {
+    width: 80px;
+    height: 80px;
+}
+
 .topic-overlay {
     position: absolute;
     width: 100%;

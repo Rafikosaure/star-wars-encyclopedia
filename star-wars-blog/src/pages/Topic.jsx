@@ -5,6 +5,8 @@ import { selectTopicsData } from '../redux/slices/topicSlice'
 import { useParams } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import PostCard from '../components/PostCard'
+import { Link } from 'react-router-dom'
+import ReturnArrow from '../assets/images/return-arrow.webp'
 
 
 export default function Topic() {
@@ -29,6 +31,11 @@ export default function Topic() {
     return (
         <div className='app topic'>
             <div className='topic-overlay' />
+            <div className='topic-div-return'>
+                <Link to={-1} className='arrow-link'>
+                    <img src={ReturnArrow} alt="Return to the topics page" />
+                </Link>
+            </div>
             {currentTopicData && (
                 <div className='topic-content'>
                     <h1 className='topic-title'>{currentTopicData.title}</h1>
