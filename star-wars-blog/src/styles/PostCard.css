@@ -1,11 +1,12 @@
 .post-card-main {
     position: relative;
     width: 80%;
-    height: 240px;
+    min-height: 300px;
     outline: 2px solid white;
     border-radius: 10px;
     font-family: Arial, Helvetica, sans-serif;
     background-color: black;
+    overflow: hidden;
 }
 
 .post-card-overlay {
@@ -24,17 +25,30 @@
     z-index: 2;
     width: 100%;
     height: 100%;
-    overflow: hidden;
-    color: white;
+    color: white;    
 }
 
-.post-card-content p {
+.post-card-infos {
+    display: flex;
+    min-height: 50px;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.infos-datetime {
+    position: absolute;
+    right: 80px;
+}
+
+.post-card-content {
     margin-left: 15px;
     font-size: 16px;
+    height: fit-content;
 }
 
 .post-card-author {
     margin-left: 15px;
+    min-height: 235px;
     display: flex;
     position: relative;
 }
@@ -65,12 +79,21 @@
     font-size: 16px;
 }
 
-.post-card-message {
-    position: absolute;
-    left: 140px;
-    top: -20px;
+.post-card-message p {
     height: 180px;
     width: auto;
     font-size: 14px;
-    margin-right: 40px;
+    margin-right: 60px;
+    margin-left: 60px;
+    overflow: hidden;
+}
+
+.post-card-bottom-bar {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
 }
