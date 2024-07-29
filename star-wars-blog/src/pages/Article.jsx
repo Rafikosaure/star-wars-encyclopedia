@@ -72,7 +72,7 @@ export default function Article() {
     return (
         <>
             <div className='app'>
-                <div className='div-return'>
+                <div className='div-return' title='Retour vers les articles'>
                     <Link to={`/category/${categoryId}`} className='arrow-link'>
                         <img src={ReturnArrow} alt="Return to the last page" />
                     </Link>

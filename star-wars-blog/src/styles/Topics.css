@@ -4,6 +4,31 @@
     position: relative;
 }
 
+.topics-div-return {
+    position: absolute;
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+}
+
+.arrow-link {
+    z-index: 2;
+    margin-left: 15px;
+    margin-top: 20px;
+    width: 80px;
+    height: 80px;
+    border-radius: 100%;
+}
+
+.arrow-link:hover {
+    filter: invert(1);
+}
+
+.arrow-link img {
+    width: 80px;
+    height: 80px;
+}
+
 .topics-main {
     position: absolute;
     width: 100%;

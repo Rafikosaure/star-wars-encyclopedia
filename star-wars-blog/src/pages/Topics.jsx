@@ -7,6 +7,8 @@ import { useParams } from 'react-router-dom'
 import TopicCard from '../components/TopicCard'
 import { useSelector } from 'react-redux'
 import { selectForumData } from '../redux/slices/forumSlice'
+import { Link } from 'react-router-dom'
+import ReturnArrow from '../assets/images/return-arrow.webp'
 
 
 export default function Topics() {
@@ -36,6 +38,11 @@ export default function Topics() {
 
   return (
     <div className='app topics'>
+      <div className='topics-div-return' title='Retour vers le forum'>
+          <Link to='/forum' className='arrow-link'>
+              <img src={ReturnArrow} alt="Return to the topics page" />
+          </Link>
+      </div>
       <div className='topics-overlay' />
       {currentData ? (
         <div className='topics-main'>
