@@ -49,6 +49,7 @@ app.use(
 
 // Routes de l'application
 const translateText = require('./routes/translation.routes')
+const authRoutes = require('./routes/auth.routes')
 const userRoutes = require('./routes/user.routes')
 const postRoutes = require('./routes/post.routes')
 const categoryRoutes = require('./routes/category.routes')
@@ -60,6 +61,7 @@ const likeRoutes = require('./routes/like.routes')
 
 // Middlewares de nos routes
 app.use('/translate', translateText)
+app.use('/auth', authRoutes)
 app.use('/user', userRoutes)
 app.use('/post', postRoutes)
 app.use('/category', categoryRoutes)
