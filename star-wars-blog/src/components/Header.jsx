@@ -31,7 +31,7 @@ export default function Header() {
   useEffect(() => {
     // Vérifier la connexion d'un utilisateur
     if (!isLoaded && isLogged) {
-      fetch('http://localhost:8000/user/logged', {
+      fetch('http://localhost:8000/auth/logged', {
         credentials: "include"
       })
       .then(response => response.json())
@@ -80,7 +80,7 @@ export default function Header() {
   // Fonction de déconnexion d'un utilisateur
   const logout = (e) => {
     e.preventDefault()
-    fetch('http://localhost:8000/user/logout', {
+    fetch('http://localhost:8000/auth/logout', {
       method: "POST",
       headers: {"Accept": "application/json", "Content-Type": "application/json"},
       credentials: "include"

@@ -29,7 +29,7 @@ export default function RegisterForm() {
         // console.log('CLIENT', formData)
         
 
-        fetch("http://localhost:8000/user/register", {
+        fetch("http://localhost:8000/auth/register", {
             method: "POST",
             body: formData
         })
