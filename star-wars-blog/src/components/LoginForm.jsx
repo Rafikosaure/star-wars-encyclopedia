@@ -6,6 +6,9 @@ import { updateRegisterState } from '../redux/slices/registerSlice'
 import { useNavigate } from 'react-router-dom'
 import { updateIsLoggedUser } from '../redux/slices/isLoggedUserSlice'
 import { toast } from 'sonner'
+import { config } from '../config'
+
+
 
 export default function LoginForm() {
     
@@ -17,7 +20,7 @@ export default function LoginForm() {
 
     const onSubmit = (data) => {
         // console.log(data)
-        fetch("http://localhost:8000/auth/login", {
+        fetch(`${config.serverEndpoint}/auth/login`, {
             method: "POST",
             body: JSON.stringify(data),
             headers: {"Accept": "application/json", "Content-Type": "application/json"},

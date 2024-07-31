@@ -10,6 +10,9 @@ import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { reinitializeDozen, maxDozen, nextDozen, prevDozen, selectDozen } from '../redux/slices/dozenSlice'
 import { selectArticle } from '../redux/slices/articleSlice'
+import { config } from '../config'
+
+
 
 export default function Category() {
 
@@ -33,7 +36,7 @@ export default function Category() {
     } else {
       updateRightPage(true)
       // Récupérer les informations depuis l'API
-      fetch(`https://starwars-databank-server.vercel.app/api/v1/${currentDatas.keyword}?page=${storedDozen}`)
+      fetch(`${config.starWarsAPI}/${currentDatas.keyword}?page=${storedDozen}`)
       .then(response => response.json())
       .then(data => {setInfo(data.info); setItems(data.data)})
       .catch((error) => console.log(error))

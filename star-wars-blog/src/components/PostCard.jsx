@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import '../styles/PostCard.css'
 import DefaultAvatar from '../assets/images/EmojiBlitzBobaFett1.webp'
 import Like from './Like'
+import { config } from '../config'
 
 
 
@@ -12,7 +13,7 @@ export default function PostCard({ index, post }) {
 
     useEffect(() => {
         if (post) {
-            fetch(`http://localhost:8000/post/getPostUser/${post.author.id}`)
+            fetch(`${config.serverEndpoint}/post/getPostUser/${post.author.id}`)
             .then(response => response.json())
             .then(data => {
                 // console.log(data)

@@ -5,7 +5,7 @@ import DefaultAvatar from '../assets/images/EmojiBlitzBobaFett1.webp'
 import Delete from '../assets/images/delete.webp'
 import '../styles/UserData.css'
 import { toast } from 'sonner'
-
+import { config } from '../config'
 
 
 export default function UserData({ user }) {
@@ -15,7 +15,7 @@ export default function UserData({ user }) {
 
     const deleteUser = (e) => {
         e.preventDefault()
-        fetch(`http://localhost:8000/user/authDeleteById/${user._id}`, {
+        fetch(`${config.serverEndpoint}/user/authDeleteById/${user._id}`, {
             method: 'DELETE',
             credentials: 'include'
         })

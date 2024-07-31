@@ -4,6 +4,7 @@ import '../styles/Card.css'
 import { Link, useLocation } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { reinitializeDozen } from '../redux/slices/dozenSlice'
+import { config } from '../config'
 
 
 export default function Card({ item, categoryId }) {
@@ -25,7 +26,7 @@ export default function Card({ item, categoryId }) {
         targetLang: "FR",
         name: item.name
       }
-      fetch('http://localhost:8000/translate/name', {
+      fetch(`${config.serverEndpoint}/translate/name`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

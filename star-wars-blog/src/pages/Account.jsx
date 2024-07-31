@@ -18,6 +18,7 @@ import { useForm } from 'react-hook-form'
 import PictureIsValid from '../assets/images/is_valid.webp'
 import UserData from '../components/UserData'
 import { toast } from 'sonner'
+import { config } from '../config'
 
 
 export default function Account() {
@@ -38,26 +39,7 @@ export default function Account() {
     if (!isLogged) {
       navigate("/")
     }
-
   }, [isLogged, navigate])
-
-
-  // useEffect(() => {
-  //   fetch('http://localhost:8000/user/logged', {
-  //     credentials: "include"
-  //   })
-  //   .then(response => response.json())
-  //   .then(data => {
-  //     dispatch(updateIsLoggedUser(true))
-  //     setUserData(data)
-  //   })
-  //   .catch(error => {
-  //     console.log(error)
-  //     dispatch(updateIsLoggedUser(false))
-  //     navigate("/")
-  //   })
-
-  // }, [isLogged, dispatch, navigate])
 
 
   const isValidIcon = (value) => {
@@ -68,10 +50,9 @@ export default function Account() {
     }
   }
 
-
   useEffect(() => {
     if (!reloadUsers || !allUsers) {
-      fetch('http://localhost:8000/user/getAll', {
+      fetch(`${config.serverEndpoint}/user/getAll`, {
         credentials: 'include'
       })
       .then(response => response.json())
@@ -103,7 +84,7 @@ export default function Account() {
     formData.append('password', data.password)
     // console.log(formData)
 
-    fetch(`http://localhost:8000/user/update`, {
+    fetch(`${config.serverEndpoint}/user/update`, {
       method: "PUT",
       body: formData,
       credentials: 'include'
@@ -132,7 +113,7 @@ export default function Account() {
 
   const deleteCurrentUser = (e) => {
     e.preventDefault()
-    fetch(`http://localhost:8000/user/deleteById`, {
+    fetch(`${config.serverEndpoint}/user/deleteById`, {
       method: "DELETE",
       credentials: 'include'
     })

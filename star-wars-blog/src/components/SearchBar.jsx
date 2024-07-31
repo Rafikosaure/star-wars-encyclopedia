@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { saveAnArticle } from '../redux/slices/articleSlice'
+import { config } from '../config'
 
 
 export default function SearchBar({ category }) {
@@ -16,7 +17,7 @@ export default function SearchBar({ category }) {
 
   useEffect(() => {
     if (search) {
-      fetch(`https://starwars-databank-server.vercel.app/api/v1/${category}/name/${search}`)
+      fetch(`${config.starWarsAPI}/${category}/name/${search}`)
       .then(response => response.json())
       .then(data => {
         setArticle(data[0])
@@ -35,7 +36,7 @@ export default function SearchBar({ category }) {
       name: text
     }
     if (text) {
-      fetch('http://localhost:8000/translate/name', {
+      fetch(`${config.serverEndpoint}/translate/name`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

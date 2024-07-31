@@ -17,6 +17,8 @@ import { useState } from 'react'
 import { toast } from 'sonner'
 import BurgerMenu from './BurgerMenu.jsx'
 import { updateUserLog } from '../redux/slices/loggedUserSlice.js'
+import { config } from '../config.js'
+
 
 
 export default function Header() {
@@ -31,7 +33,7 @@ export default function Header() {
   useEffect(() => {
     // Vérifier la connexion d'un utilisateur
     if (!isLoaded && isLogged) {
-      fetch('http://localhost:8000/auth/logged', {
+      fetch(`${config.serverEndpoint}/auth/logged`, {
         credentials: "include"
       })
       .then(response => response.json())
@@ -54,7 +56,7 @@ export default function Header() {
 
   useEffect(() => {
     // Récupérer les catégories du forum avec leurs topics
-    fetch('http://localhost:8000/category/getAllCategoriesWithTopics')
+    fetch(`${config.serverEndpoint}/category/getAllCategoriesWithTopics`)
     .then(response => response.json())
     .then(data => {
       // console.log(data)
@@ -66,7 +68,7 @@ export default function Header() {
 
   // Récupérer les topics du forum avec leurs posts
   useEffect(() => {
-    fetch(`http://localhost:8000/topic/getTopicsAndPosts`)
+    fetch(`${config.serverEndpoint}/topic/getTopicsAndPosts`)
     .then(response => response.json())
     .then((data) => {
       // console.log(data)
@@ -80,7 +82,7 @@ export default function Header() {
   // Fonction de déconnexion d'un utilisateur
   const logout = (e) => {
     e.preventDefault()
-    fetch('http://localhost:8000/auth/logout', {
+    fetch(`${config.serverEndpoint}/auth/logout`, {
       method: "POST",
       headers: {"Accept": "application/json", "Content-Type": "application/json"},
       credentials: "include"

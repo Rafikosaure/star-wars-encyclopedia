@@ -6,6 +6,8 @@ import '../styles/Article.css'
 import data from '../data/localApiCategories.json'
 import ReturnArrow from '../assets/images/return-arrow.webp'
 import { Link } from 'react-router-dom'
+import { config } from '../config'
+
 
 
 export default function Article() {
@@ -27,7 +29,7 @@ export default function Article() {
     useEffect(() => {
         if (currentDatas) {
             // Récupération de l'article depuis l'API
-            fetch(`https://starwars-databank-server.vercel.app/api/v1/${currentDatas.keyword}/${articleId}`)
+            fetch(`${config.starWarsAPI}/${currentDatas.keyword}/${articleId}`)
             .then(response => response.json())
             .then(data => setItem(data))
             // Gestion dans ce catch d'un articleId incorrect
@@ -51,7 +53,7 @@ export default function Article() {
                 description: item.description
             }
 
-            fetch('http://localhost:8000/translate', {
+            fetch(`${config.serverEndpoint}/translate`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

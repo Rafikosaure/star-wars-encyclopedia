@@ -6,6 +6,7 @@ import isValid from '../assets/images/is_valid.webp'
 import { useDispatch } from 'react-redux'
 import { updateRegisterState } from '../redux/slices/registerSlice'
 import { toast } from 'sonner';
+import { config } from '../config'
 
 
 export default function RegisterForm() {
@@ -26,10 +27,9 @@ export default function RegisterForm() {
         formData.append('name', data.name)
         formData.append('email', data.email)
         formData.append('password', data.password)
-        // console.log('CLIENT', formData)
         
 
-        fetch("http://localhost:8000/auth/register", {
+        fetch(`${config.serverEndpoint}/auth/register`, {
             method: "POST",
             body: formData
         })
