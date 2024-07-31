@@ -5,7 +5,7 @@ import DefaultAvatar from '../assets/images/EmojiBlitzBobaFett1.webp'
 import Delete from '../assets/images/delete.webp'
 import '../styles/UserData.css'
 import { toast } from 'sonner'
-import { config } from '../config'
+import config from '../config'
 
 
 export default function UserData({ user }) {

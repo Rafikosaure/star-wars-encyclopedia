@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { reinitializeDozen, maxDozen, nextDozen, prevDozen, selectDozen } from '../redux/slices/dozenSlice'
 import { selectArticle } from '../redux/slices/articleSlice'
-import { config } from '../config'
+import config from '../config'
 
 
 

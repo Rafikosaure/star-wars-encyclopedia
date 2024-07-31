@@ -18,7 +18,7 @@ import { useForm } from 'react-hook-form'
 import PictureIsValid from '../assets/images/is_valid.webp'
 import UserData from '../components/UserData'
 import { toast } from 'sonner'
-import { config } from '../config'
+import config from '../config'
 
 
 export default function Account() {

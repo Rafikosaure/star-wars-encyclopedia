@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import '../styles/PostCard.css'
 import DefaultAvatar from '../assets/images/EmojiBlitzBobaFett1.webp'
 import Like from './Like'
-import { config } from '../config'
+import config from '../config'
 
 
 

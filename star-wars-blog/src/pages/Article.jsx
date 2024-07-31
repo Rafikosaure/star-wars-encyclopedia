@@ -6,7 +6,7 @@ import '../styles/Article.css'
 import data from '../data/localApiCategories.json'
 import ReturnArrow from '../assets/images/return-arrow.webp'
 import { Link } from 'react-router-dom'
-import { config } from '../config'
+import config from '../config'
 
 
 

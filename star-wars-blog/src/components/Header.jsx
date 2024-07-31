@@ -17,8 +17,7 @@ import { useState } from 'react'
 import { toast } from 'sonner'
 import BurgerMenu from './BurgerMenu.jsx'
 import { updateUserLog } from '../redux/slices/loggedUserSlice.js'
-import { config } from '../config.js'
-
+import config from '../config.js'
 
 
 export default function Header() {
@@ -58,10 +57,7 @@ export default function Header() {
     // Récupérer les catégories du forum avec leurs topics
     fetch(`${config.serverEndpoint}/category/getAllCategoriesWithTopics`)
     .then(response => response.json())
-    .then(data => {
-      // console.log(data)
-      dispatch(saveForumData(data))
-    })
+    .then(data => dispatch(saveForumData(data)))
     .catch(error => console.log(error))
   }, [dispatch])
 
@@ -70,10 +66,7 @@ export default function Header() {
   useEffect(() => {
     fetch(`${config.serverEndpoint}/topic/getTopicsAndPosts`)
     .then(response => response.json())
-    .then((data) => {
-      // console.log(data)
-      dispatch(saveTopicsData(data))
-    })
+    .then(data => dispatch(saveTopicsData(data)))
     .catch(error => console.log(error))
 
   }, [dispatch])

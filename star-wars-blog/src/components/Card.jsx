@@ -4,7 +4,7 @@ import '../styles/Card.css'
 import { Link, useLocation } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { reinitializeDozen } from '../redux/slices/dozenSlice'
-import { config } from '../config'
+import config from '../config'
 
 
 export default function Card({ item, categoryId }) {

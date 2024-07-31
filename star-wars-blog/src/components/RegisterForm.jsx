@@ -6,7 +6,7 @@ import isValid from '../assets/images/is_valid.webp'
 import { useDispatch } from 'react-redux'
 import { updateRegisterState } from '../redux/slices/registerSlice'
 import { toast } from 'sonner';
-import { config } from '../config'
+import config from '../config'
 
 
 export default function RegisterForm() {

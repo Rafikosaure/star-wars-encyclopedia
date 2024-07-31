@@ -6,7 +6,7 @@ import { updateRegisterState } from '../redux/slices/registerSlice'
 import { useNavigate } from 'react-router-dom'
 import { updateIsLoggedUser } from '../redux/slices/isLoggedUserSlice'
 import { toast } from 'sonner'
-import { config } from '../config'
+import config from '../config'
 
 
 

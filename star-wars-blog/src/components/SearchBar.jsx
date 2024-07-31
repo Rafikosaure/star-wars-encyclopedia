@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { saveAnArticle } from '../redux/slices/articleSlice'
-import { config } from '../config'
+import config from '../config'
 
 
 export default function SearchBar({ category }) {
