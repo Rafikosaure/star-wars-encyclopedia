@@ -25,9 +25,11 @@ export default function Category() {
   const [rightPage, updateRightPage] = useState(false)
   const nbDozen = useRef()
   const navigate = useNavigate()
+  
 
   // Trouver les articles correspondant à la catégorie choisie
   const currentDatas = data.find((item) => item._id === categoryId)
+
 
   useEffect(() => {
     // Gestion des mauvaises URLs

@@ -1,6 +1,8 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { saveAnArticle } from '../redux/slices/articleSlice'
 import '../styles/index.css'
 import '../styles/Article.css'
 import data from '../data/localApiCategories.json'
@@ -13,7 +15,7 @@ import config from '../config'
 export default function Article() {
 
     const [item, setItem] = useState()
-    // const [translatedData, setTranslatedData] = useState()
+    const dispatch = useDispatch()
     const [translatedName, setTranslatedName] = useState()
     const [translatedDescription, setTranslatedDescription] = useState()
     const navigate = useNavigate()
@@ -25,7 +27,11 @@ export default function Article() {
     // Récupération de la catégorie de l'article
     const currentDatas = data.find((item) => item._id === categoryId)
 
-    
+    // Réinitialisation de l'affichage dans la page Catégorie
+    useEffect(() => {
+        dispatch(saveAnArticle())
+    })
+
     useEffect(() => {
         if (currentDatas) {
             // Récupération de l'article depuis l'API
