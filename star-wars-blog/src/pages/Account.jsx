@@ -30,6 +30,7 @@ export default function Account() {
   const isLogged = useSelector(selectIsLoggedState)
   const [fileIsLoad, updateFileIsLoad] = useState('display-none')
   const [allowDeletion, setAllowDeletion] = useState(false)
+  const [unvalidPassword, setUnvalidPassword] = useState('none')
   const { register, handleSubmit, reset } = useForm()
   const reloadUsers = useSelector(selectReloadUsersState)
   const userData = useSelector(selectLoggedUser)
@@ -70,14 +71,28 @@ export default function Account() {
   }, [reloadUsers, allUsers, dispatch])
 
 
+  function validatePassword(password){
+    var Reg = new RegExp(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/);
+    return Reg.test(password);
+  }
+
+
   const modifyData = (data) => {
-    // console.log(data)
     const formData = new FormData();
     if (data.picture.length > 0) {
       formData.append('picture', data.picture[0])
       delete data.picture
     } else {
       delete data.picture
+    }
+    if (data.password.length > 0) {
+      const isValid = validatePassword(data.password)
+      console.log(isValid, data.password)
+      if (!isValid) {
+        toast('Mot de passe trop faible !')
+        setUnvalidPassword('block')
+        return
+      }
     }
     formData.append('name', data.name)
     formData.append('email', data.email)
@@ -94,6 +109,7 @@ export default function Account() {
       // console.log(data)
       dispatch(updateUserLog(data))
       reset()
+      setUnvalidPassword('none')
       // setDisabled(true)
       updateFileIsLoad("display-none")
       dispatch(updateLoadedUser(false))
@@ -157,6 +173,7 @@ export default function Account() {
                     <input type="text" name='name' placeholder='Modifiez votre nom...' {...register("name", {required: false})} onFocus={(e) => e.target.placeholder = ""} onBlur={(e) => e.target.placeholder = 'Modifiez votre nom...'}/>
                     <input type="email" name='email' placeholder='Modifiez votre email...' {...register("email", {required: false})} onFocus={(e) => e.target.placeholder = ""} onBlur={(e) => e.target.placeholder = 'Modifiez votre email...'}/>
                     <input type="password" name='password' placeholder='Modifiez votre mot de passe...' {...register("password", {required: false})} onFocus={(e) => e.target.placeholder = ""} onBlur={(e) => e.target.placeholder = 'Modifiez votre mot de passe...'}/>
+                    <p className='unvalid-password-text' style={{display: unvalidPassword}}>Votre mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caracère spécial.</p>
                     <input className='account-file-input' type="file" id="file" name="picture" accept=".png, .jpg, .jpeg" {...register("picture", {required: false})} onChange={(e) => isValidIcon(e.target.value)}/>
                     <label className='account-label' htmlFor="file">Mettre à jour votre image de profil<img src={PictureIsValid} alt="Upload is valid" className={`input-valid-img ${fileIsLoad}`} /></label>
                     <button className='account-submit-button' type='submit'>Mettre à jour</button>

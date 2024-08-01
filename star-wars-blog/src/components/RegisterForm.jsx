@@ -24,7 +24,6 @@ export default function RegisterForm() {
 
     const onSubmit = (data) => {
         const isValid = validatePassword(data.password)
-        console.log(isValid, data.password)
         if (!isValid) {
             toast('Mot de passe trop faible !')
             setUnvalidPassword('block')
