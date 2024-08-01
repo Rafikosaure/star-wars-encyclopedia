@@ -32,22 +32,30 @@
 .topic-card-content {
     display: flex;
     flex-direction: column;
+    color: white;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    height: 100%;
     padding-left: 3%;
     padding-right: 3%;
+    padding-top: 14px;
     gap: 10px;
-    color: white;
 }
 
-.topic-card-content h1 {
+.topic-infos {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.topic-infos h1 {
     font-size: 20px;
     margin: 0;
 }
 
-.topic-card-content p {
+.topic-infos p {
     font-size: 14px;
     margin: 0;
 }
-
-/* .topic-card-main:hover {
-    background-color: #00004C;
-} */
