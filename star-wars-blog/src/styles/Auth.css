@@ -15,6 +15,14 @@
     margin-bottom: 90px;
 }
 
+.unvalid-password-text {
+    font-size: 12px;
+    width: 35%;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
 .login-form {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-weight: bold;
