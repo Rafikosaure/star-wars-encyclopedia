@@ -31,7 +31,7 @@ export default function Header() {
 
   useEffect(() => {
     // Vérifier la connexion d'un utilisateur
-    if (!isLoaded && isLogged) {
+    if (!isLoaded || isLogged) {
       fetch(`${config.serverEndpoint}/auth/logged`, {
         credentials: "include"
       })
@@ -43,8 +43,7 @@ export default function Header() {
         dispatch(updateIsLoggedUser(true))
         dispatch(updateLoadedUser(true))
       })
-      .catch(error => {
-        // console.log(error)
+      .catch(() => {
         dispatch(updateIsLoggedUser(false))
         setLoggedUser()
       })
