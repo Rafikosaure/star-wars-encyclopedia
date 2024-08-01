@@ -32,7 +32,7 @@ export default function Topic() {
         <div className='app topic'>
             <div className='topic-overlay' />
             <div className='topic-div-return' title='Retour vers les topics'>
-                <Link to={-1} className='arrow-link'>
+                <Link to={-1} className='topic-arrow-link'>
                     <img src={ReturnArrow} alt="Return to the topics page" />
                 </Link>
             </div>
