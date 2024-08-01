@@ -87,7 +87,6 @@ export default function Account() {
     }
     if (data.password.length > 0) {
       const isValid = validatePassword(data.password)
-      console.log(isValid, data.password)
       if (!isValid) {
         toast('Mot de passe trop faible !')
         setUnvalidPassword('block')
