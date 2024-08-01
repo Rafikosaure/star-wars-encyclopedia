@@ -38,10 +38,15 @@ export default function Header() {
       .then(response => response.json())
       .then(data => {
         // console.log(data)
-        setLoggedUser(data)
-        dispatch(updateUserLog(data))
-        dispatch(updateIsLoggedUser(true))
-        dispatch(updateLoadedUser(true))
+        if (!data.badAccessMessage) {
+          setLoggedUser(data)
+          dispatch(updateUserLog(data))
+          dispatch(updateIsLoggedUser(true))
+          dispatch(updateLoadedUser(true))
+        } else {
+          dispatch(updateIsLoggedUser(false))
+          setLoggedUser()
+        }
       })
       .catch(() => {
         dispatch(updateIsLoggedUser(false))
@@ -81,11 +86,14 @@ export default function Header() {
     })
     .then(response => response.json())
     .then(data => {
-      // console.log(data)
-      dispatch(updateIsLoggedUser(false))
-      setLoggedUser()
-      dispatch(updateLoadedUser(false))
-      toast("Vous êtes déconnecté !")
+      if (!data.badAccessMessage) {
+        dispatch(updateIsLoggedUser(false))
+        setLoggedUser()
+        dispatch(updateLoadedUser(false))
+        toast("Vous êtes déconnecté !")
+      } else {
+        console.log('Echec de la déconnexion !')
+      }
     })
     .catch(error => console.log(error))
   }

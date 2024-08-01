@@ -19,7 +19,6 @@ export default function LoginForm() {
 
 
     const onSubmit = (data) => {
-        // console.log(data)
         fetch(`${config.serverEndpoint}/auth/login`, {
             method: "POST",
             body: JSON.stringify(data),
@@ -28,7 +27,6 @@ export default function LoginForm() {
         })
         .then(response => response.json())
         .then(data => {
-            // console.log(data)
             if (data.message) {
                 toast("Identifiants incorrects !")
             } else {

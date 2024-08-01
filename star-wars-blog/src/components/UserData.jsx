@@ -6,11 +6,13 @@ import Delete from '../assets/images/delete.webp'
 import '../styles/UserData.css'
 import { toast } from 'sonner'
 import config from '../config'
+import { useNavigate } from 'react-router-dom'
 
 
 export default function UserData({ user }) {
 
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
 
     const deleteUser = (e) => {
@@ -22,17 +24,17 @@ export default function UserData({ user }) {
         .then(response => response.json())
         .then(data => {
             // console.log(data)
-            if (data.message === "User has been deleted") {
-                dispatch(reloadUsersArrayFunction(false))
-                toast('Compte utilisateur supprimé !')
-            } else if (data.message === "User not found") {
-                dispatch(reloadUsersArrayFunction(false))
-                toast('Utilisateur inexistant !')
+            if (data.badAccessMessage) {
+                toast("Vous n'êtes pas authentifié !")
+                navigate('/')
             } else {
                 dispatch(reloadUsersArrayFunction(false))
-                toast('Echec de la suppression !')
+                toast('Compte utilisateur supprimé !')
             }
-            
+        })
+        .catch(error => {
+            console.log(error)
+            toast("Echec de la suppression !")
         })
     }
 

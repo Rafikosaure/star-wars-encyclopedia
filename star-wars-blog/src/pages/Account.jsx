@@ -58,17 +58,20 @@ export default function Account() {
       })
       .then(response => response.json())
       .then(data => {
-        setAllUsers(data.filter((user) => user.isAdmin !== true))
-        dispatch(reloadUsersArrayFunction(true))
-        // console.log('Tous les utilisateurs :', data)
-        // console.log('Utilisateurs actuels :', allUsers)
+        if (data.badAccessMessage) {
+          dispatch(reloadUsersArrayFunction(true))
+          navigate('/')
+        } else {
+          setAllUsers(data.filter((user) => user.isAdmin !== true))
+          dispatch(reloadUsersArrayFunction(true))
+        }
       })
       .catch(error => {
         console.log(error)
         dispatch(reloadUsersArrayFunction(true))
       })
     }
-  }, [reloadUsers, allUsers, dispatch])
+  }, [reloadUsers, allUsers, dispatch, navigate])
 
 
   function validatePassword(password){
@@ -90,6 +93,7 @@ export default function Account() {
       if (!isValid) {
         toast('Mot de passe trop faible !')
         setUnvalidPassword('block')
+        reset()
         return
       }
     }
@@ -105,15 +109,17 @@ export default function Account() {
     })
     .then(response => response.json())
     .then(data => {
-      // console.log(data)
-      dispatch(updateUserLog(data))
-      reset()
-      setUnvalidPassword('none')
-      // setDisabled(true)
-      updateFileIsLoad("display-none")
-      dispatch(updateLoadedUser(false))
-      dispatch(reloadUsersArrayFunction())
-      toast("Mise à jour effectuée !")
+      if (!data.badAccessMessage) {
+        dispatch(updateUserLog(data))
+        reset()
+        setUnvalidPassword('none')
+        updateFileIsLoad("display-none")
+        dispatch(updateLoadedUser(false))
+        dispatch(reloadUsersArrayFunction())
+        toast("Mise à jour effectuée !")
+      } else {
+        navigate('/')
+      }
     })
     .catch(error => console.error(error));
   }
@@ -134,13 +140,17 @@ export default function Account() {
     })
     .then(response => response.json())
     .then(data => {
-      // console.log(data)
-      dispatch(updateIsLoggedUser(false))
-      dispatch(updateUserLog({}))
-      dispatch(updateLoadedUser(false))
-      dispatch(reloadUsersArrayFunction())
-      toast('Compte utilisateur supprimé !')
-      navigate('/')
+      if (data.badAccessMessage) {
+        navigate('/')
+      } else {
+        // console.log(data)
+        dispatch(updateIsLoggedUser(false))
+        dispatch(updateUserLog({}))
+        dispatch(updateLoadedUser(false))
+        dispatch(reloadUsersArrayFunction())
+        toast('Compte utilisateur supprimé !')
+        navigate('/')
+      }
     })
     .catch(error => console.log(error))
   }
