@@ -1,3 +1,80 @@
+@keyframes fadein {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+.card {
+	display: flex;
+	justify-content: center;
+	margin: 15px;
+	width: 400px;
+	height: 180px;
+	overflow: hidden;
+	border: 2px solid yellow;
+	border-radius: 20px;
+	background-color: black;
+	transition-property: all;
+	transition-duration: 1s;
+	&:hover {
+		border: 2px solid white;
+	}
+}
+.card-home {
+	animation: fadein 1s;
+}
+.card-link {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-decoration: none;
+	opacity: 0.7;
+	transition-property: all;
+	transition-duration: 1s;
+	&:hover {
+		opacity: 1;
+	}
+}
+.card-image {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	width: 110%;
+	overflow: hidden;
+	img {
+		width: 100%;
+		height: auto;
+	}
+}
+.card-name-div {
+	position: absolute;
+	bottom: 0;
+	width: 110%;
+	min-height: 40px;
+	background-color: black;
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+}
+.card-name {
+	text-align: center;
+	font-size: 22px;
+	text-transform: lowercase;
+	width: 85%;
+	height: fit-content;
+	color: white;
+	margin-top: 0;
+	margin-bottom: 5px;
+}
+
+
+
+/*
 .card {
     display: flex;
     justify-content: center;
@@ -80,3 +157,4 @@
     margin-top: 0;
     margin-bottom: 5px;
 }
+*/

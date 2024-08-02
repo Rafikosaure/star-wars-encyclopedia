@@ -1,4 +1,4 @@
-import '../styles/TestPage.css'
+import '../styles/TestPage.scss'
 import { useState } from 'react'
 
 

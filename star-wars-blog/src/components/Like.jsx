@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
-import '../styles/Like.css'
+import '../styles/Like.scss'
 
 
 

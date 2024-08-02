@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { reinitializeDozen } from '../redux/slices/dozenSlice'
-import '../styles/BurgerMenu.css'
+import '../styles/BurgerMenu.scss'
 import Menu from '../assets/images/menu_hamburger.webp'
 import ClickAwayListener from 'react-click-away-listener'
 

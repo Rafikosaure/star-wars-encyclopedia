@@ -1,4 +1,38 @@
 .error-page {
+	background: url(../assets/images/error404.webp) no-repeat center center fixed;
+	position: relative;
+}
+.error-overlay {
+	position: absolute;
+	background: rgb(219, 197, 190, .50);
+	width: 100%;
+	height: 100%;
+}
+.error404-div {
+	position: absolute;
+	width: 80%;
+	min-height: 100vh;
+	padding-right: 10%;
+	padding-left: 10%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 80px;
+	overflow: hidden;
+	h1 {
+		text-align: center;
+		font-size: 36px;
+	}
+	a {
+		font-size: 32px;
+		color: midnightblue;
+	}
+}
+
+
+
+/* .error-page {
     background: url(../assets/images/error404.webp) no-repeat center center fixed;
     position: relative;
 }
@@ -32,4 +66,4 @@
 .error404-div a {
     font-size: 32px;
     color: midnightblue;
-}
+} */

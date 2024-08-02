@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import '../styles/PostCard.css'
+import '../styles/PostCard.scss'
 import DefaultAvatar from '../assets/images/EmojiBlitzBobaFett1.webp'
 import Like from './Like'
 import config from '../config'

@@ -1,6 +1,6 @@
 import React from 'react'
-import '../styles/index.css'
-import '../styles/Forum.css'
+import '../styles/index.scss'
+import '../styles/Forum.scss'
 import Code from '../components/Code'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'

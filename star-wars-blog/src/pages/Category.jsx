@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import '../styles/Category.css'
+import '../styles/Category.scss'
 import Card from '../components/Card'
 import SearchBar from '../components/SearchBar'
 import data from '../data/localApiCategories.json'

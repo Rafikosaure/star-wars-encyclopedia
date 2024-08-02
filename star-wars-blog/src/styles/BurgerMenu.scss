@@ -1,4 +1,84 @@
 .burger-menu {
+	display: none;
+}
+.hamburger-menu-icon {
+	display: none;
+}
+/* Ici : media queries pour la première partie tablette */
+@media screen and (max-width: 1580px) {
+	.navlink-display-none {
+		display: none;
+	}
+	.navlink-display-flex {
+		display: flex;
+		&:hover {
+			color: yellow;
+		}
+		&:focus {
+			color: yellow;
+		}
+		&:active {
+			color: yellow;
+		}
+	}
+}
+/* Ici : media queries pour la seconde partie tablette */
+@media screen and (max-width: 1023px) {
+	.burger-menu {
+		position: absolute;
+		z-index: 2;
+		top: 130px;
+		gap: 20px;
+		padding-top: 15px;
+		padding-bottom: 15px;
+		padding-left: 15px;
+		padding-right: 30px;
+		display: flex;
+		border: 1px solid white;
+		background-color: black;
+		overflow: visible;
+		flex-direction: column;
+		width: fit-content;
+		height: fit-content;
+		a {
+			font-size: 18px;
+			color: white;
+			text-decoration: none;
+			margin-left: 5px;
+			text-transform: lowercase;
+		}
+	}
+	.hamburger-menu-icon {
+		position: absolute;
+		margin-left: 10px;
+		top: 90px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		overflow: hidden;
+		width: 40px;
+		height: 40px;
+		background-color: transparent;
+		img {
+			width: 60px;
+			height: 100%;
+		}
+	}
+}
+/* Ici : media queries pour la partie mobile */
+@media only screen and (max-width: 767px) {
+	.burger-menu {
+		margin-left: 10px;
+		a {
+			font-size: 14px;
+		}
+	}
+}
+
+
+
+/*
+.burger-menu {
     display: none;
 }
 
@@ -10,7 +90,7 @@
 /******************************************************/
 
 /* Ici : media queries pour la première partie tablette */
-@media screen and (max-width: 1580px) {
+/* @media screen and (max-width: 1580px) {
     .navlink-display-none {
         display: none;
     }
@@ -22,11 +102,11 @@
     .navlink-display-flex:hover, .navlink-display-flex:focus, .navlink-display-flex:active {
         color: yellow;
     }
-}
+} */
 
 
 /* Ici : media queries pour la seconde partie tablette */
-@media screen and (max-width: 1023px) {
+/* @media screen and (max-width: 1023px) {
     .burger-menu {
         position: absolute;
         z-index: 2;
@@ -70,16 +150,16 @@
         width: 60px;
         height: 100%;
     }
-}
+} */
 
 
 /* Ici : media queries pour la seconde partie tablette */
-@media screen and (max-width: 991px) {
+/* @media screen and (max-width: 991px) {
     
 }
 
 /* Ici : media queries pour la partie mobile */
-@media only screen and (max-width: 767px) {
+/* @media only screen and (max-width: 767px) {
     .burger-menu {
         margin-left: 10px;
     }
@@ -88,3 +168,4 @@
         font-size: 14px;
     }
 }
+*/

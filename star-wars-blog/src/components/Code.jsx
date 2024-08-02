@@ -1,5 +1,5 @@
 import React from 'react'
-import '../styles/Code.css'
+import '../styles/Code.scss'
 import code from '../data/code.txt'
 
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import '../styles/Topic.css'
+import '../styles/Topic.scss'
 import { useSelector } from 'react-redux'
 import { selectTopicsData } from '../redux/slices/topicSlice'
 import { useParams } from 'react-router-dom'

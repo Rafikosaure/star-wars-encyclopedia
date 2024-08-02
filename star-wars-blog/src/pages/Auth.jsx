@@ -1,6 +1,6 @@
 import React from 'react'
-import '../styles/index.css'
-import '../styles/Auth.css'
+import '../styles/index.scss'
+import '../styles/Auth.scss'
 import RegisterForm from '../components/RegisterForm.jsx'
 import LoginForm from '../components/LoginForm.jsx'
 import { useSelector } from 'react-redux'

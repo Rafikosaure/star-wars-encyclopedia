@@ -1,4 +1,53 @@
+@keyframes extend {
+	0% {
+		width: 40px;
+		height: 40px;
+	}
+	50% {
+		width: 60px;
+		height: 60px;
+	}
+	100% {
+		width: 40px;
+		height: 40px;
+	}
+}
 .like-div {
+	width: fit-content;
+	height: fit-content;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	margin-right: 90px;
+}
+svg {
+	position: absolute;
+}
+#path1 {
+	fill: white;
+	fill-opacity: 1;
+	stroke: #000000;
+	stroke-opacity: 1;
+}
+#path4 {
+	fill-opacity: 1;
+	stroke: #00a100;
+	stroke-width: 0.804057;
+	stroke-opacity: 1;
+}
+.like-svg {
+	transition-property: animation;
+	width: 40px;
+	height: 40px;
+	&:active {
+		animation: extend .1s;
+	}
+}
+
+
+
+/* .like-div {
     width: fit-content;
     height: fit-content;
     display: flex;
@@ -50,4 +99,4 @@ svg {
         width: 40px;
         height: 40px;
     }
-}
+} */

@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
-import '../styles/TopicCard.css'
+import '../styles/TopicCard.scss'
 import { Link } from 'react-router-dom'
 import StarsSky from '../assets/images/ciel_nuit_banniere.webp'
 

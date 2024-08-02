@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import '../styles/index.css'
-import '../styles/Error404.css'
+import '../styles/index.scss'
+import '../styles/Error404.scss'
 
 export default function Error404() {
   return (

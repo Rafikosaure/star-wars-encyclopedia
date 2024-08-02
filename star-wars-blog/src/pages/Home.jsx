@@ -1,6 +1,6 @@
 import React from 'react'
-import '../styles/index.css'
-import '../styles/Home.css'
+import '../styles/index.scss'
+import '../styles/Home.scss'
 import data from '../data/localApiCategories.json'
 import Card from '../components/Card'
 

@@ -1,4 +1,4 @@
-import '../styles/Header.css'
+import '../styles/Header.scss'
 import Logo from '../assets/images/logo.webp'
 import { NavLink } from 'react-router-dom'
 import { useDispatch } from 'react-redux'

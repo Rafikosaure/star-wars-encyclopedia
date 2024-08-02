@@ -1,4 +1,38 @@
 @font-face {
+	font-family: 'Starjedi';
+	src: local('Starjedi'), url(../assets/fonts/Starjedi.ttf) format('truetype');
+}
+@font-face {
+	font-family: 'Starjout';
+	src: local('Starjout'), url(../assets/fonts/Starjout.ttf) format('truetype');
+}
+body {
+	margin: 0;
+	font-family: 'Starjedi';
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	background: url(../assets/images/stars.webp) no-repeat center center fixed;
+	background-size: cover;
+}
+.app {
+	width: 80%;
+	min-height: 100vh;
+	margin-left: auto;
+	margin-right: auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: baseline;
+	align-items: center;
+	border: 1px solid yellow;
+	background-color: black;
+}
+code {
+	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+
+
+/* @font-face {
   font-family: 'Starjedi';
   src: local('Starjedi'), url(../assets/fonts/Starjedi.ttf) format('truetype');
 }
@@ -11,12 +45,8 @@
 body {
   margin: 0;
   font-family: 'Starjedi';
-  /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* background-color: black; */
   background: url(../assets/images/stars.webp) no-repeat center center fixed;
   background-size: cover;
 }
@@ -38,3 +68,4 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+ */

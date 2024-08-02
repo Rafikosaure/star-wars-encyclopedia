@@ -1,4 +1,4 @@
-import '../styles/SearchBar.css'
+import '../styles/SearchBar.scss'
 import data from '../data/localApiCategories.json'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
