@@ -1,7 +1,7 @@
 const Post = require('../models/post.model.js')
 const Topic = require('../models/topic.model.js')
 const User = require('../models/user.model.js')
-require('dotenv').config()
+
 
 
 exports.createPost = async (req, res) => {

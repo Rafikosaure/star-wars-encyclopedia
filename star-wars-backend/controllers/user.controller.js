@@ -4,6 +4,7 @@ const User = require('../models/user.model.js')
 const sharp = require('sharp')
 const fs = require('fs')
 require('dotenv').config()
+const ENV = require('../config/config.js')
 
 
 // Modification des données d'un utilisateur
@@ -54,7 +55,7 @@ exports.modifyUser = async (req, res) => {
     if (userObject.password === "") {
         userObject.password = initialUser.password
     } else {
-        const newPassword = await bcrypt.hash(userObject.password, parseInt(process.env.NB_HASH))
+        const newPassword = await bcrypt.hash(userObject.password, parseInt(ENV.NB_HASH))
         userObject.password = newPassword
     }
     userObject.isAdmin = initialUser.isAdmin

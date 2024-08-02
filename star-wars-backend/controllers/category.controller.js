@@ -1,6 +1,5 @@
 const Category = require('../models/category.model.js')
 const User = require('../models/user.model.js')
-require('dotenv').config()
 
 
 // Créer une catégorie de topics

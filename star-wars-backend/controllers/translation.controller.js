@@ -1,10 +1,11 @@
 const deepl = require('deepl-node');
 require('dotenv').config({path: '../.env'})
+const ENV = require('../config/config.js')
 
 
 exports.translateTexts = async (req, res) => {
     try {
-        const authKey = process.env.API_KEY;
+        const authKey = ENV.API_KEY;
         const translator = new deepl.Translator(authKey)
 
         // Récupérer la langue cible & les données à traduire
@@ -28,7 +29,7 @@ exports.translateTexts = async (req, res) => {
 
 exports.translateName = async (req, res) => {
     try {
-        const authKey = process.env.API_KEY;
+        const authKey = ENV.API_KEY;
         const translator = new deepl.Translator(authKey)
 
         // Récupérer la langue cible & les données à traduire

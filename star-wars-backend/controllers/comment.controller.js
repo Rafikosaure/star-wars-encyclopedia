@@ -1,5 +1,4 @@
 const Comment = require('../models/comment.model.js')
-require('dotenv').config()
 
 
 exports.createComment = (req, res) => {

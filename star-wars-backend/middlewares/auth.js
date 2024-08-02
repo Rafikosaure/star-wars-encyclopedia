@@ -1,7 +1,6 @@
 const { createError } = require('./error.js')
 const jwt = require('jsonwebtoken')
-require('dotenv').config({path: '../.env'})
-// const { env } = require('../configuration/config.js')
+const ENV = require('../config/config.js')
 
 
 exports.verifyToken = (req, res, next) => {
@@ -15,7 +14,7 @@ exports.verifyToken = (req, res, next) => {
     }) // next(createError(401, "Acces Denied!"))
 
     // Vérifier la validité du jeton en utilisant jwt.verify
-    jwt.verify(token, process.env.TOKEN, (err, user) => {
+    jwt.verify(token, ENV.TOKEN, (err, user) => {
         // si une erreur se produit lors de la vérification du jeton
         if(err) {
             // Renvoie une erreur 403 (interdit) 

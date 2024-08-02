@@ -2,7 +2,7 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const User = require('../models/user.model.js')
 const sharp = require('sharp')
-require('dotenv').config()
+const ENV = require('../config/config.js')
 
 
 
@@ -25,7 +25,7 @@ exports.register = (req, res) => {
     }
     
     bcrypt
-        .hash(userObject.password, parseInt(process.env.NB_HASH))
+        .hash(userObject.password, parseInt(ENV.NB_HASH))
         .then((hash) => {
             const user = new User({
                 name: userObject.name,
@@ -65,7 +65,7 @@ exports.login = (req, res) => {
                                 // Charge utile du token
                                 { id: user.id },
                                 // Clé secrète
-                                process.env.TOKEN,
+                                ENV.TOKEN,
                                 // Options du token
                                 { expiresIn: "24h" }
                             );

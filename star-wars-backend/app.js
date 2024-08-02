@@ -7,20 +7,20 @@ const helmet = require('helmet')
 const rateLimit = require('express-rate-limit')
 const cors = require('cors')
 const cookieParser = require('cookie-parser')
+const ENV = require('./config/config.js')
 
-require('dotenv').config()
 
 // Connexion à la base de données MongoDB
 mongoose
     .connect(
-        `mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PASSWORD}@maincluster.1a02zbk.mongodb.net/?retryWrites=true&w=majority&appName=MainCluster`,
+        `mongodb+srv://${ENV.MONGODB_USER}:${ENV.MONGODB_PASSWORD}@maincluster.1a02zbk.mongodb.net/?retryWrites=true&w=majority&appName=MainCluster`,
     )
     .then(() => console.log('Connexion à MongoDB réussie !'))
     .catch(() => console.log('Connexion à MongoDB échouée !'))
 
 // Gestion des erreurs CORS
 app.use(cors({
-        origin: 'http://localhost:3000',
+        origin: ENV.CORS_ORIGIN,
         credentials: true,
         methods: ['GET', 'PUT', 'POST', 'DELETE'],
         allowedHeaders: ['Content-Type', 'Authorization']
@@ -33,8 +33,8 @@ app.use(cookieParser())
 app.use(
     rateLimit({
         windowMs: 60 * 1000,
-        max: 1000,
-        message: 'Vous avez atteint la limite de 1000 requêtes par minute !',
+        max: 100,
+        message: 'Vous avez atteint la limite de 100 requêtes par minute !',
         headers: true,
     })
 )

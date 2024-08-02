@@ -1,7 +1,7 @@
 const Topic = require('../models/topic.model.js')
 const Category = require('../models/category.model.js')
 const Post = require('../models/post.model.js')
-require('dotenv').config()
+
 
 
 exports.getTopicsAndPosts = async (req, res) => {
