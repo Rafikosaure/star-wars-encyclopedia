@@ -100,7 +100,6 @@ export default function Account() {
     formData.append('name', data.name)
     formData.append('email', data.email)
     formData.append('password', data.password)
-    // console.log(formData)
 
     fetch(`${config.serverEndpoint}/user/update`, {
       method: "PUT",
@@ -143,7 +142,6 @@ export default function Account() {
       if (data.badAccessMessage) {
         navigate('/')
       } else {
-        // console.log(data)
         dispatch(updateIsLoggedUser(false))
         dispatch(updateUserLog({}))
         dispatch(updateLoadedUser(false))
@@ -154,9 +152,8 @@ export default function Account() {
     })
     .catch(error => console.log(error))
   }
-    
   
-    
+  
   return (
     <div className='app account-page'>
       <div className='account-overlay' />
@@ -179,11 +176,11 @@ export default function Account() {
                 <h2>Mettre à jour vos infos ?</h2>
                 <div>
                   <form className='account-form-update' autoComplete='off' onSubmit={handleSubmit(modifyData)} >
-                    <input type="text" name='name' placeholder='Modifiez votre nom...' {...register("name", {required: false})} onFocus={(e) => e.target.placeholder = ""} onBlur={(e) => e.target.placeholder = 'Modifiez votre nom...'}/>
-                    <input type="email" name='email' placeholder='Modifiez votre email...' {...register("email", {required: false})} onFocus={(e) => e.target.placeholder = ""} onBlur={(e) => e.target.placeholder = 'Modifiez votre email...'}/>
-                    <input type="password" name='password' placeholder='Modifiez votre mot de passe...' {...register("password", {required: false})} onFocus={(e) => e.target.placeholder = ""} onBlur={(e) => e.target.placeholder = 'Modifiez votre mot de passe...'}/>
+                    <input type="text" name='name' placeholder='Modifiez votre nom...' {...register("name", {required: false})} onFocus={(e) => e.target.placeholder = ""} onBlur={(e) => e.target.placeholder = 'Modifiez votre nom...'} />
+                    <input type="email" name='email' placeholder='Modifiez votre email...' {...register("email", {required: false})} onFocus={(e) => e.target.placeholder = ""} onBlur={(e) => e.target.placeholder = 'Modifiez votre email...'} />
+                    <input type="password" name='password' placeholder='Modifiez votre mot de passe...' {...register("password", {required: false})} onFocus={(e) => e.target.placeholder = ""} onBlur={(e) => e.target.placeholder = 'Modifiez votre mot de passe...'} />
                     <p className='unvalid-password-text' style={{display: unvalidPassword}}>Votre mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caracère spécial.</p>
-                    <input className='account-file-input' type="file" id="file" name="picture" accept=".png, .jpg, .jpeg" {...register("picture", {required: false})} onChange={(e) => isValidIcon(e.target.value)}/>
+                    <input className='account-file-input' type="file" id="file" name="picture" accept=".png, .jpg, .jpeg" {...register("picture", {required: false})} onChange={(e) => isValidIcon(e.target.value)} />
                     <label className='account-label' htmlFor="file">Mettre à jour votre image de profil<img src={PictureIsValid} alt="Upload is valid" className={`input-valid-img ${fileIsLoad}`} /></label>
                     <button className='account-submit-button' type='submit'>Mettre à jour</button>
                   </form>
