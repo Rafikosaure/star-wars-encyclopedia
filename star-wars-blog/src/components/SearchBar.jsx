@@ -36,7 +36,7 @@ export default function SearchBar({ category }) {
       name: text
     }
     if (text) {
-      fetch(`${config.serverEndpoint}/translate/name`, {
+      fetch(`${config.serverEndpoint}/translate`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
