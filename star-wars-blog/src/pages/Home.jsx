@@ -12,19 +12,21 @@ export default function Home() {
 
   return (
     <div className='app'>
-      <div className='div-welcome'>
-        <p className='welcome-message'>
-          {homeText.toLowerCase()}
-        </p>
-      </div>
-      <div className='div-categories'>
-        <div className='transition1' />
-        <div className='transition2' />
-        <h2>catégories</h2>
-        <div className='card-list'>
-          {data.map((item) => 
-              <Card key={item._id} item={item} />
-          )}
+      <div className='home-page'>
+        <div className='div-welcome'>
+          <p className='welcome-message'>
+            {homeText.toLowerCase()}
+          </p>
+        </div>
+        <div className='div-categories'>
+          <div className='transition1' />
+          <div className='transition2' />
+          <h2>catégories</h2>
+          <div className='card-list'>
+            {data.map((item) => 
+                <Card key={item._id} item={item} />
+            )}
+          </div>
         </div>
       </div>
     </div>
