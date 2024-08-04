@@ -15,7 +15,7 @@ body {
 	background-size: cover;
 }
 .app {
-	width: 80%;
+	width: calc(80% - 2px);
 	min-height: 100vh;
 	margin-left: auto;
 	margin-right: auto;
@@ -23,13 +23,17 @@ body {
 	flex-direction: column;
 	justify-content: baseline;
 	align-items: center;
-	border: 1px solid yellow;
 	background-color: black;
 }
 code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
-
+/* Ici : media queries pour la seconde partie tablette */
+@media screen and (max-width: 991px) {
+	.app {
+    width: calc(100% - 2px)
+  }
+}
 
 
 /* @font-face {
