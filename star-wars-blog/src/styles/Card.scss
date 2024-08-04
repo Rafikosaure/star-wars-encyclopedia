@@ -71,7 +71,24 @@
 	margin-top: 0;
 	margin-bottom: 5px;
 }
-
+/* Ici : media queries pour la première partie smartphone */
+@media screen and (max-width: 660px) {
+	.card {
+		margin-left: 0;
+		margin-right: 0;
+		margin-top: 15px;
+		margin-bottom: 15px;
+		width: 340px;
+		height: 140px;
+	}
+	.card-name-div {
+		min-height: 0;
+	}
+	.card-name {
+		font-size: 16px;
+		height: fit-content;
+	}
+}
 
 
 /*
