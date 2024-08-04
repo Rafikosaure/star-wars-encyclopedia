@@ -1,5 +1,5 @@
 .header {
-	width: 80%;
+	width: calc(80% - 2px);
 	height: 140px;
 	margin-left: auto;
 	margin-right: auto;
@@ -201,19 +201,32 @@ nav {
 	}
 	.header-div-connection {
 		right: 20px;
-		top: 70px;
+		top: 80px;
+	}
+	.connection-link {
+		font-size: 14px;
+	}
+	.connection-link-logout {
+		font-size: 14px;
 	}
 }
 /* Ici : media queries pour la seconde partie tablette */
 @media screen and (max-width: 991px) {
 	.header {
-		width: 100%;
-	}
-	.header-div-connection {
-		right: 20px;
-		top: 70px;
+		width: calc(100% - 2px)
 	}
 }
+/* Ici : media queries pour la première partie smartphone */
+@media screen and (max-width: 660px) {
+	.connection-link {
+		font-size: 12px;
+	}
+	.connection-link-logout {
+		font-size: 12px;
+	}
+}
+
+
 
 
 
