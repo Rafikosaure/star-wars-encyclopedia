@@ -1,26 +1,59 @@
 import React from 'react'
 import { useState } from 'react'
 import '../styles/Like.scss'
+import config from '../config'
+import { useSelector } from 'react-redux'
+import { selectIsLoggedState } from '../redux/slices/isLoggedUserSlice'
 
 
 
-export default function Like() {
+export default function Like({ post }) {
 
+    const isLogged = useSelector(selectIsLoggedState)
     const [likeColor, updateLikeColor] = useState("black")
+    const [likeResult, updateLikeResult] = useState()
+
+
+    const attributeALike = () => {
+        fetch(`${config.serverEndpoint}/like/attributeLike/${post._id}`, {
+            method: "POST",
+            credentials: "include"
+        })
+        .then(response => response.json())
+        .then(data => {
+            updateLikeResult(data)
+        })
+        .catch(error => console.log(error))
+    }
+
+    const dislike = () => {
+        fetch(`${config.serverEndpoint}/like/dislike/${likeResult.likeId}`, {
+            method: "DELETE",
+            credentials: "include"
+        })
+        .then(response => response.json())
+        .then(data => {
+            updateLikeResult(data)
+        })
+        .catch(error => console.log(error))
+    }
 
     const likeOrDislike = (e) => {
         e.preventDefault()
         if (likeColor === "black") {
-            updateLikeColor("white")
+            attributeALike()
+            updateLikeColor('white')
         } else {
-            updateLikeColor("black")
+            dislike()
+            updateLikeColor('black')
         }
     }
 
 
     return (
         <div className='like-div'>
-            <svg
+            {isLogged && (
+                <svg
                 onClick={(e) => likeOrDislike(e)}
                 className={`like-svg`} 
                 version="1.0"
@@ -72,6 +105,7 @@ export default function Like() {
                 />
                 </g>
             </svg>
+            )}
         </div>
     )
 }
