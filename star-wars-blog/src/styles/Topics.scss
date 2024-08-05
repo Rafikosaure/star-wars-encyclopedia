@@ -2,6 +2,8 @@
 	background: url(../assets/images/star-wars-episode9-team.webp) no-repeat center center fixed;
 	color: white;
 	position: relative;
+	width: calc(80% - 4px);
+	border: 1px solid yellow;
 }
 .topics-div-return {
 	position: absolute;

@@ -3,6 +3,8 @@
 	background-size: cover;
 	position: relative;
 	color: white;
+	width: calc(80% - 4px);
+	border: 1px solid yellow;
 	min-height: 1300px;
 }
 .forum-overlay {
