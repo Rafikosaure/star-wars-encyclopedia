@@ -61,7 +61,7 @@ export default function PostCard({ index, post }) {
                     </div>
                 </div>
                 <div className='post-card-bottom-bar'>
-                    <Like />
+                    <Like post={post} />
                 </div>
             </div>
             
