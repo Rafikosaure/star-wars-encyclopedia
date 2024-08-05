@@ -37,14 +37,19 @@ svg {
 	stroke-opacity: 1;
 }
 .like-svg {
-	transition-property: animation;
+	cursor: pointer;
 	width: 40px;
 	height: 40px;
+	transition-property: animation;
 	&:active {
 		animation: extend .1s;
 	}
 }
 
+.like-svg-disabled {
+	width: 40px;
+	height: 40px;
+}
 
 
 /* .like-div {
