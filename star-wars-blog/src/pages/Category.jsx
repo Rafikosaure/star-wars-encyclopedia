@@ -76,12 +76,6 @@ export default function Category() {
     <>
       {rightPage ? (
       <div className='app-category'>
-        {/* <div className='prev-arrow-section' 
-            style={{display: storedDozen <= 1 || article.value ? 'none' : 'flex'}} 
-            onClick={prevPage}
-        >
-          <img className='arrows' src={BackArrow} alt="back arrow" />
-        </div> */}
           <div className='page-content'>
             <h1>{currentDatas.title}</h1>
             <SearchBar category={currentDatas.keyword} />
@@ -115,14 +109,7 @@ export default function Category() {
                 `${storedDozen} / ${nbDozen.current}`
               ) : null }
             </div>
-        </div>
-        {/* <div className='next-arrow-section' 
-          style={{display: storedDozen >= nbDozen.current || article.value ? 'none' : 'flex'}} 
-          onClick={nextPage}
-        >
-          <img className='arrows' src={NextArrow} alt="next arrow" />
-        </div> */}
-        
+        </div>        
       </div>
       ) : null}
     </>
