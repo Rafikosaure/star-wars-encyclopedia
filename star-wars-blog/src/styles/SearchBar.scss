@@ -52,7 +52,20 @@ $background-color_2: black;
 		color: $color_3;
 	}
 }
-
+/* Ici : media queries pour la seconde partie tablette */
+@media screen and (max-width: 991px) {
+	.search-bar {
+		min-width: 500px;
+		padding-bottom: 50px;
+	}
+	.search-input {
+		width: 100%;
+		height: 35px;
+		font-size: 14px;
+		border-radius: 6px;
+		background-color: $background-color_2;
+	}
+}
 
 
 
