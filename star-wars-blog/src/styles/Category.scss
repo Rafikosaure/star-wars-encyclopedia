@@ -21,11 +21,17 @@ $background-color_1: black;
 	position: relative;
 	border: 1px solid yellow;
 }
-.prev-arrow-section {
-	z-index: 2;
-	position: fixed;
-	left: 12%;
+.arrow-section {
+	display: flex;
+	width: 100%;
+	position: sticky;
 	bottom: 40%;
+	justify-content: space-around;
+}
+.prev-arrow-section, .next-arrow-section {
+	display: flex;
+	position: sticky;
+	z-index: 2;
 	cursor: pointer;
 	width: 80px;
 	height: 80px;
@@ -35,19 +41,11 @@ $background-color_1: black;
 		outline: 4px solid white;
 	}
 }
+.prev-arrow-section {
+	right: 82%;
+}
 .next-arrow-section {
-	z-index: 2;
-	position: fixed;
-	right: 12%;
-	bottom: 40%;
-	cursor: pointer;
-	width: 80px;
-	height: 80px;
-	border-radius: 50%;
-	overflow: hidden;
-	&:active {
-		outline: 4px solid white;
-	}
+	left: 82%;
 }
 .arrows {
 	width: 100%;
@@ -68,8 +66,8 @@ $background-color_1: black;
 }
 .dozen-indicator {
 	position: sticky;
-	margin-bottom: 50px;
 	bottom: 50px;
+	margin-bottom: 50px;
 	background-color: $background-color_1;
 	color: $color_1;
 	font-size: 20px;
@@ -93,6 +91,32 @@ $background-color_1: black;
 	justify-content: space-evenly;
 	align-items: flex-start;
 }
+/* Ici : media queries pour la seconde partie desktop */
+@media screen and (max-width: 1380px) {
+	.prev-arrow-section, .next-arrow-section {
+		width: 60px;
+		height: 60px;
+	}
+}
+/* Ici : media queries pour la seconde partie tablette */
+@media screen and (max-width: 991px) {
+	.app-category {
+		width: calc(100% - 4px);
+	}
+	.prev-arrow-section, .next-arrow-section {
+		width: 60px;
+		height: 60px;
+	}
+	.prev-arrow-section {
+		right: 85%;
+	}
+	.next-arrow-section {
+		left: 85%;
+	}
+}
+
+
+
 
 
 
