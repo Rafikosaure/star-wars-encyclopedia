@@ -5,6 +5,10 @@ $font-family_2: Arial, Helvetica, sans-serif;
 $background-color_1: white;
 $background-color_2: transparent;
 
+.auth-page {
+	width: calc(80% - 4px);
+	border: 1px solid yellow;
+}
 .login-page-content {
 	width: 100%;
 	min-height: 100vh;

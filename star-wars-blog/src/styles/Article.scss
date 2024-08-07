@@ -3,6 +3,11 @@ $color_2: yellow;
 $font-family_1: Arial, Helvetica, sans-serif;
 $background-color_1: black;
 
+.article-page {
+	width: calc(80% - 4px);
+	border: 1px solid yellow;
+}
+
 @keyframes fadein {
 	from {
 		opacity: 0;

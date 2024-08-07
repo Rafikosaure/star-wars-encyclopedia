@@ -4,7 +4,7 @@ import { useState } from 'react'
 
 export default function TestPage() {
 
-  const [likeColor, updateLikeColor] = useState("#000000")
+  const [likeColor, updateLikeColor] = useState("black")
 
   const likeOrDislike = (e) => {
     e.preventDefault()

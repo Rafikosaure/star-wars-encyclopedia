@@ -9,10 +9,10 @@ import { selectRegisterState } from '../redux/slices/registerSlice.js'
 
 export default function Auth() {
     
-    const rightForm = useSelector(selectRegisterState)
+  const rightForm = useSelector(selectRegisterState)
 
   return (
-    <div className='app'>
+    <div className='app auth-page'>
         {rightForm ? (
             <RegisterForm />            
         ) : (
