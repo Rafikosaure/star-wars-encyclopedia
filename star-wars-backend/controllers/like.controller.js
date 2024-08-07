@@ -3,6 +3,26 @@ const User = require('../models/user.model.js')
 const Like = require('../models/like.model.js')
 
 
+
+exports.getLikesByPost = async (req, res) => {
+    try {
+        const postId = req.params.id
+    
+        const likesByPost = await Post.findById(postId).populate('likes')
+        if (!likesByPost) res.status(404).json({
+            message: "Likes not found!"
+        })
+        
+        res.status(200).json(likesByPost.likes)
+
+    } catch(error) {
+        res.status(500).json({
+            message: "Likes not found!",
+            error: error
+        })
+    }
+}
+
 // Liker un post
 exports.attributeLike = async (req, res) => {
     try {
@@ -37,11 +57,10 @@ exports.attributeLike = async (req, res) => {
 
         res.status(201).json({
             message: "Like created with success!",
-            thumb: true,
             likeId: newLike._id
         })
     } catch(error) {
-        if (!newLike) res.status(500).json({
+        res.status(500).json({
             message: "Like creation failed!"
         })
     }
@@ -76,8 +95,7 @@ exports.dislike = async (req, res) => {
         currentPost.save()
 
         res.status(200).json({
-            message: "Like deleted!",
-            thumb: false
+            message: "Like deleted with success!"
         })
     
     } catch(error) {
