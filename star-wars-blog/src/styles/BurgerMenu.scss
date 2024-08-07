@@ -1,3 +1,8 @@
+$color_1: yellow;
+$color_2: white;
+$background-color_1: black;
+$background-color_2: transparent;
+
 .burger-menu {
 	display: none;
 }
@@ -12,13 +17,13 @@
 	.navlink-display-flex {
 		display: flex;
 		&:hover {
-			color: yellow;
+			color: $color_1;
 		}
 		&:focus {
-			color: yellow;
+			color: $color_1;
 		}
 		&:active {
-			color: yellow;
+			color: $color_1;
 		}
 	}
 }
@@ -35,14 +40,14 @@
 		padding-right: 30px;
 		display: flex;
 		border: 1px solid white;
-		background-color: black;
+		background-color: $background-color_1;
 		overflow: visible;
 		flex-direction: column;
 		width: fit-content;
 		height: fit-content;
 		a {
 			font-size: 18px;
-			color: white;
+			color: $color_2;
 			text-decoration: none;
 			margin-left: 5px;
 			text-transform: lowercase;
@@ -58,7 +63,7 @@
 		overflow: hidden;
 		width: 40px;
 		height: 40px;
-		background-color: transparent;
+		background-color: $background-color_2;
 		img {
 			width: 60px;
 			height: 100%;
@@ -74,6 +79,7 @@
 		}
 	}
 }
+
 
 
 
@@ -156,7 +162,7 @@
 /* Ici : media queries pour la seconde partie tablette */
 /* @media screen and (max-width: 991px) {
     
-}
+} */
 
 /* Ici : media queries pour la partie mobile */
 /* @media only screen and (max-width: 767px) {

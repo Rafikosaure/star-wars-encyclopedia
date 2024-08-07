@@ -1,10 +1,14 @@
+$color_1: white;
+$color_2: yellow;
+$background-color_1: black;
+
 .footer {
 	width: calc(80% - 2px);
 	height: fit-content;
 	margin-left: auto;
 	margin-right: auto;
-	background-color: black;
-	color: white;
+	background-color: $background-color_1;
+	color: $color_1;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -30,11 +34,11 @@
 		padding-left: 15px;
 		margin-left: auto;
 		margin-right: auto;
-		li {
+		li { 
 			margin-top: 15px;
-			a {
+			a { 
 				text-decoration: none;
-				color: yellow;
+				color: $color_2;
 			}
 		}
 	}
@@ -46,11 +50,11 @@
 /* Ici : media queries pour la seconde partie desktop */
 @media screen and (max-width: 1380px) {
 	.footer-content {
-		h3 {
+		h3 { 
 			font-size: 16px;
 		}
 		ul {
-			li {
+			li { 
 				font-size: 14px;
 			}
 		}
@@ -59,19 +63,20 @@
 /* Ici : media queries pour la seconde partie tablette */
 @media screen and (max-width: 991px) {
 	.footer {
-		width: calc(100% - 2px)
+		width: calc(100% - 2px);
 	}
 	.footer-content {
-		h3 {
+		h3 { 
 			font-size: 14px;
 		}
 		ul {
-			li {
+			li { 
 				font-size: 12px;
 			}
 		}
 	}
 }
+
 
 
 /* .footer {

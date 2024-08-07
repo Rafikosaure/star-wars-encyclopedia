@@ -1,3 +1,6 @@
+$color_1: white;
+$background-color_1: black;
+
 @keyframes fadein {
 	from {
 		opacity: 0;
@@ -59,7 +62,7 @@
 	background: url(../assets/images/background03.webp) no-repeat center center fixed;
 	h1 {
 		margin-top: 50px;
-		color: white;
+		color: $color_1;
 		cursor: default;
 	}
 }
@@ -67,8 +70,8 @@
 	position: sticky;
 	margin-bottom: 50px;
 	bottom: 50px;
-	background-color: black;
-	color: white;
+	background-color: $background-color_1;
+	color: $color_1;
 	font-size: 20px;
 	font-weight: bold;
 	border-radius: 14px;

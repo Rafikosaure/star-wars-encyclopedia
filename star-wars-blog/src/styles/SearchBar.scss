@@ -1,3 +1,9 @@
+$color_1: white;
+$color_2: yellow;
+$color_3: gainsboro;
+$background-color_1: transparent;
+$background-color_2: black;
+
 .search-bar {
 	width: 100%;
 	height: 120px;
@@ -5,7 +11,7 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background-color: transparent;
+	background-color: $background-color_1;
 	position: relative;
 }
 .search-form {
@@ -18,7 +24,7 @@
 	padding-right: 180px;
 	justify-content: center;
 	align-items: center;
-	background-color: transparent;
+	background-color: $background-color_1;
 	overflow: hidden;
 	position: absolute;
 }
@@ -29,23 +35,24 @@
 	padding-left: 10px;
 	border: 1px solid gainsboro;
 	text-align: center;
-	color: white;
+	color: $color_1;
 	font-weight: bold;
 	font-size: 18px;
 	border-radius: 6px;
-	background-color: black;
+	background-color: $background-color_2;
 	&:focus {
 		outline: 4px solid yellow;
 		border: none;
 		border-radius: 6px;
 		&::placeholder {
-			color: yellow;
+			color: $color_2;
 		}
 	}
 	&::placeholder {
-		color: gainsboro;
+		color: $color_3;
 	}
 }
+
 
 
 

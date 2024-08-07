@@ -1,9 +1,16 @@
+$color_1: white;
+$color_2: yellow;
+$color_3: gainsboro;
+$font-family_1: 'Starjout';
+$font-family_2: Arial, Helvetica, sans-serif;
+$background-color_1: black;
+
 .header {
 	width: calc(80% - 2px);
 	height: 140px;
 	margin-left: auto;
 	margin-right: auto;
-	background-color: black;
+	background-color: $background-color_1;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -27,7 +34,7 @@
 	justify-content: center;
 	align-items: center;
 	transition-property: all;
-	transition-duration: .5s;
+	transition-duration: 0.5s;
 	&:hover {
 		transform: rotate(-30deg);
 	}
@@ -50,8 +57,8 @@
 	justify-content: center;
 	position: relative;
 	h1 {
-		font-family: 'Starjout';
-		color: white;
+		font-family: $font-family_1;
+		color: $color_1;
 		font-size: 40px;
 		height: 50%;
 		margin-left: 10px;
@@ -88,7 +95,7 @@
 	align-items: center;
 	width: 45px;
 	height: 45px;
-	background-color: black;
+	background-color: $background-color_1;
 	outline: 2px solid yellow;
 	border-radius: 50%;
 	cursor: pointer;
@@ -107,34 +114,34 @@
 	font-size: 16px;
 	font-weight: bold;
 	text-decoration: underline;
-	color: yellow;
-	font-family: Arial, Helvetica, sans-serif;
+	color: $color_2;
+	font-family: $font-family_2;
 	cursor: pointer;
 	&:hover {
-		color: white;
+		color: $color_1;
 	}
 }
 .connection-link {
-	&:hover {
-		color: white;
-	}
 	margin-top: 25px;
 	font-size: 16px;
 	text-decoration: underline;
-	color: yellow;
+	color: $color_2;
 	font-weight: bold;
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: $font-family_2;
 	cursor: pointer;
+	&:hover {
+		color: $color_1;
+	}
 }
 nav {
 	a {
 		text-decoration: none;
 		text-transform: lowercase;
-		color: yellow;
+		color: $color_2;
 		cursor: pointer;
 	}
 	a.active {
-		color: gainsboro;
+		color: $color_3;
 		cursor: default;
 	}
 }
@@ -150,7 +157,7 @@ nav {
 		justify-content: center;
 		align-items: center;
 		transition-property: all;
-		transition-duration: .5s;
+		transition-duration: 0.5s;
 		img {
 			width: 50px;
 			height: 50px;
@@ -213,7 +220,7 @@ nav {
 /* Ici : media queries pour la seconde partie tablette */
 @media screen and (max-width: 991px) {
 	.header {
-		width: calc(100% - 2px)
+		width: calc(100% - 2px);
 	}
 }
 /* Ici : media queries pour la première partie smartphone */
@@ -225,7 +232,6 @@ nav {
 		font-size: 12px;
 	}
 }
-
 
 
 

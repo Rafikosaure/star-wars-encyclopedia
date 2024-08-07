@@ -1,10 +1,14 @@
+$color_1: white;
+$font-family_1: Arial, Helvetica, sans-serif;
+$background-color_1: black;
+
 .topic-card-main {
 	width: 80%;
 	height: 90px;
 	overflow: hidden;
 	border: 2px solid white;
 	border-radius: 10px;
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: $font-family_1;
 	position: relative;
 }
 .topic-card-banner {
@@ -19,16 +23,16 @@
 	text-decoration: none;
 	display: flex;
 	align-items: center;
-	background-color: black;
+	background-color: $background-color_1;
 	transition: all 0.4s;
-	&:hover {
+	&:hover { 
 		background-color: transparent;
 	}
 }
 .topic-card-content {
 	display: flex;
 	flex-direction: column;
-	color: white;
+	color: $color_1;
 	justify-content: center;
 	align-items: flex-start;
 	width: 100%;
@@ -43,7 +47,7 @@
 	width: 100%;
 	justify-content: space-between;
 	align-items: center;
-	h1 {
+	h1 { 
 		font-size: 20px;
 		margin: 0;
 	}

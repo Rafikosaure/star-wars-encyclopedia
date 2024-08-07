@@ -1,3 +1,6 @@
+$font-family_1: Arial, Helvetica, sans-serif;
+$background-color_1: lightgray;
+
 .user-data-table {
 	margin-left: auto;
 	margin-right: auto;
@@ -10,8 +13,8 @@
 	padding: 8px;
 	border: 1px solid black;
 	border-radius: 10px;
-	background-color: lightgray;
-	font-family: Arial, Helvetica, sans-serif;
+	background-color: $background-color_1;
+	font-family: $font-family_1;
 }
 .user-data-picture {
 	display: flex;
@@ -24,13 +27,18 @@
 	border: 1px solid gray;
 	border-radius: 10px;
 	overflow: hidden;
-	img {
+	img { 
 		max-height: 40px;
 	}
 }
 .user-data-name {
 	cursor: default;
 	text-transform: lowercase;
+}
+.user-data-delete-image {
+	width: 30px;
+	height: 30px;
+	cursor: pointer;
 }
 .user-data-delete-button {
 	width: 37px;
@@ -39,15 +47,11 @@
 	justify-content: center;
 	align-items: center;
 	border-radius: 10px;
-	&:hover {
+	&:hover { 
 		outline: 4px solid red;
 	}
 }
-.user-data-delete-image {
-	width: 30px;
-	height: 30px;
-	cursor: pointer;
-}
+
 
 
 

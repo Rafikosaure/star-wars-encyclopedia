@@ -1,3 +1,6 @@
+$color_1: yellow;
+$background-color_1: black;
+
 .home-page {
 	border: 1px solid yellow;
 	width: auto;
@@ -11,7 +14,7 @@
 	overflow: hidden;
 }
 .welcome-message {
-	color: yellow;
+	color: $color_1;
 	text-align: justify;
 	width: 45%;
 	font-size: 20px;
@@ -21,7 +24,7 @@
 .transition1 {
 	height: 50px;
 	width: 100%;
-	background-color: black;
+	background-color: $background-color_1;
 }
 .div-categories {
 	width: 100%;
@@ -31,11 +34,11 @@
 	align-items: center;
 	background: url(../assets/images/background02.webp) no-repeat center center;
 	background-size: cover;
-	h2 {
+	font-size: 34px;
+	margin: 0;
+	cursor: default;
+	h2 { 
 		color: white;
-		font-size: 34px;
-		margin: 0;
-		cursor: default;
 	}
 }
 .transition2 {
@@ -76,7 +79,7 @@
 		margin-right: auto;
 	}
 	.div-categories {
-		h2 {
+		h2 { 
 			font-size: 27px;
 		}
 	}
@@ -98,67 +101,8 @@
 		width: 70%;
 	}
 	.div-categories {
-		h2 {
+		h2 { 
 			font-size: 18px;
 		}
 	}
 }
-
-
-
-/* .div-welcome {
-    background: url(../assets/images/background05.webp) no-repeat center center;
-    background-size: cover;
-    height: 600px;
-    padding-top: 100px;
-    cursor: default;
-    overflow: hidden;
-}
-
-.welcome-message {
-    color: yellow;
-    text-align: justify;
-    width: 45%;
-    font-size: 20px;
-    line-height: 45px;
-    margin-left: 50px;
-}
-
-.transition1 {
-    height: 50px;
-    width: 100%;
-    background-color: black;
-}
-
-.div-categories {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background: url(../assets/images/background02.webp);
-    background-size: 100%, 100%;
-    background-position: 50%, 50%;
-}
-
-.transition2 {
-    height: 40px;
-    width: 100%;
-    background: linear-gradient(black, transparent);
-}
-
-.div-categories h2 {
-    color: white;
-    font-size: 34px;
-    margin: 0;
-    cursor: default;
-}
-
-.card-list {
-    min-height: 1000px;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-} */

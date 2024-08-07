@@ -1,3 +1,8 @@
+$color_1: white;
+$color_2: yellow;
+$font-family_1: Arial, Helvetica, sans-serif;
+$background-color_1: black;
+
 @keyframes fadein {
 	from {
 		opacity: 0;
@@ -10,7 +15,7 @@
 	display: flex;
 	width: 100%;
 	justify-content: flex-start;
-	background-color: black;
+	background-color: $background-color_1;
 }
 .presentation {
 	width: 100%;
@@ -18,7 +23,7 @@
 	margin-right: auto;
 	display: flex;
 	padding-bottom: 100px;
-	background-color: black;
+	background-color: $background-color_1;
 }
 .showing-data {
 	animation: fadein .5s;
@@ -29,7 +34,7 @@
 	width: 80px;
 	height: 80px;
 	border-radius: 100%;
-	background-color: black;
+	background-color: $background-color_1;
 	transition-property: all;
 	transition-duration: .2s;
 	&:hover {
@@ -48,7 +53,7 @@
 		max-width: 95%;
 		margin-left: auto;
 		margin-right: auto;
-		color: white;
+		color: $color_1;
 		cursor: default;
 	}
 }
@@ -78,14 +83,14 @@
 	display: flex;
 	justify-content: flex-start;
 	align-items: flex-start;
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: $font-family_1;
 	font-size: 22px;
 	text-align: justify;
 	font-weight: bold;
 	line-height: 45px;
 	cursor: default;
 	p {
-		color: yellow;
+		color: $color_2;
 	}
 }
 
