@@ -1,16 +1,16 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './pages/Home';
-import Auth from './pages/Auth';
-import Category from './pages/Category';
-import Error404 from './pages/Error404';
-import Article from "./pages/Article"
-import Forum from './pages/Forum';
-import Topics from './pages/Topics';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import Topic from './pages/Topic'
-import Account from './pages/Account';
-import TestPage from './pages/TestPage';
+import Home from './pages/Home/Home';
+import Auth from './pages/Auth/Auth';
+import Category from './pages/Category/Category';
+import Error404 from './pages/Error404/Error404';
+import Article from "./pages/Article/Article"
+import Forum from './pages/Forum/Forum';
+import Topics from './pages/Topics/Topics';
+import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
+import Topic from './pages/Topic/Topic'
+import Account from './pages/Account/Account';
+import TestPage from './pages/TestPage/TestPage';
 
 
 export default function App() {

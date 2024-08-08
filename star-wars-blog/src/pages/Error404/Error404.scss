@@ -1,0 +1,74 @@
+$color_1: midnightblue;
+
+.error-page {
+	background: url(../../assets/images/error404.webp) no-repeat center center fixed;
+	position: relative;
+	width: calc(80% - 4px);
+	border: 1px solid yellow;
+}
+.error-overlay {
+	position: absolute;
+	background: rgb(219, 197, 190, .50);
+	width: 100%;
+	height: 100%;
+}
+.error404-div {
+	position: absolute;
+	width: 80%;
+	min-height: 100vh;
+	padding-right: 10%;
+	padding-left: 10%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 80px;
+	overflow: hidden;
+	h1 {
+		text-align: center;
+		font-size: 36px;
+	}
+	a {
+		font-size: 32px;
+		color: $color_1;
+	}
+}
+
+
+
+
+/* .error-page {
+    background: url(../assets/images/error404.webp) no-repeat center center fixed;
+    position: relative;
+}
+
+.error-overlay {
+    position: absolute;
+    background: rgb(219, 197, 190, .50);
+    width: 100%;
+    height: 100%;
+}
+
+.error404-div {
+    position: absolute;
+    width: 80%;
+    min-height: 100vh;
+    padding-right: 10%;
+    padding-left: 10%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 80px;
+    overflow: hidden;
+}
+
+.error404-div h1 {
+    text-align: center;
+    font-size: 36px;
+}
+
+.error404-div a {
+    font-size: 32px;
+    color: midnightblue;
+} */

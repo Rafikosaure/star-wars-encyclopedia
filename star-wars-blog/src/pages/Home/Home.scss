@@ -1,0 +1,108 @@
+$color_1: yellow;
+$background-color_1: black;
+
+.home-page {
+	border: 1px solid yellow;
+	width: auto;
+}
+.div-welcome {
+	background: url(../../assets/images/background05.webp) no-repeat center center;
+	background-size: cover;
+	height: 600px;
+	padding-top: 100px;
+	cursor: default;
+	overflow: hidden;
+}
+.welcome-message {
+	color: $color_1;
+	text-align: justify;
+	width: 45%;
+	font-size: 20px;
+	line-height: 45px;
+	margin-left: 50px;
+}
+.transition1 {
+	height: 50px;
+	width: 100%;
+	background-color: $background-color_1;
+}
+.div-categories {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background: url(../../assets/images/background02.webp) no-repeat center center;
+	background-size: cover;
+	font-size: 34px;
+	margin: 0;
+	cursor: default;
+	h2 { 
+		color: white;
+	}
+}
+.transition2 {
+	height: 40px;
+	width: 100%;
+	background: linear-gradient(black, transparent);
+}
+.card-list {
+	min-height: 1000px;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+}
+/* Ici : media queries pour la seconde partie desktop */
+@media screen and (max-width: 1380px) {
+	.welcome-message {
+		font-size: 16px;
+		line-height: 40px;
+	}
+}
+/* Ici : media queries pour la seconde partie tablette */
+@media screen and (max-width: 991px) {
+	.welcome-message {
+		line-height: 34px;
+	}
+}
+/* Ici : media queries pour la troisième partie tablette */
+@media screen and (max-width: 767px) {
+	.div-welcome {
+		height: 400px;
+		padding-top: 50px;
+	}
+	.welcome-message {
+		width: 75%;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	.div-categories {
+		h2 { 
+			font-size: 27px;
+		}
+	}
+}
+/* Ici : media queries pour la première partie smartphone */
+@media screen and (max-width: 660px) {
+	.div-welcome {
+		height: fit-content;
+	}
+	.welcome-message {
+		font-size: 14px;
+		line-height: 30px;
+	}
+}
+/* Ici : media queries pour la seconde partie smartphone */
+@media screen and (max-width: 420px) {
+	.welcome-message {
+		font-size: 12px;
+		width: 70%;
+	}
+	.div-categories {
+		h2 { 
+			font-size: 18px;
+		}
+	}
+}
