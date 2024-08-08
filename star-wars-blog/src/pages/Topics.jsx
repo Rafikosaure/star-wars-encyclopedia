@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux'
 import { selectForumData } from '../redux/slices/forumSlice'
 import { Link } from 'react-router-dom'
 import ReturnArrow from '../assets/images/return-arrow.webp'
+import TopicForm from '../components/TopicForm'
 
 
 export default function Topics() {
@@ -55,10 +56,12 @@ export default function Topics() {
               <TopicCard key={index} topic={topic} />
             ))
           }
+          <div className='topic-creation-form'>
+            <TopicForm />
+          </div>
         </div>
       </div>
       ) : null}
-      
     </div>
   )
 }
