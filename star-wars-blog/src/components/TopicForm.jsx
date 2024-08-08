@@ -15,6 +15,7 @@ export default function TopicForm() {
         if (formDisplay === 'none') {
             setFormDisplay("flex")
         } else {
+            reset()
             setFormDisplay('none')
         }
     }
