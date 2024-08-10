@@ -39,10 +39,11 @@ $background-color_1: black;
 			a { 
 				text-decoration: none;
 				color: $color_2;
+				text-transform: lowercase;
 			}
 		}
 	}
-	h3 {
+	h2 {
 		cursor: default;
 		text-transform: lowercase;
 	}
@@ -50,7 +51,7 @@ $background-color_1: black;
 /* Ici : media queries pour la seconde partie desktop */
 @media screen and (max-width: 1380px) {
 	.footer-content {
-		h3 { 
+		h2 { 
 			font-size: 16px;
 		}
 		ul {
@@ -66,7 +67,7 @@ $background-color_1: black;
 		width: calc(100% - 2px);
 	}
 	.footer-content {
-		h3 { 
+		h2 { 
 			font-size: 14px;
 		}
 		ul {
