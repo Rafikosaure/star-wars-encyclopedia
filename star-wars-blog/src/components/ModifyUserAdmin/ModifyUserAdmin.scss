@@ -1,0 +1,229 @@
+.unvalid-password-text {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+.other-user-form-update {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    align-items: center;
+}
+
+/* input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:active,
+input:-webkit-autofill:focus {
+    background-color: #FFFFFF !important;
+    color: #555 !important;
+    -webkit-box-shadow: 0 0 0 1000px white inset !important;
+    -webkit-text-fill-color: #555555 !important;
+} */
+
+.other-user-input {
+    border: none;
+    border-radius: 20px;
+    width: 94%;
+    height: 31px;
+    margin: 0;
+    font-size: 18px;
+    padding-left: 15px;
+    padding-right: 15px;
+    background-color: white;
+}
+
+.other-user-input:focus {
+    outline: 1px solid gainsboro;
+}
+input[type='file'] {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+#div-input-file {
+    color: #747474;
+    position: relative;
+    width: calc(94% + 30px);
+    height: 33px;
+    border-radius: 20px;
+    font-size: 18px;
+    background-color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.div-imput-file-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+}
+.other-user-label[for='file'] {
+    cursor: default;
+    color: #747474;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    outline: none;
+    border-radius: 20px;
+    width: 94%;
+    height: 33px;
+    margin: 0;
+    font-size: 18px;
+    padding-left: 15px;
+    padding-right: 15px;
+    background-color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.other-user-label:active {
+    outline: 1px solid gainsboro;
+}
+
+.input-other-user-valid-img {
+    background-color: transparent;
+    width: 25px;
+    height: 25px;
+    margin-left: 20px;
+}
+
+.other-user-submit-button {
+    font-family: Arial, Helvetica, sans-serif;
+    border: none;
+    outline: none;
+    border-radius: 20px;
+    width: 50%;
+    height: 33px;
+    margin: 0;
+    font-size: 18px;
+    padding-left: 15px;
+    padding-right: 15px;
+    background-color: white;
+    margin-bottom: 30px;
+    cursor: pointer;
+}
+
+.other-user-submit-button:active, .other-user-submit-button:hover {
+    outline: 4px solid gainsboro;
+    border-radius: 20px;
+}
+
+/* --------------------------------------------------------- */
+
+/* .unvalid-password-text-lambda-user {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.account-form-update-lambda-user {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    align-items: center;
+}
+
+.form-update-lambda-user, .form-update-lambda-user-file:-webkit-autofill,
+.form-update-lambda-user, .form-update-lambda-user-file:-webkit-autofill:hover,
+.form-update-lambda-user, .form-update-lambda-user-file:-webkit-autofill:active,
+.form-update-lambda-user, .form-update-lambda-user-file:-webkit-autofill:focus {
+    background-color: #FFFFFF !important;
+    color: #555 !important;
+    -webkit-box-shadow: 0 0 0 1000px white inset !important;
+    -webkit-text-fill-color: #555555 !important;
+}
+
+.form-update-lambda-user, .form-update-lambda-user-file {
+    border: none;
+    border-radius: 20px;
+    width: 94%;
+    height: 31px;
+    margin: 0;
+    font-size: 18px;
+    padding-left: 15px;
+    padding-right: 15px;
+    background-color: white;
+}
+
+.form-update-lambda-user, .form-update-lambda-user-file:focus {
+    outline: 1px solid gainsboro;
+}
+
+.form-update-lambda-user-file[type="file"] {
+    position: absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    opacity: 0;
+}
+
+.account-label-lambda-user-file[for="file2"] {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #A2A2A2;
+    border: none;
+    outline: none;
+    border-radius: 20px;
+    width: 94%;
+    height: 33px;
+    margin: 0;
+    font-size: 18px;
+    padding-left: 15px;
+    padding-right: 15px;
+    background-color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    
+}
+
+.account-label-lambda-user-file:active {
+    outline: 1px solid gainsboro;
+}
+
+.input-valid-img-lambda-user {
+    background-color: transparent;
+    width: 25px;
+    height: 25px;
+    margin-left: 20px;
+}
+
+.display-user-lambda-none {
+    display: none;
+}
+
+.display-user-lambda-flex {
+    display: flex;
+}
+
+.account-submit-button-lambda-user {
+    font-family: Arial, Helvetica, sans-serif;
+    border: none;
+    outline: none;
+    border-radius: 20px;
+    width: 50%;
+    height: 33px;
+    margin: 0;
+    font-size: 18px;
+    padding-left: 15px;
+    padding-right: 15px;
+    background-color: white;
+    margin-bottom: 30px;
+    cursor: pointer;
+}
+
+.account-submit-button-lambda-user:active, .account-submit-button-lambda-user:hover {
+    outline: 4px solid gainsboro;
+    border-radius: 20px;
+} */
