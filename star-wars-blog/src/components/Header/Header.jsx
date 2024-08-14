@@ -10,8 +10,6 @@ import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { selectIsLoggedState } from '../../redux/slices/isLoggedUserSlice.js'
 import { selectLoadedState } from '../../redux/slices/loadedUserSlice.js'
-import { saveForumData } from '../../redux/slices/forumSlice.js'
-import { saveTopicsData } from '../../redux/slices/topicSlice.js'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import { toast } from 'sonner'
@@ -55,25 +53,6 @@ export default function Header() {
     }
     
   }, [isLogged, dispatch, isLoaded])
-    
-
-  useEffect(() => {
-    // Récupérer les catégories du forum avec leurs topics
-    fetch(`${config.serverEndpoint}/category/getAllCategoriesWithTopics`)
-    .then(response => response.json())
-    .then(data => dispatch(saveForumData(data)))
-    .catch(error => console.log(error))
-  }, [dispatch])
-
-
-  // Récupérer les topics du forum avec leurs posts
-  useEffect(() => {
-    fetch(`${config.serverEndpoint}/topic/getTopicsAndPosts`)
-    .then(response => response.json())
-    .then(data => dispatch(saveTopicsData(data)))
-    .catch(error => console.log(error))
-
-  }, [dispatch])
   
 
   // Fonction de déconnexion d'un utilisateur
@@ -98,8 +77,6 @@ export default function Header() {
     .catch(error => console.log(error))
   }
   
-
-
   return (
     <div className='header'>
       <div className='navbar'>
