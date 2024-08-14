@@ -35,7 +35,14 @@ exports.modifyUser = async (req, res) => {
     }
     
     // Récupération des données de l'utilisateur initial
-    const initialUser = await User.findById(req.user.id)
+    let currentUserId;
+    const params = req.params.id
+    if (params !== 'noId') {
+        currentUserId = params
+    } else {
+        currentUserId = req.user.id
+    }
+    const initialUser = await User.findById(currentUserId)
     if (!initialUser) {
         res.status(404).json({
             message: "User not found!"
@@ -62,7 +69,7 @@ exports.modifyUser = async (req, res) => {
     
     // Mise à jour des données
     const newUser = await User.findByIdAndUpdate(
-        { _id: req.user.id },
+        { _id: currentUserId },
         userObject,
         { new: true }
     )
