@@ -295,6 +295,7 @@ input[type='file'] {
 	margin-bottom: 30px;
 	cursor: pointer;
 	&:hover {
+		width: fit-content;
 		outline: 4px solid gainsboro;
 		border-radius: 20px;
 	}
