@@ -18,29 +18,46 @@ exports.getTopicsAndPosts = async (req, res) => {
     res.status(200).json(topicsWithPosts)
 }
 
+exports.getTopics = (req, res) => {
+    Topic.find()
+        .then((topics) => res.status(200).json(topics))
+        .catch((error) => res.status(404).json({
+            message: "Topics not found!"
+        }))
+}
+
 
 exports.getTopicsByCategory = async (req, res) => {
     
-    // Récupérer l'id de la catégorie courante
-    const categoryId = req.params.id
+    try {
+        // Récupérer l'id de la catégorie courante
+        const categoryId = req.params.id
 
-    // Vérifier si la catégorie n'est pas undefind
-    if (!categoryId) res.status(404).json({
-        message: "Identifiant incorrect !"
-    })
+        // Vérifier si la catégorie n'est pas undefind
+        if (!categoryId) res.status(404).json({
+            message: "Identifiant incorrect !"
+        })
 
-    // Trouver les topics liés à cette catégorie
-    const currentCategoryWithTopics = await Category.findById(categoryId).populate("topics")
+        // Trouver les topics liés à cette catégorie
+        const currentCategoryWithTopics = await Category.findById(categoryId).populate("topics")
 
-    // Vérifier que les données ne sont pas undefined
-    if (!currentCategoryWithTopics) res.status(404).json({
-        message: "Category not found!"
-    })
+        // Vérifier que les données ne sont pas undefined
+        if (!currentCategoryWithTopics) res.status(404).json({
+            message: "Category not found!"
+        })
+        
+        // Envoyer le tableau des topics
+        res.status(200).json({
+            title: currentCategoryWithTopics.title,
+            topics: currentCategoryWithTopics.topics
+        })
+
+    } catch(error) {
+        res.status(500).json({
+            error: error
+        })
+    }
     
-    // Envoyer la catégorie ainsi que le tableau des topics
-    res.status(200).json(
-        currentCategoryWithTopics
-    )
 }
 
 
