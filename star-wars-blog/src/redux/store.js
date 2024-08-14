@@ -5,9 +5,8 @@ import registerManager from "./slices/registerSlice";
 import isLoggedReducer from './slices/isLoggedUserSlice';
 import loadedReducer from "./slices/loadedUserSlice";
 import reloadUsersReducer from "./slices/reloadUsersArray";
-import forumDataReducer from './slices/forumSlice';
-import topicsDataReducer from './slices/topicSlice'
-import userLogReducer from './slices/loggedUserSlice'
+import userLogReducer from './slices/loggedUserSlice';
+import forumDataReloadReducer from './slices/forumDataReload';
 
 
 export default configureStore({
@@ -18,8 +17,7 @@ export default configureStore({
         isLoggedReducer: isLoggedReducer,
         loadedReducer: loadedReducer,
         reloadUsersArray: reloadUsersReducer,
-        forumDataReducer: forumDataReducer,
-        topicsDataReducer: topicsDataReducer,
-        userLogReducer: userLogReducer
+        userLogReducer: userLogReducer,
+        forumDataReload: forumDataReloadReducer
     }
 })
