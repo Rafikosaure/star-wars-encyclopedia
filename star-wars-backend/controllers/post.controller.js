@@ -36,27 +36,35 @@ exports.createPost = async (req, res) => {
 
 
 exports.getPostsByTopicId = async (req, res) => {
+    try {
+        // Récupérer l'id du topic courant
+        const topicId = req.params.id
+
+        // Vérifier que l'id n'est pas undefind
+        if (!topicId) res.status(404).json({
+            message: "Identifiant incorrect !"
+        })
+
+        // Trouver les posts liés à ce topic
+        const currentTopicWithPosts = await Topic.findById(topicId).populate("posts")
+
+        // Vérifier que les données ne sont pas undefined
+        if (!currentTopicWithPosts) res.status(404).json({
+            message: "Topic not found!"
+        })
+        
+        // Envoyer le topic ainsi que le tableau des posts
+        res.status(200).json({
+            title: currentTopicWithPosts.title,
+            id: currentTopicWithPosts._id,
+            posts: currentTopicWithPosts.posts
+        })
+    } catch(error) {
+        res.status(500).json({
+            error: error
+        })
+    }
     
-    // Récupérer l'id du topic courant
-    const topicId = req.params.id
-
-    // Vérifier que l'id n'est pas undefind
-    if (!topicId) res.status(404).json({
-        message: "Identifiant incorrect !"
-    })
-
-    // Trouver les posts liés à ce topic
-    const currentTopicWithPosts = await Topic.findById(topicId).populate("posts")
-
-    // Vérifier que les données ne sont pas undefined
-    if (!currentTopicWithPosts) res.status(404).json({
-        message: "Topic not found!"
-    })
-    
-    // Envoyer le topic ainsi que le tableau des posts
-    res.status(200).json(
-        currentTopicWithPosts
-    )
 }
 
 
