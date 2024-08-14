@@ -100,7 +100,7 @@ export default function Like({ post }) {
                 xmlnssvg="http://www.w3.org/2000/svg">
                 <defs
                 id="defs2" />
-                <sodipodiNamedview
+                <sodipodinamedview
                 id="namedview2"
                 pagecolor="#ffffff"
                 bordercolor="#000000"
