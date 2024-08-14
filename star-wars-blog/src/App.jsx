@@ -10,6 +10,7 @@ import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import Topic from './pages/Topic/Topic'
 import Account from './pages/Account/Account';
+import Admin from './pages/Admin/Admin';
 import TestPage from './pages/TestPage/TestPage';
 
 
@@ -26,6 +27,7 @@ export default function App() {
               <Route path='/forum' element={<Forum />} />
               <Route path='/topics/:topicsCategoryId' element={<Topics />} />
               <Route path='/account' element={<Account />} />
+              <Route path='/admin' element={<Admin />} />
               <Route path='/topic/:topicId' element={<Topic />} />
               <Route path='/testPage' element={<TestPage />} />
               <Route path='*' element={<Error404 />} />
