@@ -1,6 +1,7 @@
 $color_1: white;
 $color_2: black;
 $color_3: #555;
+$color_4: gainsboro;
 $font-family_1: Arial, Helvetica, sans-serif;
 $background-color_1: lightblue;
 $background-color_2: lightgray;
@@ -181,14 +182,52 @@ input {
 	gap: 40px;
 	align-items: center;
 }
-.account-file-input[type="file"] {
-	position: absolute;
-	width: 0;
-	height: 0;
-	padding: 0;
-	opacity: 0;
+
+input[type='file'] {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    cursor: pointer;
 }
-.account-label[for="file"] {
+// .div-imput-file-content {
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     position: absolute;
+//     width: 100%;
+//     height: 100%;
+//     border-radius: 20px;
+// }
+
+// .account-file-input {
+// 	border-radius: 20px;
+// 	padding: 0;
+// 	opacity: 0;
+// }
+#div-input-file {
+	position: relative;
+	width: calc(94% + 30px) !important;
+	height: 33px !important;
+	border-radius: 20px !important;
+	font-size: 18px;
+	background-color: $background-color_5;
+	font-family: $font-family_1;
+	outline: none;
+}
+.div-input-file-image {
+	display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+}
+.account-label {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	border: none;
 	outline: none;
 	border-radius: 20px;
@@ -196,16 +235,18 @@ input {
 	height: 33px;
 	margin: 0;
 	font-size: 18px;
+	color: $color_3;
 	padding-left: 15px;
 	padding-right: 15px;
 	background-color: $background-color_5;
 	font-family: $font-family_1;
+	cursor: pointer;
 	&:active {
 		outline: 1px solid gainsboro;
 	}
 }
 .input-valid-img {
-	background-color: $background-color_6;
+	background-color: transparent;
 	width: 25px;
 	height: 25px;
 	margin-left: 20px;
@@ -271,7 +312,22 @@ input {
 	justify-content: center;
 	align-items: center;
 }
-
+.link-to-admin {
+	font-size: 22px;
+	text-transform: lowercase;
+	margin-bottom: 40px;
+	text-decoration: none;
+	color: black;
+	display: flex;
+	justify-content: center;
+	outline: 2px solid black;
+	border-radius: 10px;
+	background-color: rgba(220, 220, 220, .5);
+	cursor: pointer;
+	&:hover {
+		background-color: $color_4;
+	}
+}
 
 
 

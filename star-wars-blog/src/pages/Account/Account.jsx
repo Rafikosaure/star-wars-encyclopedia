@@ -10,13 +10,13 @@ import { selectReloadUsersState } from '../../redux/slices/reloadUsersArray'
 import { reloadUsersArrayFunction } from '../../redux/slices/reloadUsersArray'
 import { selectLoggedUser } from '../../redux/slices/loggedUserSlice'
 import { updateUserLog } from '../../redux/slices/loggedUserSlice'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import '../../sharedStyles/index.scss'
 import './Account.scss'
 import DefaultAvatar from '../../assets/images/EmojiBlitzBobaFett1.webp'
 import { useForm } from 'react-hook-form'
 import PictureIsValid from '../../assets/images/is_valid.webp'
-import UserData from '../../components/UserData/UserData'
+// import UserData from '../../components/UserData/UserData'
 import { toast } from 'sonner'
 import config from '../../config'
 
@@ -81,6 +81,9 @@ export default function Account() {
 
 
   const modifyData = (data) => {
+    if (data.name.length <= 0 && data.email.length <= 0 && data.password.length <= 0 && data.picture.length <= 0) {
+      return
+    }
     const formData = new FormData();
     if (data.picture.length > 0) {
       formData.append('picture', data.picture[0])
@@ -101,7 +104,7 @@ export default function Account() {
     formData.append('email', data.email)
     formData.append('password', data.password)
 
-    fetch(`${config.serverEndpoint}/user/update`, {
+    fetch(`${config.serverEndpoint}/user/update/noId`, {
       method: "PUT",
       body: formData,
       credentials: 'include'
@@ -180,6 +183,12 @@ export default function Account() {
                     <input type="email" name='email' placeholder='Modifiez votre email...' {...register("email", {required: false})} onFocus={(e) => e.target.placeholder = ""} onBlur={(e) => e.target.placeholder = 'Modifiez votre email...'} />
                     <input type="password" name='password' placeholder='Modifiez votre mot de passe...' {...register("password", {required: false})} onFocus={(e) => e.target.placeholder = ""} onBlur={(e) => e.target.placeholder = 'Modifiez votre mot de passe...'} />
                     <p className='unvalid-password-text' style={{display: unvalidPassword}}>Votre mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caracère spécial.</p>
+                    {/* <div id='div-input-file'>
+                      <div className='div-input-file-image'>Image de profil
+                        <img src={PictureIsValid} alt="Upload is valid" className={`input-valid-img ${fileIsLoad}`} />
+                      </div>
+                      <input className='account-file-input' type="file" id="file" name="picture" accept=".png, .jpg, .jpeg" {...register("picture")} onChange={(e) => isValidIcon(e.target.value)} />
+                    </div> */}
                     <input className='account-file-input' type="file" id="file" name="picture" accept=".png, .jpg, .jpeg" {...register("picture", {required: false})} onChange={(e) => isValidIcon(e.target.value)} />
                     <label className='account-label' htmlFor="file">Mettre à jour votre image de profil<img src={PictureIsValid} alt="Upload is valid" className={`input-valid-img ${fileIsLoad}`} /></label>
                     <button className='account-submit-button' type='submit'>Mettre à jour</button>
@@ -201,13 +210,7 @@ export default function Account() {
                   </div>
                 </>
                 ) : (
-                  <>
-                    <h2 className='account-profile-title'>Gestion des utilisateurs</h2>
-                    {allUsers && (
-                      allUsers.map((user) => 
-                        <UserData key={user._id} user={user} />
-                    ))}
-                  </>
+                  <Link className={"link-to-admin"} to={'/admin'}>Administrer le site</Link>
                 )}
               </div>
             </div>
