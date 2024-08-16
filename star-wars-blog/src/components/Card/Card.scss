@@ -12,6 +12,7 @@ $background-color_1: black;
 .card {
 	display: flex;
 	justify-content: center;
+	z-index: 2;
 	margin: 15px;
 	width: 400px;
 	height: 180px;
@@ -77,12 +78,9 @@ $background-color_1: black;
 /* Ici : media queries pour la première partie smartphone */
 @media screen and (max-width: 660px) {
 	.card {
-		margin-left: 0;
-		margin-right: 0;
-		margin-top: 15px;
-		margin-bottom: 15px;
-		width: 340px;
-		height: 125px;
+		margin-bottom: 10px;
+		width: 240px;
+		height: 100px;
 	}
 	.card-name-div {
 		min-height: 0;
