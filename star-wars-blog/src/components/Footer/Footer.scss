@@ -1,5 +1,5 @@
 $color_1: white;
-$color_2: yellow;
+$color_2: rgb(53, 155, 155);
 $background-color_1: black;
 
 .footer {
@@ -20,9 +20,9 @@ $background-color_1: black;
 	padding-left: 5%;
 	padding-right: 5%;
 	padding-bottom: 70px;
-	border-top: 1px solid yellow;
-	border-left: 1px solid yellow;
-	border-right: 1px solid yellow;
+	border-top: 1px solid lightcyan;
+	border-left: 1px solid lightcyan;
+	border-right: 1px solid lightcyan;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-between;

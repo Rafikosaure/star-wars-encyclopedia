@@ -1,5 +1,6 @@
 $color_1: white;
 $color_2: black;
+$color_3: rgb(53, 155, 155);
 $font-family_1: Arial, Helvetica, sans-serif;
 $background-color_1: black;
 $background-color_2: white;
@@ -21,7 +22,7 @@ $background-color_2: white;
 	height: 50px;
 	width: calc(100% - 2px);
 	background-color: $background-color_1;
-	outline: 1px solid white;
+	outline: 1px solid $color_3;
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
 }

@@ -1,8 +1,10 @@
-$color_1: yellow;
+$color_1: rgb(53, 155, 155);
 $background-color_1: black;
+$font-family_1: Arial, Helvetica, sans-serif;
+
 
 .home-page {
-	border: 1px solid yellow;
+	border: 1px solid lightcyan;
 	width: auto;
 }
 .div-welcome {
@@ -14,6 +16,7 @@ $background-color_1: black;
 	overflow: hidden;
 }
 .welcome-message {
+	text-transform: lowercase;
 	color: $color_1;
 	text-align: justify;
 	width: 45%;
@@ -58,14 +61,18 @@ $background-color_1: black;
 /* Ici : media queries pour la seconde partie desktop */
 @media screen and (max-width: 1380px) {
 	.welcome-message {
-		font-size: 16px;
+		margin-top: 40px;
+		font-size: 18px;
 		line-height: 40px;
 	}
 }
 /* Ici : media queries pour la seconde partie tablette */
 @media screen and (max-width: 991px) {
 	.welcome-message {
-		line-height: 34px;
+		line-height: 40px;
+		font-family: $font-family_1;
+		font-weight: bold;
+		text-transform: none;
 	}
 }
 /* Ici : media queries pour la troisième partie tablette */

@@ -1,5 +1,5 @@
 $color_1: white;
-$color_2: yellow;
+$color_2: rgb(53, 155, 155);
 $color_3: black;
 $font-family_1: Arial, Helvetica, sans-serif;
 $font-family_2: 'Starjedi';
@@ -12,7 +12,7 @@ $background-color_2: white;
 	position: relative;
 	color: $color_1;
 	width: calc(80% - 4px);
-	border: 1px solid yellow;
+	border: 1px solid $color_1;
 	min-height: 1300px;
 }
 .forum-overlay {
@@ -54,20 +54,21 @@ $background-color_2: white;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	border: 2px solid yellow;
+	border: 2px solid $color_2;
 	border-radius: 10px;
 	width: 50%;
 	background-color: $background-color_1;
 	h2 { 
 		width: 100%;
 		text-align: center;
-		color: $color_2;
+		color: $color_1;
 		font-family: $font-family_2;
 		padding-bottom: 10px;
 		cursor: default;
 	}
 }
 .div-category {
+	color: $color_2;
 	width: 100%;
 	height: 65px;
 	display: flex;

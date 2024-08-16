@@ -1,5 +1,5 @@
 $color_1: white;
-$color_2: yellow;
+$color_2: lightcyan;
 $color_3: gainsboro;
 $font-family_1: 'Starjout';
 $font-family_2: Arial, Helvetica, sans-serif;
@@ -22,7 +22,7 @@ $background-color_1: black;
 	background-image: url(../../assets/images/banner02.webp);
 	background-size: 110%, 110%;
 	background-position: 50%, 50%;
-	border: 1px solid yellow;
+	border: 1px solid lightcyan;
 	position: relative;
 }
 .link-logo {
@@ -96,7 +96,7 @@ $background-color_1: black;
 	width: 45px;
 	height: 45px;
 	background-color: $background-color_1;
-	outline: 2px solid yellow;
+	outline: 2px solid lightcyan;
 	border-radius: 50%;
 	cursor: pointer;
 	overflow: hidden;
