@@ -28,6 +28,7 @@ $background-color_2: white;
 	flex-direction: column;
 	align-items: center;
 	width: 100%;
+	height: 100%;
 	text-align: justify;
 	font-family: $font-family_1;
 }
@@ -80,6 +81,62 @@ $background-color_2: white;
 		background-color: $background-color_2;
 		color: $color_3;
 		font-size: 20px;
+	}
+}
+/* Ici : media queries pour la seconde partie desktop */
+@media screen and (max-width: 1380px) {
+    .forum-div-categories {
+        width: 65%;
+    }
+}
+/* Ici : media queries pour la première partie tablette */
+@media screen and (max-width: 1023px) {
+    .forum-div-categories {
+        width: 80%;
+    }
+}
+/* Ici : media queries pour la seconde partie tablette */
+@media screen and (max-width: 991px) {
+	.forum {
+		width: calc(100% - 4px);
+	}
+	.forum-title {
+		font-family: $font-family_2;
+		width: 80%;
+		text-align: center;
+		font-size: 22px;
+		cursor: default;
+	}
+	.chart-text {
+		font-size: 14px;
+		width: 90%;
+	}
+	.forum-div-categories {
+		h2 {
+			font-size: 18px;
+		}
+	}
+	.div-category {
+		width: 100%;
+		height: 57px;
+		font-size: 16px;
+		&:hover {
+			font-size: 18px;
+		}
+	}
+}
+/* Ici : media queries pour la première partie smartphone */
+@media screen and (max-width: 660px) {
+	.forum-div-categories {
+		width: 90%;
+	}
+	.div-category {
+		width: 100%;
+		height: 50px;
+		font-size: 14px;
+		&:hover { 
+			font-size: 16px;
+		}
 	}
 }
 

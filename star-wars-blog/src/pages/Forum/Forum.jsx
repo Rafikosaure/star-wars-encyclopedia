@@ -42,13 +42,13 @@ export default function Forum() {
           <Code />
         </div>
         {forumCategories && (
-          <div className='forum-div-categories'>
-          <h2>{forumTitle2.toLowerCase()}</h2>
-          {forumCategories.map((category) => 
-            <div className='div-category' key={category._id} onClick={() => navigate(`/topics/${category._id}`)}>
-              <h3>{category.title}</h3>
-            </div>
-          )}
+        <div className='forum-div-categories'>
+        <h2>{forumTitle2.toLowerCase()}</h2>
+        {forumCategories.map((category) => 
+          <div className='div-category' key={category._id} onClick={() => navigate(`/topics/${category._id}`)}>
+            <h3>{category.title}</h3>
+          </div>
+        )}
         </div>  
         )}
       </div>

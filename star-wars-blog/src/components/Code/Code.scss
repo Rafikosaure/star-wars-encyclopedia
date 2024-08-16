@@ -50,6 +50,27 @@ object {
 	color: $color_2;
 	text-align: justify;
 }
+/* Ici : media queries pour la seconde partie desktop */
+@media screen and (max-width: 1380px) {
+    .collapse-main {
+        width: 65%;
+    }
+}
+/* Ici : media queries pour la première partie tablette */
+@media screen and (max-width: 1023px) {
+    .collapse-main {
+        width: 80%;
+    }
+    .collapse-title {
+        font-size: 18px;
+    }
+}
+/* Ici : media queries pour la première partie smartphone */
+@media screen and (max-width: 660px) {
+	.collapse-main {
+        width: 90%;
+    }
+}
 
 
 /* .collapse-main {
