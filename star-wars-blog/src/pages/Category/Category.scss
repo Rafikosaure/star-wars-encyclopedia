@@ -91,6 +91,21 @@ $background-color_1: black;
 	justify-content: space-evenly;
 	align-items: flex-start;
 }
+.card-list-spinner {
+	position: absolute;
+	z-index: 1;
+	width: 300px;
+	height: 300px;
+}
+.spinner-1 {
+	top: 200px;
+}
+.spinner-2 {
+	top: 600px;
+}
+.spinner-3 {
+	top: 1000px;
+}
 /* Ici : media queries pour la seconde partie desktop */
 @media screen and (max-width: 1380px) {
 	.prev-arrow-section, .next-arrow-section {

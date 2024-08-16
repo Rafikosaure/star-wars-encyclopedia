@@ -5,6 +5,7 @@ import SearchBar from '../../components/SearchBar/SearchBar'
 import data from '../../data/localApiCategories.json'
 import NextArrow from '../../assets/images/next-arrow.webp'
 import BackArrow from '../../assets/images/back-arrow.webp'
+import Spinner from '../../assets/images/spinner.svg'
 import { useParams } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
@@ -23,6 +24,7 @@ export default function Category() {
   const [items, setItems] = useState([])
   const [info, setInfo] = useState([])
   const [rightPage, updateRightPage] = useState(false)
+  const [spinnerDisplay, setSpinnerDisplay] = useState('none')
   const nbDozen = useRef()
   const navigate = useNavigate()
   
@@ -38,9 +40,14 @@ export default function Category() {
     } else {
       updateRightPage(true)
       // Récupérer les informations depuis l'API
+      setSpinnerDisplay('block')
       fetch(`${config.starWarsAPI}/${currentDatas.keyword}?page=${storedDozen}`)
       .then(response => response.json())
-      .then(data => {setInfo(data.info); setItems(data.data)})
+      .then(data => {
+        setInfo(data.info)
+        setItems(data.data)
+        setSpinnerDisplay('none')
+      })
       .catch((error) => console.log(error))
 
       // Calculer le nombre de dizaines d'articles (arrondi à l'excès)
@@ -80,6 +87,9 @@ export default function Category() {
             <h1>{currentDatas.title}</h1>
             <SearchBar category={currentDatas.keyword} />
             <div className='card-list'>
+              <img className='card-list-spinner spinner-1' style={{display: `${spinnerDisplay}`}} src={Spinner} alt="Premier spinner de chargement" />
+              <img className='card-list-spinner spinner-2' style={{display: `${spinnerDisplay}`}} src={Spinner} alt="Second spinner de chargement" />
+              <img className='card-list-spinner spinner-3' style={{display: `${spinnerDisplay}`}} src={Spinner} alt="Troisième spinner de chargement" />
               {article.value === undefined ? 
                 (items.map((item) => 
                   <Card key={item._id} item={item} categoryId={categoryId} />
