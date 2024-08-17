@@ -111,7 +111,7 @@ $font-family_1: Arial, Helvetica, sans-serif;
 /* Ici : media queries pour la seconde partie smartphone */
 @media screen and (max-width: 420px) {
 	.welcome-message {
-		font-size: 12px;
+		line-height: 26px;
 		width: 70%;
 	}
 }

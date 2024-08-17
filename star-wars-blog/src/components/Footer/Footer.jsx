@@ -13,14 +13,14 @@ export default function Footer() {
         </ul>
         <ul>
           <h2>Réseaux sociaux</h2>
-          <li><a href='https://www.linkedin.com/in/rafikbensadi' target='_blank' rel="noreferrer">linkedin</a></li>
-          <li><a href="https://www.instagram.com/rafikosaure/" target='_blank' rel="noreferrer">instagram</a></li>
-          <li><a href="https://www.facebook.com/rafik.bensadi.9/" target='_blank' rel="noreferrer">facebook</a></li>
+          <li><a href='https://www.linkedin.com/in/rafikbensadi' target='_blank' rel="noreferrer">Linkedin</a></li>
+          <li><a href="https://www.instagram.com/rafikosaure/" target='_blank' rel="noreferrer">Instagram</a></li>
+          <li><a href="https://www.facebook.com/rafik.bensadi.9/" target='_blank' rel="noreferrer">Facebook</a></li>
         </ul>
         <ul>
           <h2>Contact</h2>
-          <li><a href="mailto:rafikbensadi@live.fr?subject=Contact%20depuis%20rafikbensadi.com">par email</a></li>
-          <li><a href="tel:+33649363839">par téléphone</a></li>
+          <li><a href="mailto:rafikbensadi@live.fr?subject=Contact%20depuis%20rafikbensadi.com">Email</a></li>
+          <li><a href="tel:+33649363839">Mobile</a></li>
         </ul>
       </div>
     </div>
