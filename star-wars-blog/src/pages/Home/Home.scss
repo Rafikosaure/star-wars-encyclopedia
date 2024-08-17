@@ -1,10 +1,11 @@
 $color_1: rgb(53, 155, 155);
+$color_2: lightcyan;
 $background-color_1: black;
 $font-family_1: Arial, Helvetica, sans-serif;
 
 
 .home-page {
-	border: 1px solid lightcyan;
+	border: 1px solid $color_2;
 	width: auto;
 }
 .div-welcome {
