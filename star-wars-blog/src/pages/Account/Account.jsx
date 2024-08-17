@@ -12,7 +12,7 @@ import { selectLoggedUser } from '../../redux/slices/loggedUserSlice'
 import { updateUserLog } from '../../redux/slices/loggedUserSlice'
 import { useNavigate, Link } from 'react-router-dom'
 import '../../sharedStyles/index.scss'
-import './Account.scss'
+import '../../sharedStyles/Account.scss'
 import DefaultAvatar from '../../assets/images/EmojiBlitzBobaFett1.webp'
 import { useForm } from 'react-hook-form'
 import PictureIsValid from '../../assets/images/is_valid.webp'
@@ -183,14 +183,14 @@ export default function Account() {
                     <input type="email" name='email' placeholder='Modifiez votre email...' {...register("email", {required: false})} onFocus={(e) => e.target.placeholder = ""} onBlur={(e) => e.target.placeholder = 'Modifiez votre email...'} />
                     <input type="password" name='password' placeholder='Modifiez votre mot de passe...' {...register("password", {required: false})} onFocus={(e) => e.target.placeholder = ""} onBlur={(e) => e.target.placeholder = 'Modifiez votre mot de passe...'} />
                     <p className='unvalid-password-text' style={{display: unvalidPassword}}>Votre mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caracère spécial.</p>
-                    {/* <div id='div-input-file'>
+                    <div id='div-input-file'>
                       <div className='div-input-file-image'>Image de profil
                         <img src={PictureIsValid} alt="Upload is valid" className={`input-valid-img ${fileIsLoad}`} />
                       </div>
                       <input className='account-file-input' type="file" id="file" name="picture" accept=".png, .jpg, .jpeg" {...register("picture")} onChange={(e) => isValidIcon(e.target.value)} />
-                    </div> */}
-                    <input className='account-file-input' type="file" id="file" name="picture" accept=".png, .jpg, .jpeg" {...register("picture", {required: false})} onChange={(e) => isValidIcon(e.target.value)} />
-                    <label className='account-label' htmlFor="file">Mettre à jour votre image de profil<img src={PictureIsValid} alt="Upload is valid" className={`input-valid-img ${fileIsLoad}`} /></label>
+                    </div>
+                    {/* <input className='account-file-input' type="file" id="file" name="picture" accept=".png, .jpg, .jpeg" {...register("picture", {required: false})} onChange={(e) => isValidIcon(e.target.value)} />
+                    <label className='account-label' htmlFor="file">Mettre à jour votre image de profil<img src={PictureIsValid} alt="Upload is valid" className={`input-valid-img ${fileIsLoad}`} /></label> */}
                     <button className='account-submit-button' type='submit'>Mettre à jour</button>
                   </form>
                 </div>

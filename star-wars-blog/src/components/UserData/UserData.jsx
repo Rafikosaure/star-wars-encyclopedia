@@ -61,8 +61,11 @@ export default function UserData({ user }) {
                 <img src={DefaultAvatar} alt='avatar par défaut' />
             )}
         </div>
-        <div className='user-data-name'>{user.name}</div>
-        <div className='user-data-name'>{user.email}</div>
+        <div className='user-data-name-div'>
+            <div className='user-data-name'>{user.name}</div>
+            <div className='user-data-name'>{user.email}</div>
+        </div>
+        
         <div className='user-data-delete-button' onClick={(e) => deleteUser(e)} title="Supprimer l'utilisateur"><img src={Delete} alt='croix de suppression' className='user-data-delete-image' /></div>
     </div>
     <div className='AdminModifyUserForm' style={{display: `${openOrCloseUserForm}`}}>

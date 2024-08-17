@@ -65,29 +65,28 @@ input[type='file'] {
     height: 100%;
     border-radius: 20px;
 }
-.other-user-label[for='file'] {
-    cursor: default;
-    color: #747474;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: none;
-    outline: none;
-    border-radius: 20px;
-    width: 94%;
-    height: 33px;
-    margin: 0;
-    font-size: 18px;
-    padding-left: 15px;
-    padding-right: 15px;
-    background-color: white;
-    font-family: Arial, Helvetica, sans-serif;
-}
+// .other-user-label[for='file'] {
+//     cursor: default;
+//     color: #747474;
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     border: none;
+//     outline: none;
+//     border-radius: 20px;
+//     width: 94%;
+//     height: 33px;
+//     margin: 0;
+//     font-size: 18px;
+//     padding-left: 15px;
+//     padding-right: 15px;
+//     background-color: white;
+//     font-family: Arial, Helvetica, sans-serif;
+// }
 
-.other-user-label:active {
-    outline: 1px solid gainsboro;
-}
-
+// .other-user-label:active {
+//     outline: 1px solid gainsboro;
+// }
 .input-other-user-valid-img {
     background-color: transparent;
     width: 25px;
@@ -110,10 +109,35 @@ input[type='file'] {
     margin-bottom: 30px;
     cursor: pointer;
 }
-
 .other-user-submit-button:active, .other-user-submit-button:hover {
     outline: 4px solid gainsboro;
     border-radius: 20px;
+}
+/* Ici : media queries pour la troisième partie tablette */
+@media screen and (max-width: 767px) {
+    .unvalid-password-text {
+        font-size: 10px;
+    }
+    .other-user-form-update {
+        gap: 25px;
+    }
+    .other-user-input {
+        height: 25px;
+        font-size: 14px;
+    }
+    #div-input-file {
+        height: 25px;
+        font-size: 14px;
+    }
+    .input-other-user-valid-img {
+        width: 20px;
+        height: 20px;
+        margin-left: 10px;
+    }
+    .other-user-submit-button {
+        height: 25px;
+        font-size: 14px;
+    }
 }
 
 /* --------------------------------------------------------- */
