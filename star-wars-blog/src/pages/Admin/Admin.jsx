@@ -27,7 +27,7 @@ export default function Admin() {
 
   useEffect(() => {
     if (!isLogged || loggedUser.isAdmin !== true) {
-      navigate("*")
+      navigate("/")
     }
   }, [isLogged, loggedUser, navigate])
 
