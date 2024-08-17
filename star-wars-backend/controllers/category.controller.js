@@ -25,13 +25,11 @@ exports.findCategoryFromTopic = (req, res) => {
 
     Category.find({ "topics": { _id: topicId }})
     .then(category => {
-        console.log(category)
         res.status(200).json({
             category: category
         })
     })
     .catch(error => {
-        console.log(error)
         res.status(404).json(error)
     })
 }
