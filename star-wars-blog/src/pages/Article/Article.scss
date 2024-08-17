@@ -1,11 +1,12 @@
 $color_1: white;
-$color_2: yellow;
+$color_2: rgb(53, 155, 155);
+$color_3: lightcyan;
 $font-family_1: Arial, Helvetica, sans-serif;
 $background-color_1: black;
 
 .article-page {
 	width: calc(80% - 4px);
-	border: 1px solid yellow;
+	border: 1px solid $color_3;
 }
 
 @keyframes fadein {
@@ -74,7 +75,7 @@ $background-color_1: black;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	border: 3px solid yellow;
+	border: 3px solid $color_2;
 	border-radius: 20px;
 	img {
 		height: 100%;
@@ -98,7 +99,103 @@ $background-color_1: black;
 		color: $color_2;
 	}
 }
-
+/* Ici : media queries pour la seconde partie desktop */
+@media screen and (max-width: 1380px) {
+	.description-div {
+		font-size: 20px;
+		line-height: 35px;
+	}
+	.img-presentation {
+		height: 600px;
+	}
+}
+/* Ici : media queries pour la première partie tablette */
+@media screen and (max-width: 1023px) {
+	.description-div {
+		font-size: 18px;
+		line-height: 30px;
+	}
+	.img-presentation {
+		height: 540px;
+	}
+}
+/* Ici : media queries pour la seconde partie tablette */
+@media screen and (max-width: 991px) {
+	.article-page {
+		width: calc(100% - 4px);
+	}
+	.description-div {
+		font-size: 16px;
+		line-height: 28px;
+	}
+	.img-presentation {
+		height: 520px;
+	}
+}
+/* Ici : media queries pour la troisième partie tablette */
+@media screen and (max-width: 767px) {
+	.arrow-link {
+		max-width: 60px;
+		max-height: 60px;
+		img {
+			max-width: 60px;
+			max-height: 60px;
+		}
+	}
+	.main-div {
+		h1 {
+			font-size: 22px;
+		}
+	}
+	.content {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		width: 100%;
+	}
+	.description-div {
+		padding: 0;
+		padding-top: 20px;
+		font-size: 16px;
+		line-height: 28px;
+		width: 80%;
+	}
+	.img-presentation {
+		width: 80%;
+		height: 520px;
+		padding: 0;
+		margin-left: 0;
+	}
+}
+/* Ici : media queries pour la première partie smartphone */
+@media screen and (max-width: 660px) {
+	.img-presentation {
+		width: 80%;
+		height: 350px;
+	}
+}
+/* Ici : media queries pour la seconde partie smartphone */
+@media screen and (max-width: 420px) {
+	.description-div {
+		line-height: 26px;
+		width: 80%;
+		font-size: 14px;
+	}
+	.img-presentation {
+		width: 80%;
+		height: 270px;
+	}
+	.arrow-link {
+		margin-left: 15px;
+		margin-top: 20px;
+		max-width: 40px;
+		max-height: 40px;
+		img {
+			max-width: 40px;
+			max-height: 40px;
+		}
+	}
+}
 
 
 
