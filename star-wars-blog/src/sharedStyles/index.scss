@@ -10,6 +10,9 @@ $background-color_1: black;
 	font-family: 'Starjout';
 	src: local('Starjout'), url(../assets/fonts/Starjout.ttf) format('truetype');
 }
+html {
+	scroll-behavior: smooth;
+}
 body {
 	margin: 0;
 	font-family: $font-family_1;

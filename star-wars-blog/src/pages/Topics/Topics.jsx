@@ -1,6 +1,8 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { selectReloadTopicsState } from '../../redux/slices/topicsReload.js'
+import { useSelector } from 'react-redux'
 import '../../sharedStyles/index.scss'
 import './Topics.scss'
 import { useParams } from 'react-router-dom'
@@ -17,7 +19,7 @@ export default function Topics() {
   const navigate = useNavigate()
   const [topicsData, setTopicsData] = useState()
   const [categoryTitle, setCategoryTitle] = useState()
-
+  const topicsBool = useSelector(selectReloadTopicsState)
 
 
   // Récupérer les topics de la catégorie
@@ -37,7 +39,7 @@ export default function Topics() {
       console.log(error)
     })
     
-  }, [topicsCategoryId, navigate])
+  }, [topicsCategoryId, topicsBool, navigate])
 
 
 

@@ -6,7 +6,9 @@ import isLoggedReducer from './slices/isLoggedUserSlice';
 import loadedReducer from "./slices/loadedUserSlice";
 import reloadUsersReducer from "./slices/reloadUsersArray";
 import userLogReducer from './slices/loggedUserSlice';
-import forumDataReloadReducer from './slices/forumDataReload';
+import topicsReloadReducer from './slices/topicsReload';
+import citationReducer from './slices/citationSlice';
+import postsReloadReducer from "./slices/postsReload";
 
 
 export default configureStore({
@@ -18,6 +20,8 @@ export default configureStore({
         loadedReducer: loadedReducer,
         reloadUsersArray: reloadUsersReducer,
         userLogReducer: userLogReducer,
-        forumDataReload: forumDataReloadReducer
+        topicsReload: topicsReloadReducer,
+        citation: citationReducer,
+        postsReload: postsReloadReducer
     }
 })
