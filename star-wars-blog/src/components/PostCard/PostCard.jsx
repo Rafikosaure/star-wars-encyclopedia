@@ -3,17 +3,22 @@ import './PostCard.scss'
 import DefaultAvatar from '../../assets/images/EmojiBlitzBobaFett1.webp'
 import Like from '../Like/Like'
 import config from '../../config'
+import { useDispatch } from 'react-redux'
+import { saveACitation } from '../../redux/slices/citationSlice'
 
 
 
-export default function PostCard({ index, post }) {
+
+export default function PostCard({ index, post, topicId }) {
 
     const [postUser, setPostUser] = useState()
     const [datetime, updateDateTime] = useState()
+    const dispatch = useDispatch()
+
 
     useEffect(() => {
         if (post) {
-            fetch(`${config.serverEndpoint}/post/getPostUser/${post.author.id}`)
+            fetch(`${config.serverEndpoint}/post/getPostAuthor/${post.author.id}`)
             .then(response => response.json())
             .then(data => {
                 // console.log(data)
@@ -25,7 +30,34 @@ export default function PostCard({ index, post }) {
             })
             .catch(error => console.log(error))
         }
+        
     }, [post])
+
+
+    const saveCurrentCitation = () => {
+        let citationObject = {
+            authorId: undefined,
+            text: undefined
+        }
+        citationObject.authorId = postUser._id
+        if (post.content.includes("\n\n")) {
+            const textCitation = post.content.split("\n\n").at(-1)
+            const completeCitation = `${postUser.name} a dit :\n"${textCitation}"`
+            citationObject.text = completeCitation
+        } else {
+            const completeCitation = `${postUser.name} a dit :\n"${post.content}"`
+            citationObject.text = completeCitation
+        }
+        dispatch(saveACitation(citationObject))
+    }
+
+
+    const textWithBreaks = post.content.split('\n').map((text, index) => (
+        <React.Fragment key={index}>
+            {text}
+            <br />
+        </React.Fragment>
+    ))
 
 
     return (
@@ -56,12 +88,13 @@ export default function PostCard({ index, post }) {
                     )}
                     <div className='post-card-message'>
                         {post && (
-                            <p>{post.content}</p>
+                            <p>{textWithBreaks}</p>
                         )}
                     </div>
                 </div>
                 <div className='post-card-bottom-bar'>
                     <Like post={post} />
+                    <a className='post-card-citation-link' href={`/topic/${topicId}#citation-post`} onClick={() => saveCurrentCitation()}>➥ Citer</a>
                 </div>
             </div>
             
