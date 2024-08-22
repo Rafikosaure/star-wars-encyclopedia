@@ -8,8 +8,7 @@ const postSchema = new mongoose.Schema({
         id: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "User"
-        },
-        name: { type: String, required: true }
+        }
     },
     comments: [
         {
