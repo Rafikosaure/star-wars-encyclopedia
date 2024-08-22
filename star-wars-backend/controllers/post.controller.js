@@ -5,33 +5,56 @@ const User = require('../models/user.model.js')
 
 
 exports.createPost = async (req, res) => {
+    try {
+        // Récupérer l'id du topic courant
+        const topicId = req.params.id
 
-    // Récupérer l'id du topic courant
-    const topicId = req.params.id
+        // Tenter de trouver le topic courant par son id
+        const currentTopic = await Topic.findById(topicId)
+        if (!currentTopic) res.status(404).json({
+            message: "Topic not found!"
+        })
 
-    // Tenter de trouver le topic courant par son id
-    const currentTopic = await Topic.findById(topicId)
-    if (!currentTopic) res.status(404).json({
-        message: "Topic not found!"
-    })
+        // Attribution du titre du topic courant au post
+        let reqPost = req.body
+        reqPost.title = currentTopic.title
 
-    // Attribution du titre du topic courant au post
-    let reqPost = req.body
-    reqPost.title = currentTopic.title
+        // Construction du texte du post comportant la citation
+        if (reqPost.citation) {
+            const { citationAuthorId, citationText } = reqPost.citation
+            const citationAuthor = await User.findById(citationAuthorId)
+            if (!citationAuthor) res.status(404).json({
+                message: "Author not found!"
+            })
+            let newCitation = `"${citationText}"\n\n${reqPost.content}`
 
-    // Création du post et enregistrement dans le topic courant
-    Post.create(reqPost)
-    .then(newPost => {
-        newPost.save()
-        currentTopic.posts.push(newPost)
-        currentTopic.save()
-        res.status(201).json({
-            newPost
-        })})
-    // Gestion de l'échec potentielle de la procédure
-    .catch(() => res.status(400).json({
-        message: "Echec de la création du post !"
-    }))
+            // Gestion des éventuelles citations précédentes
+            const completeCitation = newCitation.split('\n\n')
+            const lastCitation = completeCitation.at(-2).replace(/^"|"$/g, "")
+            const lastContent = completeCitation.at(-1)
+            const finalContent = `${citationAuthor.name} a dit :\n"${lastCitation}"\n\n${lastContent}`
+            
+            reqPost.content = finalContent
+        }
+
+        // Création du post et enregistrement dans le topic courant
+        Post.create(reqPost)
+        .then(newPost => {
+            newPost.save()
+            currentTopic.posts.push(newPost)
+            currentTopic.save()
+            res.status(201).json({
+                newPost
+            })})
+        // Gestion de l'échec potentielle de la procédure
+        .catch(() => res.status(400).json({
+            message: "Post creation failed!"
+        }))
+    } catch(error) {
+        res.status(500).json({
+            message: error
+        })
+    }
 }
 
 
@@ -64,29 +87,33 @@ exports.getPostsByTopicId = async (req, res) => {
             error: error
         })
     }
-    
 }
 
 
 // Récupérer l'utillisateur d'un post
-exports.getPostUser = async (req, res) => {
-    
-    // Récupérer l'id de l'utilisateur du post
-    const userId = req.params.id
+exports.getPostAuthor = async (req, res) => {
+    try {
+        // Récupérer l'id de l'utilisateur du post
+        const userId = req.params.id
 
-    // Vérifier si l'id est valide
-    if (!userId) res.status(404).json({
-        message: "Identifiant incorrect !"
-    })
+        // Vérifier si l'id est valide
+        if (!userId) res.status(404).json({
+            message: "Identifiant incorrect !"
+        })
 
-    // Récupérer l'utilisateur du post avec son id
-    const currentUser = await User.findById(userId)
+        // Récupérer l'utilisateur du post avec son id
+        const currentUser = await User.findById(userId)
 
-    // Vérifier que l'on a bien reçu un résultat valide
-    if (!currentUser) res.status(404).json({
-        message: "User not found!"
-    })
-    
-    // Renvoyer en réponse l'utilisateur courant
-    res.status(200).json(currentUser)
+        // Vérifier que l'on a bien reçu un résultat valide
+        if (!currentUser) res.status(404).json({
+            message: "User not found!"
+        })
+        
+        // Renvoyer en réponse l'utilisateur courant
+        res.status(200).json(currentUser)
+    } catch(error) {
+        res.status(500).json({
+            message: error
+        })
+    }
 }
