@@ -8,7 +8,6 @@ import { saveACitation } from '../../redux/slices/citationSlice'
 
 
 
-
 export default function PostCard({ index, post, topicId }) {
 
     const [postUser, setPostUser] = useState()
