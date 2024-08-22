@@ -1,11 +1,10 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useSelector, useDispatch } from 'react-redux'
 import { selectIsLoggedState } from '../../redux/slices/isLoggedUserSlice'
 import { selectLoggedUser } from '../../redux/slices/loggedUserSlice'
-import { selectReloadForumDataState } from '../../redux/slices/forumDataReload.js'
-import { reloadForumData } from '../../redux/slices/forumDataReload.js'
+import { reloadTopics } from '../../redux/slices/topicsReload.js'
 import './TopicForm.scss'
 import config from '../../config.js'
 
@@ -16,13 +15,7 @@ export default function TopicForm({ topicsCategoryId }) {
     const [formDisplay, setFormDisplay] = useState('none')
     const isLogged = useSelector(selectIsLoggedState)
     const loggedUser = useSelector(selectLoggedUser)
-    const forumDataValue = useSelector(selectReloadForumDataState)
     const dispatch = useDispatch()
-
-
-    useEffect(() => {
-        console.log(forumDataValue)
-    }, [forumDataValue])
 
 
     const displayManager = (e) => {
@@ -47,8 +40,7 @@ export default function TopicForm({ topicsCategoryId }) {
             title: "",
             content: data.description,
             author: {
-                id: loggedUser._id,
-                name: loggedUser.name
+                id: loggedUser._id
             },
             comments: [],
             likes: []
@@ -58,7 +50,6 @@ export default function TopicForm({ topicsCategoryId }) {
             topic: newTopic,
             post: newPost
         }
-        dispatch(reloadForumData(false))
         // Envoi de la requête
         fetch(`${config.serverEndpoint}/topic/createTopic/${topicsCategoryId}`, {
             method: "POST",
@@ -69,6 +60,7 @@ export default function TopicForm({ topicsCategoryId }) {
         .then(response => response.json())
         .then(data => {
             console.log(data)
+            dispatch(reloadTopics())
         })
         .catch(error => console.log(error))
         reset()
@@ -83,7 +75,7 @@ export default function TopicForm({ topicsCategoryId }) {
                 <form className='creation-topic-form' style={{display:`${formDisplay}`}} onSubmit={handleSubmit(createNewTopic)}>
                     <input className='creation-topic-input-title' name='title' type="text" placeholder='Titre du topic' {...register("title")} required />
                     <textarea className='creation-topic-textarea-question' name='question' type="text" placeholder='Question du topic' {...register("question")} maxLength={220} required />
-                    <textarea className='creation-topic-textarea-description' name='description' type="text" placeholder='Tapez votre premier post' {...register("description")} maxLength={450} required />
+                    <textarea className='creation-topic-textarea-description' name='description' type="text" placeholder='Tapez votre premier post' {...register("description")} maxLength={500} required />
                     <button type="submit">Créer Topic</button>
                 </form>
                 </>

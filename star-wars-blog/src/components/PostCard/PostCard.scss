@@ -67,6 +67,12 @@ $background-color_1: black;
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;
+	.post-card-citation-link {
+		z-index: 1;
+		text-decoration: none;
+		color: $color_1;
+		margin-right: 10%;
+	}
 }
 .post-card-author-div {
 	width: 60px;
