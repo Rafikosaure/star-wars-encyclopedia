@@ -19,7 +19,7 @@ export default function App() {
     <>
       <Router>
           <Header />
-          <Routes>
+            <Routes>
               <Route path="/" element={<Home />} />
               <Route path='/auth' element={<Auth />} />
               <Route path="/category/:categoryId" element={<Category />} />
@@ -31,7 +31,7 @@ export default function App() {
               <Route path='/topic/:topicId' element={<Topic />} />
               <Route path='/testPage' element={<TestPage />} />
               <Route path='*' element={<Error404 />} />
-          </Routes>
+            </Routes>
           <Footer />
       </Router>
     </>
