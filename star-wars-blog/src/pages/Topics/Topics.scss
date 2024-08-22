@@ -7,7 +7,7 @@ $background-color_2: black;
 	color: $color_1;
 	position: relative;
 	width: calc(80% - 4px);
-	border: 1px solid yellow;
+	border: 1px solid $color_1;
 }
 .topics-div-return {
 	position: absolute;
@@ -50,6 +50,7 @@ $background-color_2: black;
 }
 .topics-page-title {
 	margin-top: 50px;
+	cursor: default;
 }
 .topics-list {
 	margin-top: 50px;

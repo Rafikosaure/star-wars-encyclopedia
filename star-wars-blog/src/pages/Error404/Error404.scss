@@ -1,10 +1,11 @@
 $color_1: midnightblue;
+$color_2: white;
 
 .error-page {
 	background: url(../../assets/images/error404.webp) no-repeat center center fixed;
 	position: relative;
 	width: calc(80% - 4px);
-	border: 1px solid yellow;
+	border: 1px solid $color_2;
 }
 .error-overlay {
 	position: absolute;
