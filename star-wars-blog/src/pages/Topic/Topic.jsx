@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form'
 import { useSelector, useDispatch } from 'react-redux'
 import { selectCitation } from '../../redux/slices/citationSlice'
 import { reinitializeCitation } from '../../redux/slices/citationSlice'
+import { selectIsLoggedState } from '../../redux/slices/isLoggedUserSlice'
 import { selectLoggedUser } from '../../redux/slices/loggedUserSlice'
 import { reloadPosts } from '../../redux/slices/postsReload'
 import { selectReloadPostsState } from '../../redux/slices/postsReload'
@@ -23,9 +24,10 @@ export default function Topic() {
     const [currentCategory, setCurrentCategory] = useState()
     const navigate = useNavigate()
     const { register, handleSubmit, reset } = useForm()
-    const loggedUser = useSelector(selectLoggedUser)
     const currentCitation = useSelector(selectCitation)
     const reloadPostsBool = useSelector(selectReloadPostsState)
+    const loggedUser = useSelector(selectLoggedUser)
+    const isLogged = useSelector(selectIsLoggedState)
     const citationText = currentCitation.text
     const citationAuthorId = currentCitation.authorId
     const dispatch = useDispatch()
@@ -116,16 +118,19 @@ export default function Topic() {
                         ))}
                     </div>
                     )}
-                    <form id='citation-post' className='creation-post-form' onSubmit={handleSubmit(createNewPost)}>
-                        {citationText && (
-                            <div className='citation-div'>
-                                <span className='citation-cancel' title='Annuler la citation' onClick={() => dispatch(reinitializeCitation())}>✖</span>
-                                <p className='citation-content'>{citationText}</p>
-                            </div>
-                        )}
-                        <textarea className='creation-post-textarea-description' name='description' type="text" placeholder='Tapez votre post' {...register("description")} maxLength={500} required />
-                        <button type='submit' className='creation-post-form-submit'>Publier</button>
-                    </form>
+                    {isLogged && (
+                        <form id='citation-post' className='creation-post-form' onSubmit={handleSubmit(createNewPost)}>
+                            {citationText && (
+                                <div className='citation-div'>
+                                    <span className='citation-cancel' title='Annuler la citation' onClick={() => dispatch(reinitializeCitation())}>✖</span>
+                                    <p className='citation-content'>{citationText}</p>
+                                </div>
+                            )}
+                            <textarea className='creation-post-textarea-description' name='description' type="text" placeholder='Tapez votre post' {...register("description")} maxLength={500} required />
+                            <button type='submit' className='creation-post-form-submit'>Publier</button>
+                        </form>
+                    )}
+                    
                 </div>
             )}
         </div>
