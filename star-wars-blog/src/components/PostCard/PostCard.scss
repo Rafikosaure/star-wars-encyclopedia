@@ -1,4 +1,5 @@
 $color_1: white;
+$color_2: #b4b4b4;
 $font-family_1: Arial, Helvetica, sans-serif;
 $background-color_1: black;
 
@@ -27,15 +28,23 @@ $background-color_1: black;
 	font-size: 16px;
 }
 .post-card-infos {
+	position: relative;
 	margin-left: 15px;
 	display: flex;
 	min-height: 50px;
 	position: relative;
 	padding-bottom: 10px;
+	.delete-post-cross {
+		position: absolute;
+		right: 20px;
+		top: 12px;
+		cursor: pointer;
+	}
 }
 .infos-datetime {
 	position: absolute;
 	right: 80px;
+	cursor: default;
 }
 .post-card-author {
 	margin-left: 15px;
@@ -70,8 +79,14 @@ $background-color_1: black;
 	.post-card-citation-link {
 		z-index: 1;
 		text-decoration: none;
-		color: $color_1;
 		margin-right: 10%;
+	}
+	.loggedColor {
+		color: $color_1;
+	}
+	.unLoggedColor {
+		color: $color_2;
+		cursor: default;
 	}
 }
 .post-card-author-div {
