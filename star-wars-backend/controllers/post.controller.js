@@ -1,5 +1,7 @@
 const Post = require('../models/post.model.js')
 const Topic = require('../models/topic.model.js')
+const Comment = require('../models/comment.model.js')
+const Like = require('../models/like.model.js')
 const User = require('../models/user.model.js')
 
 
@@ -65,7 +67,7 @@ exports.getPostsByTopicId = async (req, res) => {
 
         // Vérifier que l'id n'est pas undefind
         if (!topicId) res.status(404).json({
-            message: "Identifiant incorrect !"
+            message: "Invalid ID"
         })
 
         // Trouver les posts liés à ce topic
@@ -98,7 +100,7 @@ exports.getPostAuthor = async (req, res) => {
 
         // Vérifier si l'id est valide
         if (!userId) res.status(404).json({
-            message: "Identifiant incorrect !"
+            message: "Invalid ID"
         })
 
         // Récupérer l'utilisateur du post avec son id
@@ -111,6 +113,48 @@ exports.getPostAuthor = async (req, res) => {
         
         // Renvoyer en réponse l'utilisateur courant
         res.status(200).json(currentUser)
+    } catch(error) {
+        res.status(500).json({
+            message: error
+        })
+    }
+}
+
+
+exports.deletePostById = async (req, res) => {
+    try {
+        // Vérifier si l'utilisateur est l'admin du site
+        const currentUser = await User.findById(req.user.id)
+        if (!currentUser.isAdmin) 
+            res.status(404).json({
+                message: "Access forbidden!"
+            })
+
+        // Récupérer l'id du post
+        const postId = req.params.id
+
+        // Vérifier si l'id du post est valide
+        if (!postId) res.status(404).json({
+            message: "Invalid ID"
+        })
+
+        // Trouver le topic contenant le post et y supprimer sa référence
+        const currentTopic = await Topic.find({ 'posts': { $in: { '_id': postId }}})
+        currentTopic[0].posts.pull({ _id: postId })
+        currentTopic[0].save()
+
+        // Supprimer les likes du post
+        await Like.deleteMany({ post: postId })
+        
+        // Supprimer les commentaires du post
+        await Comment.deleteMany({ post: postId })
+
+        // Supprimer le post lui-même
+        await Post.findByIdAndDelete({ _id: postId })
+        res.status(200).json({
+            message: "Post deleted!"
+        })
+
     } catch(error) {
         res.status(500).json({
             message: error
