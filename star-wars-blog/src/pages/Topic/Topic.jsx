@@ -120,6 +120,7 @@ export default function Topic() {
                     )}
                     {isLogged && (
                         <form id='citation-post' className='creation-post-form' onSubmit={handleSubmit(createNewPost)}>
+                            <h2 className='creation-post-form-title'>Créez un post</h2>
                             {citationText && (
                                 <div className='citation-div'>
                                     <span className='citation-cancel' title='Annuler la citation' onClick={() => dispatch(reinitializeCitation())}>✖</span>
