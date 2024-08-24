@@ -76,6 +76,12 @@ $background-color_1: black;
 		align-items: center;
 		gap: 2.2%;
 		font-size: 18px;
+		.navlink-active {
+			color: $color_1;
+		}
+		.navlink-inactive {
+			color: $color_3;
+		}
 	}
 }
 .header-div-connection {
