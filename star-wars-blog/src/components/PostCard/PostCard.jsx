@@ -3,8 +3,11 @@ import './PostCard.scss'
 import DefaultAvatar from '../../assets/images/EmojiBlitzBobaFett1.webp'
 import Like from '../Like/Like'
 import config from '../../config'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { saveACitation } from '../../redux/slices/citationSlice'
+import { reloadPosts } from '../../redux/slices/postsReload'
+import { selectIsLoggedState } from '../../redux/slices/isLoggedUserSlice'
+import { selectLoggedUser } from '../../redux/slices/loggedUserSlice'
 
 
 
@@ -12,6 +15,8 @@ export default function PostCard({ index, post, topicId }) {
 
     const [postUser, setPostUser] = useState()
     const [datetime, updateDateTime] = useState()
+    const isLogged = useSelector(selectIsLoggedState)
+    const loggedUser = useSelector(selectLoggedUser)
     const dispatch = useDispatch()
 
 
@@ -59,12 +64,31 @@ export default function PostCard({ index, post, topicId }) {
     ))
 
 
+    const deletePostFunction = (e) => {
+        e.preventDefault()
+        console.log('Suppression du post')
+        fetch(`${config.serverEndpoint}/post/deletePostById/${post._id}`, {
+            method: "DELETE",
+            credentials: "include"
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data.message)
+            dispatch(reloadPosts())
+        })
+        .catch(error => console.log(error))
+    }
+
+
     return (
         <div className='post-card-main'>
             <div className='post-card-overlay' />
             <div className='post-card-content'>
                 {datetime && (
                     <div className='post-card-infos'>
+                        {isLogged && loggedUser.isAdmin ? (
+                            <div className='delete-post-cross' title='Supprimer le post' onClick={(e) => deletePostFunction(e)}>✖</div>
+                        ) : null}
                         <p>{`# ${index + 1}`}</p><p className='infos-datetime'>{`Le ${datetime.getDate()}/${datetime.getMonth() + 1}/${datetime.getFullYear()} à ${datetime.getHours() + 1}h${datetime.getUTCMinutes()}`}</p>
                     </div>
                 )}
@@ -93,7 +117,12 @@ export default function PostCard({ index, post, topicId }) {
                 </div>
                 <div className='post-card-bottom-bar'>
                     <Like post={post} />
-                    <a className='post-card-citation-link' href={`/topic/${topicId}#citation-post`} onClick={() => saveCurrentCitation()}>➥ Citer</a>
+                    {isLogged ? (
+                        <a className='post-card-citation-link loggedColor' href={`/topic/${topicId}#citation-post`} title='Citer ce post' onClick={() => saveCurrentCitation()}>➥ Citer</a>
+                    ) : (
+                        <p className='post-card-citation-link unLoggedColor' title='Connectez-vous pour citer ce post'>➥ Citer</p>
+                    )}
+                    
                 </div>
             </div>
             
