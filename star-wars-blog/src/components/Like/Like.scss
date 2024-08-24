@@ -1,4 +1,5 @@
 $color_1: white;
+$color_2: #b4b4b4;
 
 @keyframes extend {
 	0% {
@@ -29,13 +30,13 @@ $color_1: white;
     stroke-opacity: 1;
 }
 #path5 {
-	fill: #b4b4b4;
+	fill: $color_2;
 	fill-opacity: 0.59683794;
-	stroke: #b4b4b4;
+	stroke: $color_2;
 	stroke-opacity: 1;
 }
 #path6 {
-	fill: #b4b4b4;
+	fill: $color_2;
 	fill-opacity: 0.59607846;
 }
 .like-svg {

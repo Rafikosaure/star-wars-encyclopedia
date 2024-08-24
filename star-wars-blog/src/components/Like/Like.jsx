@@ -135,28 +135,28 @@ export default function Like({ post }) {
                 transform="matrix(7.5,0,0,-7.5,0,4360)" 
                 />
                 </g>
+                <title>Liker ce post</title>
             </svg>
         ) : (
             <svg
-            className='like-svg-disabled'
-            version="1.0"
-            width="512pt"
-            height="436pt"
-            viewBox="0 0 512 436"
-            preserveAspectRatio="xMidYMid"
-            id="svg2"
-            sodipodidocname="like-disabled.svg"
-            inkscapeversion="1.3.2 (091e20e, 2023-11-25, custom)"
-            inkscapeexport-filename="like-disabled.svg"
-            inkscapeexport-xdpi="96"
-            inkscapeexport-ydpi="96"
-            xmlnsinkscape="http://www.inkscape.org/namespaces/inkscape"
-            xmlnssodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-            xmlns="http://www.w3.org/2000/svg"
-            xmlnssvg="http://www.w3.org/2000/svg">
-            <defs
-                id="defs2" />
-            <sodipodinamedview
+                className='like-svg-disabled'
+                version="1.0"
+                width="512pt"
+                height="436pt"
+                viewBox="0 0 512 436"
+                preserveAspectRatio="xMidYMid"
+                id="svg2"
+                sodipodidocname="like-disabled.svg"
+                inkscapeversion="1.3.2 (091e20e, 2023-11-25, custom)"
+                inkscapeexport-filename="like-disabled.svg"
+                inkscapeexport-xdpi="96"
+                inkscapeexport-ydpi="96"
+                xmlnsinkscape="http://www.inkscape.org/namespaces/inkscape"
+                xmlnssodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlnssvg="http://www.w3.org/2000/svg">
+                <defs id="defs2" />
+                <sodipodinamedview
                 id="namedview2"
                 pagecolor="#ffffff"
                 bordercolor="#000000"
@@ -176,7 +176,7 @@ export default function Like({ post }) {
                 inkscapewindow-maximized="1"
                 inkscapecurrent-layer="g2" 
                 />
-            <g
+                <g
                 transform="matrix(0.1,0,0,-0.1,0,436)"
                 fill="#000000"
                 stroke="none"
@@ -195,6 +195,7 @@ export default function Like({ post }) {
                 // style="fill:#000000;fill-opacity:0.59607846" 
                 />
                 </g>
+                <title>Connectez-vous pour liker ce post</title>
             </svg>
             )}
         </div>
