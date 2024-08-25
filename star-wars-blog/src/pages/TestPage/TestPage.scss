@@ -1,29 +1,19 @@
 $font-family_1: Arial, Helvetica, sans-serif;
-$background-color_1: black;
+$color_1: rgb(53, 155, 155);
+$background-color_1: white;
 
-@keyframes extend {
-	0% {
-		width: 40px;
-		height: 40px;
-	}
-	50% {
-		width: 60px;
-		height: 60px;
-	}
-	100% {
-		width: 40px;
-		height: 40px;
-	}
-}
 .test-app {
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 50px;
+    padding-bottom: 50px;
 	font-family: $font-family_1;
 	min-height: 100vh;
-	width: calc(80% - 4px);
-	border: 1px solid yellow;
+	width: calc(70% - 2px);
+	border: 1px solid $color_1;
 	margin-left: auto;
 	margin-right: auto;
-	// background-color: $background-color_1;
-	background-color: beige;
+	background-color: $background-color_1;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
