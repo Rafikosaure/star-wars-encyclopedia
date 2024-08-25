@@ -60,13 +60,31 @@ $background-color_1: black;
 	min-width: 100px;
 }
 .post-card-message {
+	width: 100%;
+	margin-right: 60px;
+	margin-left: 60px;
 	p { 
 		height: fit-content;
 		width: auto;
 		font-size: 14px;
-		margin-right: 60px;
-		margin-left: 60px;
 		overflow: hidden;
+	}
+	.post-card-modify-message {
+		width: 100%;
+		min-height: fit-content;
+		height: 100%;
+		textarea {
+			background-color: $background-color_1;
+			font-size: 14px;
+			font-family: $font-family_1;
+			color: $color_1;
+			width: 100%;
+			height: 100%;
+			margin: 0;
+			padding: 10px;
+			border: none;
+			outline: 1px solid $color_1;
+		}
 	}
 }
 .post-card-bottom-bar {
@@ -76,13 +94,14 @@ $background-color_1: black;
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;
-	.post-card-citation-link {
+	.post-card-link {
 		z-index: 1;
 		text-decoration: none;
-		margin-right: 10%;
+		margin-right: 7%;
 	}
 	.loggedColor {
 		color: $color_1;
+		cursor: pointer;
 	}
 	.unLoggedColor {
 		color: $color_2;

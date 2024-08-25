@@ -17,6 +17,8 @@ export default function PostCard({ index, post, topicId }) {
     const [datetime, updateDateTime] = useState()
     const isLogged = useSelector(selectIsLoggedState)
     const loggedUser = useSelector(selectLoggedUser)
+    const [postContentDisplay, setPostContentDisplay] = useState('block')
+    const [modifyContentDisplay, setModifyContentDisplay] = useState('none')
     const dispatch = useDispatch()
 
 
@@ -80,6 +82,37 @@ export default function PostCard({ index, post, topicId }) {
     }
 
 
+    const modifyContent = (e) => {
+        if (e.keyCode === 13 && e.shiftKey === false) {
+            e.preventDefault();
+
+            const modifiedWord = '--modifié--\n';
+            let newContent;
+            const originalContent = post.content.split("\n\n");
+            if (originalContent.length === 2 && e.target.value.includes(modifiedWord)) {
+                newContent = `${originalContent.at(-2)}\n\n${e.target.value}`
+            } else if(originalContent.length === 2 && !e.target.value.includes(modifiedWord)) {
+                newContent = `${originalContent.at(-2)}\n\n${modifiedWord}${e.target.value}`
+            } else if(originalContent.length !== 2 && !e.target.value.includes(modifiedWord)) {
+                newContent = `${modifiedWord}${e.target.value}`
+            } else {
+                newContent = `${e.target.value}`
+            }
+            console.log(newContent)
+            setModifyContentDisplay('none')
+            setPostContentDisplay('block')
+        }
+    }
+
+    const modifyDisplayManager = (e) => {
+        e.preventDefault()
+        if (postContentDisplay === "block") {
+            setPostContentDisplay("none")
+            setModifyContentDisplay("block")
+        }
+    }
+
+
     return (
         <div className='post-card-main'>
             <div className='post-card-overlay' />
@@ -111,18 +144,34 @@ export default function PostCard({ index, post, topicId }) {
                     )}
                     <div className='post-card-message'>
                         {post && (
-                            <p>{textWithBreaks}</p>
+                            <>
+                                <p style={{display: `${postContentDisplay}`}}>{textWithBreaks}</p>
+                                <form style={{display: `${modifyContentDisplay}`}} className='post-card-modify-message' onKeyDown={(e) => modifyContent(e)}>
+                                    <textarea defaultValue={post.content.split("\n\n").at(-1)} className='textarea-scroll' />
+                                </form>
+                            </>
                         )}
                     </div>
                 </div>
                 <div className='post-card-bottom-bar'>
-                    <Like post={post} />
-                    {isLogged ? (
-                        <a className='post-card-citation-link loggedColor' href={`/topic/${topicId}#citation-post`} title='Citer ce post' onClick={() => saveCurrentCitation()}>➥ Citer</a>
+                    {isLogged && postUser ? (
+                        <>
+                            {postContentDisplay === 'block' && modifyContentDisplay === "none" && (loggedUser._id === postUser._id || loggedUser.isAdmin) ? (
+                                <p className='post-card-link loggedColor' title='Modifier ce post' onClick={(e) => modifyDisplayManager(e)}>🖉 Modifier</p>
+                            ) : (
+                                // <p className='post-card-link unLoggedColor'>🖉 Modifier</p>
+                                null
+                            )}
+                            <a className='post-card-link loggedColor' href={`/topic/${topicId}#citation-post`} title='Citer ce post' onClick={() => saveCurrentCitation()}>➥ Citer</a>
+                        </>
                     ) : (
-                        <p className='post-card-citation-link unLoggedColor' title='Connectez-vous pour citer ce post'>➥ Citer</p>
+                        <>
+                            {/* <p className='post-card-link unLoggedColor'>🖉 Modifier</p> */}
+                            <p className='post-card-link unLoggedColor' title='Connectez-vous pour citer ce post'>➥ Citer</p>
+                        </>
+                        
                     )}
-                    
+                    <Like post={post} />
                 </div>
             </div>
             
