@@ -7,20 +7,22 @@ export default function Footer() {
       <div className='footer-content'>
         <ul>
           <h2>Mentions légales</h2>
-          <li><a href='/'>Conditions Générales d'Utilisation</a></li>
-          <li><a href='/'>RGPD</a></li>
-          <li><a href='/'>Politique des cookies</a></li>
+          <li><a href="/legal">Politique de confidentialité</a></li>
+          <li><a href='/legal#CGU'>Conditions Générales d'Utilisation</a></li>
+          <li><a href='/legal#RGPD'>Gestion des données personnelles</a></li>
+          <li><a href='/legal#cookies'>Politique des cookies</a></li>
         </ul>
         <ul>
           <h2>Réseaux sociaux</h2>
-          <li><a href='https://www.linkedin.com/in/rafikbensadi' target='_blank' rel="noreferrer">Linkedin</a></li>
-          <li><a href="https://www.instagram.com/rafikosaure/" target='_blank' rel="noreferrer">Instagram</a></li>
+          <li><a href='https://www.linkedin.com/in/rafikbensadi' target='_blank' rel="noreferrer">LinkedIn</a></li>
+          <li><a href="https://x.com/BenSadiRaf27412" target='_blank' rel="noreferrer">{`X (ex-Twitter)`}</a></li>
           <li><a href="https://www.facebook.com/rafik.bensadi.9/" target='_blank' rel="noreferrer">Facebook</a></li>
+          <li><a href="https://www.instagram.com/rafikosaure/" target='_blank' rel="noreferrer">Instagram</a></li>
         </ul>
         <ul>
           <h2>Contact</h2>
-          <li><a href="mailto:rafikbensadi@live.fr?subject=Contact%20depuis%20rafikbensadi.com">Email</a></li>
-          <li><a href="tel:+33649363839">Mobile</a></li>
+          <li><a href="mailto:rafikbensadi@live.fr?subject=Contact%20depuis%20rafikbensadi.com">Contactez-moi par email</a></li>
+          <li><a href="tel:+33649363839">Envoyez-moi un appel téléphonique</a></li>
         </ul>
       </div>
     </div>
