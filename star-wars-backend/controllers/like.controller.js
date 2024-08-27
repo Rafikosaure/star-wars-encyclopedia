@@ -1,4 +1,5 @@
 const Post = require('../models/post.model.js')
+const Comment = require('../models/comment.model.js')
 const User = require('../models/user.model.js')
 const Like = require('../models/like.model.js')
 
@@ -32,33 +33,32 @@ exports.attributeLike = async (req, res) => {
             message: "Unknown user!"
         })
 
-        const postId = req.params.id
-        if (!postId) {
+        const mediaId = req.params.id
+        if (!mediaId) {
             res.status(404).json({
-                message: "Post undefined!"
+                message: "Media undefined!"
             })
         }
 
-        const currentPost = await Post.findById(postId)
-        if (!currentPost) res.status(404).json({
-            message: "Unknown post!"
+        // Trouver le post ou le commentaire à liker
+        let currentMedia = await Comment.findById(mediaId)
+        if (!currentMedia) {
+            currentMedia = await Post.findById(mediaId)
+            if (!currentMedia) res.status(404).json({
+                message: "Media not found!"
+            })
+        }
+        let newLike = createAndPushNewLike(currentMedia, currentUser)
+        if (!newLike) res.status(501).json({
+            message: "Like creation failed!"
         })
 
-        const likeObject = {
-            post: currentPost,
-            user: currentUser
-        }
-
-        const newLike = await Like.create(likeObject)
-        newLike.save()
-
-        currentPost.likes.push(newLike)
-        currentPost.save()
-
+        console.log(newLike)
         res.status(201).json({
             message: "Like created with success!",
             likeId: newLike._id
         })
+
     } catch(error) {
         res.status(500).json({
             message: "Like creation failed!"
@@ -81,19 +81,20 @@ exports.dislike = async (req, res) => {
         if (!currentLike) res.status(404).json({
             message: "Like not found!"
         })
-
-        const currentPost = await Post.findById(currentLike.post)
-        if (!currentPost) res.status(404).json({
-            message: "Post not found!"
-        })
+        
+        // Supprimer la référence du like
+        let currentMedia = await Post.findById(currentLike.likeType)
+        if (!currentMedia) {
+            currentMedia = await Comment.findById(currentLike.likeType)
+            if (!currentMedia) res.status(404).json({
+                message: "Reference deletion failed!"
+            })
+        }
+        currentMedia.likes.pull({ _id: likeId })
+        currentMedia.save()
         
         // Suppression du like
         await Like.deleteOne({ _id: likeId })
-
-        // Supprimer la référence du like dans le post courant
-        currentPost.likes.pull({ _id: likeId })
-        currentPost.save()
-
         res.status(200).json({
             message: "Like deleted with success!"
         })
@@ -103,4 +104,23 @@ exports.dislike = async (req, res) => {
             message: "Like deletion failed!"
         })
     }
+}
+
+
+const createAndPushNewLike = async (currentMedia, currentUser) => {
+    try {
+        const likeObject = {
+            likeType: currentMedia,
+            user: currentUser
+        }
+        const newLike = await Like.create(likeObject)
+        newLike.save()
+        currentMedia.likes.push(newLike)
+        currentMedia.save()
+        return newLike
+
+    } catch {
+        return undefined
+    }
+    
 }
