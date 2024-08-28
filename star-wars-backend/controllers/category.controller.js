@@ -19,9 +19,6 @@ exports.createCategory = (req, res) => {
 exports.findCategoryFromTopic = (req, res) => {
     
     const topicId = req.params.id
-    if (!topicId) res.status(404).json({
-        message: 'Wrong parameter'
-    })
 
     Category.find({ "topics": { _id: topicId }})
     .then(category => {

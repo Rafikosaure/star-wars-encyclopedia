@@ -33,11 +33,6 @@ exports.getTopicsByCategory = async (req, res) => {
         // Récupérer l'id de la catégorie courante
         const categoryId = req.params.id
 
-        // Vérifier si la catégorie n'est pas undefind
-        if (!categoryId) res.status(404).json({
-            message: "Identifiant incorrect !"
-        })
-
         // Trouver les topics liés à cette catégorie
         const currentCategoryWithTopics = await Category.findById(categoryId).populate("topics")
 

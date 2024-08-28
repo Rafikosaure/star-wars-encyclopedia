@@ -34,11 +34,6 @@ exports.attributeLike = async (req, res) => {
         })
 
         const mediaId = req.params.id
-        if (!mediaId) {
-            res.status(404).json({
-                message: "Media undefined!"
-            })
-        }
 
         // Trouver le post ou le commentaire à liker
         let currentMedia = await Comment.findById(mediaId)
@@ -71,11 +66,6 @@ exports.attributeLike = async (req, res) => {
 exports.dislike = async (req, res) => {
     try {
         const likeId = req.params.id
-        if (!likeId) {
-            res.status(404).json({
-                message: "LikeId undefined!"
-            })
-        }
 
         const currentLike = await Like.findById(likeId)
         if (!currentLike) res.status(404).json({
