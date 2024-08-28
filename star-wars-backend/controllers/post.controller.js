@@ -65,11 +65,6 @@ exports.getPostsByTopicId = async (req, res) => {
         // Récupérer l'id du topic courant
         const topicId = req.params.id
 
-        // Vérifier que l'id n'est pas undefind
-        if (!topicId) res.status(404).json({
-            message: "Invalid ID"
-        })
-
         // Trouver les posts liés à ce topic
         const currentTopicWithPosts = await Topic.findById(topicId).populate("posts")
 
@@ -97,11 +92,6 @@ exports.getPostAuthor = async (req, res) => {
     try {
         // Récupérer l'id de l'utilisateur du post
         const userId = req.params.id
-
-        // Vérifier si l'id est valide
-        if (!userId) res.status(404).json({
-            message: "Invalid ID"
-        })
 
         // Récupérer l'utilisateur du post avec son id
         const currentUser = await User.findById(userId)
@@ -133,18 +123,13 @@ exports.deletePostById = async (req, res) => {
         // Récupérer l'id du post
         const postId = req.params.id
 
-        // Vérifier si l'id du post est valide
-        if (!postId) res.status(404).json({
-            message: "Invalid ID"
-        })
-
         // Trouver le topic contenant le post et y supprimer sa référence
         const currentTopic = await Topic.find({ 'posts': { $in: { '_id': postId }}})
         currentTopic[0].posts.pull({ _id: postId })
         currentTopic[0].save()
 
         // Supprimer les likes du post
-        await Like.deleteMany({ post: postId })
+        await Like.deleteMany({ likeType: postId })
         
         // Supprimer les commentaires du post
         await Comment.deleteMany({ post: postId })
@@ -158,6 +143,42 @@ exports.deletePostById = async (req, res) => {
     } catch(error) {
         res.status(500).json({
             message: error
+        })
+    }
+}
+
+
+exports.modifyPost = async (req, res) => {
+    try {
+        const post = await Post.findById(req.params.id)
+        if (!post) res.status(404).json({
+            message: "Post not found!"
+        })
+
+        const postObject = {
+            title: post.title,
+            content: req.body.content,
+            author: post.author,
+            comments: post.comments,
+            likes: post.likes
+        }
+
+        const newPost = await Post.findByIdAndUpdate(
+            { _id: req.params.id },
+            postObject,
+            { new: true }
+        ); 
+        
+        if (!newPost) {
+            res.status(500).json({
+                message: "Data update failed!"
+            })
+        }
+        res.status(200).json(newPost)
+
+    } catch {
+        res.status(500).json({
+            message: "Post update failed!",
         })
     }
 }
