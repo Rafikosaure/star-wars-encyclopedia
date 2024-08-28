@@ -10,7 +10,7 @@ exports.verifyToken = (req, res, next) => {
     // Si le jeton (token) n'est pas présent, 
     // renvoie une erreur 401 (accès refusé)
     if(!token) res.status(200).json({  
-        badAccessMessage: 'Accès refusé !'
+        badAccessMessage: 'Access denied!'
     }) // return next(createError(401, "Acces Denied!"))
 
     // Vérifier la validité du jeton en utilisant jwt.verify
