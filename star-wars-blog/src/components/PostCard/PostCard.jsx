@@ -75,7 +75,7 @@ export default function PostCard({ index, post, topicId }) {
         })
         .then(response => response.json())
         .then(data => {
-            console.log(data.message)
+            // console.log(data.message)
             dispatch(reloadPosts())
         })
         .catch(error => console.log(error))
@@ -98,7 +98,21 @@ export default function PostCard({ index, post, topicId }) {
             } else {
                 newContent = `${e.target.value}`
             }
-            console.log(newContent)
+
+            // Appel au serveur pour modifier le contenu du post
+            fetch(`${config.serverEndpoint}/post/updatePost/${post._id}`, {
+                method: "PUT",
+                headers: {"Accept": "application/json", "Content-Type": "application/json"},
+                credentials: "include",
+                body: JSON.stringify({
+                    content: newContent
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                // console.log(data)
+                dispatch(reloadPosts())
+            })
             setModifyContentDisplay('none')
             setPostContentDisplay('block')
         }
