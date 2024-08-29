@@ -48,11 +48,8 @@ exports.getTopicsByCategory = async (req, res) => {
         })
 
     } catch(error) {
-        res.status(500).json({
-            error: error
-        })
+        res.status(500).json(error)
     }
-    
 }
 
 
@@ -97,9 +94,6 @@ exports.createTopic = async (req, res) => {
             })
         }
     } catch(error) {
-        res.status(500).json({
-            message: error
-        })
+        res.status(500).json(error)
     }
-    
 }

@@ -18,8 +18,7 @@ exports.getLikesByPost = async (req, res) => {
 
     } catch(error) {
         res.status(500).json({
-            message: "Likes not found!",
-            error: error
+            message: "Likes not found!"
         })
     }
 }
@@ -89,7 +88,7 @@ exports.dislike = async (req, res) => {
             message: "Like deleted with success!"
         })
     
-    } catch(error) {
+    } catch {
         res.status(500).json({
             message: "Like deletion failed!"
         })
@@ -112,5 +111,4 @@ const createAndPushNewLike = async (currentMedia, currentUser) => {
     } catch {
         return undefined
     }
-    
 }

@@ -8,7 +8,6 @@ const ENV = require('../config/config.js')
 
 // Enregistre un nouvel utilisateur dans la base de données
 exports.register = (req, res) => {
-    
     const userObject = req.body
     let profilePicture = ""
 
