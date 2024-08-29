@@ -131,7 +131,15 @@ exports.deletePostById = async (req, res) => {
         // Supprimer les likes du post
         await Like.deleteMany({ likeType: postId })
         
-        // Supprimer les commentaires du post
+        // D'abord, supprimer les likes des commentaires du post
+        const commentsToDelete = await Comment.find({ post: postId })
+        if (commentsToDelete.length > 0) {
+            commentsToDelete.forEach(async (comment) => {
+                await Like.deleteMany({ likeType: {  $in: comment.likes } })
+          });
+        }
+
+        // Ensuite supprimer les commentaires du post
         await Comment.deleteMany({ post: postId })
 
         // Supprimer le post lui-même
