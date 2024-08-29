@@ -53,9 +53,7 @@ exports.createPost = async (req, res) => {
             message: "Post creation failed!"
         }))
     } catch(error) {
-        res.status(500).json({
-            message: error
-        })
+        res.status(500).json(error)
     }
 }
 
@@ -80,9 +78,7 @@ exports.getPostsByTopicId = async (req, res) => {
             posts: currentTopicWithPosts.posts
         })
     } catch(error) {
-        res.status(500).json({
-            error: error
-        })
+        res.status(500).json(error)
     }
 }
 
@@ -104,9 +100,7 @@ exports.getPostAuthor = async (req, res) => {
         // Renvoyer en réponse l'utilisateur courant
         res.status(200).json(currentUser)
     } catch(error) {
-        res.status(500).json({
-            message: error
-        })
+        res.status(500).json(error)
     }
 }
 
@@ -133,25 +127,21 @@ exports.deletePostById = async (req, res) => {
         
         // D'abord, supprimer les likes des commentaires du post
         const commentsToDelete = await Comment.find({ post: postId })
-        if (commentsToDelete.length > 0) {
-            commentsToDelete.forEach(async (comment) => {
-                await Like.deleteMany({ likeType: {  $in: comment.likes } })
-          });
-        }
+        commentsToDelete.forEach(async (comment) => {
+            await Like.deleteMany({ _id: comment._id })
+        });
 
-        // Ensuite supprimer les commentaires du post
+        // Ensuite supprimer les commentaires eux-mêmes
         await Comment.deleteMany({ post: postId })
 
-        // Supprimer le post lui-même
+        // Enfin, supprimer le post
         await Post.findByIdAndDelete({ _id: postId })
         res.status(200).json({
             message: "Post deleted!"
         })
 
     } catch(error) {
-        res.status(500).json({
-            message: error
-        })
+        res.status(500).json(error)
     }
 }
 
