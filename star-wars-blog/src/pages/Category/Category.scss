@@ -58,8 +58,11 @@ $background-color_1: black;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	background: url(../../assets/images/background03.webp) no-repeat center center fixed;
-	background-size: cover;
+	background: url(../../assets/images/background03.webp) no-repeat center center;
+	-webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 	h1 {
 		margin-top: 50px;
 		color: $color_1;
