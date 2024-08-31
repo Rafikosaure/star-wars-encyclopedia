@@ -19,7 +19,7 @@ export default function Like({ post }) {
 
     // Récupération du tableau de likes du post courant
     useEffect(() => {
-        fetch(`${config.serverEndpoint}/like/getLikesByPost/${post._id}`)
+        fetch(`${config.serverEndpoint}/like/getLikes/${post._id}`)
         .then(response => response.json())
         .then(data => {
             // console.log('Les likes du post :', data)
