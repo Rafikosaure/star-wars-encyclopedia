@@ -3,11 +3,55 @@ const Post = require('../models/post.model.js')
 const User = require('../models/user.model.js')
 
 
-exports.createComment = (req, res) => {
-    const comment = new Comment(req.body)
-    comment.save()
-        .then(() => res.status(201).json({ message: 'Comment created!' }))
-        .catch(() => res.status(400).json({ message: 'Comment creation failed!' }))
+exports.createComment = async (req, res) => {
+    try {
+        // Récupérer l'id du post courant
+        const postId = req.params.id
+
+        // Trouver le post courant par son id
+        const currentPost = await Post.findById(postId)
+        if (!currentPost) res.status(404).json({
+            message: "Post not found!"
+        })
+
+        let reqComment = req.body;
+
+        // Construction du texte du commentaire comportant la citation
+        if (reqComment.citation) {
+            const { citationAuthorId, citationText } = reqComment.citation
+            const citationAuthor = await User.findById(citationAuthorId)
+            if (!citationAuthor) res.status(404).json({
+                message: "Author not found!"
+            })
+            let newCitation = `"${citationText}"\n\n${reqComment.content}`
+
+            // Gestion des éventuelles citations précédentes
+            const completeCitation = newCitation.split('\n\n')
+            const lastCitation = completeCitation.at(-2).replace(/^"|"$/g, "")
+            const lastContent = completeCitation.at(-1)
+            const finalContent = `${citationAuthor.name} a dit :\n"${lastCitation}"\n\n${lastContent}`
+            
+            // Finalisation du nouveau commentaire avec citation
+            reqComment.content = finalContent
+        }
+
+        // Création du commentaire et enregistrement dans le post courant
+        Comment.create(reqComment)
+        .then(newComment => {
+            newComment.save()
+            currentPost.comments.push(newComment)
+            currentPost.save()
+            res.status(201).json({
+                newComment
+            })})
+        // Gestion de l'échec potentielle de la procédure
+        .catch(() => res.status(400).json({
+            message: "Comment creation failed!"
+        }))
+
+    } catch(error) {
+        res.status(500).json(error)
+    }
 }
 
 
