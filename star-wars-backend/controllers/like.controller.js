@@ -5,16 +5,21 @@ const Like = require('../models/like.model.js')
 
 
 
-exports.getLikesByPost = async (req, res) => {
+exports.getLikes = async (req, res) => {
     try {
-        const postId = req.params.id
-    
-        const likesByPost = await Post.findById(postId).populate('likes')
-        if (!likesByPost) res.status(404).json({
-            message: "Likes not found!"
-        })
+        // Récupérer l'id du post / du commentaire dans une variable
+        let typeId = req.params.id
         
-        res.status(200).json(likesByPost.likes)
+        // Est-ce qu'il s'agit des likes d'un post ou bien d'un commentaire ?
+        let likesByType = await Comment.findById(typeId).populate('likes')
+        if (!likesByType) {
+            likesByType = await Post.findById(typeId).populate('likes')
+            if (!likesByType) res.status(404).json({
+                message: "Likes not found!"
+            })
+        }
+        
+        res.status(200).json(likesByType.likes)
 
     } catch(error) {
         res.status(500).json({
@@ -32,17 +37,17 @@ exports.attributeLike = async (req, res) => {
             message: "Unknown user!"
         })
 
-        const mediaId = req.params.id
+        const typeId = req.params.id
 
         // Trouver le post ou le commentaire à liker
-        let currentMedia = await Comment.findById(mediaId)
-        if (!currentMedia) {
-            currentMedia = await Post.findById(mediaId)
-            if (!currentMedia) res.status(404).json({
-                message: "Media not found!"
+        let currentType = await Comment.findById(typeId)
+        if (!currentType) {
+            currentType = await Post.findById(typeId)
+            if (!currentType) res.status(404).json({
+                message: "Media type not found!"
             })
         }
-        let newLike = createAndPushNewLike(currentMedia, currentUser)
+        let newLike = createAndPushNewLike(currentType, currentUser)
         if (!newLike) res.status(501).json({
             message: "Like creation failed!"
         })
@@ -64,23 +69,26 @@ exports.attributeLike = async (req, res) => {
 // Disliker un post
 exports.dislike = async (req, res) => {
     try {
+        // Récupérer l'id du like dans une constante
         const likeId = req.params.id
 
+        // Récupérer le like par son id
         const currentLike = await Like.findById(likeId)
         if (!currentLike) res.status(404).json({
             message: "Like not found!"
         })
         
-        // Supprimer la référence du like
-        let currentMedia = await Post.findById(currentLike.likeType)
-        if (!currentMedia) {
-            currentMedia = await Comment.findById(currentLike.likeType)
-            if (!currentMedia) res.status(404).json({
+        // Est-ce qu'il s'agit du like d'un post ou bien d'un commentaire ?
+        let currentType = await Post.findById(currentLike.likeType)
+        if (!currentType) {
+            currentType = await Comment.findById(currentLike.likeType)
+            if (!currentType) res.status(404).json({
                 message: "Reference deletion failed!"
             })
         }
-        currentMedia.likes.pull({ _id: likeId })
-        currentMedia.save()
+        // Supprimer la référence du like
+        currentType.likes.pull({ _id: likeId })
+        currentType.save()
         
         // Suppression du like
         await Like.deleteOne({ _id: likeId })
@@ -96,16 +104,16 @@ exports.dislike = async (req, res) => {
 }
 
 
-const createAndPushNewLike = async (currentMedia, currentUser) => {
+const createAndPushNewLike = async (currentType, currentUser) => {
     try {
         const likeObject = {
-            likeType: currentMedia,
+            likeType: currentType,
             user: currentUser
         }
         const newLike = await Like.create(likeObject)
         newLike.save()
-        currentMedia.likes.push(newLike)
-        currentMedia.save()
+        currentType.likes.push(newLike)
+        currentType.save()
         return newLike
 
     } catch {
