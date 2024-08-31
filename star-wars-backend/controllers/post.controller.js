@@ -11,7 +11,7 @@ exports.createPost = async (req, res) => {
         // Récupérer l'id du topic courant
         const topicId = req.params.id
 
-        // Tenter de trouver le topic courant par son id
+        // Trouver le topic courant par son id
         const currentTopic = await Topic.findById(topicId)
         if (!currentTopic) res.status(404).json({
             message: "Topic not found!"
