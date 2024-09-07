@@ -1,22 +1,9 @@
 const Topic = require('../models/topic.model.js')
 const Category = require('../models/category.model.js')
 const Post = require('../models/post.model.js')
+const Comment = require('../models/comment.model.js')
 
 
-
-// exports.getTopicsAndPosts = async (req, res) => {
-
-//     // Chercher tous les topics avec leurs posts
-//     const topicsWithPosts = await Topic.find().populate('posts')
-
-//     // Vérifier si les données sont valides
-//     if (!topicsWithPosts) res.status(404).json({
-//         message: "Topics not found!"
-//     })
-
-//     // Renvoyer l'objet récupéré en réponse
-//     res.status(200).json(topicsWithPosts)
-// }
 
 exports.getTopics = (req, res) => {
     Topic.find()
@@ -27,7 +14,7 @@ exports.getTopics = (req, res) => {
 }
 
 
-exports.getTopicsByCategory = async (req, res) => {
+exports.getTopicsByCategoryId = async (req, res) => {
     
     try {
         // Récupérer l'id de la catégorie courante
@@ -95,5 +82,80 @@ exports.createTopic = async (req, res) => {
         }
     } catch(error) {
         res.status(500).json(error)
+    }
+}
+
+
+exports.deleteTopicById = async (req, res) => {
+    try {
+        const topicId = req.params.id
+
+        // Trouver le topic (et récupérer ses posts)
+        const currentTopic = await Topic.findById(topicId).populate('posts')
+        if (!currentTopic) res.status(404).json({
+            message: "Topic not found!"
+        })
+
+        // Trouver la catégorie contenant le topic et y supprimer sa référence
+        const currentCategory = await Category.find({ 'topics': { $in: { '_id': topicId }}})
+        currentCategory[0].topics.pull({ _id: topicId })
+        currentCategory[0].save()
+
+        // Posts du topic : d'abord, supprimer leurs likes
+        const postsToDelete = currentTopic.posts;
+        postsToDelete.forEach(async (post) => {
+            await Like.deleteMany({ likeType: post._id })
+        });
+
+        // Trouver les commentaires des posts du topic
+        postsToDelete.forEach(async (post) => {
+            const comments = getCommentsOfAPost(post)
+            if (!comments) res.status(404).json({
+                message: "Comments not found!"
+            })
+            
+            // Supprimer les likes des comments
+            comments.forEach(async (comment) => {
+                const result = deleteLikesOfAComment(comment)
+                if (!result) res.status(404).json({
+                    message: "Likes deletion failed!"
+                })
+            })
+            // Supprimer les comments du post
+            await Comment.deleteMany({ post: post._id })
+
+            // Supprimer les posts
+            await Post.findByIdAndDelete(post._id)
+        })
+        // Supprimer le topic
+        await Topic.findByIdAndDelete(topicId)
+
+    } catch(error) {
+        res.status(500).json({
+            message: 'Topic deletion failed!'
+        })
+    }
+}
+
+
+const deleteLikesOfAComment = async (comment) => {
+    try {
+        await Like.deleteMany({ liketype: comment._Id })
+        return true
+
+    } catch(error) {
+        console.log(error)
+        return false
+    }
+}
+
+const getCommentsOfAPost = async (post) => {
+    try {
+        const comments = await Comment.find({ post: post._id })
+        return comments
+
+    } catch(error) {
+        console.log(error)
+        return false
     }
 }
