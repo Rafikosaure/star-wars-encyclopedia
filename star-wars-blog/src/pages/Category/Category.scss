@@ -125,17 +125,19 @@ $background-color_1: black;
 		width: calc(100% - 4px);
 	}
 	.arrow-section {
-		bottom: 34%;
+		bottom: 50%;
+		display: block;
 	}
 	.prev-arrow-section, .next-arrow-section {
-		width: 60px;
-		height: 60px;
+		width: 50px;
+		height: 50px;
+		position: absolute;
 	}
 	.prev-arrow-section {
-		right: 84%;
+		margin-right: 10px;
 	}
 	.next-arrow-section {
-		left: 84%;
+		margin-left: 10px;
 	}
 }
 /* Ici : media queries pour la troisième partie tablette */
