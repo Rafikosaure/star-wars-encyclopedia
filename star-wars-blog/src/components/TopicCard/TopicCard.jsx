@@ -23,7 +23,7 @@ export default function TopicCard({ topic }) {
                 <div className='topic-card-content'>
                     {topic && datetime && (
                         <>
-                            <div className='topic-infos'><h1>{topic.title}</h1><p>{`Créé le ${datetime.getDate()}/${datetime.getMonth() + 1}/${datetime.getFullYear()} à ${datetime.getHours() + 1}h${datetime.getUTCMinutes()}`}</p></div>
+                            <div className='topic-infos'><h1>{topic.title}</h1><p>{`Créé le ${datetime.toLocaleDateString("fr-FR", {weekday: "long", year: "numeric", month: "long", day: "numeric", hour: '2-digit', minute: '2-digit' }).replace(':', 'h')}`}</p></div>
                             <p>{topic.description}</p>
                         </>
                     )}
