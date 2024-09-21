@@ -8,7 +8,7 @@ import { selectLoggedUser } from '../../redux/slices/loggedUserSlice'
 
 
 
-export default function Like({ post }) {
+export default function Like({ post, comment }) {
 
     const loggedUser = useSelector(selectLoggedUser)
     const isLogged = useSelector(selectIsLoggedState)
@@ -16,18 +16,32 @@ export default function Like({ post }) {
     const [likeArray, updateLikeArray] = useState([])
     const [currentUserLike, updateCurrentUserLike] = useState()
     const [likeIsHere, setLikeIsHere] = useState(false)
+    const [commentLike, setCommentLike] = useState()
 
     // Récupération du tableau de likes du post courant
     useEffect(() => {
-        fetch(`${config.serverEndpoint}/like/getLikes/${post._id}`)
-        .then(response => response.json())
-        .then(data => {
-            // console.log('Les likes du post :', data)
-            updateLikeArray(data)
-            setLikeIsHere(false)
-        })
-        .catch(error => console.log(error))
-    }, [post, likeIsHere])
+        if (post) {
+            setCommentLike()
+            fetch(`${config.serverEndpoint}/like/getLikes/${post._id}`)
+            .then(response => response.json())
+            .then(data => {
+                // console.log('Les likes du post :', data)
+                updateLikeArray(data)
+                setLikeIsHere(false)
+            })
+            .catch(error => console.log(error))
+        } else if(comment) {
+            setCommentLike('comment-like')
+            fetch(`${config.serverEndpoint}/like/getLikes/${comment._id}`)
+            .then(response => response.json())
+            .then(data => {
+                updateLikeArray(data)
+                setLikeIsHere(false)
+            })
+            .catch(error => console.log(error))
+        }
+        
+    }, [post, comment, likeIsHere])
 
 
     useEffect(() => {
@@ -45,29 +59,59 @@ export default function Like({ post }) {
 
 
     const attributeALike = () => {
-        fetch(`${config.serverEndpoint}/like/attributeLike/${post._id}`, {
-            method: "POST",
-            credentials: "include"
-        })
-        .then(response => response.json())
-        .then(data => {
-            setLikeIsHere(true)
-            // console.log(data.message)
-        })
-        .catch(error => console.log(error))
+        if (post) {
+            setCommentLike()
+            fetch(`${config.serverEndpoint}/like/attributeLike/${post._id}`, {
+                method: "POST",
+                credentials: "include"
+            })
+            .then(response => response.json())
+            .then(data => {
+                setLikeIsHere(true)
+            })
+            .catch(error => console.log(error))
+        } else {
+            setCommentLike('comment-like')
+            fetch(`${config.serverEndpoint}/like/attributeLike/${comment._id}`, {
+                method: "POST",
+                credentials: "include"
+            })
+            .then(response => response.json())
+            .then(data => {
+                setLikeIsHere(true)
+            })
+            .catch(error => console.log(error))
+        }
+        
     }
 
     const dislike = () => {
-        fetch(`${config.serverEndpoint}/like/dislike/${currentUserLike._id}`, {
-            method: "DELETE",
-            credentials: "include"
-        })
-        .then(response => response.json())
-        .then(data => {
-            setLikeIsHere(true)
-            // console.log(data.message)
-        })
-        .catch(error => console.log(error))
+        if (post) {
+            setCommentLike()
+            fetch(`${config.serverEndpoint}/like/dislike/${currentUserLike._id}`, {
+                method: "DELETE",
+                credentials: "include"
+            })
+            .then(response => response.json())
+            .then(data => {
+                setLikeIsHere(true)
+                // console.log(data.message)
+            })
+            .catch(error => console.log(error))
+        } else {
+            setCommentLike('comment-like')
+            // dislike a comment
+            fetch(`${config.serverEndpoint}/like/dislike/${currentUserLike._id}`, {
+                method: "DELETE",
+                credentials: "include"
+            })
+            .then(response => response.json())
+            .then(data => {
+                setLikeIsHere(true)
+            })
+            .catch(error => console.log(error))
+        }
+        
     }
 
     const likeOrDislike = (e) => {
@@ -82,7 +126,7 @@ export default function Like({ post }) {
 
     return (
         <>
-        <div className='like-thumb-div'>
+        <div className={`like-thumb-div ${commentLike}`}>
         {isLogged ? (
             <svg
                 onClick={(e) => likeOrDislike(e)}
@@ -135,11 +179,23 @@ export default function Like({ post }) {
                 transform="matrix(7.5,0,0,-7.5,0,4360)" 
                 />
                 </g>
-                <title>Liker ce post</title>
+                {post && currentUserLike && (
+                    <title>Disliker ce post</title>
+                )}
+                {post && !currentUserLike && (
+                    <title>Liker ce post</title>
+                )}
+                {!post && currentUserLike && (
+                    <title>Disliker ce commentaire</title>
+                )}
+                {!post && !currentUserLike && (
+                    <title>Liker ce commentaire</title>
+                )}
+                
             </svg>
         ) : (
             <svg
-                className='like-svg-disabled'
+                className={`like-svg-disabled`}
                 version="1.0"
                 width="512pt"
                 height="436pt"
@@ -195,13 +251,22 @@ export default function Like({ post }) {
                 // style="fill:#000000;fill-opacity:0.59607846" 
                 />
                 </g>
-                <title>Connectez-vous pour liker ce post</title>
+                {post ? (
+                    <title>Connectez-vous pour liker ce post</title>
+                ) : (
+                    <title>Connectez-vous pour liker ce commentaire</title>
+                )}
+                
             </svg>
             )}
         </div>
         <div className='like-counter-div'>
             {likeArray && (
-                <p className='like-counter'>{likeArray.length}</p>
+                post ? (
+                    <p className='like-counter' style={{cursor: 'default'}}>{likeArray.length}</p>
+                ) : (
+                    <p className='like-counter' style={{cursor: 'default', fontSize: '11px'}}>{likeArray.length}</p>
+                )
             )}
         </div>
         
