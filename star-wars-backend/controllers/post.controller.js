@@ -88,19 +88,16 @@ exports.getPostAuthor = async (req, res) => {
     try {
         // Récupérer l'id de l'utilisateur du post
         const userId = req.params.id
-
+        
         // Récupérer l'utilisateur du post avec son id
         const currentUser = await User.findById(userId)
-
-        // Vérifier que l'on a bien reçu un résultat valide
-        if (!currentUser) res.status(404).json({
-            message: "User not found!"
-        })
         
         // Renvoyer en réponse l'utilisateur courant
         res.status(200).json(currentUser)
     } catch(error) {
-        res.status(500).json(error)
+        res.status(404).json({
+            message: "User not found!"
+        })
     }
 }
 
