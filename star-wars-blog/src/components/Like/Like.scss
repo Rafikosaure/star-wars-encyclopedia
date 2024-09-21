@@ -23,6 +23,10 @@ $color_2: #b4b4b4;
 	width: 50px;
 	height: 50px;
 }
+.comment-like {
+	width: 24px;
+	height: 24px;
+}
 #path1 {
     fill: white;
     fill-opacity: 1;
@@ -42,28 +46,29 @@ $color_2: #b4b4b4;
 .like-svg {
 	margin: 0;
 	cursor: pointer;
-	width: 40px;
-	height: 40px;
+	width: 80%;
+	height: 80%;
 	transition-property: animation;
 	&:active { 
 		animation: extend .1s;
 	}
 }
 .like-svg-disabled {
-	width: 40px;
-	height: 40px;
-}
-.like-counter {
-	color: $color_1;
-	cursor: default;
-	height: 10px;
+	width: 80%;
+	height: 80%;
 }
 .like-counter-div {
+	font-family: Arial, Helvetica, sans-serif;
 	padding-left: 10px;
 	width: 10%;
 	height: fit-content;
 	z-index: 1;
 	display: flex;
+	cursor: default;
+	.like-counter {
+		color: $color_1;
+		height: 10px;
+	}
 }
 
 
