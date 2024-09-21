@@ -8,6 +8,7 @@ import reloadUsersReducer from "./slices/reloadUsersArray";
 import userLogReducer from './slices/loggedUserSlice';
 import topicsReloadReducer from './slices/topicsReload';
 import citationReducer from './slices/citationSlice';
+import commentCitationReducer from "./slices/commentCitationSlice";
 import postsReloadReducer from "./slices/postsReload";
 
 
@@ -22,6 +23,7 @@ export default configureStore({
         userLogReducer: userLogReducer,
         topicsReload: topicsReloadReducer,
         citation: citationReducer,
+        commentCitation: commentCitationReducer,
         postsReload: postsReloadReducer
     }
 })
