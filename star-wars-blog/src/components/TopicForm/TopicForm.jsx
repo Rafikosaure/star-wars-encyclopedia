@@ -59,7 +59,7 @@ export default function TopicForm({ topicsCategoryId }) {
         })
         .then(response => response.json())
         .then(data => {
-            console.log(data)
+            // console.log(data)
             dispatch(reloadTopics())
         })
         .catch(error => console.log(error))
