@@ -1,6 +1,7 @@
 const Comment = require('../models/comment.model.js')
 const Post = require('../models/post.model.js')
 const User = require('../models/user.model.js')
+const Like = require('../models/like.model.js')
 
 
 exports.createComment = async (req, res) => {
@@ -54,6 +55,20 @@ exports.createComment = async (req, res) => {
     }
 }
 
+exports.getOneCommentById = async (req, res) => {
+    try {
+        const commentId = req.params.id
+        const comment = await Comment.findById(commentId)
+        if (!comment) res.status(404).json({
+            message: "Comment not found!"
+        })
+        res.status(200).json(comment)
+    
+    } catch(error) {
+        res.status(500).json(error)
+    }
+}
+
 
 exports.getCommentsByPostId = async (req, res) => {
     try {
@@ -70,6 +85,29 @@ exports.getCommentsByPostId = async (req, res) => {
         res.status(500).json(error)
     }
 }
+
+
+// Récupérer l'utillisateur d'un commentaire
+exports.getCommentAuthorById = async (req, res) => {
+    try {
+        // Récupérer l'id de l'auteur du commentaire
+        const userId = req.params.id
+
+        // Récupérer l'auteur du commentaire avec son id
+        const currentUser = await User.findById(userId)
+
+        // Vérifier que l'on a bien reçu un résultat valide
+        if (!currentUser) res.status(404).json({
+            message: "User not found!"
+        })
+        
+        // Renvoyer en réponse l'utilisateur courant
+        res.status(200).json(currentUser)
+    } catch(error) {
+        res.status(500).json(error)
+    }
+}
+
 
 
 exports.updateACommentById = async (req, res) => {
@@ -109,13 +147,6 @@ exports.updateACommentById = async (req, res) => {
 
 exports.deleteACommentById = async (req, res) => {
     try {
-        // Vérifier si l'utilisateur est l'admin du site
-        const currentUser = await User.findById(req.user.id)
-        if (!currentUser.isAdmin) 
-            res.status(404).json({
-                message: "Access forbidden!"
-            })
-        
         // Récupérer l'id du commentaire
         const commentId = req.params.id
 
@@ -129,6 +160,7 @@ exports.deleteACommentById = async (req, res) => {
 
         // Enfin, supprimer le commentaire
         await Comment.findByIdAndDelete({ _id: commentId })
+        
         res.status(200).json({
             message: "Comment deleted!"
         })
