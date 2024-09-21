@@ -16,7 +16,6 @@ import '../../sharedStyles/Account.scss'
 import DefaultAvatar from '../../assets/images/EmojiBlitzBobaFett1.webp'
 import { useForm } from 'react-hook-form'
 import PictureIsValid from '../../assets/images/is_valid.webp'
-// import UserData from '../../components/UserData/UserData'
 import { toast } from 'sonner'
 import config from '../../config'
 
