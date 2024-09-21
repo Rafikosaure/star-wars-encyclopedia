@@ -59,6 +59,10 @@ $background-color_2: black;
 	flex-direction: column;
 	align-items: center;
 	gap: 10px;
+	.topics-list-empty-message {
+		font-family: Arial, Helvetica, sans-serif;
+		font-size: 28px;
+	}
 }
 .topic-creation-form {
 	margin-top: 50px;
