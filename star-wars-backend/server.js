@@ -14,7 +14,7 @@ const normalizePort = (val) => {
     }
     return false
 }
-const port = normalizePort(ENV.PORT || '4000')
+const port = normalizePort(ENV.SERVER_PORT || '4000')
 app.set('port', port)
 
 const errorHandler = (error) => {
