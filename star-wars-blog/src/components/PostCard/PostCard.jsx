@@ -178,7 +178,7 @@ export default function PostCard({ index, post, topicId }) {
 
 
     return (
-        <div className='post-card-main-wrapper'>
+        <div className='post-card-main-wrapper' id={post._id}>
             <div className='post-card-main'>
                 <div className='post-card-overlay' />
                 <div className='post-card-content'>
