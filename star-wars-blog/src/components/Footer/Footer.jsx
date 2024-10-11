@@ -21,8 +21,8 @@ export default function Footer() {
         </ul>
         <ul>
           <h2>Contact</h2>
-          <li><a href="mailto:rafikbensadi@live.fr?subject=Contact%20depuis%20rafikbensadi.com">Contactez-moi par email</a></li>
-          <li><a href="tel:+33649363839">Envoyez-moi un appel téléphonique</a></li>
+          <li><a href="mailto:rafikbensadi@live.fr?subject=Contact%20depuis%20rafikbensadi.com">Contact par email</a></li>
+          <li><a href="tel:+33649363839">Contact par téléphone</a></li>
         </ul>
       </div>
     </div>
