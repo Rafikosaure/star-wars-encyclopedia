@@ -9,17 +9,16 @@ exports.emailMention = (data, mentionnedUser, datetime) => {
             <title>relance</title>
             <link rel="important stylesheet" href="chrome://messagebody/skin/messageBody.css">
             </head>
-            <body style="display: block; margin: auto; max-width: 800px; width: 95%;">
-            <div>
-                
-                <div><br><img src='cid:starwarsencyclopediabanner' style="width: 100%; min-width: 400px" /></div><br><br>
+            <body style="display: block; padding: 15px; max-width: 800px; min-width: 450px; width: auto;">
+            <div style="width: 100%; margin-left: auto; margin-right: auto;">
+                <div><br><img src='cid:starwarsencyclopediabanner' style="width: 100%; min-width: 400px;"/></div><br><br>
                 <div>Bonjour ${mentionnedUser.name},
                 </div><br>
                 <div>
                 ${data.author.name} a fait mention de vous le ${datetime} dans la discussion "${data.topic.title}" !
                 </div>
                 <div>
-                Pour prendre connaissance de son message, rendez-vous <a href='http://localhost:3000/topic/${data.topic.id}#${data.postId}'>dans la discussion</a>.
+                Pour prendre connaissance de son message, rendez-vous <a href='http://localhost:3000/topic/${data.topic.id}#${data.postId}'>ici</a>.
                 </div>
 
                 <br><br><br>
