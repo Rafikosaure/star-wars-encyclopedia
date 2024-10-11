@@ -4,6 +4,8 @@ import { useParams } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { useSelector, useDispatch } from 'react-redux'
+import { selectReloadUsersState } from '../../redux/slices/reloadUsersArray'
+import { reloadUsersArrayFunction } from '../../redux/slices/reloadUsersArray'
 import { selectCitation } from '../../redux/slices/citationSlice'
 import { reinitializeCitation } from '../../redux/slices/citationSlice'
 import { selectIsLoggedState } from '../../redux/slices/isLoggedUserSlice'
@@ -16,18 +18,20 @@ import ReturnArrow from '../../assets/images/return-arrow.webp'
 import config from '../../config'
 
 
+
 export default function Topic() {
-    
     
     const { topicId } = useParams()
     const [currentTopicData, setCurrentTopicData] = useState()
     const [currentCategory, setCurrentCategory] = useState()
+    const [usersList, setUsersList] = useState()
     const navigate = useNavigate()
     const { register, handleSubmit, reset } = useForm()
     const currentCitation = useSelector(selectCitation)
     const reloadPostsBool = useSelector(selectReloadPostsState)
     const loggedUser = useSelector(selectLoggedUser)
     const isLogged = useSelector(selectIsLoggedState)
+    const reloadUsers = useSelector(selectReloadUsersState)
     const citationText = currentCitation.text
     const citationAuthorId = currentCitation.authorId
     const dispatch = useDispatch()
@@ -59,6 +63,29 @@ export default function Topic() {
     }, [topicId])
 
 
+    useEffect(() => {
+        // Récupération des utilisateurs
+        if (!reloadUsers || !usersList) {
+            fetch(`${config.serverEndpoint}/user/getAll`, {
+                credentials: 'include'
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (!data.badAccessMessage) {
+                    // console.log(data)
+                    setUsersList(data)
+                }
+                dispatch(reloadUsersArrayFunction(true))
+            })
+            .catch(error => {
+                console.log(error)
+                dispatch(reloadUsersArrayFunction(true))
+            })
+        }
+    }, [dispatch, reloadUsers, usersList])
+
+
+
     const createNewPost = (data) => {
         // Construction du corps de la requète
         const fetchContent = data.description.replace(/\s+/g, ' ').trim()
@@ -70,7 +97,8 @@ export default function Topic() {
             },
             comments: [],
             likes: []
-        }
+        }        
+
         if (citationText && citationAuthorId) {
             const fetchCitationText = citationText.split("a dit :").at(-1).trim().replace(/^"|"$/g, "")
             fetchData.citation = {
@@ -79,7 +107,7 @@ export default function Topic() {
             }
         }
 
-        // Envoi de la requète
+        // // Envoi de la requète
         fetch(`${config.serverEndpoint}/post/createPost/${topicId}`, {
             method: "POST",
             credentials: "include",
@@ -87,13 +115,43 @@ export default function Topic() {
             body: JSON.stringify(fetchData)
         })
         .then(response => response.json())
-        .then(data => {
-            // console.log(data)
+        .then(result => {
+            // Gestion des mentions
+            let includedUsersArray = []
+            if (usersList) {
+                usersList.forEach((user) => {
+                    const isIncludeValue = data.description.search(`@${user.name}`)
+                    if (isIncludeValue !== -1) {
+                        // console.log(`"${user}" est présent dans le texte.`)
+                        includedUsersArray.push(user)
+                    }
+                })
+                notifyMentionnedUsers(includedUsersArray, result.newPost._id)
+            }
             dispatch(reloadPosts())
         })
         .catch(error => console.log(error))
         reset()
         dispatch(reinitializeCitation())
+    }
+    
+    
+    // Fonction de traitement des appels aux notifications si mentions il y a
+    const notifyMentionnedUsers = (usersToNotify, postId) => {
+        console.log("Paramètres :", usersToNotify, postId)
+        fetch(`${config.serverEndpoint}/email/userNotification/${topicId}`, {
+            method: "POST",
+            credentials: "include",
+            headers: {"Accept": "application/json", "Content-Type": "application/json"},
+            body: JSON.stringify({
+                users: usersToNotify,
+                emailType: "mention",
+                postId: postId
+            })
+        })
+        .then(response => response.json())
+        .then(data => console.log(data.message))
+        .catch(error => console.log(error.message))
     }
 
 
@@ -119,7 +177,7 @@ export default function Topic() {
                     </div>
                     )}
                     {isLogged && (
-                        <form id='citation-post' className='creation-post-form' onSubmit={handleSubmit(createNewPost)}>
+                        <form className='creation-post-form' onSubmit={handleSubmit(createNewPost)}>
                             <h2 className='creation-post-form-title'>Créez un post</h2>
                             {citationText && (
                                 <div className='citation-div'>
@@ -127,7 +185,8 @@ export default function Topic() {
                                     <p className='citation-content'>{citationText}</p>
                                 </div>
                             )}
-                            <textarea className='creation-post-textarea-description' name='description' type="text" placeholder='Tapez votre post' {...register("description")} maxLength={500} required />
+
+                            <textarea id="test" className='creation-post-textarea-description' name='description' type="text" placeholder='Tapez votre post' {...register("description")} maxLength={500} required />
                             <button type='submit' className='creation-post-form-submit'>Publier</button>
                         </form>
                     )}
