@@ -136,22 +136,41 @@ export default function Topic() {
     }
     
     
-    // Fonction de traitement des appels aux notifications si mentions il y a
-    const notifyMentionnedUsers = (usersToNotify, postId) => {
-        console.log("Paramètres :", usersToNotify, postId)
-        fetch(`${config.serverEndpoint}/email/userNotification/${topicId}`, {
-            method: "POST",
-            credentials: "include",
-            headers: {"Accept": "application/json", "Content-Type": "application/json"},
-            body: JSON.stringify({
-                users: usersToNotify,
-                emailType: "mention",
-                postId: postId
+    // Envoi des notifications en cas de mentions
+    const notifyMentionnedUsers = async (usersToNotify, postId) => {
+
+        // Vérification si les mentions sont autorisées
+        const promises = usersToNotify.map(async (userToNotify) => {
+            const response = await fetch(`${config.serverEndpoint}/isMentionned/getIsMentionnedOption/${userToNotify._id}`, { credentials: 'include' });
+            const allowMentionObject = response.json()
+            const result = await allowMentionObject
+            if (result.allowMentions) {
+                return userToNotify
+            } else {
+                return undefined
+            }
+        });
+        const allowedUsers = await Promise.all(promises);
+
+        // Filtrer les utilisateurs
+        const filteredUsers = allowedUsers.filter(user => user !== undefined)
+
+        // Envoi des notifications aux utilisateurs concernés
+        if (allowedUsers.length > 0) {
+            fetch(`${config.serverEndpoint}/email/userNotification/${topicId}`, {
+                method: "POST",
+                credentials: "include",
+                headers: {"Accept": "application/json", "Content-Type": "application/json"},
+                body: JSON.stringify({
+                    users: filteredUsers,
+                    emailType: "mention",
+                    postId: postId
+                })
             })
-        })
-        .then(response => response.json())
-        .then(data => console.log(data.message))
-        .catch(error => console.log(error.message))
+            .then(response => response.json())
+            .then(data => console.log(data.message))
+            .catch(error => console.log(error.message))
+        }
     }
 
 
