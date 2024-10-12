@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const User = require('../models/user.model.js')
+const IsMentionned = require('../models/isMentionned.model.js')
 const sharp = require('sharp')
 const ENV = require('../config/config.js')
 
@@ -14,7 +15,6 @@ exports.register = (req, res) => {
     // Traitement de l'image mémorisée avec le module sharp
     if (req.file) {
         const { buffer, originalname } = req.file
-        console.log("Jusqu'ici tout va bien...", req.file.originalname)
         const timestamp = Date.now()
         const name = originalname.split(' ').join('_')
         const ref = `${name}-${timestamp}.webp`
@@ -34,9 +34,13 @@ exports.register = (req, res) => {
                 isAdmin: userObject.isAdmin
             })
             user.save()
-                .then(() =>
+                .then(() => {
+                    const isMentionned = new IsMentionned({
+                        userId: user._id
+                    })
+                    isMentionned.save()
                     res.status(201).json({ message: 'Utilisateur créé !' })
-                )
+                })
                 .catch((error) => res.status(400).json({ error }))
         })
         .catch((error) => res.status(500).json({ error }))
