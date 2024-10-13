@@ -4,6 +4,7 @@ $background-color_2: black;
 
 .topics {
 	background: url(../../assets/images/star-wars-episode9-team.webp) no-repeat center center fixed;
+	background-size: cover;
 	color: $color_1;
 	position: relative;
 	width: calc(80% - 4px);
@@ -67,6 +68,35 @@ $background-color_2: black;
 .topic-creation-form {
 	margin-top: 50px;
 	margin-bottom: 100px;
+}
+/* Ici : media queries pour la seconde partie desktop */
+@media screen and (max-width: 1380px) {
+    .topics-list-empty-message {
+		font-size: 20px !important;
+	}
+}
+/* Ici : media queries pour la première partie tablette */
+@media screen and (max-width: 1023px) {
+    .topics-list-empty-message {
+		font-size: 18px !important;
+	}
+	.topic-creation-form {
+		margin-top: 70px;
+		margin-bottom: 30px;
+	}
+}
+/* Ici : media queries pour la seconde partie tablette */
+@media screen and (max-width: 991px) {
+	.topics {
+		width: calc(100% - 4px);
+	}
+	.topics-page-title {
+		margin-top: 60px;
+		width: 80%;
+		text-align: center;
+		font-size: 22px;
+		cursor: default;
+	}
 }
 
 

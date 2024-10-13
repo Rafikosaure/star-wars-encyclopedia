@@ -1,74 +1,237 @@
+$color_1: black;
+$font-family_1: Arial, Helvetica, sans-serif;
+$background-color_1: rgba(255, 255, 255, .8);
+$background-color_2: rgba(240,255,255,0.2);
+$background-color_3: lightskyblue;
+
 .creation-topic-main {
-    width: 700px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+	width: 700px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 .creation-topic-display-button {
-    background-color: rgba(255, 255, 255, .8);
-    text-align: center;
-    font-size: 22px;
-    margin-bottom: 50px;
-    color: black;
-    width: 80%;
-    height: 40px;
-    border-radius: 10px;
-    cursor: pointer;
+	background-color: $background-color_1;
+	text-align: center;
+	font-size: 22px;
+	margin-bottom: 50px;
+	color: $color_1;
+	width: 80%;
+	height: 40px;
+	border-radius: 10px;
+	cursor: pointer;
 }
 .creation-topic-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
-    gap: 15px;
-    background-color: rgba(240,255,255,0.2);
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-top: 40px;
-    padding-bottom: 40px;
-    border-radius: 10px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+	gap: 15px;
+	background-color: $background-color_2;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top: 40px;
+	padding-bottom: 40px;
+	border-radius: 10px;
 }
 .creation-topic-input-title {
-    height: 30px;
+	height: 30px;
+	width: 80%;
+	border-radius: 10px;
+	background-color: $background-color_1;
+	padding-left: 15px;
+	padding-right: 15px;
+	font-size: 16px;
+	font-family: $font-family_1;
+	box-sizing: border-box;
+	&::placeholder {
+		font-family: $font-family_1;
+		font-size: 14px;
+	}
+	&:focus {
+		border: 4px solid rgb(53, 155, 155);
+		outline: none;
+	}
 }
 .creation-topic-textarea-question {
-    height: 60px;
+	height: 60px;
+	width: 80%;
+	border-radius: 10px;
+	background-color: $background-color_1;
+	padding-left: 15px;
+	padding-right: 15px;
+	font-size: 16px;
+	font-family: $font-family_1;
+	box-sizing: border-box;
+	&::placeholder {
+		font-family: $font-family_1;
+		font-size: 14px;
+	}
+	&:focus {
+		border: 4px solid rgb(53, 155, 155);
+		outline: none;
+	}
 }
 .creation-topic-textarea-description {
-    height: 150px;
-}
-.creation-topic-input-title, .creation-topic-textarea-description, .creation-topic-textarea-question {
-    width: 80%;
-    border-radius: 10px;
-    background-color: rgba(255, 255, 255, .8);
-    padding-left: 15px;
-    padding-right: 15px;
-    font-size: 16px;
-    font-family: Arial, Helvetica, sans-serif;
-    box-sizing: border-box;
-}
-.creation-topic-input-title::placeholder, .creation-topic-textarea-description::placeholder, .creation-topic-textarea-question::placeholder {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 14px;
-}
-.creation-topic-input-title:focus, .creation-topic-textarea-description:focus, .creation-topic-textarea-question:focus {
-    border: 4px solid rgb(53, 155, 155);
-    outline: none;
+	height: 150px;
+	width: 80%;
+	border-radius: 10px;
+	background-color: $background-color_1;
+	padding-left: 15px;
+	padding-right: 15px;
+	font-size: 16px;
+	font-family: $font-family_1;
+	box-sizing: border-box;
+	&::placeholder {
+		font-family: $font-family_1;
+		font-size: 14px;
+	}
+	&:focus {
+		border: 4px solid rgb(53, 155, 155);
+		outline: none;
+	}
 }
 button {
-    background-color: rgba(255, 255, 255, .8);
-    margin-top: 0;
-    width: 40%;
+	background-color: $background-color_1;
+	margin-top: 0;
+	width: 40%;
+	&:hover {
+		outline: none;
+		border: 4px solid rgb(53, 155, 155);
+	}
+	&:active {
+		border: 4px solid lightskyblue;
+		outline: none;
+		background-color: $background-color_3;
+	}
 }
-button:hover {
-    outline: none;
-    border: 4px solid rgb(53, 155, 155);
+/* Ici : media queries pour la première partie smartphone */
+@media screen and (max-width: 660px) {
+	.creation-topic-main {
+		width: 375px;
+	}
+	.creation-topic-display-button {
+		font-size: 16px;
+		height: 30px;
+		margin-bottom: 15px;
+	}
+	.creation-topic-input-title {
+		width: 95%;
+		font-size: 12px;
+		&::placeholder {
+			font-size: 12px;
+		}
+	}
+	.creation-topic-textarea-description {
+		width: 95%;
+		font-size: 12px;
+		&::placeholder {
+			font-size: 12px;
+		}
+	}
+	.creation-topic-textarea-question {
+		width: 95%;
+		font-size: 12px;
+		&::placeholder {
+			font-size: 12px;
+		}
+	}
 }
-button:active {
-    border: 4px solid lightskyblue;
-    outline: none;
-    background-color: lightskyblue;
-}
+
+
+
+// .creation-topic-main {
+//     width: 700px;
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: center;
+//     align-items: center;
+// }
+// .creation-topic-display-button {
+//     background-color: rgba(255, 255, 255, .8);
+//     text-align: center;
+//     font-size: 22px;
+//     margin-bottom: 50px;
+//     color: black;
+//     width: 80%;
+//     height: 40px;
+//     border-radius: 10px;
+//     cursor: pointer;
+// }
+// .creation-topic-form {
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//     width: 80%;
+//     margin-left: auto;
+//     margin-right: auto;
+//     gap: 15px;
+//     background-color: rgba(240,255,255,0.2);
+//     padding-left: 10px;
+//     padding-right: 10px;
+//     padding-top: 40px;
+//     padding-bottom: 40px;
+//     border-radius: 10px;
+// }
+// .creation-topic-input-title {
+//     height: 30px;
+// }
+// .creation-topic-textarea-question {
+//     height: 60px;
+// }
+// .creation-topic-textarea-description {
+//     height: 150px;
+// }
+// .creation-topic-input-title, .creation-topic-textarea-description, .creation-topic-textarea-question {
+//     width: 80%;
+//     border-radius: 10px;
+//     background-color: rgba(255, 255, 255, .8);
+//     padding-left: 15px;
+//     padding-right: 15px;
+//     font-size: 16px;
+//     font-family: Arial, Helvetica, sans-serif;
+//     box-sizing: border-box;
+// }
+// .creation-topic-input-title::placeholder, .creation-topic-textarea-description::placeholder, .creation-topic-textarea-question::placeholder {
+//     font-family: Arial, Helvetica, sans-serif;
+//     font-size: 14px;
+// }
+// .creation-topic-input-title:focus, .creation-topic-textarea-description:focus, .creation-topic-textarea-question:focus {
+//     border: 4px solid rgb(53, 155, 155);
+//     outline: none;
+// }
+// button {
+//     background-color: rgba(255, 255, 255, .8);
+//     margin-top: 0;
+//     width: 40%;
+// }
+// button:hover {
+//     outline: none;
+//     border: 4px solid rgb(53, 155, 155);
+// }
+// button:active {
+//     border: 4px solid lightskyblue;
+//     outline: none;
+//     background-color: lightskyblue;
+// }
+// /* Ici : media queries pour la première partie smartphone */
+// @media screen and (max-width: 660px) {
+// 	.creation-topic-main {
+//         width: 375px;
+//     }
+//     .creation-topic-display-button {
+//         font-size: 16px;
+//         height: 30px;
+//         margin-bottom: 15px;
+//     }
+//     .creation-topic-input-title, .creation-topic-textarea-description, .creation-topic-textarea-question {
+//         width: 95%;
+//         font-size: 12px;
+//     }
+//     .creation-topic-input-title::placeholder, .creation-topic-textarea-description::placeholder, .creation-topic-textarea-question::placeholder {
+//         font-size: 12px;
+//     }
+// }

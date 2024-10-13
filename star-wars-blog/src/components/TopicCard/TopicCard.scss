@@ -51,9 +51,101 @@ $background-color_1: black;
 		font-size: 20px;
 		margin: 0;
 	}
-	p {
-		font-size: 14px;
-		margin: 0;
+	.topic-datetime-and-actions {
+		display: flex;
+		justify-content: flex-end;
+		align-items: center;
+		p {
+			font-size: 14px;
+			margin: 0;
+		}
+		.topic-action {
+			line-height: 20px;
+			margin-left: 20px;
+			cursor: pointer;
+		}
+		.bulle {
+			width: 16px; 
+			height: 16px;
+			min-width: 16px;
+			min-height: 16px;
+		}
+	}
+}
+/* Ici : media queries pour la seconde partie desktop */
+@media screen and (max-width: 1380px) {
+	.topic-card-main {
+		width: 90%;
+	}
+    .topic-infos {
+		h1 { 
+			font-size: 14px;
+		}
+		.topic-datetime-and-actions {
+			p {
+				font-size: 13px;
+			}
+		}
+	}
+	.topic-description {
+		font-size: 13px;
+	}
+}
+/* Ici : media queries pour la première partie tablette */
+@media screen and (max-width: 1023px) {
+	.topic-card-main {
+		width: 95%;
+	}
+	.topic-infos {
+		h1 { 
+			font-size: 14px;
+		}
+		.topic-datetime-and-actions {
+			p {
+				font-size: 12px;
+			}
+		}
+	}
+	.topic-description {
+		font-size: 12px;
+	}
+}
+/* Ici : media queries pour la seconde partie tablette */
+@media screen and (max-width: 991px) {
+	.topic-card-main {
+		min-height: 100px;
+		height: fit-content;
+	}
+	.topic-infos {
+		h1 { 
+			font-size: 14px;
+		}
+		.topic-datetime-and-actions {
+			p {
+				display: none;
+				font-size: 12px;
+			}
+		}
+	}
+	.topic-description {
+		font-size: 12px;
+	}
+}
+/* Ici : media queries pour la première partie smartphone */
+@media screen and (max-width: 660px) {
+	.topic-infos {
+		h1 { 
+			font-size: 12px;
+		}
+		.topic-datetime-and-actions {
+			p {
+				display: none;
+				font-size: 11px;
+			}
+		}
+	}
+	.topic-description {
+		font-size: 11px;
 	}
 }
 
