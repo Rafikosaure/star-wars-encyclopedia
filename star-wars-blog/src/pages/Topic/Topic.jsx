@@ -136,9 +136,9 @@ export default function Topic() {
     }
     
     
-    // Envoi des notifications en cas de mentions
+    // Envoi des notifications en cas de mention
     const notifyMentionnedUsers = async (usersToNotify, postId) => {
-
+        
         // Vérification si les mentions sont autorisées
         const promises = usersToNotify.map(async (userToNotify) => {
             const response = await fetch(`${config.serverEndpoint}/isMentionned/getIsMentionnedOption/${userToNotify._id}`, { credentials: 'include' });
@@ -196,7 +196,7 @@ export default function Topic() {
                     </div>
                     )}
                     {isLogged && (
-                        <form className='creation-post-form' onSubmit={handleSubmit(createNewPost)}>
+                        <form id='citation-post' className='creation-post-form' onSubmit={handleSubmit(createNewPost)}>
                             <h2 className='creation-post-form-title'>Créez un post</h2>
                             {citationText && (
                                 <div className='citation-div'>
@@ -205,7 +205,7 @@ export default function Topic() {
                                 </div>
                             )}
 
-                            <textarea id="test" className='creation-post-textarea-description' name='description' type="text" placeholder='Tapez votre post' {...register("description")} maxLength={500} required />
+                            <textarea className='creation-post-textarea-description' name='description' type="text" placeholder='Tapez votre post' {...register("description")} maxLength={500} required />
                             <button type='submit' className='creation-post-form-submit'>Publier</button>
                         </form>
                     )}
