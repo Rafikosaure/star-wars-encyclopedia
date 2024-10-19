@@ -37,7 +37,7 @@ export default function Account() {
 
   useEffect(() => {
     if (!isLogged) {
-      navigate("/")
+      navigate("/auth")
     }
   }, [isLogged, navigate])
 
@@ -59,7 +59,7 @@ export default function Account() {
       .then(data => {
         if (data.badAccessMessage) {
           dispatch(reloadUsersArrayFunction(true))
-          navigate('/')
+          navigate('/auth')
         } else {
           setAllUsers(data.filter((user) => user.isAdmin !== true))
           dispatch(reloadUsersArrayFunction(true))
@@ -119,7 +119,7 @@ export default function Account() {
         dispatch(reloadUsersArrayFunction())
         toast("Mise à jour effectuée !")
       } else {
-        navigate('/')
+        navigate('/auth')
       }
     })
     .catch(error => console.error(error));
@@ -142,14 +142,14 @@ export default function Account() {
     .then(response => response.json())
     .then(data => {
       if (data.badAccessMessage) {
-        navigate('/')
+        navigate('/auth')
       } else {
         dispatch(updateIsLoggedUser(false))
         dispatch(updateUserLog({}))
         dispatch(updateLoadedUser(false))
         dispatch(reloadUsersArrayFunction())
         toast('Compte utilisateur supprimé !')
-        navigate('/')
+        navigate('/auth')
       }
     })
     .catch(error => console.log(error))
