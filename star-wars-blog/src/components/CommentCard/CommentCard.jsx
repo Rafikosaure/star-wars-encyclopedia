@@ -58,6 +58,7 @@ export default function CommentCard({ index, commentId, topicId, postId }) {
     }, [currentComment])
 
 
+    // Mise en forme des retours à la ligne
     const shapingTextWithBreaks = () => {
         if (currentComment) {
             const textWithBreaks = currentComment.content.split('\n').map((text, index) => (
@@ -155,9 +156,24 @@ export default function CommentCard({ index, commentId, topicId, postId }) {
         dispatch(saveACommentCitation(citationObject))
     }
 
+    // // Gestion des mentions
+    // const mentionsManager = (data, result) => {
+    //     let includedUsersArray = []
+    //     if (usersList) {
+    //         usersList.forEach((user) => {
+    //             const isIncludeValue = data.description.search(`@${user.name}`)
+    //             if (isIncludeValue !== -1) {
+    //                 // console.log(`"${user}" est présent dans le texte.`)
+    //                 includedUsersArray.push(user)
+    //             }
+    //         })
+    //         notifyMentionnedUsers(includedUsersArray, result.newComment._id, topicId)
+    //     }
+    // }
+
 
   return (
-    <div className='comment-card-wrapper'>
+    <div id={commentId} className='comment-card-wrapper'>
         <p className='comment-card-wrapper-arrow'>➤</p>
         <div className='comment-card-body'>
             <div className='comment-card-main'>
