@@ -58,33 +58,42 @@ exports.userNotificationEmail = async (req, res) => {
         const datetime = dateObject.toLocaleDateString("fr-FR", options).replace(':', 'h')
 
         // Send emails to all mentionned users
-        data.users.forEach(async (mentionnedUser) => {
-            // Manage type of email
-            let emailTypeToSend;
-            if (data.emailType === "mention") {
-                emailTypeToSend = {
-                    subject: `${mentionnedUser.name}, on fait mention de vous !`,
-                    html: Email.emailMention(data, mentionnedUser, datetime)
+        await Promise.all(
+            data.users.map(async (userToSend) => {
+                // Manage type of email
+                let emailTypeToSend;
+                if (data.emailType === "mention") {
+                    emailTypeToSend = {
+                        subject: `${userToSend.name}, on fait mention de vous !`,
+                        html: Email.emailMention(data, userToSend, datetime)
+                    }
+                } else if (data.emailType === "newPost") {
+                    emailTypeToSend = {
+                        subject: `${userToSend.name}, du nouveau dans le forum !`,
+                        html: Email.emailNewPost(data, userToSend, datetime)
+                    }
                 }
-            }
-            const mailOptions = {
-                from: data.author.email,
-                to: mentionnedUser.email,
-                subject: emailTypeToSend.subject, // Subject of the email
-                html: emailTypeToSend.html, // Template of the email
-                attachments: [{
-                    filename: 'email-banner.jpg',
-                    path: './images/email-banner.jpg',
-                    cid: 'starwarsencyclopediabanner' // same value cid than in the src of the html image (in the template)
-                }]
-            }
-            transporter.sendMail(mailOptions)
-            .then(info => console.log("Email sent !", info.response))
-            .catch(error => res.status(404).json({
-                message: "Error! Email sending failed!",
-                error: error
-            }))
-        })
+                const mailOptions = {
+                    from: data.author.email,
+                    to: userToSend.email,
+                    subject: emailTypeToSend.subject, // Subject of the email
+                    html: emailTypeToSend.html, // Template of the email
+                    attachments: [{
+                        filename: 'email-banner.jpg',
+                        path: './images/email-banner.jpg',
+                        cid: 'starwarsencyclopediabanner' // same value cid than in the src of the html image (in the template)
+                    }]
+                }
+
+                // Send email to the current user of the loop
+                transporter.sendMail(mailOptions)
+                .then(info => console.log("Email sent !", info.response))
+                .catch(error => res.status(404).json({
+                    message: "Error! Email sending failed!",
+                    error: error
+                }))
+            })
+        )
 
         res.status(200).json({
             message: "Email processing complete!"
