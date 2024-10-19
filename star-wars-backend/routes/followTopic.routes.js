@@ -1,18 +1,13 @@
 const express = require('express')
-const followTopic = require('../controllers/followTopic.controller.js')
+const followTopicCtrl = require('../controllers/followTopic.controller.js')
 const auth = require('../middlewares/auth.js')
 const router = express.Router()
 
 
 /** Routes de gestion des discussions suivies par les utilisateurs */
-
-// router.post('/register', multer, userCtrl.register)
-// router.post('/login', userCtrl.login)
-// router.post('/logout', auth.verifyToken, userCtrl.logout)
-// router.get('/logged', auth.verifyToken, userCtrl.logged)
-// router.get('/getAll', auth.verifyToken, userCtrl.getAllUsers)
-// router.put('/update', auth.verifyToken, multer, userCtrl.modifyUser)
-// router.delete('/authDeleteById/:id', auth.verifyToken, userCtrl.authDeleteById)
-// router.delete('/deleteById', auth.verifyToken, userCtrl.deleteById)
+router.post('/createAFollowTopicArray/:id', auth.verifyToken, followTopicCtrl.createAFollowTopicArray)
+router.get('/getAllFollowersOfATopic/:id', followTopicCtrl.getAllFollowersOfATopic)
+router.get('/getAllFollowedTopics', auth.verifyToken, followTopicCtrl.getAllFollowedTopics)
+router.put('/chooseWhetherToFollowOrNot/:id', auth.verifyToken, followTopicCtrl.chooseWhetherToFollowOrNot)
 
 module.exports = router
