@@ -4,38 +4,114 @@ import { useSelector } from 'react-redux'
 import './TopicCard.scss'
 import { selectIsLoggedState } from '../../redux/slices/isLoggedUserSlice'
 import { selectLoggedUser } from '../../redux/slices/loggedUserSlice'
+import { reloadTopics } from '../../redux/slices/topicsReload'
+import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import StarsSky from '../../assets/images/ciel_nuit_banniere.webp'
-
+import config from '../../config'
+import { toast } from 'sonner'
 
 
 export default function TopicCard({ topic }) {
 
     const isLogged = useSelector(selectIsLoggedState)
     const loggedUser = useSelector(selectLoggedUser)
+    const dispatch = useDispatch()
     const [isFollowedColor, setIsFollowedColor] = useState('white')
     const [isFollowedTitle, setIsFollowedTitle] = useState('Suivre cette discussion')
     const [datetime, updateDateTime] = useState()
+    const [followersArray, setFollowersArray] = useState()
+    const [currentFollower, setCurrentFollower] = useState()
+
 
     useEffect(() => {
         const topicDate = new Date(topic.createdAt)
         updateDateTime(topicDate)
     }, [topic])
 
+
+    useEffect(() => {
+        // Récupération des abonnés à la discussion
+        if (!followersArray) {
+            fetch(`${config.serverEndpoint}/followTopic/getAllFollowersOfATopic/${topic._id}`)
+            .then(response => response.json())
+            .then(data => {
+                setFollowersArray(data)
+            })
+            .catch(error => console.log(error))
+        }
+        
+        // Enregistrement de l'utilisateur si il fait partie des abonnés
+        if (followersArray !== undefined && followersArray.length > 0 && loggedUser) {
+            setCurrentFollower(followersArray.find(follower => loggedUser.email === follower.email))
+            if (currentFollower) {
+                setIsFollowedColor('rgb(53, 155, 155)')
+                setIsFollowedTitle('Ne plus suivre cette discussion')
+            }
+        } else {
+            setCurrentFollower()
+        }
+    }, [topic, followersArray, loggedUser, currentFollower])
+
+
     const deleteTopicFunction = (e) => {
         e.preventDefault()
-        console.log('La fonction de suppression de topic est activée !')
+        fetch(`${config.serverEndpoint}/topic/deleteTopicById/${topic._id}`, {
+            method: "DELETE",
+            credentials: "include"
+        })
+        .then(response => response.json())
+        .then(data => {
+            // console.log(data.message)
+            if (data.message) {
+                toast("Discussion supprimée !")
+            }
+            dispatch(reloadTopics())
+        })
+        .catch(error => console.log(error))
     }
+
 
     const followThisTopicFunction = (e) => {
         e.preventDefault()
-        if (isFollowedColor === "white") {
-            setIsFollowedColor('rgb(53, 155, 155)')
-            setIsFollowedTitle('Ne plus suivre cette discussion')
+        let toFollow;
+        
+        if (!currentFollower) {
+            toFollow = true
         } else {
-            setIsFollowedColor('white')
-            setIsFollowedTitle('Suivre cette discussion')
+            toFollow = false
         }
+
+        // Requête pour suivre ou non la discussion 
+        fetch(`${config.serverEndpoint}/followTopic/chooseWhetherToFollowOrNot/${topic._id}`, {
+            method: "PUT",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ toFollow: toFollow })
+        })
+        .then(response => response.json())
+        .then(data => {
+            // console.log(data)
+
+            // Gestion de l'interface si l'utilisateur est ou non un abonné
+            if (data.topicIsFollowed === true) {
+                toast("Vous suivez cette discussion !")
+                setIsFollowedColor('rgb(53, 155, 155)')
+                setIsFollowedTitle('Ne plus suivre cette discussion')
+            } else {
+                toast("Vous ne suivez plus cette discussion !")
+                setIsFollowedColor('white')
+                setIsFollowedTitle('Suivre cette discussion')
+            }
+            setFollowersArray()
+        })
+        .catch(error => {
+            console.log(error)
+        })
+
+        
     }
 
 
