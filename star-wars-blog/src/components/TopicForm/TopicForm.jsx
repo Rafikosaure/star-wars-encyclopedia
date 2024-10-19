@@ -7,6 +7,7 @@ import { selectLoggedUser } from '../../redux/slices/loggedUserSlice'
 import { reloadTopics } from '../../redux/slices/topicsReload.js'
 import './TopicForm.scss'
 import config from '../../config.js'
+import { toast } from 'sonner'
 
 
 export default function TopicForm({ topicsCategoryId }) {
@@ -60,6 +61,7 @@ export default function TopicForm({ topicsCategoryId }) {
         .then(response => response.json())
         .then(data => {
             // console.log(data)
+            toast("Nouvelle discussion créee !")
             dispatch(reloadTopics())
         })
         .catch(error => console.log(error))
