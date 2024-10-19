@@ -9,7 +9,5 @@ router.post('/createIsMentionnedOption/:id', auth.verifyToken, isMentionnedCtrl.
 router.delete('/deleteIsMentionnedOption/:id', auth.verifyToken, isMentionnedCtrl.deleteIsMentionnedOption)
 router.put('/updateIsMentionnedOption/:id', auth.verifyToken, isMentionnedCtrl.allowOrDisallowMentions)
 router.get('/getIsMentionnedOption/:id', auth.verifyToken, isMentionnedCtrl.getIsMentionnedOption)
-// router.get('/getAllCategoriesWithTopics', categoryCtrl.getAllCategoriesWithTopics)
-// router.get('/findCategoryFromTopic/:id', categoryCtrl.findCategoryFromTopic)
 
 module.exports = router

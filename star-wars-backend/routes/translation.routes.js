@@ -6,7 +6,5 @@ const router = express.Router()
 // Route pour les traductions de texte
 router.post('/', translate.translateText)
 
-
-
 module.exports = router
 

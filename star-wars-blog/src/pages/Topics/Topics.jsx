@@ -13,6 +13,7 @@ import TopicForm from '../../components/TopicForm/TopicForm'
 import config from '../../config'
 
 
+
 export default function Topics() {
 
   const { topicsCategoryId } = useParams()
@@ -38,7 +39,6 @@ export default function Topics() {
     .catch(error => {
       console.log(error)
     })
-    
   }, [topicsCategoryId, topicsBool, navigate])
 
 
