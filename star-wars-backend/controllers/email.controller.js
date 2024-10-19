@@ -20,7 +20,7 @@ exports.userNotificationEmail = async (req, res) => {
         const users = req.body.users
 
         // Get the id of the new post
-        const postId = req.body.postId
+        const messageId = req.body.messageId
 
         // Get the type of the email
         const emailType = req.body.emailType
@@ -30,7 +30,7 @@ exports.userNotificationEmail = async (req, res) => {
             users: users,
             author: author,
             topic: currentTopic,
-            postId: postId,
+            messageId: messageId,
             emailType: emailType
         }
 
