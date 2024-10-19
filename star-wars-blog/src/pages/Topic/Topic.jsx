@@ -12,6 +12,8 @@ import { selectIsLoggedState } from '../../redux/slices/isLoggedUserSlice'
 import { selectLoggedUser } from '../../redux/slices/loggedUserSlice'
 import { reloadPosts } from '../../redux/slices/postsReload'
 import { selectReloadPostsState } from '../../redux/slices/postsReload'
+// import notifyMentionnedUsers from '../../sharedFunctions/notifyMentionnedUsers'
+import mentionsManager from '../../sharedFunctions/mentionsManager'
 import PostCard from '../../components/PostCard/PostCard'
 import { Link } from 'react-router-dom'
 import ReturnArrow from '../../assets/images/return-arrow.webp'
@@ -116,61 +118,16 @@ export default function Topic() {
         })
         .then(response => response.json())
         .then(result => {
+
             // Gestion des mentions
-            let includedUsersArray = []
-            if (usersList) {
-                usersList.forEach((user) => {
-                    const isIncludeValue = data.description.search(`@${user.name}`)
-                    if (isIncludeValue !== -1) {
-                        // console.log(`"${user}" est présent dans le texte.`)
-                        includedUsersArray.push(user)
-                    }
-                })
-                notifyMentionnedUsers(includedUsersArray, result.newPost._id)
-            }
+            mentionsManager(data.description, result.newPost._id, usersList, topicId)
+            
+            // Mettre à jour les posts
             dispatch(reloadPosts())
         })
         .catch(error => console.log(error))
         reset()
         dispatch(reinitializeCitation())
-    }
-    
-    
-    // Envoi des notifications en cas de mention
-    const notifyMentionnedUsers = async (usersToNotify, postId) => {
-        
-        // Vérification si les mentions sont autorisées
-        const promises = usersToNotify.map(async (userToNotify) => {
-            const response = await fetch(`${config.serverEndpoint}/isMentionned/getIsMentionnedOption/${userToNotify._id}`, { credentials: 'include' });
-            const allowMentionObject = response.json()
-            const result = await allowMentionObject
-            if (result.allowMentions) {
-                return userToNotify
-            } else {
-                return undefined
-            }
-        });
-        const allowedUsers = await Promise.all(promises);
-
-        // Filtrer les utilisateurs
-        const filteredUsers = allowedUsers.filter(user => user !== undefined)
-
-        // Envoi des notifications aux utilisateurs concernés
-        if (allowedUsers.length > 0) {
-            fetch(`${config.serverEndpoint}/email/userNotification/${topicId}`, {
-                method: "POST",
-                credentials: "include",
-                headers: {"Accept": "application/json", "Content-Type": "application/json"},
-                body: JSON.stringify({
-                    users: filteredUsers,
-                    emailType: "mention",
-                    postId: postId
-                })
-            })
-            .then(response => response.json())
-            .then(data => console.log(data.message))
-            .catch(error => console.log(error.message))
-        }
     }
 
 
