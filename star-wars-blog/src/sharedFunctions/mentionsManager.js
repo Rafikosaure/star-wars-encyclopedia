@@ -2,7 +2,8 @@ import notifyMentionnedUsers from "./notifyMentionnedUsers"
 
 
 // Gestion des mentions
-const mentionsManager = (data, newMessageId, usersList, topicId) => {
+export default function mentionsManager(data, newMessageId, usersList, topicId) {
+
     let includedUsersArray = []
     if (usersList) {
         usersList.forEach((user) => {
@@ -15,5 +16,3 @@ const mentionsManager = (data, newMessageId, usersList, topicId) => {
         notifyMentionnedUsers(includedUsersArray, newMessageId, topicId)
     }
 }
-
-export default mentionsManager;
