@@ -6,13 +6,15 @@ import Like from '../Like/Like'
 import { useSelector, useDispatch } from 'react-redux'
 import { selectIsLoggedState } from '../../redux/slices/isLoggedUserSlice'
 import { selectLoggedUser } from '../../redux/slices/loggedUserSlice'
+import { reloadUsersArrayFunction } from '../../redux/slices/reloadUsersArray'
 import { reloadPosts } from '../../redux/slices/postsReload'
 import config from '../../config'
 import { saveACommentCitation } from '../../redux/slices/commentCitationSlice'
+import mentionsManager from '../../sharedFunctions/mentionsManager'
 
 
 
-export default function CommentCard({ index, commentId, topicId, postId }) {
+export default function CommentCard({ index, commentId, topicId, postId, usersList }) {
     
     const [currentComment, setCurrentComment] = useState()
     const [commentUser, setCommentUser] = useState()
@@ -48,14 +50,12 @@ export default function CommentCard({ index, commentId, topicId, postId }) {
             fetch(`${config.serverEndpoint}/comment/getCommentAuthor/${currentComment.author.id}`)
             .then(response => response.json())
             .then(data => {
-                // console.log(data)
-                if (!data.message) {
-                    setCommentUser(data)
-                }
+                setCommentUser(data)
             })
             .catch(error => console.log(error))
         }
     }, [currentComment])
+
 
 
     // Mise en forme des retours à la ligne
@@ -116,7 +116,12 @@ export default function CommentCard({ index, commentId, topicId, postId }) {
             })
             .then(response => response.json())
             .then(data => {
-                // console.log(data.content)
+
+                // Gestion des mentions
+                dispatch(reloadUsersArrayFunction(false))
+                mentionsManager(data.content, data._id, usersList, topicId)
+
+                // Rafraichissement du commentaire
                 if (commentUpdater) {
                     setCommentUpdater(false)
                 } else {
@@ -155,21 +160,6 @@ export default function CommentCard({ index, commentId, topicId, postId }) {
         }
         dispatch(saveACommentCitation(citationObject))
     }
-
-    // // Gestion des mentions
-    // const mentionsManager = (data, result) => {
-    //     let includedUsersArray = []
-    //     if (usersList) {
-    //         usersList.forEach((user) => {
-    //             const isIncludeValue = data.description.search(`@${user.name}`)
-    //             if (isIncludeValue !== -1) {
-    //                 // console.log(`"${user}" est présent dans le texte.`)
-    //                 includedUsersArray.push(user)
-    //             }
-    //         })
-    //         notifyMentionnedUsers(includedUsersArray, result.newComment._id, topicId)
-    //     }
-    // }
 
 
   return (
@@ -226,7 +216,8 @@ export default function CommentCard({ index, commentId, topicId, postId }) {
                     </div>
                 </div>
             <div className='comment-card-footer'>
-                {isLogged && commentUser ? (
+                
+                {isLogged && commentUser && (
                     <>
                         {commentContentDisplay === 'block' && modifyContentDisplay === "none" && (loggedUser._id === commentUser._id || loggedUser.isAdmin) ? (
                             <p className='comment-card-footer-link loggedColor' title='Modifier ce commentaire' onClick={(e) => modifyDisplayManager(e)}>🖉 Modifier</p>
@@ -235,13 +226,19 @@ export default function CommentCard({ index, commentId, topicId, postId }) {
                         )}
                         <a className='comment-card-footer-link loggedColor' href={`/topic/${topicId}`} title='Citer ce commentaire' onClick={(e) => saveCurrentCitation(e)}>➥ Citer</a>
                     </>
-                ) : (
+                )}
+                {isLogged && !commentUser && (
+                    <p className='comment-card-footer-link unloggedColor'>Commentaire d'un utilisateur inconnu</p>
+                )}
+                {!isLogged && commentUser && (
                     <>
                         <p className='comment-card-footer-link unloggedColor' title='Connectez-vous pour citer ce commentaire'>➥ Citer</p>
+                        <Like post={undefined} comment={currentComment}/>
                     </>
-                    
                 )}
-                <Like post={undefined} comment={currentComment}/>
+                {!isLogged && !commentUser && (
+                        <p className='comment-card-footer-link unloggedColor'>Commentaire d'un utilisateur inconnu</p>
+                )}                
             </div>
         </div>
     </div>
