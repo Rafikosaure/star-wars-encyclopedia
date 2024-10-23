@@ -95,16 +95,13 @@ exports.getCommentAuthorById = async (req, res) => {
 
         // Récupérer l'auteur du commentaire avec son id
         const currentUser = await User.findById(userId)
-
-        // Vérifier que l'on a bien reçu un résultat valide
-        if (!currentUser) res.status(404).json({
-            message: "User not found!"
-        })
         
         // Renvoyer en réponse l'utilisateur courant
         res.status(200).json(currentUser)
     } catch(error) {
-        res.status(500).json(error)
+        res.status(500).json({
+            message: "User not found!"
+        })
     }
 }
 
