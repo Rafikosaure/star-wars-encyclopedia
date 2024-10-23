@@ -7,7 +7,7 @@ import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 import { saveACitation } from '../../redux/slices/citationSlice'
 import { reinitializeCommentCitation, selectCommentCitation } from '../../redux/slices/commentCitationSlice'
-import { selectReloadUsersState, reloadUsersArrayFunction } from '../../redux/slices/reloadUsersArray'
+import { reloadUsersArrayFunction } from '../../redux/slices/reloadUsersArray'
 import { reloadPosts } from '../../redux/slices/postsReload'
 import { selectIsLoggedState } from '../../redux/slices/isLoggedUserSlice'
 import { selectLoggedUser } from '../../redux/slices/loggedUserSlice'
@@ -16,7 +16,7 @@ import mentionsManager from '../../sharedFunctions/mentionsManager'
 
 
 
-export default function PostCard({ index, post, topicId }) {
+export default function PostCard({ index, post, topicId, usersList }) {
 
     const [postUser, setPostUser] = useState()
     const [datetime, updateDateTime] = useState()
@@ -24,8 +24,6 @@ export default function PostCard({ index, post, topicId }) {
     const loggedUser = useSelector(selectLoggedUser)
     const [postContentDisplay, setPostContentDisplay] = useState('block')
     const [modifyContentDisplay, setModifyContentDisplay] = useState('none')
-    const [usersList, setUsersList] = useState()
-    const reloadUsers = useSelector(selectReloadUsersState)
     const currentCommentCitation = useSelector(selectCommentCitation)
     const commentCitationText = currentCommentCitation.text
     const commentCitationAuthorId = currentCommentCitation.authorId
@@ -51,28 +49,7 @@ export default function PostCard({ index, post, topicId }) {
     }, [post])
 
 
-    // Récupération des utilisateurs
-    useEffect(() => {
-        if (!reloadUsers || !usersList) {
-            fetch(`${config.serverEndpoint}/user/getAll`, {
-                credentials: 'include'
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (!data.badAccessMessage) {
-                    // console.log(data)
-                    setUsersList(data)
-                }
-                dispatch(reloadUsersArrayFunction(true))
-            })
-            .catch(error => {
-                console.log(error)
-                dispatch(reloadUsersArrayFunction(true))
-            })
-        }
-    }, [dispatch, reloadUsers, usersList])
-
-
+    
     const saveCurrentCitation = () => {
         let citationObject = {
             authorId: undefined,
@@ -107,7 +84,6 @@ export default function PostCard({ index, post, topicId }) {
         })
         .then(response => response.json())
         .then(data => {
-            // console.log(data.message)
             dispatch(reloadPosts())
         })
         .catch(error => console.log(error))
@@ -142,7 +118,12 @@ export default function PostCard({ index, post, topicId }) {
             })
             .then(response => response.json())
             .then(data => {
-                // console.log(data)
+
+                // Gestion des mentions dans le texte modifié
+                dispatch(reloadUsersArrayFunction(false))
+                mentionsManager(newContent, data._id, usersList, topicId)
+
+                // Rafraichissement des posts affichés
                 dispatch(reloadPosts())
             })
             setModifyContentDisplay('none')
@@ -170,6 +151,7 @@ export default function PostCard({ index, post, topicId }) {
             // Construction du corps de la requète
             const fetchContent = data.target.value.replace(/\s+/g, ' ').trim()
             let fetchData = {
+                post: post._id,
                 content: fetchContent,
                 author: {
                     id: loggedUser._id
@@ -194,9 +176,10 @@ export default function PostCard({ index, post, topicId }) {
             .then(result => {
 
                 // Gestion des mentions
+                dispatch(reloadUsersArrayFunction(false))
                 mentionsManager(fetchContent, result.newComment._id, usersList, topicId)
 
-                // Mise à jour des commentaires
+                // Rafraichissement des commentaires affichés
                 dispatch(reloadPosts())
             })
             .catch(error => console.log(error))
@@ -278,7 +261,7 @@ export default function PostCard({ index, post, topicId }) {
             <div className='post-card-comments-section'>
                 {post && (
                     post.comments.map((commentId, index) => (
-                        <CommentCard key={index} index={index} commentId={commentId} topicId={topicId} postId={post._id} />
+                        <CommentCard key={index} index={index} commentId={commentId} topicId={topicId} postId={post._id} usersList={usersList} />
                     ))
                 )}
                 

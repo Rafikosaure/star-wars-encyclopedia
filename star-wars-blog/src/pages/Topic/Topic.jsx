@@ -12,7 +12,6 @@ import { selectIsLoggedState } from '../../redux/slices/isLoggedUserSlice'
 import { selectLoggedUser } from '../../redux/slices/loggedUserSlice'
 import { reloadPosts } from '../../redux/slices/postsReload'
 import { selectReloadPostsState } from '../../redux/slices/postsReload'
-// import notifyMentionnedUsers from '../../sharedFunctions/notifyMentionnedUsers'
 import mentionsManager from '../../sharedFunctions/mentionsManager'
 import PostCard from '../../components/PostCard/PostCard'
 import { Link } from 'react-router-dom'
@@ -54,6 +53,7 @@ export default function Topic() {
     }, [navigate, topicId, reloadPostsBool])
 
 
+
     useEffect(() => {
         fetch(`${config.serverEndpoint}/category/findCategoryFromTopic/${topicId}`)
         .then(response => response.json())
@@ -65,6 +65,7 @@ export default function Topic() {
     }, [topicId])
 
 
+
     useEffect(() => {
         // Récupération des utilisateurs
         if (!reloadUsers || !usersList) {
@@ -74,7 +75,6 @@ export default function Topic() {
             .then(response => response.json())
             .then(data => {
                 if (!data.badAccessMessage) {
-                    // console.log(data)
                     setUsersList(data)
                 }
                 dispatch(reloadUsersArrayFunction(true))
@@ -109,7 +109,7 @@ export default function Topic() {
             }
         }
 
-        // // Envoi de la requète
+        // Envoi de la requète
         fetch(`${config.serverEndpoint}/post/createPost/${topicId}`, {
             method: "POST",
             credentials: "include",
@@ -120,9 +120,10 @@ export default function Topic() {
         .then(result => {
 
             // Gestion des mentions
+            dispatch(reloadUsersArrayFunction(false))
             mentionsManager(data.description, result.newPost._id, usersList, topicId)
             
-            // Mettre à jour les posts
+            // Rafraichissement des posts affichés
             dispatch(reloadPosts())
         })
         .catch(error => console.log(error))
@@ -148,7 +149,7 @@ export default function Topic() {
                     {currentTopicData && (
                     <div className='topic-list'>
                         {currentTopicData.posts.map((post, index) => (
-                            <PostCard key={index} index={index} post={post} topicId={topicId}/>
+                            <PostCard key={index} index={index} post={post} topicId={topicId} usersList={usersList}/>
                         ))}
                     </div>
                     )}
