@@ -70,6 +70,43 @@ $color_2: #b4b4b4;
 		height: 10px;
 	}
 }
+/* Ici : media queries pour la seconde partie desktop */
+@media screen and (max-width: 1380px) {
+	.like-thumb-div {
+		width: 42px;
+		height: 42px;
+	}
+	.like-counter {
+		font-size: 14px;
+	}
+}
+/* Ici : media queries pour la première partie tablette */
+@media screen and (max-width: 1023px) {
+	.like-thumb-div {
+		width: 35px;
+		height: 35px;
+	}
+}
+/* Ici : media queries pour la seconde partie tablette */
+@media screen and (max-width: 991px) {
+	.like-thumb-div {
+		width: 30px;
+		height: 30px;
+	}
+	.like-counter {
+		font-size: 13px;
+	}
+}
+/* Ici : media queries pour la première partie smartphone */
+@media screen and (max-width: 660px) {
+	.like-thumb-div {
+		width: 25px;
+		height: 25px;
+	}
+	.like-counter {
+		font-size: 12px;
+	}
+}
 
 
 
