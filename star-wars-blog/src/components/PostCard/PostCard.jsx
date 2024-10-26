@@ -3,15 +3,14 @@ import './PostCard.scss'
 import DefaultAvatar from '../../assets/images/EmojiBlitzBobaFett1.webp'
 import Like from '../Like/Like'
 import config from '../../config'
-import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 import { saveACitation } from '../../redux/slices/citationSlice'
-import { reinitializeCommentCitation, selectCommentCitation } from '../../redux/slices/commentCitationSlice'
 import { reloadUsersArrayFunction } from '../../redux/slices/reloadUsersArray'
 import { reloadPosts } from '../../redux/slices/postsReload'
 import { selectIsLoggedState } from '../../redux/slices/isLoggedUserSlice'
 import { selectLoggedUser } from '../../redux/slices/loggedUserSlice'
 import CommentCard from '../CommentCard/CommentCard'
+import CommentForm from '../CommentForm/CommentForm'
 import mentionsManager from '../../sharedFunctions/mentionsManager'
 
 
@@ -24,10 +23,6 @@ export default function PostCard({ index, post, topicId, usersList }) {
     const loggedUser = useSelector(selectLoggedUser)
     const [postContentDisplay, setPostContentDisplay] = useState('block')
     const [modifyContentDisplay, setModifyContentDisplay] = useState('none')
-    const currentCommentCitation = useSelector(selectCommentCitation)
-    const commentCitationText = currentCommentCitation.text
-    const commentCitationAuthorId = currentCommentCitation.authorId
-    const { register, reset } = useForm()
     const dispatch = useDispatch()
 
 
@@ -140,55 +135,6 @@ export default function PostCard({ index, post, topicId, usersList }) {
     }
 
 
-    const createNewComment = (data) => {
-        if (data.keyCode === 13 && data.shiftKey === false) {
-            data.preventDefault();
-            if (data.target.value.length === 0) {
-                dispatch(reinitializeCommentCitation())
-                console.log("Données non-renseignées !")
-                return
-            }
-            // Construction du corps de la requète
-            const fetchContent = data.target.value.replace(/\s+/g, ' ').trim()
-            let fetchData = {
-                post: post._id,
-                content: fetchContent,
-                author: {
-                    id: loggedUser._id
-                },
-                likes: []
-            }
-            if (commentCitationText && commentCitationAuthorId) {
-                const fetchCitationText = commentCitationText.split("a dit :").at(-1).trim().replace(/^"|"$/g, "")
-                fetchData.citation = {
-                    citationAuthorId: commentCitationAuthorId, 
-                    citationText: fetchCitationText
-                }
-            }
-            // Envoi de la requète
-            fetch(`${config.serverEndpoint}/comment/createComment/${post._id}`, {
-                method: "POST",
-                credentials: "include",
-                headers: {"Accept": "application/json", "Content-Type": "application/json"},
-                body: JSON.stringify(fetchData)
-            })
-            .then(response => response.json())
-            .then(result => {
-
-                // Gestion des mentions
-                dispatch(reloadUsersArrayFunction(false))
-                mentionsManager(fetchContent, result.newComment._id, usersList, topicId)
-
-                // Rafraichissement des commentaires affichés
-                dispatch(reloadPosts())
-            })
-            .catch(error => console.log(error))
-            reset()
-            dispatch(reinitializeCommentCitation())
-        }
-    }
-
-
     return (
         <div className='post-card-main-wrapper' id={post._id}>
             <div className='post-card-main'>
@@ -225,7 +171,7 @@ export default function PostCard({ index, post, topicId, usersList }) {
                                 <>
                                     <p style={{display: `${postContentDisplay}`}}>{textWithBreaks}</p>
                                     <form style={{display: `${modifyContentDisplay}`}} className='post-card-modify-message' onKeyDown={(e) => modifyContent(e)}>
-                                        <textarea defaultValue={post.content.split("\n\n").at(-1)} className='textarea-scroll' />
+                                        <textarea defaultValue={post.content.split("\n\n").at(-1)} maxLength={500} className='textarea-scroll' />
                                     </form>
                                 </>
                             )}
@@ -268,18 +214,9 @@ export default function PostCard({ index, post, topicId, usersList }) {
             </div>
             <div className='new-comment-form-section'>
                 {isLogged && postUser && (
-                    <form className='new-comment-form' onKeyDown={(e) => createNewComment(e)}>
-                        {commentCitationText && (
-                            <div className='comment-citation-div'>
-                                <span className='comment-citation-cancel' title='Annuler la citation' onClick={() => dispatch(reinitializeCommentCitation())}>✖</span>
-                                <p className='comment-citation-content'>{commentCitationText}</p>
-                            </div>
-                        )}
-                        <textarea className='new-comment-form-textarea' name='newComment' type="text" maxLength={500} placeholder='Tapez un commentaire' {...register("newComment")} required></textarea>
-                    </form>
+                    <CommentForm post={post} usersList={usersList} topicId={topicId} />
                 )}
             </div>
-            
         </div>
     )
 }
