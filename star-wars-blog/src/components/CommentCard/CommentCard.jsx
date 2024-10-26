@@ -146,6 +146,7 @@ export default function CommentCard({ index, commentId, topicId, postId, usersLi
     const saveCurrentCitation = (e) => {
         e.preventDefault()
         let citationObject = {
+            postId: postId,
             authorId: undefined,
             text: undefined
         }
@@ -209,7 +210,7 @@ export default function CommentCard({ index, commentId, topicId, postId, usersLi
                             <p className='comment-card-content-text' style={{display: `${commentContentDisplay}`}}>{shapingTextWithBreaks()}</p>
 
                             <form style={{display: `${modifyContentDisplay}`}} className='comment-card-modify-message' onKeyDown={(e) => modifyContent(e)}>
-                                <textarea defaultValue={currentComment.content.split("\n\n").at(-1)} className='textarea-scroll' />
+                                <textarea defaultValue={currentComment.content.split("\n\n").at(-1)} className='textarea-scroll' maxLength={500} />
                             </form>
                         </>
                     )}
@@ -225,6 +226,7 @@ export default function CommentCard({ index, commentId, topicId, postId, usersLi
                             null
                         )}
                         <a className='comment-card-footer-link loggedColor' href={`/topic/${topicId}`} title='Citer ce commentaire' onClick={(e) => saveCurrentCitation(e)}>➥ Citer</a>
+                        <Like post={undefined} comment={currentComment}/>
                     </>
                 )}
                 {isLogged && !commentUser && (
