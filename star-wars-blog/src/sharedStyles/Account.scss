@@ -14,6 +14,7 @@ $background-color_6: transparent;
 
 .account-page {
 	background: url(../assets/images/millenium_condor_chess_room.webp) no-repeat center center fixed;
+	background-size: cover;
 	height: fit-content;
 	color: $color_1;
 	position: relative;
@@ -107,6 +108,25 @@ $background-color_6: transparent;
 	margin-bottom: 60px;
 	margin-left: auto;
 	margin-right: auto;
+}
+.notifs-section {
+	width: 100%;
+	margin-bottom: 25px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	h2 {
+		margin-top: 0;
+	}
+	.allow-mentions-notifs {
+		font-family: $font-family_1;
+		font-size: 24px;
+		cursor: default;
+		width: 100%;
+		display: flex;
+		justify-content: space-around;
+		align-items: center;
+	}
 }
 .account-form-update-section {
 	h2 {
@@ -391,7 +411,7 @@ input[type='file'] {
 		width: 70px !important;
 		height: 70px !important;
 	}
-	.account-user-key, .account-user-value {
+	.account-user-key, .account-user-value, .allow-mentions-notifs {
 		font-size: 16px !important;
 	}
 	.account-form-update-section {
