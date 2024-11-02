@@ -33,7 +33,9 @@ const notifyMentionnedUsers = async (usersToNotify, messageId, topicId) => {
             })
         })
         .then(response => response.json())
-        .then(data => console.log(data.message))
+        .then(data => {
+            // console.log(data.message)
+        })
         .catch(error => console.log(error.message))
     }
 }
