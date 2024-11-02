@@ -17,6 +17,7 @@ import DefaultAvatar from '../../assets/images/EmojiBlitzBobaFett1.webp'
 import { useForm } from 'react-hook-form'
 import PictureIsValid from '../../assets/images/is_valid.webp'
 import { toast } from 'sonner'
+import NotifSwitch from '../../components/NotifSwitch/NotifSwitch'
 import config from '../../config'
 
 
@@ -174,6 +175,11 @@ export default function Account() {
               <div className='account-user-detail'><p className='account-user-key'>Nom :</p><p className='account-user-value'>{userData.name}</p></div>
               <div className='account-user-detail'><p className='account-user-key'>Email :</p><p className='account-user-value'>{userData.email}</p></div>
               <div className='account-section-separator'/>
+              <div className='notifs-section'>
+                <h2 className='account-profile-title'>Notifications</h2>
+                <span className='allow-mentions-notifs'><span>Autoriser en cas de mention :</span><NotifSwitch loggedUser={userData} /></span>
+              </div>
+              <div className='account-section-separator'></div>
               <div className='account-form-update-section'>
                 <h2>Mettre à jour vos infos ?</h2>
                 <div>
