@@ -8,6 +8,7 @@ import { updateIsLoggedUser } from '../../redux/slices/isLoggedUserSlice'
 import { updateLoadedUser } from '../../redux/slices/loadedUserSlice'
 import { selectReloadUsersState } from '../../redux/slices/reloadUsersArray'
 import { reloadUsersArrayFunction } from '../../redux/slices/reloadUsersArray'
+import { selectReloadFollowedTopicsState } from '../../redux/slices/followedTopicsReload'
 import { selectLoggedUser } from '../../redux/slices/loggedUserSlice'
 import { updateUserLog } from '../../redux/slices/loggedUserSlice'
 import { useNavigate, Link } from 'react-router-dom'
@@ -18,6 +19,7 @@ import { useForm } from 'react-hook-form'
 import PictureIsValid from '../../assets/images/is_valid.webp'
 import { toast } from 'sonner'
 import NotifSwitch from '../../components/NotifSwitch/NotifSwitch'
+import FollowedTopicCard from '../../components/FollowedTopicCard/FollowedTopicCard'
 import config from '../../config'
 
 
@@ -25,7 +27,6 @@ export default function Account() {
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  // const [userData, setUserData] = useState()
   const [allUsers, setAllUsers] = useState()
   const isLogged = useSelector(selectIsLoggedState)
   const [fileIsLoad, updateFileIsLoad] = useState('display-none')
@@ -34,6 +35,9 @@ export default function Account() {
   const { register, handleSubmit, reset } = useForm()
   const reloadUsers = useSelector(selectReloadUsersState)
   const userData = useSelector(selectLoggedUser)
+  const [followedTopics, setFollowedTopics] = useState()
+  const reloadFollowedTopics = useSelector(selectReloadFollowedTopicsState)
+
 
 
   useEffect(() => {
@@ -72,6 +76,19 @@ export default function Account() {
       })
     }
   }, [reloadUsers, allUsers, dispatch, navigate])
+
+
+  useEffect(() => {
+    // Récupérer les discussions suivies par l'utilisateur
+    if (isLogged) {
+      fetch(`${config.serverEndpoint}/followTopic/getAllFollowedTopics/${userData._id}`)
+      .then(response => response.json())
+      .then(data => {
+        setFollowedTopics(data)
+      })
+      .catch(error => console.log(error))
+    }
+  }, [isLogged, userData, reloadFollowedTopics])
 
 
   function validatePassword(password){
@@ -178,6 +195,19 @@ export default function Account() {
               <div className='notifs-section'>
                 <h2 className='account-profile-title'>Notifications</h2>
                 <span className='allow-mentions-notifs'><span>Autoriser en cas de mention :</span><NotifSwitch loggedUser={userData} /></span>
+              </div>
+              <div className='account-section-separator'/>
+                <div className='notifs-section'>
+                  <h2 className='account-profile-title'>Discussions suivies</h2>
+                  {followedTopics && followedTopics.length > 0 ? (
+                  <>
+                    {followedTopics.map((topic, index) => (
+                      <FollowedTopicCard key={topic._id} index={index} topicData={topic} />
+                    ))}
+                  </>
+                  ) : (
+                    <p className='any-followed-topic-text'>Aucune discussion suivie</p>
+                  )}
               </div>
               <div className='account-section-separator'></div>
               <div className='account-form-update-section'>
