@@ -5,6 +5,7 @@ import './TopicCard.scss'
 import { selectIsLoggedState } from '../../redux/slices/isLoggedUserSlice'
 import { selectLoggedUser } from '../../redux/slices/loggedUserSlice'
 import { reloadTopics } from '../../redux/slices/topicsReload'
+import { reloadFollowedTopics } from '../../redux/slices/followedTopicsReload'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import StarsSky from '../../assets/images/ciel_nuit_banniere.webp'
@@ -106,6 +107,7 @@ export default function TopicCard({ topic }) {
                 setIsFollowedTitle('Suivre cette discussion')
             }
             setFollowersArray()
+            dispatch(reloadFollowedTopics())
         })
         .catch(error => {
             console.log(error)
