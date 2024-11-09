@@ -82,7 +82,7 @@ export default function Category() {
   return (
     <>
       {rightPage ? (
-      <div className='app-category'>
+        <div className='app-category'>
           <div className='page-content'>
             <h1>{currentDatas.title}</h1>
             <SearchBar category={currentDatas.keyword} />
@@ -119,8 +119,8 @@ export default function Category() {
                 `${storedDozen} / ${nbDozen.current}`
               ) : null }
             </div>
-        </div>        
-      </div>
+          </div>
+        </div>
       ) : null}
     </>
   )
