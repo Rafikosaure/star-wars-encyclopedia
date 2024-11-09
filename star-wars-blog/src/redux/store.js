@@ -10,6 +10,7 @@ import topicsReloadReducer from './slices/topicsReload';
 import citationReducer from './slices/citationSlice';
 import commentCitationReducer from "./slices/commentCitationSlice";
 import postsReloadReducer from "./slices/postsReload";
+import followedTopicsReloadReducer from './slices/followedTopicsReload'
 
 
 export default configureStore({
@@ -24,6 +25,7 @@ export default configureStore({
         topicsReload: topicsReloadReducer,
         citation: citationReducer,
         commentCitation: commentCitationReducer,
-        postsReload: postsReloadReducer
+        postsReload: postsReloadReducer,
+        followedTopicsReload: followedTopicsReloadReducer
     }
 })
