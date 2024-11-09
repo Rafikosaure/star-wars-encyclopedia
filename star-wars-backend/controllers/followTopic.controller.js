@@ -21,8 +21,7 @@ exports.createAFollowTopicArray = async (req, res) => {
 
     } catch(error) {
         res.status(400).json({
-            message: 'followTopic array creation failed!',
-            error: error
+            message: 'followTopic array creation failed!'
         })
     }
 }
@@ -35,8 +34,7 @@ exports.getAllFollowersOfATopic = async (req, res) => {
         res.status(200).json(currentFollowTopic.users)
     } catch(error) {
         res.status(404).json({
-            message: "Followers not found!",
-            error: error
+            message: "Followers not found!"
         })
     }
 }
@@ -44,7 +42,8 @@ exports.getAllFollowersOfATopic = async (req, res) => {
 // Récupérer toutes les discussions suivies par l'utilisateur
 exports.getAllFollowedTopics = async (req, res) => {
     try  {
-        const userId = req.user.id
+        const userId = req.params.id
+
         // Récupérer tous les tableaux des discussions suivies
         const currentFollowedTopicsArrays = await FollowTopic.find({
             'users': { $in: { '_id': userId }}
@@ -66,8 +65,7 @@ exports.getAllFollowedTopics = async (req, res) => {
         
     } catch(error) {
         res.status(404).json({
-            message: "Recovery of ongoing topics failed!",
-            error: error
+            message: "Recovery of ongoing topics failed!"
         })
     }
 }
@@ -105,8 +103,7 @@ exports.chooseWhetherToFollowOrNot = async (req, res) => {
 
     } catch(error) {
         res.status(404).json({
-            message: "Operation failed!",
-            error: error
+            message: "Operation failed!"
         })
     }
 }
