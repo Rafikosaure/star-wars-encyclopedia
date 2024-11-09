@@ -3,6 +3,7 @@ $color_2: white;
 
 .error-page {
 	background: url(../../assets/images/error404.webp) no-repeat center center fixed;
+	background-size: cover;
 	position: relative;
 	width: calc(80% - 4px);
 	border: 1px solid $color_2;
@@ -30,12 +31,26 @@ $color_2: white;
 		font-size: 36px;
 	}
 	a {
+		text-align: center;
 		font-size: 32px;
 		color: $color_1;
 		text-decoration: none;
 	}
 }
-
+/* Ici : media queries pour la seconde partie tablette */
+@media screen and (max-width: 991px) {
+	.error-page {
+		width: calc(100% - 4px);
+	}
+	.error404-div {
+		h1 {
+			font-size: 22px;
+		}
+		a {
+			font-size: 18px;
+		}
+	}
+}
 
 
 
