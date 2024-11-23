@@ -17,6 +17,8 @@ import PostCard from '../../components/PostCard/PostCard'
 import { Link } from 'react-router-dom'
 import ReturnArrow from '../../assets/images/return-arrow.webp'
 import config from '../../config'
+import ReactTextareaAutocomplete from "@webscopeio/react-textarea-autocomplete";
+import "@webscopeio/react-textarea-autocomplete/style.css";
 
 
 
@@ -26,8 +28,9 @@ export default function Topic() {
     const [currentTopicData, setCurrentTopicData] = useState()
     const [currentCategory, setCurrentCategory] = useState()
     const [usersList, setUsersList] = useState()
+    const [usersAutoComplete, setUsersAutoComplete] = useState()
     const navigate = useNavigate()
-    const { register, handleSubmit, reset } = useForm()
+    const { handleSubmit, reset } = useForm()
     const currentCitation = useSelector(selectCitation)
     const reloadPostsBool = useSelector(selectReloadPostsState)
     const loggedUser = useSelector(selectLoggedUser)
@@ -36,7 +39,7 @@ export default function Topic() {
     const citationText = currentCitation.text
     const citationAuthorId = currentCitation.authorId
     const dispatch = useDispatch()
-
+    const [postCreationFormValue, setPostCreationFormValue] = useState(null);
 
 
     useEffect(() => {
@@ -67,6 +70,7 @@ export default function Topic() {
 
 
     useEffect(() => {
+
         // Récupération des utilisateurs
         if (!reloadUsers || !usersList) {
             fetch(`${config.serverEndpoint}/user/getAll`, {
@@ -76,6 +80,10 @@ export default function Topic() {
             .then(data => {
                 if (!data.badAccessMessage) {
                     setUsersList(data)
+
+                    // Pour l'autocompletion
+                    const usernames = data.map(user => user = { username: user.name })
+                    setUsersAutoComplete(usernames)
                 }
                 dispatch(reloadUsersArrayFunction(true))
             })
@@ -84,11 +92,17 @@ export default function Topic() {
                 dispatch(reloadUsersArrayFunction(true))
             })
         }
-    }, [dispatch, reloadUsers, usersList])
+        if (usersAutoComplete) {
+            console.log('Liste des utilisateurs :', usersAutoComplete)
+        }
+        
+    }, [dispatch, reloadUsers, usersList, usersAutoComplete])
 
 
 
     const createNewPost = (data) => {
+        data.description = postCreationFormValue
+
         // Construction du corps de la requète
         const fetchContent = data.description.replace(/\s+/g, ' ').trim()
         let fetchData = {
@@ -130,7 +144,10 @@ export default function Topic() {
         reset()
         dispatch(reinitializeCitation())
     }
+    
 
+    // Auto-complétion des utilisateurs
+    const Item = ({ entity: { username } }) => <div>{`${username}`}</div>;
 
     return (
         <div className='app topic'>
@@ -156,14 +173,26 @@ export default function Topic() {
                     {isLogged && (
                         <form id='citation-post' className='creation-post-form' onSubmit={handleSubmit(createNewPost)}>
                             <h2 className='creation-post-form-title'>Créez un post</h2>
-                            {citationText && (
+                            {citationText && usersAutoComplete && (
                                 <div className='citation-div'>
                                     <span className='citation-cancel' title='Annuler la citation' onClick={() => dispatch(reinitializeCitation())}>✖</span>
                                     <p className='citation-content'>{citationText}</p>
                                 </div>
                             )}
 
-                            <textarea className='creation-post-textarea-description' name='description' type="text" placeholder='Tapez votre post' {...register("description")} maxLength={500} required />
+                            <ReactTextareaAutocomplete id='creation-post-textarea-description' name='description' type="text" placeholder='Tapez votre post' value={postCreationFormValue} onChange={e => setPostCreationFormValue(e.target.value)} maxLength={500} required 
+                            loadingComponent={() => <span>Loading</span>}
+                                trigger={{
+                                "@": {
+                                    allowWhitespace: true,
+                                    dataProvider: token => {
+                                    return usersAutoComplete;
+                                    },
+                                    component: Item,
+                                    output: (item, trigger) =>
+                                    `${trigger}${item.username}`
+                                }
+                                }} />
                             <button type='submit' className='creation-post-form-submit'>Publier</button>
                         </form>
                     )}
