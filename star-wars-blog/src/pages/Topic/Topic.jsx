@@ -14,11 +14,11 @@ import { reloadPosts } from '../../redux/slices/postsReload'
 import { selectReloadPostsState } from '../../redux/slices/postsReload'
 import mentionsManager from '../../sharedFunctions/mentionsManager'
 import PostCard from '../../components/PostCard/PostCard'
+import PostForm from '../../components/PostForm/PostForm'
 import { Link } from 'react-router-dom'
 import ReturnArrow from '../../assets/images/return-arrow.webp'
 import config from '../../config'
-import ReactTextareaAutocomplete from "@webscopeio/react-textarea-autocomplete";
-import "@webscopeio/react-textarea-autocomplete/style.css";
+
 
 
 
@@ -28,9 +28,10 @@ export default function Topic() {
     const [currentTopicData, setCurrentTopicData] = useState()
     const [currentCategory, setCurrentCategory] = useState()
     const [usersList, setUsersList] = useState()
-    const [usersAutoComplete, setUsersAutoComplete] = useState()
+    const [description, setDescription] = useState('')
+    const [toReset, setToReset] = useState(false)
     const navigate = useNavigate()
-    const { handleSubmit, reset } = useForm()
+    const { handleSubmit } = useForm()
     const currentCitation = useSelector(selectCitation)
     const reloadPostsBool = useSelector(selectReloadPostsState)
     const loggedUser = useSelector(selectLoggedUser)
@@ -39,7 +40,6 @@ export default function Topic() {
     const citationText = currentCitation.text
     const citationAuthorId = currentCitation.authorId
     const dispatch = useDispatch()
-    const [postCreationFormValue, setPostCreationFormValue] = useState(null);
 
 
     useEffect(() => {
@@ -70,7 +70,6 @@ export default function Topic() {
 
 
     useEffect(() => {
-
         // Récupération des utilisateurs
         if (!reloadUsers || !usersList) {
             fetch(`${config.serverEndpoint}/user/getAll`, {
@@ -80,29 +79,22 @@ export default function Topic() {
             .then(data => {
                 if (!data.badAccessMessage) {
                     setUsersList(data)
-
-                    // Pour l'autocompletion
-                    const usernames = data.map(user => user = { username: user.name })
-                    setUsersAutoComplete(usernames)
                 }
-                dispatch(reloadUsersArrayFunction(true))
             })
             .catch(error => {
                 console.log(error)
-                dispatch(reloadUsersArrayFunction(true))
             })
-        }
-        if (usersAutoComplete) {
-            console.log('Liste des utilisateurs :', usersAutoComplete)
+            dispatch(reloadUsersArrayFunction(true))
         }
         
-    }, [dispatch, reloadUsers, usersList, usersAutoComplete])
+    }, [dispatch, reloadUsers, usersList])
 
 
 
     const createNewPost = (data) => {
-        data.description = postCreationFormValue
 
+        // Récupération du texte du post
+        data.description = description
         // Construction du corps de la requète
         const fetchContent = data.description.replace(/\s+/g, ' ').trim()
         let fetchData = {
@@ -141,14 +133,11 @@ export default function Topic() {
             dispatch(reloadPosts())
         })
         .catch(error => console.log(error))
-        reset()
+        setToReset(true)
         dispatch(reinitializeCitation())
     }
     
-
-    // Auto-complétion des utilisateurs
-    const Item = ({ entity: { username } }) => <div>{`${username}`}</div>;
-
+    
     return (
         <div className='app topic'>
             <div className='topic-overlay' />
@@ -166,33 +155,23 @@ export default function Topic() {
                     {currentTopicData && (
                     <div className='topic-list'>
                         {currentTopicData.posts.map((post, index) => (
-                            <PostCard key={index} index={index} post={post} topicId={topicId} usersList={usersList}/>
+                            <PostCard key={index} index={index} post={post} topicId={topicId} usersList={usersList} />
                         ))}
                     </div>
                     )}
                     {isLogged && (
                         <form id='citation-post' className='creation-post-form' onSubmit={handleSubmit(createNewPost)}>
                             <h2 className='creation-post-form-title'>Créez un post</h2>
-                            {citationText && usersAutoComplete && (
+                            {citationText && (
                                 <div className='citation-div'>
                                     <span className='citation-cancel' title='Annuler la citation' onClick={() => dispatch(reinitializeCitation())}>✖</span>
                                     <p className='citation-content'>{citationText}</p>
                                 </div>
                             )}
+                            
+                            <PostForm setDescription={setDescription} toReset={toReset} setToReset={setToReset} />
+                            {/* <textarea className='creation-post-textarea-description' name='description' placeholder='Tapez votre post' {...register("description")} maxLength={500} required /> */}
 
-                            <ReactTextareaAutocomplete id='creation-post-textarea-description' name='description' type="text" placeholder='Tapez votre post' value={postCreationFormValue} onChange={e => setPostCreationFormValue(e.target.value)} maxLength={500} required 
-                            loadingComponent={() => <span>Loading</span>}
-                                trigger={{
-                                "@": {
-                                    allowWhitespace: true,
-                                    dataProvider: token => {
-                                    return usersAutoComplete;
-                                    },
-                                    component: Item,
-                                    output: (item, trigger) =>
-                                    `${trigger}${item.username}`
-                                }
-                                }} />
                             <button type='submit' className='creation-post-form-submit'>Publier</button>
                         </form>
                     )}

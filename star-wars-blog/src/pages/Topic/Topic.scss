@@ -124,7 +124,7 @@ $background-color_3: rgba(255, 255, 255, .8);
 	margin-top: 5px;
 	cursor: pointer;
 }
-#creation-post-textarea-description {
+.creation-post-textarea-description {
 	width: 90%;
 	height: 150px;
     border-radius: 10px;
@@ -140,44 +140,14 @@ $background-color_3: rgba(255, 255, 255, .8);
 		border: none;
 	}
 }
-.rta {
-	display: flex;
-	justify-content: center;
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 16px !important;
-}
-.rta__list {
-	padding: 3px !important;
-	background-color: $background-color_3 !important;
-	border: 1px solid #dfe2e5;
-	border-radius: 10px !important;
-	box-shadow: 0 0 5px rgba(27, 31, 35, 0.1);
-	list-style: none;
-}
-.rta__entity {
-	background-color: $background-color_3 !important;
-	width: 100%;
-	text-align: left;
-	outline: none;
-	border-radius: 5px !important;
-}
-.rta__entity:hover {
-	cursor: pointer;
-}
-.rta__entity--selected {
-	border-radius: 5px !important;
-	color: $color_1 !important;
-	text-decoration: none;
-	background: $color_2 !important;
-}
-#creation-post-textarea-description::placeholder {
+.creation-post-textarea-description::placeholder {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 14px;
 }
-#creation-post-textarea-description__input:focus {
+.creation-post-textarea-description__input:focus {
     outline: 4px solid $color_2;
 }
-#creation-post-textarea-description:focus-visible {
+.creation-post-textarea-description:focus-visible {
 	outline: 4px solid $color_2;
 }
 .creation-post-form-submit {
@@ -237,9 +207,6 @@ $background-color_3: rgba(255, 255, 255, .8);
 		right: 12px;
 		margin-top: 5px;
 		font-size: 12px;
-	}
-	.rta {
-		font-size: 12px !important;
 	}
 	.creation-post-textarea-description {
 		width: 90%;
