@@ -9,7 +9,6 @@ export default function mentionsManager(data, newMessageId, usersList, topicId) 
         usersList.forEach((user) => {
             const isIncludeValue = data.search(`@${user.name}`)
             if (isIncludeValue !== -1) {
-                // console.log(`"${user}" est présent dans le texte.`)
                 includedUsersArray.push(user)
             }
         })

@@ -192,7 +192,7 @@ exports.authDeleteById = async (req, res) => {
     }
 }
 
-// Récupère tous les utilisateurs
+// Récupérer tous les utilisateurs du site
 exports.getAllUsers = (req, res) => {
     User.find()
         .then((users) => res.status(200).json(users))

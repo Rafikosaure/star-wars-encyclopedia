@@ -30,7 +30,7 @@ exports.emailMention = (data, mentionnedUser, datetime) => {
     )
 }
 
-exports.emailNewPost = (data, topicFollower, datetime) => {
+exports.emailNewMessage = (data, topicFollower, datetime) => {
     return (
         `
             <!DOCTYPE html>
@@ -45,7 +45,7 @@ exports.emailNewPost = (data, topicFollower, datetime) => {
                 <div>Bonjour ${topicFollower.name},
                 </div><br>
                 <div>
-                Du nouveau dans la discussion "${data.topic.title}" ! ${data.author.name} a publié un nouveau message le ${datetime}.
+                Du nouveau dans la discussion "${data.topic.title}" ! ${data.author.name} a publié un nouveau ${data.messageType} le ${datetime}.
                 </div>
                 <div>
                 Pour prendre connaissance de son message, rendez-vous <a href='http://localhost:3000/topic/${data.topic.id}#${data.messageId}'>ici</a>.

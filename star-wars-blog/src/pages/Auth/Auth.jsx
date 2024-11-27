@@ -8,7 +8,8 @@ import { selectRegisterState } from '../../redux/slices/registerSlice.js'
 
 
 export default function Auth() {
-    
+  
+  // Gestion des formulaire pour l'authentification
   const rightForm = useSelector(selectRegisterState)
 
   return (

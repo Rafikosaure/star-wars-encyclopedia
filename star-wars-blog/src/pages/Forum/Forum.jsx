@@ -19,12 +19,12 @@ export default function Forum() {
 
 
   useEffect(() => {
+
     // Récupérer les catégories du forum
     fetch(`${config.serverEndpoint}/category/getCategories`)
     .then(response => response.json())
     .then(data => {
       setForumCategories(data)
-      // console.log(data)
     })
     .catch(error => console.log(error))
     

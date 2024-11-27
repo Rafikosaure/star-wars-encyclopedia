@@ -39,7 +39,7 @@ export default function Account() {
   const reloadFollowedTopics = useSelector(selectReloadFollowedTopicsState)
 
 
-
+  // Redirection en cas d'utilisateur non-authentifié
   useEffect(() => {
     if (!isLogged) {
       navigate("/auth")
@@ -47,6 +47,7 @@ export default function Account() {
   }, [isLogged, navigate])
 
 
+  // Affichage de l'icone "image chargée"
   const isValidIcon = (value) => {
     if (value.length > 0) {
       updateFileIsLoad('display-flex')
@@ -55,6 +56,8 @@ export default function Account() {
     }
   }
 
+
+  // Récupération des utilisateurs du site
   useEffect(() => {
     if (!reloadUsers || !allUsers) {
       fetch(`${config.serverEndpoint}/user/getAll`, {
@@ -78,6 +81,7 @@ export default function Account() {
   }, [reloadUsers, allUsers, dispatch, navigate])
 
 
+
   useEffect(() => {
     // Récupérer les discussions suivies par l'utilisateur
     if (isLogged) {
@@ -91,12 +95,14 @@ export default function Account() {
   }, [isLogged, userData, reloadFollowedTopics])
 
 
+  // Mot de passe fort
   function validatePassword(password){
     var Reg = new RegExp(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/);
     return Reg.test(password);
   }
 
 
+  // Modification des informations des utilisateurs
   const modifyData = (data) => {
     if (data.name.length <= 0 && data.email.length <= 0 && data.password.length <= 0 && data.picture.length <= 0) {
       return
@@ -143,6 +149,8 @@ export default function Account() {
     .catch(error => console.error(error));
   }
 
+
+  // Validation de l'email avant suppression du compte
   const validateEmail = (email) => {
     if (email === userData.email) {
       setAllowDeletion(true)
@@ -151,6 +159,8 @@ export default function Account() {
     }
   }
 
+
+  // Suppression de son propre compte par l'utilisateur
   const deleteCurrentUser = (e) => {
     e.preventDefault()
     fetch(`${config.serverEndpoint}/user/deleteById`, {
@@ -224,8 +234,6 @@ export default function Account() {
                       </div>
                       <input className='account-file-input' type="file" id="file" name="picture" accept=".png, .jpg, .jpeg" {...register("picture")} onChange={(e) => isValidIcon(e.target.value)} />
                     </div>
-                    {/* <input className='account-file-input' type="file" id="file" name="picture" accept=".png, .jpg, .jpeg" {...register("picture", {required: false})} onChange={(e) => isValidIcon(e.target.value)} />
-                    <label className='account-label' htmlFor="file">Mettre à jour votre image de profil<img src={PictureIsValid} alt="Upload is valid" className={`input-valid-img ${fileIsLoad}`} /></label> */}
                     <button className='account-submit-button' type='submit'>Mettre à jour</button>
                   </form>
                 </div>

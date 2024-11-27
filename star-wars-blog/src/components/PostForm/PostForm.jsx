@@ -6,6 +6,7 @@ import { selectIsLoggedState } from '../../redux/slices/isLoggedUserSlice';
 import { selectReloadUsersState, reloadUsersArrayFunction } from '../../redux/slices/reloadUsersArray';
 
 
+
 export default function PostForm({ setDescription, toReset, setToReset }) {
 
     const [text, setText] = useState('');
@@ -50,7 +51,7 @@ export default function PostForm({ setDescription, toReset, setToReset }) {
     }, [isLogged, usersList, reloadUsers, dispatch])
 
 
-
+    // Gérer l'autocomplétion en cas de mention
     const handleChange = (e) => {
         const value = e.target.value;
         setDescription(value)
@@ -81,7 +82,7 @@ export default function PostForm({ setDescription, toReset, setToReset }) {
         }
     };
 
-
+    // Gérer le clavier en cas de mention
     const handleKeyDown = (e) => {
         if (!showSuggestions) return;
 
@@ -105,6 +106,7 @@ export default function PostForm({ setDescription, toReset, setToReset }) {
         }
     };
 
+    // Gérer les suggestions en cas de mention
     const handleSuggestionClick = (suggestion) => {
         const words = text.split(' ');
         words.pop(); // Supprime "@query"

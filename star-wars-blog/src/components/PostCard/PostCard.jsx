@@ -26,13 +26,12 @@ export default function PostCard({ index, post, topicId, usersList }) {
     const dispatch = useDispatch()
 
 
-
+    // Récupérer l'auteur du post courant
     useEffect(() => {
         if (post) {
             fetch(`${config.serverEndpoint}/post/getPostAuthor/${post.author.id}`)
             .then(response => response.json())
             .then(data => {
-                // console.log(data)
                 setPostUser(data)
             })
             .catch(error => {
@@ -44,7 +43,7 @@ export default function PostCard({ index, post, topicId, usersList }) {
     }, [post])
 
 
-    
+    // Gestion des citations du post
     const saveCurrentCitation = () => {
         let citationObject = {
             authorId: undefined,
@@ -62,7 +61,7 @@ export default function PostCard({ index, post, topicId, usersList }) {
         dispatch(saveACitation(citationObject))
     }
 
-
+    // Gestion des retours à la ligne
     const textWithBreaks = post.content.split('\n').map((text, index) => (
         <React.Fragment key={index}>
             {text}
@@ -71,6 +70,7 @@ export default function PostCard({ index, post, topicId, usersList }) {
     ))
 
 
+    // Supprimer le post courant
     const deletePostFunction = (e) => {
         e.preventDefault()
         fetch(`${config.serverEndpoint}/post/deletePostById/${post._id}`, {
@@ -85,6 +85,7 @@ export default function PostCard({ index, post, topicId, usersList }) {
     }
 
 
+    // Modifier le message du post
     const modifyContent = (e) => {
         if (e.keyCode === 13 && e.shiftKey === false) {
             e.preventDefault();
@@ -102,7 +103,7 @@ export default function PostCard({ index, post, topicId, usersList }) {
                 newContent = `${e.target.value}`
             }
 
-            // Appel au serveur pour modifier le contenu du post
+            // Appel au serveur pour modifier le message du post
             fetch(`${config.serverEndpoint}/post/updatePost/${post._id}`, {
                 method: "PUT",
                 headers: {"Accept": "application/json", "Content-Type": "application/json"},
@@ -126,6 +127,7 @@ export default function PostCard({ index, post, topicId, usersList }) {
         }
     }
 
+    // Gestion de l'affichage pour la modification
     const modifyDisplayManager = (e) => {
         e.preventDefault()
         if (postContentDisplay === "block") {

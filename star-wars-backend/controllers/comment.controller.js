@@ -4,6 +4,7 @@ const User = require('../models/user.model.js')
 const Like = require('../models/like.model.js')
 
 
+// Créer un commentaire
 exports.createComment = async (req, res) => {
     try {
         // Récupérer l'id du post courant
@@ -55,6 +56,7 @@ exports.createComment = async (req, res) => {
     }
 }
 
+// Récupérer un commentaire via son identifiant
 exports.getOneCommentById = async (req, res) => {
     try {
         const commentId = req.params.id
@@ -69,7 +71,7 @@ exports.getOneCommentById = async (req, res) => {
     }
 }
 
-
+// Récupérer un commentaire depuis l'identifiant du post courant
 exports.getCommentsByPostId = async (req, res) => {
     try {
         const postId = req.params.id
@@ -87,7 +89,7 @@ exports.getCommentsByPostId = async (req, res) => {
 }
 
 
-// Récupérer l'utillisateur d'un commentaire
+// Récupérer l'auteur d'un commentaire
 exports.getCommentAuthorById = async (req, res) => {
     try {
         // Récupérer l'id de l'auteur du commentaire
@@ -106,7 +108,7 @@ exports.getCommentAuthorById = async (req, res) => {
 }
 
 
-
+// Mettre à jour le message d'un commentaire
 exports.updateACommentById = async (req, res) => {
     try {
         const comment = await Comment.findById(req.params.id)
@@ -141,7 +143,7 @@ exports.updateACommentById = async (req, res) => {
     }
 }
 
-
+// Supprimer un commentaire trouvé via son identifiant
 exports.deleteACommentById = async (req, res) => {
     try {
         // Récupérer l'id du commentaire

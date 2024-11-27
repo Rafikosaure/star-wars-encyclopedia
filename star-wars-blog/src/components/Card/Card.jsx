@@ -7,6 +7,7 @@ import { reinitializeDozen } from '../../redux/slices/dozenSlice'
 import config from '../../config'
 
 
+
 export default function Card({ item, categoryId }) {
   
   const dispatch = useDispatch()
@@ -15,7 +16,8 @@ export default function Card({ item, categoryId }) {
   const paramsIds = `${categoryId}.${itemId}`
   const [translatedName, setTranslatedName] = useState()
 
-
+  
+  // Traduction linguistique automatique du sujet traité
   useEffect(() => {
     if (location.pathname !== "/") {
       const object = {
@@ -32,7 +34,6 @@ export default function Card({ item, categoryId }) {
       })
       .then(response => response.json())
       .then(data => {
-        // console.log(data.name)
         setTranslatedName(data.name.text.replace(/^"|"$/g, ""))
       })
       .catch(error => console.log(error))

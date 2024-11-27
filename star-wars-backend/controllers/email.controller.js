@@ -5,14 +5,14 @@ const User = require('../models/user.model.js')
 const Topic = require('../models/topic.model.js')
 
 
-
+// Envoi d'une notification par email
 exports.userNotificationEmail = async (req, res) => {
     try {
         // Find the topic
         const topicId = req.params.id
         const currentTopic = await Topic.findById(topicId)
 
-        // Find the author of the mentions
+        // Find the author of the mentions / of the message
         const authorId = req.user.id
         const author = await User.findById(authorId)
 
@@ -21,6 +21,9 @@ exports.userNotificationEmail = async (req, res) => {
 
         // Get the id of the new post
         const messageId = req.body.messageId
+
+        // Get the type of the message
+        const messageType = req.body.messageType
 
         // Get the type of the email
         const emailType = req.body.emailType
@@ -31,7 +34,8 @@ exports.userNotificationEmail = async (req, res) => {
             author: author,
             topic: currentTopic,
             messageId: messageId,
-            emailType: emailType
+            emailType: emailType,
+            messageType: messageType
         }
 
         // Create a transporter object
@@ -67,10 +71,10 @@ exports.userNotificationEmail = async (req, res) => {
                         subject: `${userToSend.name}, on fait mention de vous !`,
                         html: Email.emailMention(data, userToSend, datetime)
                     }
-                } else if (data.emailType === "newPost") {
+                } else if (data.emailType === "newMessage") {
                     emailTypeToSend = {
                         subject: `${userToSend.name}, du nouveau dans le forum !`,
-                        html: Email.emailNewPost(data, userToSend, datetime)
+                        html: Email.emailNewMessage(data, userToSend, datetime)
                     }
                 }
                 const mailOptions = {

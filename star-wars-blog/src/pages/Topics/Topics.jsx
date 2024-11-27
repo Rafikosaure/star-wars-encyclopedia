@@ -28,7 +28,6 @@ export default function Topics() {
     fetch(`${config.serverEndpoint}/topic/getTopicsByCategory/${topicsCategoryId}`)
     .then(response => response.json())
     .then(data => {
-      // console.log(data)
       if (data.error) {
         navigate('*')
       } else {

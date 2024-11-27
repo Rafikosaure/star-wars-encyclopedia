@@ -28,6 +28,7 @@ export default function Header() {
   
 
   useEffect(() => {
+
     // Vérifier la connexion d'un utilisateur
     if (!isLoaded || isLogged) {
       fetch(`${config.serverEndpoint}/auth/logged`, {
@@ -35,7 +36,6 @@ export default function Header() {
       })
       .then(response => response.json())
       .then(data => {
-        // console.log(data)
         if (!data.badAccessMessage) {
           setLoggedUser(data)
           dispatch(updateUserLog(data))

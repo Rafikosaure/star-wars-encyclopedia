@@ -17,6 +17,7 @@ export default function RegisterForm() {
     const dispatch = useDispatch()
     const title = 'Inscription'
 
+    // Mot de passe fort obligatoire
     function validatePassword(password){
         var Reg = new RegExp(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/);
         return Reg.test(password);
@@ -47,7 +48,6 @@ export default function RegisterForm() {
         })
         .then(response => response.json())
         .then(data => {
-            // console.log(data)
             setUnvalidPassword('none')
             dispatch(updateRegisterState(false))
             toast("Compte utilisateur créé !")
@@ -77,8 +77,6 @@ export default function RegisterForm() {
                 </div>
                 <input className='register-input-file' type="file" id="file" name="picture" accept=".png, .jpg, .jpeg" {...register("picture")} onChange={(e) => isValidIcon(e.target.value)} />
             </div>
-            {/* <input type="file" id="file" name="picture" accept=".png, .jpg, .jpeg" {...register("picture")} onChange={(e) => isValidIcon(e.target.value)}/>
-            <label htmlFor="file">Choisissez une image de profil<img src={isValid} alt="Upload is valid" className={`input-valid-img ${fileIsLoad}`} /></label> */}
             <button type='submit'>S'inscrire</button>
         </form>
         <p className='link-switch' onClick={(e) => {dispatch(updateRegisterState(false))}}>Déjà inscrit ? Connectez-vous ici !</p>

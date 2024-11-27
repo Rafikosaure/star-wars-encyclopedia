@@ -3,6 +3,7 @@ const User = require('../models/user.model')
 const Topic = require('../models/topic.model')
 
 
+
 // Créer une liste d'utilisateur suivant une discussion
 exports.createAFollowTopicArray = async (req, res) => {
     try {

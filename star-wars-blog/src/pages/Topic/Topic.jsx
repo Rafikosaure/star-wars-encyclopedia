@@ -13,6 +13,7 @@ import { selectLoggedUser } from '../../redux/slices/loggedUserSlice'
 import { reloadPosts } from '../../redux/slices/postsReload'
 import { selectReloadPostsState } from '../../redux/slices/postsReload'
 import mentionsManager from '../../sharedFunctions/mentionsManager'
+import subscribersManager from '../../sharedFunctions/subscribersManager'
 import PostCard from '../../components/PostCard/PostCard'
 import PostForm from '../../components/PostForm/PostForm'
 import { Link } from 'react-router-dom'
@@ -42,6 +43,7 @@ export default function Topic() {
     const dispatch = useDispatch()
 
 
+    // Récupérer les posts de la discussion courante
     useEffect(() => {
         fetch(`${config.serverEndpoint}/post/getPostsByTopicId/${topicId}`)
         .then(response => response.json())
@@ -57,6 +59,7 @@ export default function Topic() {
 
 
 
+    // Récupérer la catégorie de la discussion courante et ses données
     useEffect(() => {
         fetch(`${config.serverEndpoint}/category/findCategoryFromTopic/${topicId}`)
         .then(response => response.json())
@@ -70,6 +73,7 @@ export default function Topic() {
 
 
     useEffect(() => {
+
         // Récupération des utilisateurs
         if (!reloadUsers || !usersList) {
             fetch(`${config.serverEndpoint}/user/getAll`, {
@@ -95,6 +99,7 @@ export default function Topic() {
 
         // Récupération du texte du post
         data.description = description
+
         // Construction du corps de la requète
         const fetchContent = data.description.replace(/\s+/g, ' ').trim()
         let fetchData = {
@@ -129,6 +134,9 @@ export default function Topic() {
             dispatch(reloadUsersArrayFunction(false))
             mentionsManager(data.description, result.newPost._id, usersList, topicId)
             
+            // Gestion des abonnements à la discussion
+            subscribersManager(topicId, result.newPost._id, loggedUser, "post")
+
             // Rafraichissement des posts affichés
             dispatch(reloadPosts())
         })
@@ -170,8 +178,6 @@ export default function Topic() {
                             )}
                             
                             <PostForm setDescription={setDescription} toReset={toReset} setToReset={setToReset} />
-                            {/* <textarea className='creation-post-textarea-description' name='description' placeholder='Tapez votre post' {...register("description")} maxLength={500} required /> */}
-
                             <button type='submit' className='creation-post-form-submit'>Publier</button>
                         </form>
                     )}

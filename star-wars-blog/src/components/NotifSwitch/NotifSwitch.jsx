@@ -5,18 +5,11 @@ import config from '../../config'
 
 
 
-
 export default function NotifSwitch({ loggedUser }) {
 
     const [allowNotifs, setAllowNotifs] = useState()
 
-
-    // useEffect(() => {
-    //     if (allowNotifs !== undefined) {
-    //         console.log('Notifications activées :', allowNotifs)
-    //     }
-    // }, [allowNotifs])
-
+    // Récupérer le choix initial de l'utilisateur
     useEffect(() => {
         if (loggedUser) {
             fetch(`${config.serverEndpoint}/isMentionned/getIsMentionnedOption/${loggedUser._id}`, {
@@ -31,6 +24,7 @@ export default function NotifSwitch({ loggedUser }) {
     }, [loggedUser])
 
 
+    // Fonction pour autoriser / interdire les notifications en cas de mention
     const changeOption = (newOption) => {
         fetch(`${config.serverEndpoint}/isMentionned/updateIsMentionnedOption/${loggedUser._id}`, {
             method: 'PUT',
@@ -40,13 +34,12 @@ export default function NotifSwitch({ loggedUser }) {
         })
         .then(response => response.json())
         .then(data => {
-            // console.log(data)
             setAllowNotifs(data.newOption)
         })
         .catch(error => console.log(error))
     }
 
-
+    // Switcher entre les options
     const switchNotificationOption = () => {
         if (allowNotifs) {
             changeOption(false)

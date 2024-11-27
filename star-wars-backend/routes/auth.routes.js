@@ -5,7 +5,7 @@ const auth = require('../middlewares/auth.js')
 const router = express.Router()
 
 
-/** Routes d'authentification des utilisateurs du site */
+// Routes d'authentification des utilisateurs du site
 router.post('/register', multer, authCtrl.register)
 router.post('/login', authCtrl.login)
 router.post('/logout', auth.verifyToken, authCtrl.logout)

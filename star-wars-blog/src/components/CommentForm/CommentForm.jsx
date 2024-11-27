@@ -7,6 +7,7 @@ import { reloadUsersArrayFunction } from '../../redux/slices/reloadUsersArray'
 import { reloadPosts } from '../../redux/slices/postsReload'
 import { selectLoggedUser } from '../../redux/slices/loggedUserSlice'
 import mentionsManager from '../../sharedFunctions/mentionsManager'
+import subscribersManager from '../../sharedFunctions/subscribersManager'
 
 
 
@@ -28,6 +29,7 @@ export default function CommentForm({ post, usersList, topicId }) {
     const dispatch = useDispatch()
 
 
+    // Créer un commentaire
     const createNewComment = (data) => {
         if (data.keyCode === 13 && data.shiftKey === false && !isMentionValidated) {
             data.preventDefault()
@@ -47,6 +49,8 @@ export default function CommentForm({ post, usersList, topicId }) {
                 },
                 likes: []
             }
+
+            // Gestion des éventuelles citations
             if (commentCitationText && commentCitationAuthorId && commentCitationPostId === post._id) {
                 const fetchCitationText = commentCitationText.split("a dit :").at(-1).trim().replace(/^"|"$/g, "")
                 fetchData.citation = {
@@ -54,6 +58,7 @@ export default function CommentForm({ post, usersList, topicId }) {
                     citationText: fetchCitationText
                 }
             }
+
             // Envoi de la requète
             fetch(`${config.serverEndpoint}/comment/createComment/${post._id}`, {
                 method: "POST",
@@ -68,6 +73,9 @@ export default function CommentForm({ post, usersList, topicId }) {
                 dispatch(reloadUsersArrayFunction(false))
                 mentionsManager(fetchContent, result.newComment._id, usersList, topicId)
 
+                // Gestion des abonnés à la discussion
+                subscribersManager(topicId, result.newComment._id, loggedUser, "commentaire")
+
                 // Rafraichissement des commentaires affichés
                 dispatch(reloadPosts())
             })
@@ -77,7 +85,7 @@ export default function CommentForm({ post, usersList, topicId }) {
         }
     }
 
-
+    // Gestion de l'autocomplétion en cas de mention
     const handleChange = (e) => {
         const value = e.target.value;
         setText(value);
@@ -105,10 +113,11 @@ export default function CommentForm({ post, usersList, topicId }) {
             }
         } else {
             setShowSuggestions(false);
+            setIsMentionValidated(false)
         }
     };
 
-    
+    // Gestion du clavier en cas de mention
     const handleKeyDown = (e) => {
         if (!showSuggestions) return;
 
@@ -130,17 +139,17 @@ export default function CommentForm({ post, usersList, topicId }) {
             setIsMentionValidated(false)
         } else if (e.key === 'Escape') {
             setShowSuggestions(false);
+            setIsMentionValidated(false)
         }
     };
 
-
+    // Gestion des suggestions
     const handleSuggestionClick = (suggestion) => {
         const words = text.split(' ');
         words.pop(); // Supprime "@query"
         setText(words.join(' ') + ' @' + suggestion);
         setShowSuggestions(false);
     };
-
 
 
 

@@ -4,7 +4,7 @@ const User = require('../models/user.model.js')
 const Like = require('../models/like.model.js')
 
 
-
+// Récupérer les likes d'un post / d'un commentaire
 exports.getLikes = async (req, res) => {
     try {
         // Récupérer l'id du post / du commentaire dans une variable
@@ -14,11 +14,12 @@ exports.getLikes = async (req, res) => {
         let likesByType = await Comment.findById(typeId).populate('likes')
         if (!likesByType) {
             likesByType = await Post.findById(typeId).populate('likes')
-            if (!likesByType) res.status(404).json({
-                message: "Likes not found!"
-            })
+            if (!likesByType) {
+                res.status(404).json({ message: "Likes not found!" })
+            }
         }
         
+        // Renvoie les likes en réponse
         res.status(200).json(likesByType.likes)
 
     } catch(error) {
@@ -103,7 +104,7 @@ exports.dislike = async (req, res) => {
     }
 }
 
-
+// Fonction pour la création d'un like et son enregistrement
 const createAndPushNewLike = async (currentType, currentUser) => {
     try {
         const likeObject = {

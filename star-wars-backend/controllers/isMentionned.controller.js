@@ -1,6 +1,7 @@
 const IsMentionned = require('../models/isMentionned.model')
 
 
+
 // Créer une autorisation/interdiction d'être mentionné
 exports.createIsMentionnedOption = (req, res) => {
     const userId = req.params.id
@@ -12,6 +13,7 @@ exports.createIsMentionnedOption = (req, res) => {
         .then(() => res.status(201).json(isMentionned))
         .catch(() => res.status(400).json({ message: 'isMentionned option creation failed!' }))
 }
+
 
 // Supprimer une autorisation/interdiction d'être mentionné
 exports.deleteIsMentionnedOption = async (req, res) => {
@@ -26,6 +28,7 @@ exports.deleteIsMentionnedOption = async (req, res) => {
         res.status(404).json(error)
     }
 }
+
 
 // Mettre à jour une autorisation/interdiction d'être mentionné
 exports.allowOrDisallowMentions = async (req, res) => {
@@ -49,6 +52,7 @@ exports.allowOrDisallowMentions = async (req, res) => {
         })
     }
 }
+
 
 // Récupérer une autorisation/interdiction d'être mentionné
 exports.getIsMentionnedOption = async (req, res) => {

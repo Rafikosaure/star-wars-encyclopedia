@@ -27,12 +27,12 @@ export default function CommentCard({ index, commentId, topicId, postId, usersLi
     const dispatch = useDispatch()
 
 
+    // Récupérer le commentaire courant et ses informations
     useEffect(() => {
         if (commentId) {
             fetch(`${config.serverEndpoint}/comment/getOneComment/${commentId}`)
             .then(response => response.json())
             .then(data => {
-                // console.log(data)
                 if (!data.message) {
                     setCurrentComment(data)
                     const myDate = new Date(data.createdAt)
@@ -44,7 +44,7 @@ export default function CommentCard({ index, commentId, topicId, postId, usersLi
     }, [commentId, commentUpdater])
 
 
-
+    // Récupérer l'auteur du commentaire courant
     useEffect(() => {
         if (currentComment) {
             fetch(`${config.serverEndpoint}/comment/getCommentAuthor/${currentComment.author.id}`)
@@ -55,7 +55,6 @@ export default function CommentCard({ index, commentId, topicId, postId, usersLi
             .catch(error => console.log(error))
         }
     }, [currentComment])
-
 
 
     // Mise en forme des retours à la ligne
@@ -70,8 +69,8 @@ export default function CommentCard({ index, commentId, topicId, postId, usersLi
             return textWithBreaks
         }
     }
-    
-    
+        
+    // Supprimer un commentaire
     const deleteCommentFunction = (e) => {
         e.preventDefault()
         fetch(`${config.serverEndpoint}/comment/deleteAComment/${currentComment._id}`, {
@@ -80,14 +79,13 @@ export default function CommentCard({ index, commentId, topicId, postId, usersLi
         })
         .then(response => response.json())
         .then(data => {
-            // console.log(data.message)
-            // console.log('Commentaire supprimé !')
             dispatch(reloadPosts())
         })
         .catch(error => console.log(error))
     }
 
 
+    // Modifier un commentaire
     const modifyContent = (e) => {
         if (e.keyCode === 13 && e.shiftKey === false) {
             e.preventDefault();
@@ -134,6 +132,7 @@ export default function CommentCard({ index, commentId, topicId, postId, usersLi
     }
 
 
+    // Gestion de l'affichage du formulaire de modification
     const modifyDisplayManager = (e) => {
         e.preventDefault()
         if (commentContentDisplay === "block") {
@@ -143,6 +142,7 @@ export default function CommentCard({ index, commentId, topicId, postId, usersLi
     }
 
 
+    // Enregistrer une citation dans un commentaire
     const saveCurrentCitation = (e) => {
         e.preventDefault()
         let citationObject = {

@@ -4,7 +4,7 @@ const auth = require('../middlewares/auth.js')
 const router = express.Router()
 
 
-/** Routes de gestion des discussions suivies par les utilisateurs */
+// Routes de gestion des discussions suivies par les utilisateurs
 router.post('/createAFollowTopicArray/:id', auth.verifyToken, followTopicCtrl.createAFollowTopicArray)
 router.get('/getAllFollowersOfATopic/:id', followTopicCtrl.getAllFollowersOfATopic)
 router.get('/getAllFollowedTopics/:id', followTopicCtrl.getAllFollowedTopics)

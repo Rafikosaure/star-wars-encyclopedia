@@ -7,7 +7,8 @@ const User = require('../models/user.model.js')
 const Like = require('../models/like.model.js')
 
 
-// Récupérer toutes les discussions
+
+// Récupérer toutes les discussions du forum
 exports.getTopics = (req, res) => {
     Topic.find()
         .then((topics) => res.status(200).json(topics))
@@ -24,6 +25,7 @@ exports.getTopicsByCategoryId = async (req, res) => {
 
         // Trouver les topics liés à cette catégorie
         const currentCategoryWithTopics = await Category.findById(categoryId).populate("topics")
+        console.log('Données récupérées :', currentCategoryWithTopics)
 
         // Vérifier que les données ne sont pas undefined
         if (!currentCategoryWithTopics) res.status(404).json({

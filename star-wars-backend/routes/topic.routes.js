@@ -4,7 +4,7 @@ const auth = require('../middlewares/auth.js')
 const router = express.Router()
 
 
-/** Routes de création et de gestion des sujets dans le forum */
+// Routes de gestion des discussions dans le forum
 router.post('/createTopic/:id', auth.verifyToken, topicCtrl.createTopic)
 router.get('/getTopics', topicCtrl.getTopics)
 router.get('/getTopicsByCategory/:id', topicCtrl.getTopicsByCategoryId)

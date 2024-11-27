@@ -13,6 +13,7 @@ import config from '../../config'
 import { toast } from 'sonner'
 
 
+
 export default function TopicCard({ topic }) {
 
     const isLogged = useSelector(selectIsLoggedState)
@@ -23,8 +24,10 @@ export default function TopicCard({ topic }) {
     const [datetime, updateDateTime] = useState()
     const [followersArray, setFollowersArray] = useState()
     const [currentFollower, setCurrentFollower] = useState()
+    const [isHovered, setIsHovered] = useState(false); // si le curseur est ou non sur l'élément
 
 
+    // Récupération de la date de création de la discussion
     useEffect(() => {
         const topicDate = new Date(topic.createdAt)
         updateDateTime(topicDate)
@@ -32,6 +35,7 @@ export default function TopicCard({ topic }) {
 
 
     useEffect(() => {
+
         // Récupération des abonnés à la discussion
         if (!followersArray) {
             fetch(`${config.serverEndpoint}/followTopic/getAllFollowersOfATopic/${topic._id}`)
@@ -55,6 +59,7 @@ export default function TopicCard({ topic }) {
     }, [topic, followersArray, loggedUser, currentFollower])
 
 
+    // Supprimer une discussion
     const deleteTopicFunction = (e) => {
         e.preventDefault()
         fetch(`${config.serverEndpoint}/topic/deleteTopicById/${topic._id}`, {
@@ -63,7 +68,6 @@ export default function TopicCard({ topic }) {
         })
         .then(response => response.json())
         .then(data => {
-            // console.log(data.message)
             if (data.message) {
                 toast("Discussion supprimée !")
             }
@@ -73,6 +77,7 @@ export default function TopicCard({ topic }) {
     }
 
 
+    // Suivre une discussion
     const followThisTopicFunction = (e) => {
         e.preventDefault()
         let toFollow;
@@ -94,7 +99,6 @@ export default function TopicCard({ topic }) {
         })
         .then(response => response.json())
         .then(data => {
-            // console.log(data)
 
             // Gestion de l'interface si l'utilisateur est ou non un abonné
             if (data.topicIsFollowed === true) {
@@ -112,8 +116,12 @@ export default function TopicCard({ topic }) {
         .catch(error => {
             console.log(error)
         })
+    }
 
-        
+    // Styles du contour du bouton de suivi de la discussion
+    const strokeStyle = {
+        stroke: isHovered ? 'white' : 'rgb(53, 155, 155)',
+        strokeWidth: 4
     }
 
 
@@ -126,7 +134,18 @@ export default function TopicCard({ topic }) {
                         <>
                             <div className='topic-infos'><h1>{topic.title}</h1><div className='topic-datetime-and-actions'><p>{`Créé le ${datetime.toLocaleDateString("fr-FR", {weekday: "long", year: "numeric", month: "long", day: "numeric", hour: '2-digit', minute: '2-digit' }).replace(':', 'h')}`}</p>
                             {isLogged && (
-                                <div className='topic-action bulle' title={isFollowedTitle} onClick={(e) => followThisTopicFunction(e)}><svg xmlns="http://www.w3.org/2000/svg" fill={isFollowedColor} viewBox="0 0 50 50"><path d="M 25 4 C 12.316406 4 2 12.972656 2 24 C 2 30.1875 5.335938 36.066406 10.949219 39.839844 C 10.816406 40.890625 10.285156 43.441406 8.183594 46.425781 L 7.078125 47.992188 L 9.054688 48 C 14.484375 48 18.15625 44.671875 19.363281 43.394531 C 21.195313 43.796875 23.089844 44 25 44 C 37.683594 44 48 35.027344 48 24 C 48 12.972656 37.683594 4 25 4 Z"/></svg></div>
+                                <div className='topic-action bulle' 
+                                title={isFollowedTitle} 
+                                onClick={(e) => followThisTopicFunction(e)}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" 
+                                    fill={isFollowedColor}
+                                    style={strokeStyle}
+                                    onMouseEnter={() => setIsHovered(true)}   // Détecte le survol
+                                    onMouseLeave={() => setIsHovered(false)}  // Détecte lorsque le curseur quitte 
+                                    viewBox="0 0 50 50">
+                                        <path d="M 25 4 C 12.316406 4 2 12.972656 2 24 C 2 30.1875 5.335938 36.066406 10.949219 39.839844 C 10.816406 40.890625 10.285156 43.441406 8.183594 46.425781 L 7.078125 47.992188 L 9.054688 48 C 14.484375 48 18.15625 44.671875 19.363281 43.394531 C 21.195313 43.796875 23.089844 44 25 44 C 37.683594 44 48 35.027344 48 24 C 48 12.972656 37.683594 4 25 4 Z"/>
+                                    </svg>
+                                </div>
                             )}
                             {isLogged && loggedUser.isAdmin && (
                                 <div className='topic-action' title='Supprimer cette discussion' onClick={(e) => deleteTopicFunction(e)}>✖</div>

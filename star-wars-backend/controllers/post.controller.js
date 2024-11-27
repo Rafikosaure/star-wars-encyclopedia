@@ -5,7 +5,7 @@ const Like = require('../models/like.model.js')
 const User = require('../models/user.model.js')
 
 
-
+// Créer un post dans une discussion
 exports.createPost = async (req, res) => {
     try {
         // Récupérer l'id du topic courant
@@ -58,6 +58,7 @@ exports.createPost = async (req, res) => {
 }
 
 
+// Récupérer les posts contenus dans une discussion
 exports.getPostsByTopicId = async (req, res) => {
     try {
         // Récupérer l'id du topic courant
@@ -102,6 +103,7 @@ exports.getPostAuthor = async (req, res) => {
 }
 
 
+// Supprimer un post trouvé via son identifiant
 exports.deletePostById = async (req, res) => {
     try {
         // Vérifier si l'utilisateur est l'admin du site
@@ -143,6 +145,7 @@ exports.deletePostById = async (req, res) => {
 }
 
 
+// Modifier le contenu d'un post
 exports.modifyPost = async (req, res) => {
     try {
         const post = await Post.findById(req.params.id)
@@ -150,6 +153,8 @@ exports.modifyPost = async (req, res) => {
             message: "Post not found!"
         })
 
+        // Construction de l'objet post
+        // avec le message modifié
         const postObject = {
             title: post.title,
             content: req.body.content,

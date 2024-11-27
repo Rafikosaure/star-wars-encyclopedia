@@ -29,13 +29,12 @@ const notifyMentionnedUsers = async (usersToNotify, messageId, topicId) => {
             body: JSON.stringify({
                 users: filteredUsers,
                 emailType: "mention",
-                messageId: messageId
+                messageId: messageId,
+                messageType: undefined
             })
         })
         .then(response => response.json())
-        .then(data => {
-            // console.log(data.message)
-        })
+        .then(data => {})
         .catch(error => console.log(error.message))
     }
 }

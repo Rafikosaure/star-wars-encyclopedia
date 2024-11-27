@@ -4,7 +4,7 @@ const auth = require('../middlewares/auth.js')
 const router = express.Router()
 
 
-/** Routes de création et de gestion globale des commentaires des posts */
+// Routes de gestion des commentaires des posts
 router.post('/createComment/:id', auth.verifyToken, commentCtrl.createComment)
 router.get('/getOneComment/:id', commentCtrl.getOneCommentById)
 router.get('/getCommentsByPost/:id', commentCtrl.getCommentsByPostId)
