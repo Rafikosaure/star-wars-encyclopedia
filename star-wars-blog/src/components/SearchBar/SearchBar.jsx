@@ -15,6 +15,7 @@ export default function SearchBar({ category }) {
   const navigate = useNavigate()
 
 
+  // Recherche vers l'API Star Wars Databank
   useEffect(() => {
     if (search) {
       fetch(`${config.starWarsAPI}/${category}/name/${search}`)
@@ -29,6 +30,7 @@ export default function SearchBar({ category }) {
   }, [category, search, dispatch, article])
   
   
+  // Traductions
   const translateSearch = (text) => {
     const object = {
       sourceLang: "FR",
@@ -49,7 +51,8 @@ export default function SearchBar({ category }) {
     }
   }
 
-
+  
+  // Validation du formulaire (redirection vers la page article concernée)
   const onFormSubmit = (e) => {
     e.preventDefault()
     if (article) {

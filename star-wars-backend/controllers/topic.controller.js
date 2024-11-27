@@ -1,23 +1,14 @@
 const Topic = require('../models/topic.model.js')
 const Category = require('../models/category.model.js')
 const Post = require('../models/post.model.js')
+const Comment = require('../models/comment.model.js')
+const FollowTopic = require('../models/followTopic.model.js')
+const User = require('../models/user.model.js')
+const Like = require('../models/like.model.js')
 
 
 
-// exports.getTopicsAndPosts = async (req, res) => {
-
-//     // Chercher tous les topics avec leurs posts
-//     const topicsWithPosts = await Topic.find().populate('posts')
-
-//     // Vérifier si les données sont valides
-//     if (!topicsWithPosts) res.status(404).json({
-//         message: "Topics not found!"
-//     })
-
-//     // Renvoyer l'objet récupéré en réponse
-//     res.status(200).json(topicsWithPosts)
-// }
-
+// Récupérer toutes les discussions du forum
 exports.getTopics = (req, res) => {
     Topic.find()
         .then((topics) => res.status(200).json(topics))
@@ -26,15 +17,15 @@ exports.getTopics = (req, res) => {
         }))
 }
 
-
-exports.getTopicsByCategory = async (req, res) => {
-    
+// Récupérer toutes les discussions d'une catégorie
+exports.getTopicsByCategoryId = async (req, res) => {
     try {
         // Récupérer l'id de la catégorie courante
         const categoryId = req.params.id
 
         // Trouver les topics liés à cette catégorie
         const currentCategoryWithTopics = await Category.findById(categoryId).populate("topics")
+        console.log('Données récupérées :', currentCategoryWithTopics)
 
         // Vérifier que les données ne sont pas undefined
         if (!currentCategoryWithTopics) res.status(404).json({
@@ -52,7 +43,7 @@ exports.getTopicsByCategory = async (req, res) => {
     }
 }
 
-
+// Créer une discussion
 exports.createTopic = async (req, res) => {
     try {
         // Récupérer l'id de la catégorie courante
@@ -76,6 +67,18 @@ exports.createTopic = async (req, res) => {
             })
         }
 
+        // Créer un tableau de followers pour ce topic
+        const userId = req.user.id
+        const creatorUser = await User.findById(userId)
+        const newFollowTopicObject = {
+            topicId: newTopic._id,
+            users: [
+                creatorUser
+            ]
+        }
+        const newFollowTopicArray = new FollowTopic(newFollowTopicObject)
+        newFollowTopicArray.save()
+
         // Créer un premier post et l'insérer dans le nouveau topic
         let reqPost = req.body.post
         reqPost.title = newTopic.title
@@ -95,5 +98,67 @@ exports.createTopic = async (req, res) => {
         }
     } catch(error) {
         res.status(500).json(error)
+    }
+}
+
+// Supprimer une discussion
+exports.deleteTopicById = async (req, res) => {
+    try {
+        const topicId = req.params.id
+
+        // Trouver le topic et récupérer ses posts
+        const currentTopic = await Topic.findById(topicId).populate('posts')
+        if (!currentTopic) res.status(404).json({
+            message: "Topic not found!"
+        })
+
+        // Trouver la catégorie contenant le topic et y supprimer sa référence
+        const currentCategory = await Category.find({ 'topics': { $in: { '_id': topicId }}})
+        currentCategory[0].topics.pull({ _id: topicId })
+        currentCategory[0].save()
+
+        // Trouver puis supprimer le tableau des followers du topic
+        await FollowTopic.findOneAndDelete({ topicId: topicId })
+
+        // Posts du topic : d'abord, supprimer leurs likes
+        const postsToDelete = currentTopic.posts;
+        postsToDelete.map(async (post) => {
+            await Like.deleteMany({ likeType: post._id })
+        })
+
+        // Trouver les commentaires des posts du topic
+        await Promise.all(
+            postsToDelete.map(async (post) => {
+                const postWithComments = await Post.findById(post._id).populate('comments')
+                const commentsToDelete = postWithComments.comments
+                
+                // Itérer sur les commentaires de chaque post
+                await Promise.all(
+                    commentsToDelete.map(async (comment) => {
+
+                        // Supprimer les likes des commentaires
+                        await Like.deleteMany({ likeType: comment._id })
+                        
+                        // Supprimer le commentaire courant
+                        await Comment.deleteOne({ _id: comment._id })
+                    })
+                )
+            
+                // Supprimer le post courant
+                await Post.findByIdAndDelete(post._id)
+            })   
+        )
+
+        // Enfin, supprimer le topic
+        await Topic.findByIdAndDelete(topicId)
+
+        res.status(200).json({
+            message: "Topic deletion is success!"
+        })
+
+    } catch(error) {
+        res.status(500).json({
+            message: 'Topic deletion failed!'
+        })
     }
 }

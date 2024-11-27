@@ -3,6 +3,9 @@ import './Legal.scss'
 
 
 export default function Legal() {
+
+    // Cette page est dédiée aux mentions légales du site.
+    // Depuis l'interface du site, elle est accessible depuis les liens du footer.
     return (
         <div className='legal-page'>
             <h1>Politique de confidentialité</h1>

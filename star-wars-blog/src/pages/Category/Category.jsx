@@ -34,11 +34,13 @@ export default function Category() {
 
 
   useEffect(() => {
+
     // Gestion des mauvaises URLs
     if (!categoryId || !currentDatas) {
       navigate("*")
     } else {
       updateRightPage(true)
+
       // Récupérer les informations depuis l'API
       setSpinnerDisplay('block')
       fetch(`${config.starWarsAPI}/${currentDatas.keyword}?page=${storedDozen}`)
@@ -57,7 +59,7 @@ export default function Category() {
   
 
 
-  // Fonction pour gérer le clic sur le bouton 
+  // Gestion du clic sur le bouton 
   // pour voir les articles suivants
   const nextPage = () => {
     if (storedDozen >= nbDozen.current) {
@@ -68,7 +70,7 @@ export default function Category() {
   }
 
 
-  // Fonction pour gérer le clic sur le bouton 
+  // Gestion du clic sur le bouton 
   // pour voir les articles précédents
   const prevPage = () => {
     if (storedDozen <= 1) {
@@ -82,7 +84,7 @@ export default function Category() {
   return (
     <>
       {rightPage ? (
-      <div className='app-category'>
+        <div className='app-category'>
           <div className='page-content'>
             <h1>{currentDatas.title}</h1>
             <SearchBar category={currentDatas.keyword} />
@@ -119,8 +121,8 @@ export default function Category() {
                 `${storedDozen} / ${nbDozen.current}`
               ) : null }
             </div>
-        </div>        
-      </div>
+          </div>
+        </div>
       ) : null}
     </>
   )

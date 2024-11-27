@@ -41,6 +41,7 @@ export default function LoginForm() {
         });
     }
 
+
   return (
     <div className={`login-page-content`}>
         <h1>{title.toLowerCase()}</h1>

@@ -8,6 +8,7 @@ import { updateIsLoggedUser } from '../../redux/slices/isLoggedUserSlice'
 import { updateLoadedUser } from '../../redux/slices/loadedUserSlice'
 import { selectReloadUsersState } from '../../redux/slices/reloadUsersArray'
 import { reloadUsersArrayFunction } from '../../redux/slices/reloadUsersArray'
+import { selectReloadFollowedTopicsState } from '../../redux/slices/followedTopicsReload'
 import { selectLoggedUser } from '../../redux/slices/loggedUserSlice'
 import { updateUserLog } from '../../redux/slices/loggedUserSlice'
 import { useNavigate, Link } from 'react-router-dom'
@@ -16,8 +17,9 @@ import '../../sharedStyles/Account.scss'
 import DefaultAvatar from '../../assets/images/EmojiBlitzBobaFett1.webp'
 import { useForm } from 'react-hook-form'
 import PictureIsValid from '../../assets/images/is_valid.webp'
-// import UserData from '../../components/UserData/UserData'
 import { toast } from 'sonner'
+import NotifSwitch from '../../components/NotifSwitch/NotifSwitch'
+import FollowedTopicCard from '../../components/FollowedTopicCard/FollowedTopicCard'
 import config from '../../config'
 
 
@@ -25,7 +27,6 @@ export default function Account() {
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  // const [userData, setUserData] = useState()
   const [allUsers, setAllUsers] = useState()
   const isLogged = useSelector(selectIsLoggedState)
   const [fileIsLoad, updateFileIsLoad] = useState('display-none')
@@ -34,15 +35,19 @@ export default function Account() {
   const { register, handleSubmit, reset } = useForm()
   const reloadUsers = useSelector(selectReloadUsersState)
   const userData = useSelector(selectLoggedUser)
+  const [followedTopics, setFollowedTopics] = useState()
+  const reloadFollowedTopics = useSelector(selectReloadFollowedTopicsState)
 
 
+  // Redirection en cas d'utilisateur non-authentifié
   useEffect(() => {
     if (!isLogged) {
-      navigate("/")
+      navigate("/auth")
     }
   }, [isLogged, navigate])
 
 
+  // Affichage de l'icone "image chargée"
   const isValidIcon = (value) => {
     if (value.length > 0) {
       updateFileIsLoad('display-flex')
@@ -51,6 +56,8 @@ export default function Account() {
     }
   }
 
+
+  // Récupération des utilisateurs du site
   useEffect(() => {
     if (!reloadUsers || !allUsers) {
       fetch(`${config.serverEndpoint}/user/getAll`, {
@@ -60,7 +67,7 @@ export default function Account() {
       .then(data => {
         if (data.badAccessMessage) {
           dispatch(reloadUsersArrayFunction(true))
-          navigate('/')
+          navigate('/auth')
         } else {
           setAllUsers(data.filter((user) => user.isAdmin !== true))
           dispatch(reloadUsersArrayFunction(true))
@@ -74,12 +81,28 @@ export default function Account() {
   }, [reloadUsers, allUsers, dispatch, navigate])
 
 
+
+  useEffect(() => {
+    // Récupérer les discussions suivies par l'utilisateur
+    if (isLogged) {
+      fetch(`${config.serverEndpoint}/followTopic/getAllFollowedTopics/${userData._id}`)
+      .then(response => response.json())
+      .then(data => {
+        setFollowedTopics(data)
+      })
+      .catch(error => console.log(error))
+    }
+  }, [isLogged, userData, reloadFollowedTopics])
+
+
+  // Mot de passe fort
   function validatePassword(password){
     var Reg = new RegExp(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/);
     return Reg.test(password);
   }
 
 
+  // Modification des informations des utilisateurs
   const modifyData = (data) => {
     if (data.name.length <= 0 && data.email.length <= 0 && data.password.length <= 0 && data.picture.length <= 0) {
       return
@@ -120,12 +143,14 @@ export default function Account() {
         dispatch(reloadUsersArrayFunction())
         toast("Mise à jour effectuée !")
       } else {
-        navigate('/')
+        navigate('/auth')
       }
     })
     .catch(error => console.error(error));
   }
 
+
+  // Validation de l'email avant suppression du compte
   const validateEmail = (email) => {
     if (email === userData.email) {
       setAllowDeletion(true)
@@ -134,6 +159,8 @@ export default function Account() {
     }
   }
 
+
+  // Suppression de son propre compte par l'utilisateur
   const deleteCurrentUser = (e) => {
     e.preventDefault()
     fetch(`${config.serverEndpoint}/user/deleteById`, {
@@ -143,14 +170,14 @@ export default function Account() {
     .then(response => response.json())
     .then(data => {
       if (data.badAccessMessage) {
-        navigate('/')
+        navigate('/auth')
       } else {
         dispatch(updateIsLoggedUser(false))
         dispatch(updateUserLog({}))
         dispatch(updateLoadedUser(false))
         dispatch(reloadUsersArrayFunction())
         toast('Compte utilisateur supprimé !')
-        navigate('/')
+        navigate('/auth')
       }
     })
     .catch(error => console.log(error))
@@ -175,6 +202,24 @@ export default function Account() {
               <div className='account-user-detail'><p className='account-user-key'>Nom :</p><p className='account-user-value'>{userData.name}</p></div>
               <div className='account-user-detail'><p className='account-user-key'>Email :</p><p className='account-user-value'>{userData.email}</p></div>
               <div className='account-section-separator'/>
+              <div className='notifs-section'>
+                <h2 className='account-profile-title'>Notifications</h2>
+                <span className='allow-mentions-notifs'><span>Autoriser en cas de mention :</span><NotifSwitch loggedUser={userData} /></span>
+              </div>
+              <div className='account-section-separator'/>
+                <div className='notifs-section'>
+                  <h2 className='account-profile-title'>Discussions suivies</h2>
+                  {followedTopics && followedTopics.length > 0 ? (
+                  <>
+                    {followedTopics.map((topic, index) => (
+                      <FollowedTopicCard key={topic._id} index={index} topicData={topic} />
+                    ))}
+                  </>
+                  ) : (
+                    <p className='any-followed-topic-text'>Aucune discussion suivie</p>
+                  )}
+              </div>
+              <div className='account-section-separator'></div>
               <div className='account-form-update-section'>
                 <h2>Mettre à jour vos infos ?</h2>
                 <div>
@@ -189,8 +234,6 @@ export default function Account() {
                       </div>
                       <input className='account-file-input' type="file" id="file" name="picture" accept=".png, .jpg, .jpeg" {...register("picture")} onChange={(e) => isValidIcon(e.target.value)} />
                     </div>
-                    {/* <input className='account-file-input' type="file" id="file" name="picture" accept=".png, .jpg, .jpeg" {...register("picture", {required: false})} onChange={(e) => isValidIcon(e.target.value)} />
-                    <label className='account-label' htmlFor="file">Mettre à jour votre image de profil<img src={PictureIsValid} alt="Upload is valid" className={`input-valid-img ${fileIsLoad}`} /></label> */}
                     <button className='account-submit-button' type='submit'>Mettre à jour</button>
                   </form>
                 </div>

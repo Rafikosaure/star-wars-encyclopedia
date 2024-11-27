@@ -5,13 +5,13 @@ const Like = require('../models/like.model.js')
 const User = require('../models/user.model.js')
 
 
-
+// Créer un post dans une discussion
 exports.createPost = async (req, res) => {
     try {
         // Récupérer l'id du topic courant
         const topicId = req.params.id
 
-        // Tenter de trouver le topic courant par son id
+        // Trouver le topic courant par son id
         const currentTopic = await Topic.findById(topicId)
         if (!currentTopic) res.status(404).json({
             message: "Topic not found!"
@@ -58,6 +58,7 @@ exports.createPost = async (req, res) => {
 }
 
 
+// Récupérer les posts contenus dans une discussion
 exports.getPostsByTopicId = async (req, res) => {
     try {
         // Récupérer l'id du topic courant
@@ -88,23 +89,21 @@ exports.getPostAuthor = async (req, res) => {
     try {
         // Récupérer l'id de l'utilisateur du post
         const userId = req.params.id
-
+        
         // Récupérer l'utilisateur du post avec son id
         const currentUser = await User.findById(userId)
-
-        // Vérifier que l'on a bien reçu un résultat valide
-        if (!currentUser) res.status(404).json({
-            message: "User not found!"
-        })
         
         // Renvoyer en réponse l'utilisateur courant
         res.status(200).json(currentUser)
     } catch(error) {
-        res.status(500).json(error)
+        res.status(404).json({
+            message: "User not found!"
+        })
     }
 }
 
 
+// Supprimer un post trouvé via son identifiant
 exports.deletePostById = async (req, res) => {
     try {
         // Vérifier si l'utilisateur est l'admin du site
@@ -127,8 +126,8 @@ exports.deletePostById = async (req, res) => {
         
         // Commentaires du post : d'abord, supprimer leurs likes
         const commentsToDelete = await Comment.find({ post: postId })
-        commentsToDelete.forEach(async (comment) => {
-            await Like.deleteMany({ _id: comment._id })
+        commentsToDelete.map(async (comment) => {
+            await Like.deleteMany({ likeType: comment._id })
         });
 
         // Ensuite supprimer les commentaires eux-mêmes
@@ -146,6 +145,7 @@ exports.deletePostById = async (req, res) => {
 }
 
 
+// Modifier le contenu d'un post
 exports.modifyPost = async (req, res) => {
     try {
         const post = await Post.findById(req.params.id)
@@ -153,6 +153,8 @@ exports.modifyPost = async (req, res) => {
             message: "Post not found!"
         })
 
+        // Construction de l'objet post
+        // avec le message modifié
         const postObject = {
             title: post.title,
             content: req.body.content,

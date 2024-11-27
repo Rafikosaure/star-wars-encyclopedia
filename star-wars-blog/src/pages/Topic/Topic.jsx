@@ -4,36 +4,46 @@ import { useParams } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { useSelector, useDispatch } from 'react-redux'
+import { selectReloadUsersState } from '../../redux/slices/reloadUsersArray'
+import { reloadUsersArrayFunction } from '../../redux/slices/reloadUsersArray'
 import { selectCitation } from '../../redux/slices/citationSlice'
 import { reinitializeCitation } from '../../redux/slices/citationSlice'
 import { selectIsLoggedState } from '../../redux/slices/isLoggedUserSlice'
 import { selectLoggedUser } from '../../redux/slices/loggedUserSlice'
 import { reloadPosts } from '../../redux/slices/postsReload'
 import { selectReloadPostsState } from '../../redux/slices/postsReload'
+import mentionsManager from '../../sharedFunctions/mentionsManager'
+import subscribersManager from '../../sharedFunctions/subscribersManager'
 import PostCard from '../../components/PostCard/PostCard'
+import PostForm from '../../components/PostForm/PostForm'
 import { Link } from 'react-router-dom'
 import ReturnArrow from '../../assets/images/return-arrow.webp'
 import config from '../../config'
 
 
+
+
 export default function Topic() {
-    
     
     const { topicId } = useParams()
     const [currentTopicData, setCurrentTopicData] = useState()
     const [currentCategory, setCurrentCategory] = useState()
+    const [usersList, setUsersList] = useState()
+    const [description, setDescription] = useState('')
+    const [toReset, setToReset] = useState(false)
     const navigate = useNavigate()
-    const { register, handleSubmit, reset } = useForm()
+    const { handleSubmit } = useForm()
     const currentCitation = useSelector(selectCitation)
     const reloadPostsBool = useSelector(selectReloadPostsState)
     const loggedUser = useSelector(selectLoggedUser)
     const isLogged = useSelector(selectIsLoggedState)
+    const reloadUsers = useSelector(selectReloadUsersState)
     const citationText = currentCitation.text
     const citationAuthorId = currentCitation.authorId
     const dispatch = useDispatch()
 
 
-
+    // Récupérer les posts de la discussion courante
     useEffect(() => {
         fetch(`${config.serverEndpoint}/post/getPostsByTopicId/${topicId}`)
         .then(response => response.json())
@@ -48,6 +58,8 @@ export default function Topic() {
     }, [navigate, topicId, reloadPostsBool])
 
 
+
+    // Récupérer la catégorie de la discussion courante et ses données
     useEffect(() => {
         fetch(`${config.serverEndpoint}/category/findCategoryFromTopic/${topicId}`)
         .then(response => response.json())
@@ -59,7 +71,35 @@ export default function Topic() {
     }, [topicId])
 
 
+
+    useEffect(() => {
+
+        // Récupération des utilisateurs
+        if (!reloadUsers || !usersList) {
+            fetch(`${config.serverEndpoint}/user/getAll`, {
+                credentials: 'include'
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (!data.badAccessMessage) {
+                    setUsersList(data)
+                }
+            })
+            .catch(error => {
+                console.log(error)
+            })
+            dispatch(reloadUsersArrayFunction(true))
+        }
+        
+    }, [dispatch, reloadUsers, usersList])
+
+
+
     const createNewPost = (data) => {
+
+        // Récupération du texte du post
+        data.description = description
+
         // Construction du corps de la requète
         const fetchContent = data.description.replace(/\s+/g, ' ').trim()
         let fetchData = {
@@ -70,7 +110,8 @@ export default function Topic() {
             },
             comments: [],
             likes: []
-        }
+        }        
+
         if (citationText && citationAuthorId) {
             const fetchCitationText = citationText.split("a dit :").at(-1).trim().replace(/^"|"$/g, "")
             fetchData.citation = {
@@ -87,16 +128,24 @@ export default function Topic() {
             body: JSON.stringify(fetchData)
         })
         .then(response => response.json())
-        .then(data => {
-            // console.log(data)
+        .then(result => {
+
+            // Gestion des mentions
+            dispatch(reloadUsersArrayFunction(false))
+            mentionsManager(data.description, result.newPost._id, usersList, topicId)
+            
+            // Gestion des abonnements à la discussion
+            subscribersManager(topicId, result.newPost._id, loggedUser, "post")
+
+            // Rafraichissement des posts affichés
             dispatch(reloadPosts())
         })
         .catch(error => console.log(error))
-        reset()
+        setToReset(true)
         dispatch(reinitializeCitation())
     }
-
-
+    
+    
     return (
         <div className='app topic'>
             <div className='topic-overlay' />
@@ -114,7 +163,7 @@ export default function Topic() {
                     {currentTopicData && (
                     <div className='topic-list'>
                         {currentTopicData.posts.map((post, index) => (
-                            <PostCard key={index} index={index} post={post} topicId={topicId}/>
+                            <PostCard key={index} index={index} post={post} topicId={topicId} usersList={usersList} />
                         ))}
                     </div>
                     )}
@@ -127,7 +176,8 @@ export default function Topic() {
                                     <p className='citation-content'>{citationText}</p>
                                 </div>
                             )}
-                            <textarea className='creation-post-textarea-description' name='description' type="text" placeholder='Tapez votre post' {...register("description")} maxLength={500} required />
+                            
+                            <PostForm setDescription={setDescription} toReset={toReset} setToReset={setToReset} />
                             <button type='submit' className='creation-post-form-submit'>Publier</button>
                         </form>
                     )}

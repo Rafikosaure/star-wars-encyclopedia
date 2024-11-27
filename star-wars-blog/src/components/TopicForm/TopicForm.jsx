@@ -7,6 +7,8 @@ import { selectLoggedUser } from '../../redux/slices/loggedUserSlice'
 import { reloadTopics } from '../../redux/slices/topicsReload.js'
 import './TopicForm.scss'
 import config from '../../config.js'
+import { toast } from 'sonner'
+
 
 
 export default function TopicForm({ topicsCategoryId }) {
@@ -18,6 +20,7 @@ export default function TopicForm({ topicsCategoryId }) {
     const dispatch = useDispatch()
 
 
+    // Apparition / disparition du formulaire
     const displayManager = (e) => {
         e.preventDefault()
         if (formDisplay === 'none') {
@@ -28,13 +31,16 @@ export default function TopicForm({ topicsCategoryId }) {
         }
     }
 
+    // Création d'une discussion
     const createNewTopic = (data) => {
+
         // Conception de l'objet Topic
         const newTopic = {
             title: data.title,
             description: data.question,
             posts: []
         }
+
         // Conception de l'objet Post
         const newPost = {
             title: "",
@@ -45,11 +51,13 @@ export default function TopicForm({ topicsCategoryId }) {
             comments: [],
             likes: []
         }
+
         // Construction de l'objet complet de la requête
         const fetchData = {
             topic: newTopic,
             post: newPost
         }
+
         // Envoi de la requête
         fetch(`${config.serverEndpoint}/topic/createTopic/${topicsCategoryId}`, {
             method: "POST",
@@ -59,7 +67,7 @@ export default function TopicForm({ topicsCategoryId }) {
         })
         .then(response => response.json())
         .then(data => {
-            console.log(data)
+            toast("Nouvelle discussion créee !")
             dispatch(reloadTopics())
         })
         .catch(error => console.log(error))
@@ -67,13 +75,14 @@ export default function TopicForm({ topicsCategoryId }) {
         setFormDisplay('none')
     }
 
+    
     return (
         <div className='creation-topic-main'>
             {isLogged && (
                 <>
                 <div className='creation-topic-display-button' onClick={(e) => displayManager(e)}>Créez une discussion</div>
                 <form className='creation-topic-form' style={{display:`${formDisplay}`}} onSubmit={handleSubmit(createNewTopic)}>
-                    <input className='creation-topic-input-title' name='title' type="text" placeholder='Titre du topic' {...register("title")} required />
+                    <input className='creation-topic-input-title' name='title' type="text" placeholder='Titre du topic' {...register("title")} maxLength={56} required />
                     <textarea className='creation-topic-textarea-question' name='question' type="text" placeholder='Question du topic' {...register("question")} maxLength={220} required />
                     <textarea className='creation-topic-textarea-description' name='description' type="text" placeholder='Tapez votre premier post' {...register("description")} maxLength={500} required />
                     <button type="submit">Créer Topic</button>

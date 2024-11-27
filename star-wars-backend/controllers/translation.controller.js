@@ -3,6 +3,7 @@ require('dotenv').config({path: '../.env'})
 const ENV = require('../config/config.js')
 
 
+// Traduction des textes du wiki
 exports.translateText = async (req, res) => {
     try {
         const authKey = ENV.API_KEY;

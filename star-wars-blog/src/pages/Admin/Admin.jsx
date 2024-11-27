@@ -25,6 +25,7 @@ export default function Admin() {
   const loggedUser = useSelector(selectLoggedUser)
 
 
+  // Redirection automatique en cas d'accès non-autorisé
   useEffect(() => {
     if (!isLogged || loggedUser.isAdmin !== true) {
       navigate("/")
@@ -32,6 +33,7 @@ export default function Admin() {
   }, [isLogged, loggedUser, navigate])
 
 
+  // Récupération des utilisateurs du site
   useEffect(() => {
     if (!reloadUsers || !allUsers) {
       fetch(`${config.serverEndpoint}/user/getAll`, {

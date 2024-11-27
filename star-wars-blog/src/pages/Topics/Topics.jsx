@@ -13,6 +13,7 @@ import TopicForm from '../../components/TopicForm/TopicForm'
 import config from '../../config'
 
 
+
 export default function Topics() {
 
   const { topicsCategoryId } = useParams()
@@ -27,7 +28,6 @@ export default function Topics() {
     fetch(`${config.serverEndpoint}/topic/getTopicsByCategory/${topicsCategoryId}`)
     .then(response => response.json())
     .then(data => {
-      // console.log(data)
       if (data.error) {
         navigate('*')
       } else {
@@ -38,7 +38,6 @@ export default function Topics() {
     .catch(error => {
       console.log(error)
     })
-    
   }, [topicsCategoryId, topicsBool, navigate])
 
 
@@ -57,11 +56,13 @@ export default function Topics() {
           <h1 className='topics-page-title'>{categoryTitle.toLowerCase()}</h1>
         )}
         <div className='topics-list'>
-          {topicsData && 
-            (topicsData.map((topic, index) => 
+          {topicsData.length > 0 ? (
+            topicsData.map((topic, index) => 
               <TopicCard key={index} topic={topic} />
-            ))
-          }
+            )
+          ) : (
+            <p className='topics-list-empty-message'>Pas de discussion pour le moment...</p>
+          )}
           <div className='topic-creation-form'>
             <TopicForm topicsCategoryId={topicsCategoryId} />
           </div>

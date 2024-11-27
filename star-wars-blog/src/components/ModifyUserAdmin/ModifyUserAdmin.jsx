@@ -20,6 +20,7 @@ export default function ModifyUserAdmin({ user }) {
     const navigate = useNavigate()
 
 
+    // Affichage de l'icone "image chargée" 
     const isValidIcon = (value) => {
         if (value.length > 0) {
             setFileIsLoad('flex')
@@ -28,13 +29,14 @@ export default function ModifyUserAdmin({ user }) {
         }
     }
 
-
+    // Mot de passe fort
     function validatePassword(password) {
         var Reg = new RegExp(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/);
         return Reg.test(password);
     }
     
     
+    // Fonction de modification des données d'un utilisateur
     const modifyData = (data) => {
         if (data.name.length <= 0 && data.email.length <= 0 && data.password.length <= 0 && data.picture.length <= 0) {
             return
@@ -94,11 +96,6 @@ export default function ModifyUserAdmin({ user }) {
                     </div>
                     <input type="file" id="file" name="picture" accept=".png, .jpg, .jpeg" {...register("picture")} onChange={(e) => isValidIcon(e.target.value)} />
                 </div>
-                
-                {/* <label className='other-user-label' htmlFor="file">Choisissez une image de profil<img src={PictureIsValid} alt="Upload is valid" className={`input-other-user-valid-img`} style={{display: `${fileIsLoad}`}} /></label> */}
-                {/* <input className='other-user-file-input' type="file" id="file" name="picture" accept=".png, .jpg, .jpeg" {...register("picture", {required: false})} onChange={(e) => isValidIcon(e.target.value)} />
-                <label className='other-user-label' htmlFor="file">Image de profil<img src={PictureIsValid} alt="Upload is valid" className={`input-other-user-valid-img`} style={{display: `${fileIsLoad}`}} /></label> */}
-                {/* <div className='other-user-div-input-file'></div> */}
                 <button className='other-user-submit-button' type='submit'>Mettre à jour</button>
             </form>
         </div>

@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
 const User = require('../models/user.model.js')
+const IsMentionned = require('../models/isMentionned.model.js')
 const sharp = require('sharp')
 const fs = require('fs')
 require('dotenv').config()
@@ -120,6 +120,9 @@ exports.deleteById = async (req, res) => {
             expires: new Date(0)
         })
 
+        // Suppression de l'option "isMentionned"
+        await IsMentionned.findOneAndDelete({ userId: id })
+
         // Suppression de l'utilisateur dans la base de données
         await User.findByIdAndDelete(id);
 
@@ -189,7 +192,7 @@ exports.authDeleteById = async (req, res) => {
     }
 }
 
-// Récupère tous les utilisateurs
+// Récupérer tous les utilisateurs du site
 exports.getAllUsers = (req, res) => {
     User.find()
         .then((users) => res.status(200).json(users))

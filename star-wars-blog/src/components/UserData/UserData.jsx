@@ -18,6 +18,7 @@ export default function UserData({ user }) {
     const [openOrCloseUserForm, updateOpenOrCloseUserForm] = useState('none')
 
 
+    // Supprimer un utilisateur
     const deleteUser = (e) => {
         e.preventDefault()
         fetch(`${config.serverEndpoint}/user/authDeleteById/${user._id}`, {
@@ -26,7 +27,6 @@ export default function UserData({ user }) {
         })
         .then(response => response.json())
         .then(data => {
-            // console.log(data)
             if (data.badAccessMessage) {
                 toast("Vous n'êtes pas authentifié !")
                 navigate('/')
@@ -41,6 +41,7 @@ export default function UserData({ user }) {
         })
     }
 
+    // Apparition / disparition du formulaire de gestion
     const openOrCloseModifyUserForm = (e) => {
         e.preventDefault()
         if (openOrCloseUserForm === 'block') {

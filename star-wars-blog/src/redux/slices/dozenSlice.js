@@ -11,15 +11,12 @@ const dozenManagerSlice = createSlice({
         },
         nextDozen: (state, action) => {
             state.value = state.value + 1
-            // console.log('Nextdozen :', state.value)
         },
         prevDozen: (state, action) => {
             state.value = state.value - 1
-            // console.log('PrevDozen :', state.value)
         },
         maxDozen: (state, action) => {
             state.value = action.payload
-            // console.log('MaxDozen :', action.payload)
         }
     }
 })

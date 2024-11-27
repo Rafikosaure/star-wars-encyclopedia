@@ -32,24 +32,29 @@ export default function Article() {
         dispatch(saveAnArticle())
     })
 
+
     useEffect(() => {
         if (currentDatas) {
+
             // Récupération de l'article depuis l'API
             fetch(`${config.starWarsAPI}/${currentDatas.keyword}/${articleId}`)
             .then(response => response.json())
             .then(data => setItem(data))
+
             // Gestion dans ce catch d'un articleId incorrect
             .catch(error => {
                 console.log(error)
                 navigate("*")
             })
+
         // Gestion dans ce else d'une categoryId incorrecte
         } else {
             navigate("*")
         }
     }, [articleId, currentDatas, navigate])
 
-        
+
+    // Appels automatiques à l'API de traduction des textes
     useEffect(() => {
         if (item && !translatedName && !translatedDescription) {
             const object = {
