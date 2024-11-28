@@ -54,7 +54,7 @@ describe('createAFollowTopicArray controller', () => {
         expect(res.json).toHaveBeenCalledWith(mockNewFollowTopic);
     });
 
-    it("devrait retourner un code 404 en cas d'erreur", async () => {
+    it("devrait retourner un code 400 en cas d'erreur", async () => {
         User.findById.mockRejectedValue(new Error('Database error'));
 
         await createAFollowTopicArray(req, res);
