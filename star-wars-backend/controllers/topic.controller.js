@@ -25,7 +25,6 @@ exports.getTopicsByCategoryId = async (req, res) => {
 
         // Trouver les topics liés à cette catégorie
         const currentCategoryWithTopics = await Category.findById(categoryId).populate("topics")
-        console.log('Données récupérées :', currentCategoryWithTopics)
 
         // Vérifier que les données ne sont pas undefined
         if (!currentCategoryWithTopics) res.status(404).json({
