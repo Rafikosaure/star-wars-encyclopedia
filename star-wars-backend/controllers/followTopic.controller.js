@@ -16,8 +16,8 @@ exports.createAFollowTopicArray = async (req, res) => {
                 creatorUser
             ]
         }
-        const newFollowTopicArray = new FollowTopic(newFollowTopicObject)
-        newFollowTopicArray.save()
+        const newFollowTopicArray = await FollowTopic.create(newFollowTopicObject);
+
         res.status(201).json(newFollowTopicArray)
 
     } catch(error) {

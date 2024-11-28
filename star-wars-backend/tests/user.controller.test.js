@@ -19,7 +19,7 @@ describe('getAllUsers', () => {
 
   const mockUser = [
     {name: "Dinn Djarin", email: "dinn.djarin@mandalore.com", password: "aaaa"}, 
-    {name: "Dark Vader", email: "dark.vador@darkside.com", password: "aaaa"}
+    {name: "Darth Vader", email: "darth.vader@darkside.com", password: "bbbb"}
   ];
 
   it("should return a list of users", async () => {

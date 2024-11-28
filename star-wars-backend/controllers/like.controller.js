@@ -9,9 +9,9 @@ exports.getLikes = async (req, res) => {
     try {
         // Récupérer l'id du post / du commentaire dans une variable
         let typeId = req.params.id
-        
         // Est-ce qu'il s'agit des likes d'un post ou bien d'un commentaire ?
         let likesByType = await Comment.findById(typeId).populate('likes')
+        console.log('Valeur retournée :', likesByType)
         if (!likesByType) {
             likesByType = await Post.findById(typeId).populate('likes')
             if (!likesByType) {
