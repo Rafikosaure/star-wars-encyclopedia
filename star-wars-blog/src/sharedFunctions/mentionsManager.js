@@ -2,7 +2,7 @@ import notifyMentionnedUsers from "./notifyMentionnedUsers"
 
 
 // Gestion des mentions
-export default function mentionsManager(data, newMessageId, usersList, topicId) {
+export default function mentionsManager(data, newMessageId, usersList, topicId, currentPage) {
 
     let includedUsersArray = []
     if (usersList) {
@@ -12,6 +12,6 @@ export default function mentionsManager(data, newMessageId, usersList, topicId) 
                 includedUsersArray.push(user)
             }
         })
-        notifyMentionnedUsers(includedUsersArray, newMessageId, topicId)
+        notifyMentionnedUsers(includedUsersArray, newMessageId, topicId, currentPage)
     }
 }
