@@ -1,9 +1,9 @@
 import config from '../config'
 
 
-export default function subscribersManager(topicId, messageId, author, messageType) {
-    
-    // Récupération des abonné au topic
+export default function subscribersManager(topicId, messageId, author, messageType, currentPage) {
+
+    // Récupération des abonnés à la discussion
     fetch(`${config.serverEndpoint}/followTopic/getAllFollowersOfATopic/${topicId}`)
     .then(response => response.json())
     .then(data => {
@@ -21,13 +21,11 @@ export default function subscribersManager(topicId, messageId, author, messageTy
                     users: subscribers,
                     emailType: "newMessage",
                     messageId: messageId,
-                    messageType: messageType
+                    messageType: messageType,
+                    currentPage: currentPage
                 })
             })
             .then(response => response.json())
-            .then(data => {
-                console.log(data.message)
-            })
             .catch(error => console.log(error.message))
         }
     })
