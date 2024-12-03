@@ -38,18 +38,15 @@ exports.createComment = async (req, res) => {
         }
 
         // Création du commentaire et enregistrement dans le post courant
-        Comment.create(reqComment)
-        .then(newComment => {
-            newComment.save()
-            currentPost.comments.push(newComment)
-            currentPost.save()
-            res.status(201).json({
-                newComment
-            })})
+        const newComment = await Comment.create(reqComment)
+
         // Gestion de l'échec potentielle de la procédure
-        .catch(() => res.status(400).json({
+        if (!newComment) res.status(500).json({
             message: "Comment creation failed!"
-        }))
+        })
+        currentPost.comments.push(newComment)
+        currentPost.save()
+        res.status(201).json(newComment)
 
     } catch(error) {
         res.status(500).json(error)
