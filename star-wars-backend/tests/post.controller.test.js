@@ -2,13 +2,18 @@ const express = require('express')
 const app = express()
 app.use(express.json())
 const { getPostAuthor } = require('../controllers/post.controller.js')
+const { getPostsByTopicId } = require('../controllers/post.controller.js')
 const User = require('../models/user.model.js');
-const Post = require('../models/post.model.js')
+const Topic = require('../models/topic.model.js')
 
 
 
 // Mock du modèle User
 jest.mock('../models/user.model.js');
+
+// Mock du modèle Topic
+jest.mock('../models/topic.model.js');
+
 
 describe('getPostAuthor', () => {
     let req, res;
@@ -46,5 +51,76 @@ describe('getPostAuthor', () => {
         // Vérifier que la réponse contient l'objet user attendu
         expect(res.status).toHaveBeenCalledWith(200);
         expect(res.json).toHaveBeenCalledWith(mockUser);
+    });
+});
+
+describe('getPostsByTopicId', () => {
+    let req, res;
+
+    const topicId = "testid"
+    const pageNumber = 1
+
+    beforeEach(() => {
+        req = {
+            params: { id: topicId }, // ID de la discussion dans req.params
+            query: { page: pageNumber } // Numéro de la page dans req.query
+        }; 
+
+        res = {
+            json: jest.fn(),
+            status: jest.fn().mockReturnThis(),
+        };
+        jest.clearAllMocks();
+    });
+
+    it("devrait retourner tous les posts d'une discussion donnée, au maximum 10 posts par page", async () => {
+        // Mock des données de la discussion avec ses posts
+        const mockTopicWithPosts = {
+            title: "Titre de la discussion",
+            posts: [
+                {
+                    author: {
+                        id: "authorId01"
+                    },
+                    _id: "postId01",
+                    title: "Un chasseur, part 1",
+                    content: "Un chasseur sachant chasser sans son chien...",
+                    comments: [
+                        "commentId01"
+                    ],
+                    likes: [
+                        "likeId01",
+                        "likeId02"
+                    ],
+                },
+                {
+                    author: {
+                        id: "authorId02"
+                    },
+                    _id: "postId02",
+                    title: "Un chasseur, part 2",
+                    content: "C'est quoi la différence entre un bon et un mauvais chasseur ?",
+                    comments: [],
+                    likes: []
+                },
+            ],
+            totalPages: 1,
+            currentPage: pageNumber
+        }
+
+        // Mock de findById pour retourner un objet simulé avec la méthode populate
+        await Topic.findById.mockReturnValue({
+            populate: jest.fn().mockResolvedValue(mockTopicWithPosts),
+        });
+
+        // Exécuter le contrôleur
+        await getPostsByTopicId(req, res);
+
+        // Vérifier que findById a été appelé avec le bon ID
+        expect(Topic.findById).toHaveBeenCalledWith(topicId);
+
+        // Vérifier le status et la réponse JSON
+        expect(res.status).toHaveBeenCalledWith(200);
+        expect(res.json).toHaveBeenCalledWith(mockTopicWithPosts);
     });
 });

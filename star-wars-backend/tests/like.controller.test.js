@@ -1,10 +1,11 @@
 // Importer le contrôleur et les modèles nécessaires
 const { getLikes } = require('../controllers/like.controller.js');
 const Comment = require('../models/comment.model.js');
+const Post = require('../models/post.model.js')
 
 // Mock des modèles
 jest.mock('../models/comment.model.js');
-
+jest.mock('../models/post.model.js')
 
 describe('getLikes controller', () => {
     let req, res;
@@ -59,34 +60,55 @@ describe('getLikes controller', () => {
     });
 
     // it("devrait retourner les likes d'un post si aucun commentaire n'est trouvé", async () => {
-    //     const mockLikes = { likes: ['like3', 'like4'] };
+
+    //     const postWithLikesMock = {
+    //         _id: testId,
+    //         title: 'test title',
+    //         content: "J'étais sûr que ce débat apparaitrait dans le forum ! Un classique",
+    //         author: {
+    //             id: '6687c2722a8bff812fc1ac46'
+    //         },
+    //         comments: [],
+    //         likes: [
+    //             {
+    //                 _id: '67484aeb7de7513989af4dc0',
+    //                 likeType: testId,
+    //                 user: '67017fc9aaecf759b50bb5b6',
+    //             },
+    //             {
+    //                 _id: 'kqfjmlqkjlm jqkofjqklcmff',
+    //                 likeType: testId,
+    //                 user: 'uqpoffmiKfpqjmfpoqkfqofk',
+    //             }
+    //         ],
+    //     }
 
     //     // Simulation de l'absence de commentaire, mais présence du post
-    //     Comment.findById.mockResolvedValueOnce(null);
-    //     Post.findById.mockResolvedValueOnce({
-    //         populate: jest.fn().mockResolvedValueOnce(mockLikes)
+    //     await Comment.findById.mockResolvedValueOnce(null);
+    //     await Post.findById.mockReturnValue({
+    //         populate: jest.fn().mockResolvedValue(postWithLikesMock),
     //     });
 
     //     await getLikes(req, res);
 
     //     // Vérifier les appels
-    //     expect(Comment.findById).toHaveBeenCalledWith('sampleId');
-    //     expect(Post.findById).toHaveBeenCalledWith('sampleId');
+    //     expect(Comment.findById).toHaveBeenCalledWith(testId);
+    //     expect(Post.findById).toHaveBeenCalledWith(testId);
     //     expect(res.status).toHaveBeenCalledWith(200);
-    //     expect(res.json).toHaveBeenCalledWith(mockLikes.likes);
+    //     expect(res.json).toHaveBeenCalledWith(postWithLikesMock.likes);
     // });
 
-    // it("devrait retourner une erreur 404 si ni le post ni le commentaire n'ont de likes", async () => {
-    //     // Simulation de l'absence de post et de commentaire
-    //     Comment.findById.mockResolvedValueOnce(null);
-    //     Post.findById.mockResolvedValueOnce(null);
+    it("devrait retourner une erreur 500 si aucun commentaire ou post n'a été trouvé avec cet identifiant", async () => {
+        // Simulation de l'absence de post et de commentaire
+        Comment.findById.mockResolvedValueOnce(null);
+        Post.findById.mockResolvedValueOnce(null);
 
-    //     await getLikes(req, res);
+        await getLikes(req, res);
 
-    //     // Vérifier que le statut 404 et le message d'erreur sont renvoyés
-    //     expect(res.status).toHaveBeenCalledWith(404);
-    //     expect(res.json).toHaveBeenCalledWith({ message: "Likes not found!" });
-    // });
+        // Vérifier que le statut 404 et le message d'erreur sont renvoyés
+        expect(res.status).toHaveBeenCalledWith(500);
+        expect(res.json).toHaveBeenCalledWith({ message: "Likes not found!" });
+    });
 });
 
 
