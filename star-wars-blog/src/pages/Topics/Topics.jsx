@@ -28,15 +28,12 @@ export default function Topics() {
     fetch(`${config.serverEndpoint}/topic/getTopicsByCategory/${topicsCategoryId}`)
     .then(response => response.json())
     .then(data => {
-      if (data.error) {
-        navigate('*')
-      } else {
         setCategoryTitle(data.title)
         setTopicsData(data.topics)
-      }
     })
     .catch(error => {
       console.log(error)
+      navigate("*")
     })
   }, [topicsCategoryId, topicsBool, navigate])
 
