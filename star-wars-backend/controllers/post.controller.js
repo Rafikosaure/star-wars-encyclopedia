@@ -71,12 +71,30 @@ exports.getPostsByTopicId = async (req, res) => {
         if (!currentTopicWithPosts) res.status(404).json({
             message: "Topic not found!"
         })
+
+        // Récupérer le numéro de page depuis les paramètres de la requête, sinon la page 1 par défaut
+        const page = parseInt(req.query.page) || 1;
+        const pageSize = 10;  // Nombre de posts par page
+
+        // Calculer l'index des posts à ignorer (pour la pagination)
+        const skip = (page - 1) * pageSize;
+
+        // Récupérer le nombre total de posts pour ce topic
+        const totalPosts = currentTopicWithPosts.posts.length;
+
+        // Calculer le nombre total de pages
+        const totalPages = Math.ceil(totalPosts / pageSize);
+
+        // Extraire les posts à afficher pour la page actuelle
+        const postsOnPage = currentTopicWithPosts.posts.slice(skip, skip + pageSize);
         
         // Envoyer le topic ainsi que le tableau des posts
         res.status(200).json({
             title: currentTopicWithPosts.title,
             id: currentTopicWithPosts._id,
-            posts: currentTopicWithPosts.posts
+            posts: postsOnPage,
+            totalPages: totalPages,
+            currentPage: page
         })
     } catch(error) {
         res.status(500).json(error)
