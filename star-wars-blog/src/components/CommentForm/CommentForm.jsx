@@ -11,7 +11,7 @@ import subscribersManager from '../../sharedFunctions/subscribersManager'
 
 
 
-export default function CommentForm({ post, usersList, topicId }) {
+export default function CommentForm({ post, usersList, topicId, currentPage }) {
 
     const currentCommentCitation = useSelector(selectCommentCitation)
     const commentCitationText = currentCommentCitation.text
@@ -71,11 +71,11 @@ export default function CommentForm({ post, usersList, topicId }) {
 
                 // Gestion des mentions
                 dispatch(reloadUsersArrayFunction(false))
-                mentionsManager(fetchContent, result.newComment._id, usersList, topicId)
-
+                mentionsManager(fetchContent, result._id, usersList, topicId, currentPage)
+                
                 // Gestion des abonnés à la discussion
-                subscribersManager(topicId, result.newComment._id, loggedUser, "commentaire")
-
+                subscribersManager(topicId, result._id, loggedUser, "commentaire", currentPage)
+                
                 // Rafraichissement des commentaires affichés
                 dispatch(reloadPosts())
             })

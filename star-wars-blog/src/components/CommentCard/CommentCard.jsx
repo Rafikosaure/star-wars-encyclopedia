@@ -14,7 +14,7 @@ import mentionsManager from '../../sharedFunctions/mentionsManager'
 
 
 
-export default function CommentCard({ index, commentId, topicId, postId, usersList }) {
+export default function CommentCard({ index, commentId, topicId, postId, usersList, currentPage }) {
     
     const [currentComment, setCurrentComment] = useState()
     const [commentUser, setCommentUser] = useState()
@@ -117,7 +117,7 @@ export default function CommentCard({ index, commentId, topicId, postId, usersLi
 
                 // Gestion des mentions
                 dispatch(reloadUsersArrayFunction(false))
-                mentionsManager(data.content, data._id, usersList, topicId)
+                mentionsManager(data.content, data._id, usersList, topicId, currentPage)
 
                 // Rafraichissement du commentaire
                 if (commentUpdater) {
