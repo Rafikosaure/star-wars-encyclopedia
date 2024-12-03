@@ -15,7 +15,7 @@ import mentionsManager from '../../sharedFunctions/mentionsManager'
 
 
 
-export default function PostCard({ index, post, topicId, usersList }) {
+export default function PostCard({ index, post, topicId, usersList, currentPage }) {
 
     const [postUser, setPostUser] = useState()
     const [datetime, updateDateTime] = useState()
@@ -117,7 +117,7 @@ export default function PostCard({ index, post, topicId, usersList }) {
 
                 // Gestion des mentions dans le texte modifié
                 dispatch(reloadUsersArrayFunction(false))
-                mentionsManager(newContent, data._id, usersList, topicId)
+                mentionsManager(newContent, data._id, usersList, topicId, currentPage)
 
                 // Rafraichissement des posts affichés
                 dispatch(reloadPosts())
@@ -144,11 +144,11 @@ export default function PostCard({ index, post, topicId, usersList }) {
                 <div className='post-card-content'>
                     {datetime && (
                         <div className='post-card-infos'>
-                            {isLogged && loggedUser.isAdmin && index !== 0 && (
+                            {isLogged && loggedUser.isAdmin && index !== 1 && (
                                 
                                 <div className='delete-post-cross' title='Supprimer le post' onClick={(e) => deletePostFunction(e)}>✖</div>
                             )}
-                            <p className='info-index'>{`# ${index + 1}`}</p><p className='infos-datetime'>{`${datetime.toLocaleDateString("fr-FR", {weekday: "long", year: "numeric", month: "long", day: "numeric", hour: '2-digit', minute: '2-digit' }).replace(':', 'h')}`}</p>
+                            <p className='info-index'>{`# ${index}`}</p><p className='infos-datetime'>{`${datetime.toLocaleDateString("fr-FR", {weekday: "long", year: "numeric", month: "long", day: "numeric", hour: '2-digit', minute: '2-digit' }).replace(':', 'h')}`}</p>
                         </div>
                     )}
                     
@@ -209,14 +209,14 @@ export default function PostCard({ index, post, topicId, usersList }) {
             <div className='post-card-comments-section'>
                 {post && (
                     post.comments.map((commentId, index) => (
-                        <CommentCard key={index} index={index} commentId={commentId} topicId={topicId} postId={post._id} usersList={usersList} />
+                        <CommentCard key={index} index={index} commentId={commentId} topicId={topicId} postId={post._id} usersList={usersList} currentPage={currentPage} />
                     ))
                 )}
                 
             </div>
             <div className='new-comment-form-section'>
                 {isLogged && postUser && (
-                    <CommentForm post={post} usersList={usersList} topicId={topicId} />
+                    <CommentForm post={post} usersList={usersList} topicId={topicId} currentPage={currentPage} />
                 )}
             </div>
         </div>
