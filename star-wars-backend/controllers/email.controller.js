@@ -25,6 +25,9 @@ exports.userNotificationEmail = async (req, res) => {
         // Get the type of the message
         const messageType = req.body.messageType
 
+        // Get the page of the message
+        const currentPage = req.body.currentPage
+
         // Get the type of the email
         const emailType = req.body.emailType
 
@@ -35,7 +38,8 @@ exports.userNotificationEmail = async (req, res) => {
             topic: currentTopic,
             messageId: messageId,
             emailType: emailType,
-            messageType: messageType
+            messageType: messageType,
+            currentPage: currentPage
         }
 
         // Create a transporter object
