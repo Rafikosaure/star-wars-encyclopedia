@@ -6,6 +6,7 @@ import { selectIsLoggedState } from '../../redux/slices/isLoggedUserSlice'
 import { selectLoggedUser } from '../../redux/slices/loggedUserSlice'
 import { reloadTopics } from '../../redux/slices/topicsReload'
 import { reloadFollowedTopics } from '../../redux/slices/followedTopicsReload'
+import { selectTopicDozen } from '../../redux/slices/topicDozenSlice'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import StarsSky from '../../assets/images/ciel_nuit_banniere.webp'
@@ -16,6 +17,8 @@ import { toast } from 'sonner'
 
 export default function TopicCard({ topic }) {
 
+    const currentTopicDozen = useSelector(selectTopicDozen)
+    const [topicRightPage, setTopicRightPage] = useState(1)
     const isLogged = useSelector(selectIsLoggedState)
     const loggedUser = useSelector(selectLoggedUser)
     const dispatch = useDispatch()
@@ -57,6 +60,17 @@ export default function TopicCard({ topic }) {
             setCurrentFollower()
         }
     }, [topic, followersArray, loggedUser, currentFollower])
+
+
+    useEffect(() => {
+        if (topic && currentTopicDozen) {
+            if(topic._id === currentTopicDozen.value.topicId) {
+                setTopicRightPage(currentTopicDozen.value.currentPage)
+            } else {
+                setTopicRightPage(1)
+            }
+        }
+    }, [currentTopicDozen, topic, topicRightPage])
 
 
     // Supprimer une discussion
@@ -118,6 +132,7 @@ export default function TopicCard({ topic }) {
         })
     }
 
+    
     // Styles du contour du bouton de suivi de la discussion
     const strokeStyle = {
         stroke: isHovered ? 'white' : 'rgb(53, 155, 155)',
@@ -128,7 +143,7 @@ export default function TopicCard({ topic }) {
     return (
         <div className='topic-card-main'>
             <img className='topic-card-banner' src={StarsSky} alt="Ciel étoilé" />
-            <Link className='topic-card-link' to={`/topic/${topic._id}`} title='Entrez dans la discussion'>
+            <Link className='topic-card-link' to={`/topic/${topic._id}/page/${topicRightPage}`} title='Entrez dans la discussion'>
                 <div className='topic-card-content'>
                     {topic && datetime && (
                         <>
