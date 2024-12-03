@@ -2,7 +2,7 @@ import config from "../config";
 
 
 // Envoi des notifications en cas de mention
-const notifyMentionnedUsers = async (usersToNotify, messageId, topicId) => {
+const notifyMentionnedUsers = async ( usersToNotify, messageId, topicId, currentPage ) => {
         
     // Vérification si les mentions sont autorisées
     const promises = usersToNotify.map(async (userToNotify) => {
@@ -30,11 +30,11 @@ const notifyMentionnedUsers = async (usersToNotify, messageId, topicId) => {
                 users: filteredUsers,
                 emailType: "mention",
                 messageId: messageId,
-                messageType: undefined
+                messageType: undefined,
+                currentPage: currentPage
             })
         })
         .then(response => response.json())
-        .then(data => {})
         .catch(error => console.log(error.message))
     }
 }
