@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import ScrollToTop from './sharedFunctions/scrollToTop';
 import Home from './pages/Home/Home';
 import Auth from './pages/Auth/Auth';
 import Category from './pages/Category/Category';
@@ -18,6 +19,7 @@ export default function App() {
   return (
     <>
       <Router>
+        <ScrollToTop />
           <Header />
             <Routes>
               <Route path="/" element={<Home />} />
@@ -28,7 +30,7 @@ export default function App() {
               <Route path='/topics/:topicsCategoryId' element={<Topics />} />
               <Route path='/account' element={<Account />} />
               <Route path='/admin' element={<Admin />} />
-              <Route path='/topic/:topicId' element={<Topic />} />
+              <Route path='/topic/:topicId/page/:page' element={<Topic />} />
               <Route path='/legal' element={<Legal />} />
               <Route path='*' element={<Error404 />} />
             </Routes>
