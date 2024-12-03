@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import dozenManager from './slices/dozenSlice'
+import topicDozenManager from './slices/topicDozenSlice'
 import articleReducer from './slices/articleSlice'
 import registerManager from "./slices/registerSlice";
 import isLoggedReducer from './slices/isLoggedUserSlice';
@@ -16,6 +17,7 @@ import followedTopicsReloadReducer from './slices/followedTopicsReload'
 export default configureStore({
     reducer: {
         dozenManager: dozenManager,
+        topicDozenManager: topicDozenManager,
         article: articleReducer,
         registerValue: registerManager,
         isLoggedReducer: isLoggedReducer,
