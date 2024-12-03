@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { selectIsLoggedState } from '../../redux/slices/isLoggedUserSlice.js'
 import { selectLoadedState } from '../../redux/slices/loadedUserSlice.js'
+import { setCurrentTopicDozen } from '../../redux/slices/topicDozenSlice.js'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import { toast } from 'sonner'
@@ -69,6 +70,11 @@ export default function Header() {
         dispatch(updateIsLoggedUser(false))
         setLoggedUser()
         dispatch(updateLoadedUser(false))
+        const reinitializedTopicDozenState = {
+          currentPage: 1,
+          topicId: ''
+        }
+        dispatch(setCurrentTopicDozen(reinitializedTopicDozenState))
         toast("Vous êtes déconnecté !")
       } else {
         console.log('Echec de la déconnexion !')
