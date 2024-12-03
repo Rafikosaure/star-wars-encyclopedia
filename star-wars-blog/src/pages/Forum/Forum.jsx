@@ -26,9 +26,12 @@ export default function Forum() {
     .then(data => {
       setForumCategories(data)
     })
-    .catch(error => console.log(error))
+    .catch(error => {
+      console.log(error)
+      navigate("*")
+    })
     
-  }, [dispatch])
+  }, [dispatch, navigate])
 
 
 
