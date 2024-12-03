@@ -15,10 +15,10 @@ exports.emailMention = (data, mentionnedUser, datetime) => {
                 <div>Bonjour ${mentionnedUser.name},
                 </div><br>
                 <div>
-                ${data.author.name} a fait mention de vous le ${datetime} dans la discussion "${data.topic.title}" !
+                ${data.author.name} a fait mention de vous le ${datetime} dans la discussion "${data.topic.title}"!
                 </div>
                 <div>
-                Pour prendre connaissance de son message, rendez-vous <a href='http://localhost:3000/topic/${data.topic.id}#${data.messageId}'>ici</a>.
+                Pour prendre connaissance de son message, rendez-vous <a href='http://localhost:3000/topic/${data.topic.id}/page/${data.currentPage}#${data.messageId}'>ici</a>.
                 </div>
 
                 <br><br><br>
@@ -45,10 +45,10 @@ exports.emailNewMessage = (data, topicFollower, datetime) => {
                 <div>Bonjour ${topicFollower.name},
                 </div><br>
                 <div>
-                Du nouveau dans la discussion "${data.topic.title}" ! ${data.author.name} a publié un nouveau ${data.messageType} le ${datetime}.
+                Du nouveau dans la discussion "${data.topic.title}"! ${data.author.name} a publié un nouveau ${data.messageType} le ${datetime}.
                 </div>
                 <div>
-                Pour prendre connaissance de son message, rendez-vous <a href='http://localhost:3000/topic/${data.topic.id}#${data.messageId}'>ici</a>.
+                Pour prendre connaissance de son message, rendez-vous <a href='http://localhost:3000/topic/${data.topic.id}/page/${data.currentPage}#${data.messageId}'>ici</a>.
                 </div>
 
                 <br><br><br>
