@@ -48,4 +48,8 @@ server.on('listening', () => {
     console.log('Listening on ' + bind)
 })
 
+app.get('/home', (req, res) => {
+    res.status(200).json('Welcome, your app is working well');
+})
+
 server.listen(port)
