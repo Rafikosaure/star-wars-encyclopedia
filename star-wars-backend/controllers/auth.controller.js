@@ -74,7 +74,7 @@ exports.login = (req, res) => {
                             );
                             // envoi du token (cookie HTTPOnly)
                             res
-                            .cookie("access_token", token, { httpOnly: true })
+                            .cookie("access_token", token, { httpOnly: true, sameSite: "none" })
                             .status(200)
                             .json(user);
                         }
