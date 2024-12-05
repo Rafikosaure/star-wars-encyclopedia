@@ -96,10 +96,7 @@ exports.userNotificationEmail = async (req, res) => {
                 // Send email to the current user of the loop
                 transporter.sendMail(mailOptions)
                 .then(info => console.log("Email sent !", info.response))
-                .catch(error => res.status(404).json({
-                    message: "Error! Email sending failed!",
-                    error: error
-                }))
+                .catch(error => console.error("Error! Email sending failed!", error))
             })
         )
 
