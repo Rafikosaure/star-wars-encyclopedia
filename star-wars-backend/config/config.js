@@ -15,7 +15,8 @@ const ENV = {
     EMAIL_HOST: process.env.EMAIL_HOST,
     EMAIL_PORT: process.env.EMAIL_PORT,
     SERVER_PORT: process.env.SERVER_PORT,
-    CLIENT_PORT: process.env.CLIENT_PORT
+    CLIENT_PORT: process.env.CLIENT_PORT,
+    DEPLOYED_EXPRESS_SERVER_ENDPOINT: process.env.DEPLOYED_EXPRESS_SERVER_ENDPOINT
 };
 
 module.exports = ENV;

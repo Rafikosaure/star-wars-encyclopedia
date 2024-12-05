@@ -88,7 +88,7 @@ exports.userNotificationEmail = async (req, res) => {
                     html: emailTypeToSend.html, // Template of the email
                     attachments: [{
                         filename: 'email-banner.jpg',
-                        path: 'https://star-wars-encyclopedia-ten.vercel.app/images/email-banner.jpg',
+                        path: `${ENV.DEPLOYED_EXPRESS_SERVER_ENDPOINT}/images/email-banner.jpg`,
                         cid: 'starwarsencyclopediabanner' // same value cid than in the src of the html image (in the template)
                     }]
                 }
