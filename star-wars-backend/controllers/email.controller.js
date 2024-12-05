@@ -42,6 +42,8 @@ exports.userNotificationEmail = async (req, res) => {
             currentPage: currentPage
         }
 
+        console.log('Infos pour les emails :', data)
+
         // Create a transporter object
         const transporter = nodemailer.createTransport({
             host: ENV.EMAIL_HOST,
@@ -64,6 +66,8 @@ exports.userNotificationEmail = async (req, res) => {
             minute: '2-digit'
         }
         const datetime = dateObject.toLocaleDateString("fr-FR", options).replace(':', 'h')
+
+        console.log('STEP 1')
 
         // Send emails to all mentionned users
         await Promise.all(
@@ -93,12 +97,17 @@ exports.userNotificationEmail = async (req, res) => {
                     }]
                 }
 
+                console.log("Options des emails :", mailOptions)
+
                 // Send email to the current user of the loop
                 transporter.sendMail(mailOptions)
                 .then(info => console.log("Email sent !", info.response))
                 .catch(error => console.error("Error! Email sending failed!", error))
+                console.log("Ohé petite perruche !!!")
             })
         )
+
+        console.log('STEP 2')
 
         res.status(200).json({
             message: "Email processing complete!"
