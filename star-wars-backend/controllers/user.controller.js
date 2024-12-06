@@ -20,7 +20,7 @@ exports.modifyUser = async (req, res) => {
         const timestamp = Date.now()
         const name = originalname.split(' ').join('_')
         const ref = `${name}-${timestamp}.webp`
-        const path = `./images/${ref}`
+        const path = `/images/${ref}`
         sharp(buffer).resize(450).webp().toFile(path)
         // profilePicture = `${req.protocol}://${req.get('host')}/images/${ref}`
         profilePicture = `${ENV.DEPLOYED_EXPRESS_SERVER_ENDPOINT}/images/${ref}`
