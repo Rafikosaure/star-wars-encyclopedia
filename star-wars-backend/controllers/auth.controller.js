@@ -22,6 +22,7 @@ exports.register = (req, res) => {
         sharp(buffer).resize(450).webp().toFile(path)
         // profilePicture = `${req.protocol}://${req.get('host')}/images/${ref}`
         profilePicture = `${ENV.DEPLOYED_EXPRESS_SERVER_ENDPOINT}/images/${ref}`
+        console.log("Adresse de l'image :", profilePicture)
     }
     
     bcrypt
