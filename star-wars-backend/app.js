@@ -73,7 +73,7 @@ app.use('/followTopic', followTopicRoutes)
 app.use('/like', likeRoutes)
 app.use('/email', emailRoutes)
 app.use('/isMentionned', isMentionnedRoutes)
-app.use('/images', express.static(path.join(__dirname, 'images')))
+app.use('/images', cors(), express.static(path.join(__dirname, 'images')))
 
 
 module.exports = app
