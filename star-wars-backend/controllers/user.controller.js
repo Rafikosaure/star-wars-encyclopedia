@@ -21,7 +21,11 @@ exports.modifyUser = async (req, res) => {
         const name = originalname.split(' ').join('_')
         const ref = `${name}-${timestamp}.webp`
         const path = `/images/${ref}`
-        sharp(buffer).resize(450).webp().toFile(path)
+        sharp(buffer)
+        .resize(450)
+        .webp()
+        .toFile(path)
+        .then(result => console.log('Résultat de la requête avec sharp :', result))
         // profilePicture = `${req.protocol}://${req.get('host')}/images/${ref}`
         profilePicture = `${ENV.DEPLOYED_EXPRESS_SERVER_ENDPOINT}/images/${ref}`
     }
