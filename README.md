@@ -19,7 +19,7 @@ Les données utilisées pour renseigner le wiki sont issues de l'API open source
 Si vous désirez vous documenter sur Star Wars Databank, visitez ce lien : https://starwars-databank.vercel.app/
 Si vous désirez visiter le profil Github d'Antonio Rosales, il est disponible ici : https://github.com/lethamburn
 
-Les données du projet se devant d'être traduites dans un français impeccable, l'API de Deepl, l'un des meilleurs traducteurs au monde à l'heure actuel, a été utilisée au sein de ce projet afin de répondre à cette exigence. Il s'agit d'un outil basé sur l'intelligence artificielle et qui utilise des données de contexte afin de générer des traductions les plus fiables et les plus respectueuses des spécificités du français actuel possibles. Il offre une bonne traduction du champ sémantique de Star Wars de l'anglais vers le français, ce qui est la raison principale de son choix. Suivez ce lien si vous désirez vous renseigner sur cet outil : https://www.deepl.com/fr/translator
+Les données du projet se devant d'être traduites dans un français impeccable, l'API de Deepl, l'un des meilleurs traducteurs au monde au moment où j'écris ces lignes, a été utilisée au sein de ce projet afin de répondre à cette exigence. Il s'agit d'un outil basé sur l'intelligence artificielle et qui utilise des données de contexte afin de générer des traductions les plus fiables et les plus respectueuses des spécificités du français actuel possibles. Il offre une bonne traduction du champ sémantique de Star Wars de l'anglais vers le français, ce qui est la raison principale de son choix. Suivez ce lien si vous désirez vous renseigner sur cet outil : https://www.deepl.com/fr/translator
 
 
 
