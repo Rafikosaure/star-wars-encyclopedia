@@ -44,6 +44,7 @@ export default function RegisterForm() {
 
         fetch(`${config.serverEndpoint}/auth/register`, {
             method: "POST",
+            credentials: "include",
             body: formData
         })
         .then(response => response.json())
