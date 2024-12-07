@@ -19,11 +19,9 @@ exports.modifyUser = async (req, res) => {
         const { buffer, originalname } = req.file
         const timestamp = Date.now()
         const name = originalname.split(' ').join('_')
-        const ref = `${name}-${timestamp}.webp`
-        const path = `images/${ref}`
-        sharp(buffer).resize(450).webp().toFile(path)
-        console.log('TEST :', req.file.path)
-        // fs.unlink(req.file.path, () => { });
+        const ref = `${name}-${timestamp}.png`
+        const path = `./images/${ref}`
+        sharp(buffer).resize(450).png().toFile(path)
         // profilePicture = `${req.protocol}://${req.get('host')}/images/${ref}`
         profilePicture = `${ENV.DEPLOYED_EXPRESS_SERVER_ENDPOINT}/images/${ref}`
     }
