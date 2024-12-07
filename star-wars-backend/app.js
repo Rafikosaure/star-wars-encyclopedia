@@ -20,7 +20,7 @@ mongoose
 
 // Gestion des erreurs CORS
 app.use(cors({
-        origin: [ENV.CORS_ORIGIN, ENV.CORS_IMAGES],
+        origin: ENV.CORS_ORIGIN,
         credentials: true,
         methods: ['GET', 'PUT', 'POST', 'DELETE'],
         allowedHeaders: ['Content-Type', 'Authorization']
