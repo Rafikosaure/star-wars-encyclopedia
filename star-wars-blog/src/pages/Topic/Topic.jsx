@@ -276,7 +276,7 @@ export default function Topic() {
                             {citationText && (
                                 <div className='citation-div'>
                                     <span className='citation-cancel' title='Annuler la citation' onClick={() => dispatch(reinitializeCitation())}>✖</span>
-                                    <p className='citation-content'>{citationText}</p>
+                                    {/* <p className='citation-content'>{citationText}</p> */}
                                 </div>
                             )}
                             
