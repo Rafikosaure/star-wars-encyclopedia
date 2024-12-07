@@ -35,6 +35,8 @@ exports.modifyUser = async (req, res) => {
         isAdmin: false
     }
 
+    console.log("Notre userObject :", userObject)
+
     // Récupération des données de l'utilisateur initial
     let currentUserId;
     const params = req.params.id
@@ -49,8 +51,6 @@ exports.modifyUser = async (req, res) => {
             message: "User not found!"
         })
     }
-
-    console.log("Notre utilisateur :", initialUser)
 
     // Filtre des données non-renseignées
     if (userObject.name === "") {
