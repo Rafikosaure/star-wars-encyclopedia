@@ -9,6 +9,7 @@ const ENV = {
     API_KEY: process.env.API_KEY,
     NB_HASH: process.env.NB_HASH,
     CORS_ORIGIN: process.env.CORS_ORIGIN,
+    CORS_IMAGES: process.env.CORS_IMAGES,
     EMAIL_SENDER_ADDRESS: process.env.EMAIL_SENDER_ADDRESS,
     SENDER_NAME: process.env.SENDER_NAME,
     GMAIL_APP_PASSWORD: process.env.GMAIL_APP_PASSWORD,
