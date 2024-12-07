@@ -21,11 +21,7 @@ exports.modifyUser = async (req, res) => {
         const name = originalname.split(' ').join('_')
         const ref = `${name}-${timestamp}.webp`
         const path = `/images/${ref}`
-        sharp(buffer)
-        .resize(450)
-        .webp()
-        .toFile(path)
-        .then(result => console.log('Résultat de la requête avec sharp :', result))
+        sharp(buffer).resize(450).webp().toFile(path)
         // profilePicture = `${req.protocol}://${req.get('host')}/images/${ref}`
         profilePicture = `${ENV.DEPLOYED_EXPRESS_SERVER_ENDPOINT}/images/${ref}`
     }
@@ -38,7 +34,7 @@ exports.modifyUser = async (req, res) => {
         password: req.body.password,
         isAdmin: false
     }
-    
+
     // Récupération des données de l'utilisateur initial
     let currentUserId;
     const params = req.params.id
@@ -71,7 +67,8 @@ exports.modifyUser = async (req, res) => {
         userObject.password = newPassword
     }
     userObject.isAdmin = initialUser.isAdmin
-    
+    console.log("Notre nouvel utilisateur :", userObject)
+
     // Mise à jour des données
     const newUser = await User.findByIdAndUpdate(
         { _id: currentUserId },
