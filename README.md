@@ -45,53 +45,6 @@ En tous les cas, tant que vous êtes authentique et désireux de communiquer vot
 - Service d'emailing utilisé: Gmail
 
 
-4. Démarrage du projet :
-
-Ceci est à l'attention des personnes souhaitant clôner ce projet. Attention ! Avant toute chose, ce projet ne démarrera pas sans la configuration des variables d'environnement; Un descriptif détaillé de ces variables est disponible en fin de ce readme.
-
-Pour que ce projet démarre, et si vous avez configuré les variables d'environnement, il est nécessaire de fournir les dépendances nécessaires au projet, c'est le bagage logiciel dont il se sert pour fonctionner.
-
-Commencez par installer les dépendances côté serveur :
-- ouvrez un terminal à la racine du projet, puis déplacez-vous dans le répertoire du backend avec la commande : "cd star-wars-backend";
-- ensuite lancez l'installation des dépendances : "npm install";
-Ensuite faites la même chose mais côté client :
-- retournez à la racine du projet avec : "cd ..";
-- ensuite entrez dans le répertoire adéquat : "cd star-wars-blog";
-- enfin, installez les dépendances avec : "npm install".
-
-Une fois que ceci est fait, il ne reste plus qu'à lancer l'application côté backend d'abord, puis côté frontend, et toujours dans cet ordre. Procédez ainsi :
-- lancer l'application backend : rendez-vous de nouveau dans le bon dossier avec la commande "cd .." puis "cd star-wars-backend";
-- ensuite, lancez le serveur nodejs avec cette commande "nodemon server.js";
-Si vous rencontrez un bug, il vous faut configurer votre connexion à la base de données MongoDB : utilisez vos propres identifiants de connexion avec votre cluster MongoDB et insérez-les dans un fichier nommé ".env" dans le dossier "star-wars-backend". Un descriptif des variables d'environnement à configurer est disponible en fin de ce readme.
-- puis, au tour de l'application frontend : revenez à la racine du projet avec la commande "cd .." et entrez dans le frontend avec "cd star-wars-blog"; De nouveau, si vous avez configuré correctement les variables d'environnement, tout se passera correctement.
-- enfin, démarrez l'application côté frontend avec "npm start".
-
-Une fois le backend et le frontend lançés, ils communiquent ensemble et le projet fonctionne de manière globale.
-
-
-5. Variables d'environnement, descriptif :
-
-FRONTEND:
-- REACT_APP_DEEPL_API_KEY = [mettez votre clé d'API Deepl]
-- REACT_APP_EXPRESS_SERVER_ENDPOINT = [c'est l'adresse de votre serveur local, port compris. Par exemple : "http://localhost:8000"]
-- REACT_APP_STAR_WARS_DATABANK_API =[l'URL de départ de toutes vos requêtes à l'API de Star Wars Databank]
-
-BACKEND:
-- MONGODB_USER = [nom d'utilisateur de la base MongoDB]
-- MONGODB_PASSWORD = [mot de passe de votre base MongoDB]
-- TOKEN = [jeton secret, doit être le plus complexe possible. Vous pouvez le générer avec un outil en ligne]
-- API_KEY = [clé API de votre service Deepl]
-- NB_HASH = [le "salt" de votre hashage]
-- CORS_ORIGIN = [URL à autoriser dans les CORS]
-- EMAIL_SENDER_ADDRESS = [adresse email de l'expéditeur de vos notifications]
-- SENDER_NAME = [nom de l'expéditeur de vos notifications mail]
-- GMAIL_APP_PASSWORD = [clé Gmail: obligatoire pour utiliser le service d'emailing de Gmail]
-- EMAIL_HOST = [le nom du service mis à disposition par Gmail]
-- EMAIL_PORT = [le port d'expédition des emails]
-- SERVER_PORT = [port de votre serveur Express]
-- CLIENT_PORT = [port de votre client React]
-
-
 
 Si vous souhaitez me contacter au sujet de ce projet ou d'autre chose, envoyez-moi un email à "rafikbensadi@live.fr". Je vous répondrai sans délai.
 
