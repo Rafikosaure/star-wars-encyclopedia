@@ -50,6 +50,8 @@ exports.modifyUser = async (req, res) => {
         })
     }
 
+    console.log("Notre utilisateur :", initialUser)
+
     // Filtre des données non-renseignées
     if (userObject.name === "") {
         userObject.name = initialUser.name
@@ -67,7 +69,6 @@ exports.modifyUser = async (req, res) => {
         userObject.password = newPassword
     }
     userObject.isAdmin = initialUser.isAdmin
-    console.log("Notre nouvel utilisateur :", userObject)
 
     // Mise à jour des données
     const newUser = await User.findByIdAndUpdate(
