@@ -6,7 +6,7 @@ Le wiki convivial pour découvrir l'univers Star Wars, ainsi que pour partager s
 
 Ce Wiki avec forum de discussion est un projet visant à promouvoir la culture liée à l'univers Star Wars, ainsi qu'à satisfaire la soif de connaissance des fans de la dernière comme de la première heure sur cet univers de science-fiction iconique.
 
-Il a été conçu par Rafik Ben Sadi à l'occasion de sa formation en 2024 de concepteur-développeur d'applications. Rafik est un développeur fullstack basé sur la région parisienne. Il a conçu ce projet pour l'association fictive loi 1901:
+Je me présente, je suis Rafik Ben Sadi, développeur fullstack basé sur la région parisienne. J'ai eu le plaisir de concevoir ce projet dans le cadre de ma formation en 2024 de concepteur-développeur d'applications, et ce pour l'association fictive loi 1901:
 "Amicale de la 501ème Légion" – 27, place de la Madeleine 75008 Paris, représenté par Michel Plagueis, son représentant légal (fictif aussi...).
 
 
@@ -27,7 +27,7 @@ Les données du projet se devant d'être traduites dans un français impeccable,
 
 C'était important à mon sens que les personnes souhaitant se documenter sur cet univers passionnant aient également un espace pour partager cette passion, et s'exprimer entre fans. C'est de ce raisonnement qu'est issu la création du forum de Star Wars Encyclopedia.
 
-On peut s'y rendre pour s'y créer un compte personnalisé, puis participer aux discussions. On peut aussi bien en devenir un membre influent et actif que simplement s'y rendre pour y flâner de temps en temps. On peut y partager ses réflexions sur tout ce qui a trait à Star Wars : les films, les séries, les jeux vidéos, et même la littérature ! Tout les fans y sont les bienvenus, du moment que ce lieu reste propice à l'expression de la passion qui nous anime. 
+On peut s'y rendre pour s'y créer un compte personnalisé, puis participer aux discussions. On peut aussi bien en devenir un membre influent et actif que simplement s'y rendre pour y flâner de temps en temps. On peut y partager ses réflexions sur tout ce qui a trait à Star Wars : les films, les séries, les jeux vidéos... et même la littérature ! Tout les fans y sont les bienvenus, du moment que ce lieu reste propice à l'expression de la passion qui nous anime. 
 
 Si vous pensez vraiment que Han n'a pas tiré le premier, créez une discussion et exposez vos arguments ! La communauté sera ravie de débattre et de partager son regard sur ce sujet. Bon, même si pour la plupart d'entre nous cette question est tranchée...
 
