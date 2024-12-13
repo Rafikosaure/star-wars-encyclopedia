@@ -8,8 +8,10 @@ import { Toaster } from 'sonner';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <ReduxProvider store={store}>
-    <Toaster />
-      <App />
-  </ReduxProvider> 
+  <React.StrictMode>
+    <ReduxProvider store={store}>
+      <Toaster />
+        <App />
+    </ReduxProvider> 
+  </React.StrictMode>
 );
