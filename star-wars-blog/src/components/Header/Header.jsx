@@ -75,15 +75,14 @@ export default function Header() {
         }
         dispatch(setCurrentTopicDozen(reinitializedTopicDozenState))
         toast("Vous êtes déconnecté !")
-        setLogoutTime(false)
       // } else {
         // console.log('Echec de la déconnexion !')
       // }
     })
     .catch(error => {
       console.log(error)
-      setLogoutTime(false)
     })
+    setLogoutTime(false)
   }
   
   return (
