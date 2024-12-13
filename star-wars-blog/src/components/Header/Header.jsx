@@ -30,23 +30,18 @@ export default function Header() {
   
 
   useEffect(() => {
+    
     // Vérifier la connexion d'un utilisateur
-    // if ((!isLoaded || isLogged) && logoutTime === false) {
     if (isLogged && logoutTime === false) {
       fetch(`${config.serverEndpoint}/auth/logged`, {
         credentials: "include"
       })
       .then(response => response.json())
       .then(data => {
-        // if (!data.badAccessMessage) {
-          console.log(data)
-          setLoggedUser(data)
-          dispatch(updateUserLog(data))
-          if (data._id) {
-            dispatch(updateIsLoggedUser(true))
-          }
-          dispatch(updateLoadedUser(true))
-        // } else {        }
+        setLoggedUser(data)
+        dispatch(updateUserLog(data))
+        dispatch(updateIsLoggedUser(true))
+        dispatch(updateLoadedUser(true))
       })
       .catch(() => {
         dispatch(updateIsLoggedUser(false))
@@ -68,19 +63,15 @@ export default function Header() {
     })
     .then(response => response.json())
     .then(data => {
-      // if (!data.badAccessMessage) {
-        dispatch(updateIsLoggedUser(false))
-        setLoggedUser(undefined)
-        dispatch(updateLoadedUser(false))
-        const reinitializedTopicDozenState = {
-          currentPage: 1,
-          topicId: ''
-        }
-        dispatch(setCurrentTopicDozen(reinitializedTopicDozenState))
-        toast("Vous êtes déconnecté !")
-      // } else {
-        // console.log('Echec de la déconnexion !')
-      // }
+      dispatch(updateIsLoggedUser(false))
+      setLoggedUser(undefined)
+      dispatch(updateLoadedUser(false))
+      const reinitializedTopicDozenState = {
+        currentPage: 1,
+        topicId: ''
+      }
+      dispatch(setCurrentTopicDozen(reinitializedTopicDozenState))
+      toast("Vous êtes déconnecté !")
     })
     .catch(error => {
       console.log(error)
