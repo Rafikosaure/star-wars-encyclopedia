@@ -27,12 +27,12 @@ export default function Header() {
   const isLogged = useSelector(selectIsLoggedState)
   const isLoaded = useSelector(selectLoadedState)
   const [logoutTime, setLogoutTime] = useState(false)
-  const [testBizarre, setTestBizarre] = useState(true)
+  // const [testBizarre, setTestBizarre] = useState(true)
   
 
   useEffect(() => {
     // Vérifier la connexion d'un utilisateur
-    if ((!isLoaded || isLogged) && !logoutTime && !testBizarre) {
+    if ((!isLoaded || isLogged) && !logoutTime) {
       fetch(`${config.serverEndpoint}/auth/logged`, {
         credentials: "include"
       })
@@ -51,7 +51,7 @@ export default function Header() {
       })
     }
     
-  }, [isLogged, dispatch, isLoaded, logoutTime, testBizarre])
+  }, [isLogged, dispatch, isLoaded, logoutTime])
   
 
   // Fonction de déconnexion d'un utilisateur
