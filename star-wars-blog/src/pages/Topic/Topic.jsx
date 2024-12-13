@@ -94,7 +94,7 @@ export default function Topic() {
             // Vérification de la validité de la page
             if (totalPages && !isPageValid(pageNum, totalPages)) {
 
-                // Rediriger vers la page d'erreur 404 si la page est invalide
+                // Rediriger vers la page 1 si la page est invalide
 
                 navigate(`/topic/${topicId}/page/1`);
             }

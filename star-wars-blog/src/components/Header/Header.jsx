@@ -31,7 +31,8 @@ export default function Header() {
 
   useEffect(() => {
     // Vérifier la connexion d'un utilisateur
-    if ((!isLoaded || isLogged) && logoutTime === false) {
+    // if ((!isLoaded || isLogged) && logoutTime === false) {
+    if (isLogged && logoutTime === false) {
       fetch(`${config.serverEndpoint}/auth/logged`, {
         credentials: "include"
       })
