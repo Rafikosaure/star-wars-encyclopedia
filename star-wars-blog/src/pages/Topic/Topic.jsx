@@ -95,10 +95,11 @@ export default function Topic() {
             if (totalPages && !isPageValid(pageNum, totalPages)) {
 
                 // Rediriger vers la page d'erreur 404 si la page est invalide
-                navigate("*");
+
+                navigate(`/topic/${topicId}/page/1`);
             }
         }
-    }, [page, totalPages, currentTopicData, currentPage, navigate]);
+    }, [page, totalPages, currentTopicData, currentPage, navigate, topicId]);
 
 
     // Récupérer la catégorie de la discussion courante et ses données
