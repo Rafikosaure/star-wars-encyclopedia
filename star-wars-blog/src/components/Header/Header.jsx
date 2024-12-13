@@ -23,7 +23,7 @@ export default function Header() {
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const [loggedUser, setLoggedUser] = useState()
+  const [loggedUser, setLoggedUser] = useState(undefined)
   const isLogged = useSelector(selectIsLoggedState)
   const isLoaded = useSelector(selectLoadedState)
   
@@ -63,9 +63,9 @@ export default function Header() {
     })
     .then(response => response.json())
     .then(data => {
-      if (!data.badAccessMessage) {
+      // if (!data.badAccessMessage) {
         dispatch(updateIsLoggedUser(false))
-        setLoggedUser()
+        setLoggedUser(undefined)
         dispatch(updateLoadedUser(false))
         const reinitializedTopicDozenState = {
           currentPage: 1,
@@ -73,9 +73,9 @@ export default function Header() {
         }
         dispatch(setCurrentTopicDozen(reinitializedTopicDozenState))
         toast("Vous êtes déconnecté !")
-      } else {
-        console.log('Echec de la déconnexion !')
-      }
+      // } else {
+        // console.log('Echec de la déconnexion !')
+      // }
     })
     .catch(error => console.log(error))
   }
