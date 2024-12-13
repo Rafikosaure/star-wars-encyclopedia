@@ -102,6 +102,8 @@ exports.logout = (req, res) => {
     try {
         res.clearCookie('access_token', {
             httpOnly: true,
+            secure: true,
+            sameSite: 'None',
             expires: new Date(0)
         })
         res.status(200).json({ message: 'Utilisateur déconnecté !' })
