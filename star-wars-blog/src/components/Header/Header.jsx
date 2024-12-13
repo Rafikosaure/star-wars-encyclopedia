@@ -38,9 +38,12 @@ export default function Header() {
       .then(response => response.json())
       .then(data => {
         // if (!data.badAccessMessage) {
+          console.log(data)
           setLoggedUser(data)
           dispatch(updateUserLog(data))
-          dispatch(updateIsLoggedUser(true))
+          if (data._id) {
+            dispatch(updateIsLoggedUser(true))
+          }
           dispatch(updateLoadedUser(true))
         // } else {        }
       })
