@@ -33,21 +33,22 @@ export default function Header() {
     // console.log('1. IsLogged :', isLogged)
     // Vérifier la connexion d'un utilisateur
     if ((!isLoaded || isLogged) && logoutTime === false) {
-      // onsole.log('2. Islogged :', isLogged)
+      // console.log('2. Islogged :', isLogged)
       fetch(`${config.serverEndpoint}/auth/logged`, {
         credentials: "include"
       })
       .then(response => response.json())
       .then(data => {
-        console.log('DATA LOGIN:', data)
         setLoggedUser(data)
         dispatch(updateUserLog(data))
         dispatch(updateIsLoggedUser(true))
         dispatch(updateLoadedUser(true))
       })
       .catch(() => {
-        dispatch(updateIsLoggedUser(false))
         setLoggedUser(undefined)
+        dispatch(updateUserLog(undefined))
+        dispatch(updateIsLoggedUser(false))
+        dispatch(updateLoadedUser(false))
       })
     }
     
