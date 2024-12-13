@@ -26,12 +26,12 @@ export default function Header() {
   const [loggedUser, setLoggedUser] = useState(undefined)
   const isLogged = useSelector(selectIsLoggedState)
   const isLoaded = useSelector(selectLoadedState)
+  const [logoutTime, setLogoutTime] = useState(false)
   
 
   useEffect(() => {
-
     // Vérifier la connexion d'un utilisateur
-    if (!isLoaded || isLogged) {
+    if ((!isLoaded || isLogged) && !logoutTime) {
       fetch(`${config.serverEndpoint}/auth/logged`, {
         credentials: "include"
       })
@@ -50,12 +50,13 @@ export default function Header() {
       })
     }
     
-  }, [isLogged, dispatch, isLoaded])
+  }, [isLogged, dispatch, isLoaded, logoutTime])
   
 
   // Fonction de déconnexion d'un utilisateur
   const logout = (e) => {
     e.preventDefault()
+    setLogoutTime(true)
     fetch(`${config.serverEndpoint}/auth/logout`, {
       method: "POST",
       headers: {"Accept": "application/json", "Content-Type": "application/json"},
@@ -73,11 +74,15 @@ export default function Header() {
         }
         dispatch(setCurrentTopicDozen(reinitializedTopicDozenState))
         toast("Vous êtes déconnecté !")
+        setLogoutTime(false)
       // } else {
         // console.log('Echec de la déconnexion !')
       // }
     })
-    .catch(error => console.log(error))
+    .catch(error => {
+      console.log(error)
+      setLogoutTime(false)
+    })
   }
   
   return (
