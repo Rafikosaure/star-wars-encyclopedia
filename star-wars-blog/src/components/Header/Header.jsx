@@ -30,9 +30,10 @@ export default function Header() {
   
 
   useEffect(() => {
-    
+    console.log('1. IsLogged :', isLogged)
     // Vérifier la connexion d'un utilisateur
-    if (isLogged && logoutTime === false) {
+    if ((!isLoaded || isLogged) && logoutTime === false) {
+      console.log('2. Islogged :', isLogged)
       fetch(`${config.serverEndpoint}/auth/logged`, {
         credentials: "include"
       })
@@ -137,7 +138,7 @@ export default function Header() {
                         } to="/forum" onClick={() => dispatch(reinitializeDozen())}>Forum</NavLink>
           </nav>
           <div className='header-div-connection'>
-            {!isLogged ? (
+            {!isLoaded ? (
               <p onClick={() => navigate('/auth')} className='connection-link'>Se connecter</p>
             ) : (
               <>
