@@ -125,9 +125,7 @@ export default function Topic() {
             })
             .then(response => response.json())
             .then(data => {
-                if (!data.badAccessMessage) {
-                    setUsersList(data)
-                }
+                setUsersList(data)
             })
             .catch(error => {
                 console.log(error)
