@@ -27,7 +27,6 @@ export default function Header() {
   const isLogged = useSelector(selectIsLoggedState)
   const isLoaded = useSelector(selectLoadedState)
   const [logoutTime, setLogoutTime] = useState(false)
-  // const [testBizarre, setTestBizarre] = useState(true)
   
 
   useEffect(() => {
@@ -41,7 +40,6 @@ export default function Header() {
         // if (!data.badAccessMessage) {
           setLoggedUser(data)
           dispatch(updateUserLog(data))
-          // dispatch(updateIsLoggedUser(true))
           dispatch(updateLoadedUser(true))
         // } else {        }
       })
