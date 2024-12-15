@@ -7,7 +7,7 @@ Le wiki convivial pour découvrir l'univers Star Wars, ainsi que pour partager s
 Ce Wiki avec forum de discussion est un projet visant à promouvoir la culture liée à l'univers Star Wars, ainsi qu'à satisfaire la soif de connaissance des fans de la dernière comme de la première heure sur cet univers de science-fiction iconique.
 
 Je me présente, je suis Rafik Ben Sadi, développeur fullstack basé sur la région parisienne. J'ai eu le plaisir de concevoir ce projet dans le cadre de ma formation en 2024 de concepteur-développeur d'applications, et ce pour l'association fictive loi 1901:
-"Amicale de la 501ème Légion" – 27, place de la Madeleine 75008 Paris, représenté par Michel Plagueis, son représentant légal (fictif aussi...).
+"Amicale de la 501ème Légion" – 27, place de la Madeleine 75008 Paris, représenté par Jean-Michel Plagueis, son représentant légal (fictif aussi...).
 
 
 
