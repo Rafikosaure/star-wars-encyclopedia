@@ -49,16 +49,16 @@ export default function Forum() {
           <p className='chart-text'><strong>Vénérable Jedi, afin que votre visite soit guidée par la Force, voici quelques règles à respecter :</strong></p>
           <Code />
         </div>
+        <div className='theme-spinner'>
+          <img style={{display: `${spinnerDisplay}`}} src={Spinner} alt="Spinner de chargement des thèmes" />
+        </div>
         {forumCategories && (
         <div className='forum-div-categories'>
         <h2>{forumTitle2.toLowerCase()}</h2>
         {forumCategories.map((category) => 
-        <>
-          <img className='theme-spinner' style={{display: `${spinnerDisplay}`}} src={Spinner} alt="Spinner de chargement des thèmes" />
           <div className='div-category' key={category._id} onClick={() => navigate(`/topics/${category._id}`)}>
             <h3>{category.title}</h3>
           </div>
-        </>
         )}
         </div>  
         )}
