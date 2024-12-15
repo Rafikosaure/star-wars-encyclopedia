@@ -137,6 +137,14 @@ $background-color_2: white;
 		}
 	}
 }
+/* Ici : media queries pour la troisième partie tablette */
+@media screen and (max-width: 767px) {
+	.theme-spinner {
+		left: calc(50% - 100px) !important;
+		width: 200px !important;
+		height: 200px !important;
+	}
+}
 /* Ici : media queries pour la première partie smartphone */
 @media screen and (max-width: 660px) {
 	.forum-div-categories {
