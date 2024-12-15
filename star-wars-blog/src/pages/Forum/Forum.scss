@@ -66,6 +66,12 @@ $background-color_2: white;
 		padding-bottom: 10px;
 		cursor: default;
 	}
+	.theme-spinner {
+		position: absolute;
+		z-index: 3;
+		width: 300px;
+		height: 300px;
+	}
 }
 .div-category {
 	color: $color_2;

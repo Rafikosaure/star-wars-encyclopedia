@@ -6,6 +6,7 @@ import Code from '../../components/Code/Code'
 import { useNavigate } from 'react-router-dom'
 import config from '../../config'
 import { useDispatch } from 'react-redux'
+import Spinner from '../../assets/images/spinner.svg'
 
 
 
@@ -15,18 +16,22 @@ export default function Forum() {
   const forumTitle1 = "Bienvenue dans le forum !"
   const forumTitle2 = "Thématiques"
   const [forumCategories, setForumCategories] = useState()
+  const [spinnerDisplay, setSpinnerDisplay] = useState('none')
   const dispatch = useDispatch()
 
 
   useEffect(() => {
 
     // Récupérer les catégories du forum
+    setSpinnerDisplay('flex')
     fetch(`${config.serverEndpoint}/category/getCategories`)
     .then(response => response.json())
     .then(data => {
       setForumCategories(data)
+      setSpinnerDisplay('none')
     })
     .catch(error => {
+      setSpinnerDisplay('none')
       console.log(error)
       navigate("*")
     })
@@ -48,9 +53,12 @@ export default function Forum() {
         <div className='forum-div-categories'>
         <h2>{forumTitle2.toLowerCase()}</h2>
         {forumCategories.map((category) => 
+        <>
+          <img className='theme-spinner' style={{display: `${spinnerDisplay}`}} src={Spinner} alt="Spinner de chargement des thèmes" />
           <div className='div-category' key={category._id} onClick={() => navigate(`/topics/${category._id}`)}>
             <h3>{category.title}</h3>
           </div>
+        </>
         )}
         </div>  
         )}
