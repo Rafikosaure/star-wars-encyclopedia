@@ -33,7 +33,7 @@ export default function Forum() {
     .catch(error => {
       setSpinnerDisplay('none')
       console.log(error)
-      // navigate("*")
+      navigate("/forum")
     })
     
   }, [dispatch, navigate])
