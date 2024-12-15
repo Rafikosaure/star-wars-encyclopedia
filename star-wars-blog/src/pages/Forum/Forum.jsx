@@ -28,7 +28,7 @@ export default function Forum() {
     .then(response => response.json())
     .then(data => {
       setForumCategories(data)
-      setSpinnerDisplay('none')
+      setSpinnerDisplay('flex')
     })
     .catch(error => {
       setSpinnerDisplay('none')
