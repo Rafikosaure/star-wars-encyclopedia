@@ -28,7 +28,7 @@ export default function Forum() {
     .then(response => response.json())
     .then(data => {
       setForumCategories(data)
-      setSpinnerDisplay('flex')
+      setSpinnerDisplay('none')
     })
     .catch(error => {
       setSpinnerDisplay('none')
@@ -49,8 +49,8 @@ export default function Forum() {
           <p className='chart-text'><strong>Vénérable Jedi, afin que votre visite soit guidée par la Force, voici quelques règles à respecter :</strong></p>
           <Code />
         </div>
-        <div className='theme-spinner'>
-          <img style={{display: `${spinnerDisplay}`}} src={Spinner} alt="Spinner de chargement des thèmes" />
+        <div className='forum-div-theme-spinner'>
+          <img className='theme-spinner' style={{display: `${spinnerDisplay}`}} src={Spinner} alt="Spinner de chargement des thèmes" />
         </div>
         {forumCategories && (
         <div className='forum-div-categories'>

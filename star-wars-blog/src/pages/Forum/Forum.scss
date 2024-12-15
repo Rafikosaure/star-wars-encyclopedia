@@ -31,6 +31,17 @@ $background-color_2: white;
 	height: 100%;
 	text-align: justify;
 	font-family: $font-family_1;
+	.forum-div-theme-spinner {
+		position: relative;
+		.theme-spinner {
+			position: absolute;
+			left: calc(50% - 150px);
+			top: 150px;
+			z-index: 3;
+			width: 300px;
+			height: 300px;
+		}
+	}
 }
 .chart-section {
 	height: fit-content;
@@ -65,12 +76,6 @@ $background-color_2: white;
 		font-family: $font-family_2;
 		padding-bottom: 10px;
 		cursor: default;
-	}
-	.theme-spinner {
-		position: absolute;
-		z-index: 3;
-		width: 300px;
-		height: 300px;
 	}
 }
 .div-category {
