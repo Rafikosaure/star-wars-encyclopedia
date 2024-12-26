@@ -22,7 +22,7 @@ body {
 	background-size: cover;
 }
 .app {
-	width: calc(80% - 4px);
+	width: 80%;
 	min-height: 100vh;
 	margin-left: auto;
 	margin-right: auto;
@@ -38,6 +38,6 @@ code {
 /* Ici : media queries pour la seconde partie tablette */
 @media screen and (max-width: 991px) {
 	.app {
-		width: calc(100% - 2px);
+		width: 100%;
 	}
 }

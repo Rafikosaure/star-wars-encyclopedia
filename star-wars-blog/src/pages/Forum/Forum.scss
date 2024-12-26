@@ -11,7 +11,8 @@ $background-color_2: white;
 	background-size: cover;
 	position: relative;
 	color: $color_1;
-	width: calc(80% - 4px);
+	// width: calc(80% - 4px);
+	width: calc(80% - 2px);
 	border: 1px solid $color_1;
 	min-height: 1300px;
 }
@@ -110,7 +111,8 @@ $background-color_2: white;
 /* Ici : media queries pour la seconde partie tablette */
 @media screen and (max-width: 991px) {
 	.forum {
-		width: calc(100% - 4px);
+		// width: calc(100% - 4px);
+		width: calc(100% - 2px);
 	}
 	.forum-title {
 		font-family: $font-family_2;

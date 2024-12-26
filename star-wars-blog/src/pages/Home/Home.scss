@@ -6,7 +6,7 @@ $font-family_1: Arial, Helvetica, sans-serif;
 
 .home-page {
 	border: 1px solid $color_2;
-	width: auto;
+	width: calc(80% - 2px);
 }
 .div-welcome {
 	background: url(../../assets/images/background05.webp) no-repeat center center;
@@ -69,6 +69,9 @@ $font-family_1: Arial, Helvetica, sans-serif;
 }
 /* Ici : media queries pour la seconde partie tablette */
 @media screen and (max-width: 991px) {
+	.home-page {
+		width: calc(100% - 2px);
+	}
 	.welcome-message {
 		line-height: 40px;
 		font-family: $font-family_1;

@@ -6,7 +6,8 @@ $font-family_2: Arial, Helvetica, sans-serif;
 $background-color_1: black;
 
 .header {
-	width: calc(80% - 2px);
+	// width: calc(80% - 2px);
+	width: 80%;
 	height: 140px;
 	margin-left: auto;
 	margin-right: auto;
@@ -16,7 +17,8 @@ $background-color_1: black;
 	align-items: center;
 }
 .navbar {
-	width: 100%;
+	// width: 100%;
+	width: calc(100% - 2px);
 	height: 100%;
 	display: flex;
 	background-image: url(../../assets/images/banner02.webp);
@@ -226,7 +228,8 @@ nav {
 /* Ici : media queries pour la seconde partie tablette */
 @media screen and (max-width: 991px) {
 	.header {
-		width: calc(100% - 2px);
+		// width: calc(100% - 2px);
+		width: 100%;
 	}
 }
 /* Ici : media queries pour la première partie smartphone */

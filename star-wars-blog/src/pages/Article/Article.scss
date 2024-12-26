@@ -5,7 +5,8 @@ $font-family_1: Arial, Helvetica, sans-serif;
 $background-color_1: black;
 
 .article-page {
-	width: calc(80% - 4px);
+	// width: calc(80% - 4px);
+	width: calc(80% - 2px);
 	border: 1px solid $color_3;
 }
 
@@ -122,7 +123,8 @@ $background-color_1: black;
 /* Ici : media queries pour la seconde partie tablette */
 @media screen and (max-width: 991px) {
 	.article-page {
-		width: calc(100% - 4px);
+		// width: calc(100% - 4px);
+		width: calc(100% - 2px);
 	}
 	.description-div {
 		font-size: 16px;

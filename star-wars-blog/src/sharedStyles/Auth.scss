@@ -7,7 +7,7 @@ $background-color_1: white;
 $background-color_2: transparent;
 
 .auth-page {
-	width: calc(80% - 4px);
+	width: calc(80% - 2px);
 	border: 1px solid $color_1;
 }
 .login-page-content {
@@ -176,7 +176,7 @@ input[type="file"] {
 /* Ici : media queries pour la seconde partie tablette */
 @media screen and (max-width: 991px) {
 	.auth-page {
-		width: calc(100% - 4px);
+		width: calc(100% - 2px);
 	}
 	.login-page-content {
 		h1 {

@@ -7,7 +7,7 @@ $background-color_2: black;
 	background-size: cover;
 	color: $color_1;
 	position: relative;
-	width: calc(80% - 4px);
+	width: calc(80% - 2px);
 	border: 1px solid $color_1;
 }
 .topics-div-return {
@@ -88,7 +88,7 @@ $background-color_2: black;
 /* Ici : media queries pour la seconde partie tablette */
 @media screen and (max-width: 991px) {
 	.topics {
-		width: calc(100% - 4px);
+		width: calc(100% - 2px);
 	}
 	.topics-page-title {
 		margin-top: 60px;
