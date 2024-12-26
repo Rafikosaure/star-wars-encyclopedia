@@ -11,7 +11,6 @@ $background-color_1: black;
 	}
 }
 .app-category {
-	// width: calc(80% - 4px);
 	width: calc(80% - 2px);
 	min-height: 100vh;
 	margin-left: auto;
@@ -123,7 +122,6 @@ $background-color_1: black;
 /* Ici : media queries pour la seconde partie tablette */
 @media screen and (max-width: 991px) {
 	.app-category {
-		// width: calc(100% - 4px);
 		width: calc(100% - 2px);
 	}
 	.arrow-section {

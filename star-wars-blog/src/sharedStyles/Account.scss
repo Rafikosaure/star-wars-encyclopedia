@@ -18,7 +18,6 @@ $background-color_6: transparent;
 	height: fit-content;
 	color: $color_1;
 	position: relative;
-	// width: calc(80% - 4px);
 	width: calc(80% - 2px);
 	border: 1px solid $color_6 !important;
 }
@@ -370,7 +369,6 @@ input[type='file'] {
 /* Ici : media queries pour la seconde partie tablette */
 @media screen and (max-width: 991px) {
 	.account-page {
-		// width: calc(100% - 4px) !important;
 		width: calc(100% - 2px) !important;
 	}
 }
