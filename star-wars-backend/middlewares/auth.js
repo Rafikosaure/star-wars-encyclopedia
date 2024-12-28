@@ -6,7 +6,6 @@ const ENV = require('../config/config.js')
 exports.verifyToken = (req, res, next) => {
     // Récupère le jeton (token) JWT à partir des cookies de la requête
     const token = req.cookies.access_token;
-    console.log('Notre token :', token)
     // Si le jeton (token) n'est pas présent, 
     // renvoie une erreur 401 (accès refusé)
     if(!token) return next(createError(401, "Acces Denied!"))
