@@ -70,7 +70,9 @@ export default function TopicForm({ topicsCategoryId }) {
             toast("Nouvelle discussion créee !")
             dispatch(reloadTopics())
         })
-        .catch(error => console.log(error))
+        .catch(error => {
+            // console.log(error)
+        })
         reset()
         setFormDisplay('none')
     }

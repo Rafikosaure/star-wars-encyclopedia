@@ -43,7 +43,7 @@ export default function Article() {
 
             // Gestion dans ce catch d'un articleId incorrect
             .catch(error => {
-                console.log(error)
+                // console.log(error)
                 navigate("*")
             })
 
@@ -77,7 +77,9 @@ export default function Article() {
                 setTranslatedDescription(data.description.text.replace(/^"|"$/g, ""))
                 
             })
-            .catch(error => console.log(error))
+            .catch(error => {
+                // console.log(error)
+            })
         }
     })
 

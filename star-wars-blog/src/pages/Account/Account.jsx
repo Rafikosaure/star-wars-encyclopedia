@@ -73,7 +73,7 @@ export default function Account() {
         // }
       })
       .catch(error => {
-        console.log(error)
+        // console.log(error)
         dispatch(reloadUsersArrayFunction(true))
         navigate('/auth')
       })
@@ -90,7 +90,9 @@ export default function Account() {
       .then(data => {
         setFollowedTopics(data)
       })
-      .catch(error => console.log(error))
+      .catch(error => {
+        // console.log(error)
+      })
     }
   }, [isLogged, userData, reloadFollowedTopics])
 
@@ -146,7 +148,7 @@ export default function Account() {
       // }
     })
     .catch(error => {
-      console.log(error)
+      // console.log(error)
       navigate('/auth')
     });
   }
@@ -183,7 +185,7 @@ export default function Account() {
       // }
     })
     .catch(error => {
-      console.log(error)
+      // console.log(error)
       navigate('/auth')
     })
   }

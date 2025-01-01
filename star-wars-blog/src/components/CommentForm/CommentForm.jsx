@@ -35,7 +35,7 @@ export default function CommentForm({ post, usersList, topicId, currentPage }) {
             data.preventDefault()
             if (data.target.value.length === 0) {
                 dispatch(reinitializeCommentCitation())
-                console.log("Données non-renseignées !")
+                // console.log("Données non-renseignées !")
                 return
             }
 
@@ -79,7 +79,9 @@ export default function CommentForm({ post, usersList, topicId, currentPage }) {
                 // Rafraichissement des commentaires affichés
                 dispatch(reloadPosts())
             })
-            .catch(error => console.log(error))
+            .catch(error => {
+                // console.log(error)
+            })
             setText('')
             dispatch(reinitializeCommentCitation())
         }

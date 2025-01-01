@@ -73,7 +73,7 @@ export default function Topic() {
             }
         })
         .catch(error => {
-            console.log(error)
+            // console.log(error)
             navigate("*")
         })
     }, [navigate, dispatch, topicId, page, currentPage, reloadPostsBool, currentTopicDozen])
@@ -110,7 +110,7 @@ export default function Topic() {
             setCurrentCategory(data.category[0])
         })
         .catch(error => {
-            console.log(error)
+            // console.log(error)
             navigate("*")
         })
 
@@ -129,7 +129,7 @@ export default function Topic() {
                 setUsersList(data)
             })
             .catch(error => {
-                console.log(error)
+                // console.log(error)
                 navigate("*")
             })
             dispatch(reloadUsersArrayFunction(true))
@@ -217,7 +217,9 @@ export default function Topic() {
             // Rafraichissement des posts affichés
             dispatch(reloadPosts())
         })
-        .catch(error => console.log(error))
+        .catch(error => {
+            // console.log(error)
+        })
         setToReset(true)
         dispatch(reinitializeCitation())
     }

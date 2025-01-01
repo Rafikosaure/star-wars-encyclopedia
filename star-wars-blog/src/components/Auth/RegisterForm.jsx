@@ -53,7 +53,9 @@ export default function RegisterForm() {
             dispatch(updateRegisterState(false))
             toast("Compte utilisateur créé !")
         })
-        .catch(error => console.error(error));
+        .catch(error => {
+            // console.error(error)
+        });
     }
 
     const isValidIcon = (value) => {

@@ -50,7 +50,9 @@ export default function Category() {
         setItems(data.data)
         setSpinnerDisplay('none')
       })
-      .catch((error) => console.log(error))
+      .catch((error) => {
+        // console.log(error)
+      })
 
       // Calculer le nombre de dizaines d'articles (arrondi à l'excès)
       nbDozen.current = Math.ceil(info.total / 10)

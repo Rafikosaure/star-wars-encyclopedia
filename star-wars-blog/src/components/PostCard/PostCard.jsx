@@ -35,7 +35,7 @@ export default function PostCard({ index, post, topicId, usersList, currentPage 
                 setPostUser(data)
             })
             .catch(error => {
-                console.log(error)
+                // console.log(error)
             })
             const myDate = new Date(post.createdAt)
             updateDateTime(myDate)
@@ -81,7 +81,9 @@ export default function PostCard({ index, post, topicId, usersList, currentPage 
         .then(data => {
             dispatch(reloadPosts())
         })
-        .catch(error => console.log(error))
+        .catch(error => {
+            // console.log(error)
+        })
     }
 
 

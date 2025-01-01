@@ -29,7 +29,9 @@ export default function Like({ post, comment }) {
                 updateLikeArray(data)
                 setLikeIsHere(false)
             })
-            .catch(error => console.log(error))
+            .catch(error => {
+                // console.log(error)
+            })
         } else if(comment) {
             setCommentLike('comment-like')
             fetch(`${config.serverEndpoint}/like/getLikes/${comment._id}`)
@@ -38,7 +40,9 @@ export default function Like({ post, comment }) {
                 updateLikeArray(data)
                 setLikeIsHere(false)
             })
-            .catch(error => console.log(error))
+            .catch(error => {
+                // console.log(error)
+            })
         }
         
     }, [post, comment, likeIsHere])
@@ -70,7 +74,9 @@ export default function Like({ post, comment }) {
             .then(data => {
                 setLikeIsHere(true)
             })
-            .catch(error => console.log(error))
+            .catch(error => {
+                // console.log(error)
+            })
         } else {
             setCommentLike('comment-like')
             fetch(`${config.serverEndpoint}/like/attributeLike/${comment._id}`, {
@@ -81,7 +87,9 @@ export default function Like({ post, comment }) {
             .then(data => {
                 setLikeIsHere(true)
             })
-            .catch(error => console.log(error))
+            .catch(error => {
+                // console.log(error)
+            })
         }
         
     }
@@ -99,7 +107,9 @@ export default function Like({ post, comment }) {
             .then(data => {
                 setLikeIsHere(true)
             })
-            .catch(error => console.log(error))
+            .catch(error => {
+                // console.log(error)
+            })
         } else {
 
             // "Disliker" un commentaire
@@ -112,7 +122,9 @@ export default function Like({ post, comment }) {
             .then(data => {
                 setLikeIsHere(true)
             })
-            .catch(error => console.log(error))
+            .catch(error => {
+                // console.log(error)
+            })
         }
         
     }

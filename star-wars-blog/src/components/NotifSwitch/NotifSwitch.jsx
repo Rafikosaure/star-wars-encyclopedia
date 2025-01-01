@@ -19,7 +19,9 @@ export default function NotifSwitch({ loggedUser }) {
             .then(data => {
                 setAllowNotifs(data.allowMentions)
             })
-            .catch(error => console.log(error))
+            .catch(error => {
+                // console.log(error)
+            })
         }
     }, [loggedUser])
 
@@ -36,7 +38,9 @@ export default function NotifSwitch({ loggedUser }) {
         .then(data => {
             setAllowNotifs(data.newOption)
         })
-        .catch(error => console.log(error))
+        .catch(error => {
+            // console.log(error)
+        })
     }
 
     // Switcher entre les options

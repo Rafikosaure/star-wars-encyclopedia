@@ -50,7 +50,7 @@ export default function Admin() {
         // }
       })
       .catch(error => {
-        console.log(error)
+        // console.log(error)
         dispatch(reloadUsersArrayFunction(true))
         navigate('/')
       })
