@@ -75,7 +75,7 @@ export default function Header() {
       toast("Vous êtes déconnecté !")
     })
     .catch(error => {
-      // console.log(error)
+      console.log(error)
     })
     setLogoutTime(false)
   }

@@ -30,7 +30,7 @@ export default function Like({ post, comment }) {
                 setLikeIsHere(false)
             })
             .catch(error => {
-                // console.log(error)
+                console.log(error)
             })
         } else if(comment) {
             setCommentLike('comment-like')
@@ -41,7 +41,7 @@ export default function Like({ post, comment }) {
                 setLikeIsHere(false)
             })
             .catch(error => {
-                // console.log(error)
+                console.log(error)
             })
         }
         
@@ -75,7 +75,7 @@ export default function Like({ post, comment }) {
                 setLikeIsHere(true)
             })
             .catch(error => {
-                // console.log(error)
+                console.log(error)
             })
         } else {
             setCommentLike('comment-like')
@@ -88,7 +88,7 @@ export default function Like({ post, comment }) {
                 setLikeIsHere(true)
             })
             .catch(error => {
-                // console.log(error)
+                console.log(error)
             })
         }
         
@@ -108,7 +108,7 @@ export default function Like({ post, comment }) {
                 setLikeIsHere(true)
             })
             .catch(error => {
-                // console.log(error)
+                console.log(error)
             })
         } else {
 
@@ -123,7 +123,7 @@ export default function Like({ post, comment }) {
                 setLikeIsHere(true)
             })
             .catch(error => {
-                // console.log(error)
+                console.log(error)
             })
         }
         

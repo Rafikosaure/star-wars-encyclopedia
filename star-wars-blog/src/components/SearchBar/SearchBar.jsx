@@ -25,7 +25,7 @@ export default function SearchBar({ category }) {
         dispatch(saveAnArticle(article))
       })
       .catch(error => {
-        // console.log(error)
+        console.log(error)
       })
     }
 
@@ -50,7 +50,7 @@ export default function SearchBar({ category }) {
       .then(response => response.json())
       .then(data => setSearch(data.name.text.replace(/^"|"$/g, "")))
       .catch(error => {
-        // console.log(error)
+        console.log(error)
       })
     }
   }

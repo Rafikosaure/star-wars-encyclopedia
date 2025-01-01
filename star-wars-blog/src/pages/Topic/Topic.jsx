@@ -73,7 +73,7 @@ export default function Topic() {
             }
         })
         .catch(error => {
-            // console.log(error)
+            console.log(error)
             navigate("*")
         })
     }, [navigate, dispatch, topicId, page, currentPage, reloadPostsBool, currentTopicDozen])
@@ -95,7 +95,6 @@ export default function Topic() {
             if (totalPages && !isPageValid(pageNum, totalPages)) {
 
                 // Rediriger vers la page 1 si la page est invalide
-
                 navigate(`/topic/${topicId}/page/1`);
             }
         }
@@ -110,7 +109,7 @@ export default function Topic() {
             setCurrentCategory(data.category[0])
         })
         .catch(error => {
-            // console.log(error)
+            console.log(error)
             navigate("*")
         })
 
@@ -129,7 +128,7 @@ export default function Topic() {
                 setUsersList(data)
             })
             .catch(error => {
-                // console.log(error)
+                console.log(error)
                 navigate("*")
             })
             dispatch(reloadUsersArrayFunction(true))
@@ -218,7 +217,7 @@ export default function Topic() {
             dispatch(reloadPosts())
         })
         .catch(error => {
-            // console.log(error)
+            console.log(error)
         })
         setToReset(true)
         dispatch(reinitializeCitation())

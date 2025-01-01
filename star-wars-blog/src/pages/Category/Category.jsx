@@ -51,7 +51,7 @@ export default function Category() {
         setSpinnerDisplay('none')
       })
       .catch((error) => {
-        // console.log(error)
+        console.log(error)
       })
 
       // Calculer le nombre de dizaines d'articles (arrondi à l'excès)

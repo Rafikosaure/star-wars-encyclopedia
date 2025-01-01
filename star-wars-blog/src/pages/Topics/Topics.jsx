@@ -32,7 +32,7 @@ export default function Topics() {
         setTopicsData(data.topics)
     })
     .catch(error => {
-      // console.log(error)
+      console.log(error)
       navigate("*")
     })
   }, [topicsCategoryId, topicsBool, navigate])

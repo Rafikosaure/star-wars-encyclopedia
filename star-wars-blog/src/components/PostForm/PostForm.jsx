@@ -44,7 +44,7 @@ export default function PostForm({ setDescription, toReset, setToReset }) {
                 }
             })
             .catch(error => {
-                // console.log(error)
+                console.log(error)
             })
             dispatch(reloadUsersArrayFunction(true))
         }

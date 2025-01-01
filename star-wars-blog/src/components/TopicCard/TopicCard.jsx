@@ -47,7 +47,7 @@ export default function TopicCard({ topic }) {
                 setFollowersArray(data)
             })
             .catch(error => {
-                // console.log(error)
+                console.log(error)
             })
         }
         
@@ -90,7 +90,7 @@ export default function TopicCard({ topic }) {
             dispatch(reloadTopics())
         })
         .catch(error => {
-            // console.log(error)
+            console.log(error)
         })
     }
 
@@ -132,7 +132,7 @@ export default function TopicCard({ topic }) {
             dispatch(reloadFollowedTopics())
         })
         .catch(error => {
-            // console.log(error)
+            console.log(error)
         })
     }
 

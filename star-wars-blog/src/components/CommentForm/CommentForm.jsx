@@ -80,7 +80,7 @@ export default function CommentForm({ post, usersList, topicId, currentPage }) {
                 dispatch(reloadPosts())
             })
             .catch(error => {
-                // console.log(error)
+                console.log(error)
             })
             setText('')
             dispatch(reinitializeCommentCitation())

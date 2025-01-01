@@ -43,7 +43,7 @@ export default function Article() {
 
             // Gestion dans ce catch d'un articleId incorrect
             .catch(error => {
-                // console.log(error)
+                console.log(error)
                 navigate("*")
             })
 
@@ -78,7 +78,7 @@ export default function Article() {
                 
             })
             .catch(error => {
-                // console.log(error)
+                console.log(error)
             })
         }
     })

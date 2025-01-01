@@ -32,7 +32,7 @@ export default function Forum() {
     })
     .catch(error => {
       setSpinnerDisplay('none')
-      // console.log(error)
+      console.log(error)
       // navigate("*")
     })
     

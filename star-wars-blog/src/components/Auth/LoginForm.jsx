@@ -36,7 +36,7 @@ export default function LoginForm() {
             }
         })
         .catch(error => {
-            // console.error(error)
+            console.error(error)
             dispatch(updateIsLoggedUser(false))
         });
     }

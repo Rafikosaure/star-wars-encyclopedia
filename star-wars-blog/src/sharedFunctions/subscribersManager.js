@@ -27,11 +27,11 @@ export default function subscribersManager(topicId, messageId, author, messageTy
             })
             .then(response => response.json())
             .catch(error => {
-                // console.log(error.message)
+                console.log(error.message)
             })
         }
     })
     .catch(error => {
-        // console.log(error)
+        console.log(error)
     })
 }

@@ -37,7 +37,7 @@ export default function Card({ item, categoryId }) {
         setTranslatedName(data.name.text.replace(/^"|"$/g, ""))
       })
       .catch(error => {
-        // console.log(error)
+        console.log(error)
       })
     }
       

@@ -71,7 +71,7 @@ export default function TopicForm({ topicsCategoryId }) {
             dispatch(reloadTopics())
         })
         .catch(error => {
-            // console.log(error)
+            console.log(error)
         })
         reset()
         setFormDisplay('none')

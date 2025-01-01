@@ -40,7 +40,7 @@ export default function CommentCard({ index, commentId, topicId, postId, usersLi
                 }
             })
             .catch(error => {
-                // console.log(error)
+                console.log(error)
             })
         }
     }, [commentId, commentUpdater])
@@ -55,7 +55,7 @@ export default function CommentCard({ index, commentId, topicId, postId, usersLi
                 setCommentUser(data)
             })
             .catch(error => {
-                // console.log(error)
+                console.log(error)
             })
         }
     }, [currentComment])
@@ -86,7 +86,7 @@ export default function CommentCard({ index, commentId, topicId, postId, usersLi
             dispatch(reloadPosts())
         })
         .catch(error => {
-            // console.log(error)
+            console.log(error)
         })
     }
 

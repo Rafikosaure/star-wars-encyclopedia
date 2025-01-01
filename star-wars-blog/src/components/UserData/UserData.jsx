@@ -36,7 +36,7 @@ export default function UserData({ user }) {
             }
         })
         .catch(error => {
-            // console.log(error)
+            console.log(error)
             toast("Echec de la suppression !")
         })
     }

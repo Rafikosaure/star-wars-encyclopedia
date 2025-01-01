@@ -54,7 +54,7 @@ export default function RegisterForm() {
             toast("Compte utilisateur créé !")
         })
         .catch(error => {
-            // console.error(error)
+            console.error(error)
         });
     }
 
