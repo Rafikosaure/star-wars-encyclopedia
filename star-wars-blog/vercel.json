@@ -1,0 +1,22 @@
+{
+    "headers": [
+        {
+            "source": "/(.*)",
+            "headers": [
+                {
+                    "key": "Content-Security-Policy",
+                    "value": "default-src 'self'; img-src 'self' data:; connect-src 'self' https://starwars-databank-server.vercel.app/api/v1 https://star-wars-encyclopedia-api.com;"
+                },
+                {
+                    "key": "Strict-Transport-Security",
+                    "value": "max-age=31536000; includeSubDomains; preload"
+                },
+                {
+                    "key": "X-Content-Type-Options",
+                    "value": "nosniff"
+                }
+            ]
+        }
+    ]
+}
+  
