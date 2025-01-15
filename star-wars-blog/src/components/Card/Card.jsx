@@ -15,6 +15,7 @@ export default function Card({ item, categoryId }) {
   const itemId = item._id
   const paramsIds = `${categoryId}.${itemId}`
   const [translatedName, setTranslatedName] = useState()
+  console.log('URL :', item.image)
 
   
   // Traduction linguistique automatique du sujet traité
