@@ -5,7 +5,7 @@
             "headers": [
                 {
                     "key": "Content-Security-Policy",
-                    "value": "img-src 'self' data: https://star-wars-encyclopedia-api.com https://lumiere-a.akamaihd.net/v1/images https://starwars-databank-server.vercel.app/api/v1;"
+                    "value": "img-src 'self' data: https://star-wars-encyclopedia-api.com https://lumiere-a.akamaihd.net/v1 https://starwars-databank-server.vercel.app/api/v1;"
                 },
                 {
                     "key": "Strict-Transport-Security",
