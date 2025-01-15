@@ -5,7 +5,7 @@
             "headers": [
                 {
                     "key": "Content-Security-Policy",
-                    "value": ""
+                    "value": "default-src 'self'; script-src 'self' https://star-wars-encyclopedia-api.com https://vercel.live https://starwars-databank-server.vercel.app https://star-wars-encyclopedia-api.com;"
                 },
                 {
                     "key": "Strict-Transport-Security",
