@@ -27,38 +27,41 @@ $font-family_1: Arial, Helvetica, sans-serif;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-between;
-	ul {
-		list-style: none;
-		padding-left: 0;
-		width: 30%;
-		min-width: 220px;
-		padding-left: 15px;
+	.footer-content-block {
+		padding-left: 35px;
+		width: 25%;
+		min-width: 200px;
 		margin-left: auto;
 		margin-right: auto;
-		li { 
-			margin-top: 15px;
-			a {
-				font-family: $font-family_1;
-				text-decoration: none;
-				color: $color_2;
+		h2 {
+			cursor: default;
+			text-transform: lowercase;
+		}
+		ul {
+			list-style: none;
+			padding-left: 0;
+			li { 
+				margin-top: 15px;
+				a {
+					font-family: $font-family_1;
+					text-decoration: none;
+					color: $color_2;
+				}
 			}
 		}
-	}
-	h2 {
-		cursor: default;
-		text-transform: lowercase;
 	}
 }
 /* Ici : media queries pour la seconde partie desktop */
 @media screen and (max-width: 1380px) {
-	.footer-content {
-		h2 { 
-			font-size: 16px;
-		}
-		ul {
-			li { 
-				font-size: 14px;
-			}
+	h2 {
+		font-size: 16px;
+	}
+	ul {
+		list-style: none;
+		padding-left: 0;
+		li { 
+			font-size: 14px;
+			
 		}
 	}
 }
@@ -67,16 +70,11 @@ $font-family_1: Arial, Helvetica, sans-serif;
 	.footer {
 		width: 100%;
 	}
-	.footer-content {
-		h2 { 
-			font-size: 14px;
-		}
-		ul {
-			li {
-				line-height: 15px;
-				font-size: 14px;
-				font-weight: bold;
-			}
-		}
+	h2 {
+		font-size: 14px;
+	}
+	li { 
+		line-height: 15px;
+		font-weight: bold;
 	}
 }
