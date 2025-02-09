@@ -26,12 +26,12 @@ export default function Header() {
   const [loggedUser, setLoggedUser] = useState(undefined)
   const isLogged = useSelector(selectIsLoggedState)
   const isLoaded = useSelector(selectLoadedState)
-  const [logoutTime, setLogoutTime] = useState(false)
   
 
   useEffect(() => {
     // Vérifier la connexion d'un utilisateur
-    if ((!isLoaded || isLogged) && !logoutTime) {
+    const connect = sessionStorage.getItem("connect");
+    if ((!isLoaded || isLogged) && connect) {
       fetch(`${config.serverEndpoint}/auth/logged`, {
         credentials: "include"
       })
@@ -50,13 +50,12 @@ export default function Header() {
       })
     }
     
-  }, [isLogged, dispatch, isLoaded, logoutTime])
+  }, [isLogged, dispatch, isLoaded])
   
 
   // Fonction de déconnexion d'un utilisateur
   const logout = (e) => {
     e.preventDefault()
-    setLogoutTime(true)
     fetch(`${config.serverEndpoint}/auth/logout`, {
       method: "POST",
       headers: {"Accept": "application/json", "Content-Type": "application/json"},
@@ -64,6 +63,7 @@ export default function Header() {
     })
     .then(response => response.json())
     .then(data => {
+      sessionStorage.removeItem("connect");
       dispatch(updateIsLoggedUser(false))
       setLoggedUser(undefined)
       dispatch(updateLoadedUser(false))
@@ -77,7 +77,6 @@ export default function Header() {
     .catch(error => {
       console.log(error)
     })
-    setLogoutTime(false)
   }
   
   return (
