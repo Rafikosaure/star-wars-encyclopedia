@@ -10,7 +10,7 @@ import { useParams } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { reinitializeDozen, maxDozen, nextDozen, prevDozen, selectDozen } from '../../redux/slices/dozenSlice'
-import { selectArticle } from '../../redux/slices/articleSlice'
+import { selectArticlesArray } from '../../redux/slices/articlesArraySlice'
 import config from '../../config'
 
 
@@ -19,7 +19,7 @@ export default function Category() {
 
   const dispatch = useDispatch()
   const storedDozen = useSelector(selectDozen)
-  const article = useSelector(selectArticle)
+  const articlesArray = useSelector(selectArticlesArray)
   const { categoryId } = useParams()
   const [items, setItems] = useState([])
   const [info, setInfo] = useState([])
@@ -94,31 +94,35 @@ export default function Category() {
               <img className='card-list-spinner spinner-1' style={{display: `${spinnerDisplay}`}} src={Spinner} alt="Premier spinner de chargement" />
               <img className='card-list-spinner spinner-2' style={{display: `${spinnerDisplay}`}} src={Spinner} alt="Second spinner de chargement" />
               <img className='card-list-spinner spinner-3' style={{display: `${spinnerDisplay}`}} src={Spinner} alt="Troisième spinner de chargement" />
-              {article.value === undefined ? 
+              {articlesArray.length === 0 ?
                 (items.map((item) => 
                   <Card key={item._id} item={item} categoryId={categoryId} />
                 )
-                ) : (
-                  <Card key={article._id} item={article.value} categoryId={categoryId} />
-                )
+              ) : (
+                articlesArray.map((article) => (
+                  <Card key={article._id} item={article} categoryId={categoryId} />
+                ))
+              )
               }
             </div>
             <div className='arrow-section'>
               <div className='prev-arrow-section' 
-              style={{display: storedDozen <= 1 || article.value ? 'none' : 'flex'}} 
+              style={{display: storedDozen <= 1 || articlesArray.length > 0 ? 'none' : 'flex'}} 
               onClick={prevPage}
               >
                 <img className='arrows' src={BackArrow} alt="back arrow" />
               </div>
               <div className='next-arrow-section' 
-                style={{display: storedDozen >= nbDozen.current || article.value ? 'none' : 'flex'}} 
+                style={{display: storedDozen >= nbDozen.current || articlesArray.length > 0 ? 'none' : 'flex'}} 
                 onClick={nextPage}
               >
                 <img className='arrows' src={NextArrow} alt="next arrow" />
               </div>
             </div>
             
-            <div className='dozen-indicator' style={{display: article.value ? 'none' : 'block'}}>
+            <div className='dozen-indicator' 
+              style={{display: articlesArray.length > 0 ? 'none' : 'block'}}
+              >
               {!isNaN(nbDozen.current) && !isNaN(storedDozen) ? (
                 `${storedDozen} / ${nbDozen.current}`
               ) : null }

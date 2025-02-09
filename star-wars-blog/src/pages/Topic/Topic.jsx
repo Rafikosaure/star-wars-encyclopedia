@@ -228,8 +228,10 @@ export default function Topic() {
         <div className='app topic'>
             <div className='topic-overlay' />
             {currentCategory && (
-                <div className='topic-div-return' title='Retour vers les topics'>
-                    <Link to={`/topics/${currentCategory._id}`} className='topic-arrow-link'>
+                <div className='topic-div-return'>
+                    <Link to={`/topics/${currentCategory._id}`}  className='topic-arrow-link' 
+                    title='Retour vers la liste des discussions'
+                    >
                         <img src={ReturnArrow} alt="Return to the topics page" />
                     </Link>
                 </div>

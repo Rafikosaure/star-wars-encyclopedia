@@ -2,7 +2,7 @@ import React from 'react'
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { saveAnArticle } from '../../redux/slices/articleSlice'
+import { saveArticlesArray } from '../../redux/slices/articlesArraySlice'
 import '../../sharedStyles/index.scss'
 import './Article.scss'
 import data from '../../data/localApiCategories.json'
@@ -29,7 +29,7 @@ export default function Article() {
 
     // Réinitialisation de l'affichage dans la page Catégorie
     useEffect(() => {
-        dispatch(saveAnArticle())
+        dispatch(saveArticlesArray([]))
     })
 
 
@@ -58,10 +58,14 @@ export default function Article() {
     useEffect(() => {
         if (item && !translatedName && !translatedDescription) {
             const object = {
-                sourceLang: "EN",
-                targetLang: "FR",
-                name: item.name,
-                description: item.description
+                sourceLang: "en",
+                targetLang: "fr",
+                array: [{
+                    id: item._id,
+                    name: item.name,
+                    image: item.image,
+                    description: item.description
+                }]
             }
 
             fetch(`${config.serverEndpoint}/translate`, {
@@ -73,8 +77,9 @@ export default function Article() {
             })
             .then(response => response.json())
             .then(data => {
-                setTranslatedName(data.name.text.replace(/^"|"$/g, ""))
-                setTranslatedDescription(data.description.text.replace(/^"|"$/g, ""))
+                const translatedArray = data.translatedArray
+                setTranslatedName(translatedArray[0].name.replace(/^"|"$/g, ""))
+                setTranslatedDescription(translatedArray[0].description.replace(/^"|"$/g, ""))
                 
             })
             .catch(error => {
@@ -87,8 +92,8 @@ export default function Article() {
     return (
         <>
             <div className='app article-page'>
-                <div className='div-return' title='Retour vers les articles'>
-                    <Link to={`/category/${categoryId}`} className='arrow-link'>
+                <div className='div-return'>
+                    <Link to={`/category/${categoryId}`} title='Retour vers les articles' className='arrow-link'>
                         <img src={ReturnArrow} alt="Return to the last page" />
                     </Link>
                 </div>

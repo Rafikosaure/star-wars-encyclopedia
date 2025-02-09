@@ -21,9 +21,13 @@ export default function Card({ item, categoryId }) {
   useEffect(() => {
     if (location.pathname !== "/") {
       const object = {
-        sourceLang: "EN",
-        targetLang: "FR",
-        name: item.name
+        sourceLang: "en",
+        targetLang: "fr",
+        array: [{
+          id: item._id,
+          name: item.name,
+          image: item.image
+        }]
       }
       fetch(`${config.serverEndpoint}/translate`, {
         method: "POST",
@@ -34,14 +38,14 @@ export default function Card({ item, categoryId }) {
       })
       .then(response => response.json())
       .then(data => {
-        setTranslatedName(data.name.text.replace(/^"|"$/g, ""))
+        setTranslatedName(data.translatedArray[0].name.replace(/^"|"$/g, ""))
       })
       .catch(error => {
         console.log(error)
       })
     }
       
-    }, [item.name, translatedName, location])
+    }, [item, location])
     
 
 
