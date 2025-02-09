@@ -41,8 +41,8 @@ export default function Topics() {
 
   return (
     <div className='app topics'>
-      <div className='topics-div-return' title='Retour vers le forum'>
-          <Link to='/forum' className='arrow-link'>
+      <div className='topics-div-return'>
+          <Link to='/forum' className='arrow-link' title='Retour vers le forum'>
               <img src={ReturnArrow} alt="Return to the topics page" />
           </Link>
       </div>
