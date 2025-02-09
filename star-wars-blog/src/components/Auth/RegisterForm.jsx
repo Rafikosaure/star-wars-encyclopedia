@@ -44,6 +44,7 @@ export default function RegisterForm() {
 
         fetch(`${config.serverEndpoint}/auth/register`, {
             method: "POST",
+            credentials: "include",
             body: formData
         })
         .then(response => response.json())
@@ -52,7 +53,9 @@ export default function RegisterForm() {
             dispatch(updateRegisterState(false))
             toast("Compte utilisateur créé !")
         })
-        .catch(error => console.error(error));
+        .catch(error => {
+            console.error(error)
+        });
     }
 
     const isValidIcon = (value) => {

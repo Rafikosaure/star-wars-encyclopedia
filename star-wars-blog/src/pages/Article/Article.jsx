@@ -77,7 +77,9 @@ export default function Article() {
                 setTranslatedDescription(data.description.text.replace(/^"|"$/g, ""))
                 
             })
-            .catch(error => console.log(error))
+            .catch(error => {
+                console.log(error)
+            })
         }
     })
 

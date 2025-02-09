@@ -6,6 +6,7 @@ import Code from '../../components/Code/Code'
 import { useNavigate } from 'react-router-dom'
 import config from '../../config'
 import { useDispatch } from 'react-redux'
+import Spinner from '../../assets/images/spinner.svg'
 
 
 
@@ -15,20 +16,24 @@ export default function Forum() {
   const forumTitle1 = "Bienvenue dans le forum !"
   const forumTitle2 = "Thématiques"
   const [forumCategories, setForumCategories] = useState()
+  const [spinnerDisplay, setSpinnerDisplay] = useState('none')
   const dispatch = useDispatch()
 
 
   useEffect(() => {
 
     // Récupérer les catégories du forum
+    setSpinnerDisplay('flex')
     fetch(`${config.serverEndpoint}/category/getCategories`)
     .then(response => response.json())
     .then(data => {
       setForumCategories(data)
+      setSpinnerDisplay('none')
     })
     .catch(error => {
+      setSpinnerDisplay('none')
       console.log(error)
-      navigate("*")
+      // navigate("*")
     })
     
   }, [dispatch, navigate])
@@ -43,6 +48,9 @@ export default function Forum() {
         <div className='chart-section'>
           <p className='chart-text'><strong>Vénérable Jedi, afin que votre visite soit guidée par la Force, voici quelques règles à respecter :</strong></p>
           <Code />
+        </div>
+        <div className='forum-div-theme-spinner'>
+          <img className='theme-spinner' style={{display: `${spinnerDisplay}`}} src={Spinner} alt="Spinner de chargement des thèmes" />
         </div>
         {forumCategories && (
         <div className='forum-div-categories'>

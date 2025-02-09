@@ -65,17 +65,17 @@ export default function Account() {
       })
       .then(response => response.json())
       .then(data => {
-        if (data.badAccessMessage) {
-          dispatch(reloadUsersArrayFunction(true))
-          navigate('/auth')
-        } else {
+        // if (data.badAccessMessage) {
+          
+        // } else {
           setAllUsers(data.filter((user) => user.isAdmin !== true))
           dispatch(reloadUsersArrayFunction(true))
-        }
+        // }
       })
       .catch(error => {
         console.log(error)
         dispatch(reloadUsersArrayFunction(true))
+        navigate('/auth')
       })
     }
   }, [reloadUsers, allUsers, dispatch, navigate])
@@ -90,7 +90,9 @@ export default function Account() {
       .then(data => {
         setFollowedTopics(data)
       })
-      .catch(error => console.log(error))
+      .catch(error => {
+        console.log(error)
+      })
     }
   }, [isLogged, userData, reloadFollowedTopics])
 
@@ -134,7 +136,7 @@ export default function Account() {
     })
     .then(response => response.json())
     .then(data => {
-      if (!data.badAccessMessage) {
+      // if (!data.badAccessMessage) {
         dispatch(updateUserLog(data))
         reset()
         setUnvalidPassword('none')
@@ -142,11 +144,13 @@ export default function Account() {
         dispatch(updateLoadedUser(false))
         dispatch(reloadUsersArrayFunction())
         toast("Mise à jour effectuée !")
-      } else {
-        navigate('/auth')
-      }
+      // } else {
+      // }
     })
-    .catch(error => console.error(error));
+    .catch(error => {
+      console.log(error)
+      navigate('/auth')
+    });
   }
 
 
@@ -169,18 +173,21 @@ export default function Account() {
     })
     .then(response => response.json())
     .then(data => {
-      if (data.badAccessMessage) {
-        navigate('/auth')
-      } else {
+      // if (data.badAccessMessage) {
+        
+      // } else {
         dispatch(updateIsLoggedUser(false))
         dispatch(updateUserLog({}))
         dispatch(updateLoadedUser(false))
         dispatch(reloadUsersArrayFunction())
         toast('Compte utilisateur supprimé !')
         navigate('/auth')
-      }
+      // }
     })
-    .catch(error => console.log(error))
+    .catch(error => {
+      console.log(error)
+      navigate('/auth')
+    })
   }
   
   

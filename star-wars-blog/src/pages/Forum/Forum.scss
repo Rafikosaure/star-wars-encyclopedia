@@ -11,7 +11,7 @@ $background-color_2: white;
 	background-size: cover;
 	position: relative;
 	color: $color_1;
-	width: calc(80% - 4px);
+	width: calc(80% - 2px);
 	border: 1px solid $color_1;
 	min-height: 1300px;
 }
@@ -31,6 +31,17 @@ $background-color_2: white;
 	height: 100%;
 	text-align: justify;
 	font-family: $font-family_1;
+	.forum-div-theme-spinner {
+		position: relative;
+		.theme-spinner {
+			position: absolute;
+			left: calc(50% - 150px);
+			top: 150px;
+			z-index: 3;
+			width: 300px;
+			height: 300px;
+		}
+	}
 }
 .chart-section {
 	height: fit-content;
@@ -99,7 +110,7 @@ $background-color_2: white;
 /* Ici : media queries pour la seconde partie tablette */
 @media screen and (max-width: 991px) {
 	.forum {
-		width: calc(100% - 4px);
+		width: calc(100% - 2px);
 	}
 	.forum-title {
 		font-family: $font-family_2;
@@ -124,6 +135,14 @@ $background-color_2: white;
 		&:hover {
 			font-size: 18px;
 		}
+	}
+}
+/* Ici : media queries pour la troisième partie tablette */
+@media screen and (max-width: 767px) {
+	.theme-spinner {
+		left: calc(50% - 100px) !important;
+		width: 200px !important;
+		height: 200px !important;
 	}
 }
 /* Ici : media queries pour la première partie smartphone */

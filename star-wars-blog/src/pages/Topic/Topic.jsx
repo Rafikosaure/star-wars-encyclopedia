@@ -94,11 +94,11 @@ export default function Topic() {
             // Vérification de la validité de la page
             if (totalPages && !isPageValid(pageNum, totalPages)) {
 
-                // Rediriger vers la page d'erreur 404 si la page est invalide
-                navigate("*");
+                // Rediriger vers la page 1 si la page est invalide
+                navigate(`/topic/${topicId}/page/1`);
             }
         }
-    }, [page, totalPages, currentTopicData, currentPage, navigate]);
+    }, [page, totalPages, currentTopicData, currentPage, navigate, topicId]);
 
 
     // Récupérer la catégorie de la discussion courante et ses données
@@ -125,9 +125,7 @@ export default function Topic() {
             })
             .then(response => response.json())
             .then(data => {
-                if (!data.badAccessMessage) {
-                    setUsersList(data)
-                }
+                setUsersList(data)
             })
             .catch(error => {
                 console.log(error)
@@ -218,7 +216,9 @@ export default function Topic() {
             // Rafraichissement des posts affichés
             dispatch(reloadPosts())
         })
-        .catch(error => console.log(error))
+        .catch(error => {
+            console.log(error)
+        })
         setToReset(true)
         dispatch(reinitializeCitation())
     }

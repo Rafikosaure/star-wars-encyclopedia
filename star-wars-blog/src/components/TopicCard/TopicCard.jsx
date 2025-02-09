@@ -46,7 +46,9 @@ export default function TopicCard({ topic }) {
             .then(data => {
                 setFollowersArray(data)
             })
-            .catch(error => console.log(error))
+            .catch(error => {
+                console.log(error)
+            })
         }
         
         // Enregistrement de l'utilisateur si il fait partie des abonnés
@@ -87,7 +89,9 @@ export default function TopicCard({ topic }) {
             }
             dispatch(reloadTopics())
         })
-        .catch(error => console.log(error))
+        .catch(error => {
+            console.log(error)
+        })
     }
 
 

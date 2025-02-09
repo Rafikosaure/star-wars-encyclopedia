@@ -41,17 +41,18 @@ export default function Admin() {
       })
       .then(response => response.json())
       .then(data => {
-        if (data.badAccessMessage) {
+        // if (data.badAccessMessage) {
           dispatch(reloadUsersArrayFunction(true))
-          navigate('/')
-        } else {
+          
+        // } else {
           setAllUsers(data.filter((user) => user.isAdmin !== true))
           dispatch(reloadUsersArrayFunction(true))
-        }
+        // }
       })
       .catch(error => {
         console.log(error)
         dispatch(reloadUsersArrayFunction(true))
+        navigate('/')
       })
     }
   }, [reloadUsers, allUsers, dispatch, navigate])

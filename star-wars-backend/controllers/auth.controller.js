@@ -20,7 +20,8 @@ exports.register = (req, res) => {
         const ref = `${name}-${timestamp}.webp`
         const path = `./images/${ref}`
         sharp(buffer).resize(450).webp().toFile(path)
-        profilePicture = `${req.protocol}://${req.get('host')}/images/${ref}`
+        // profilePicture = `${req.protocol}://${req.get('host')}/images/${ref}`
+        profilePicture = `${ENV.DEPLOYED_EXPRESS_SERVER_ENDPOINT}/images/${ref}`
     }
     
     bcrypt
@@ -101,6 +102,8 @@ exports.logout = (req, res) => {
     try {
         res.clearCookie('access_token', {
             httpOnly: true,
+            secure: true,
+            sameSite: 'None',
             expires: new Date(0)
         })
         res.status(200).json({ message: 'Utilisateur déconnecté !' })

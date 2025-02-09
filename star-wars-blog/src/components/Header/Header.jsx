@@ -23,42 +23,40 @@ export default function Header() {
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const [loggedUser, setLoggedUser] = useState()
+  const [loggedUser, setLoggedUser] = useState(undefined)
   const isLogged = useSelector(selectIsLoggedState)
   const isLoaded = useSelector(selectLoadedState)
+  const [logoutTime, setLogoutTime] = useState(false)
   
 
   useEffect(() => {
-
     // Vérifier la connexion d'un utilisateur
-    if (!isLoaded || isLogged) {
+    if ((!isLoaded || isLogged) && !logoutTime) {
       fetch(`${config.serverEndpoint}/auth/logged`, {
         credentials: "include"
       })
       .then(response => response.json())
       .then(data => {
-        if (!data.badAccessMessage) {
-          setLoggedUser(data)
-          dispatch(updateUserLog(data))
-          dispatch(updateIsLoggedUser(true))
-          dispatch(updateLoadedUser(true))
-        } else {
-          dispatch(updateIsLoggedUser(false))
-          setLoggedUser()
-        }
+        setLoggedUser(data)
+        dispatch(updateUserLog(data))
+        dispatch(updateIsLoggedUser(true))
+        dispatch(updateLoadedUser(true))
       })
       .catch(() => {
+        setLoggedUser(undefined)
+        dispatch(updateUserLog(undefined))
         dispatch(updateIsLoggedUser(false))
-        setLoggedUser()
+        dispatch(updateLoadedUser(false))
       })
     }
     
-  }, [isLogged, dispatch, isLoaded])
+  }, [isLogged, dispatch, isLoaded, logoutTime])
   
 
   // Fonction de déconnexion d'un utilisateur
   const logout = (e) => {
     e.preventDefault()
+    setLogoutTime(true)
     fetch(`${config.serverEndpoint}/auth/logout`, {
       method: "POST",
       headers: {"Accept": "application/json", "Content-Type": "application/json"},
@@ -66,21 +64,20 @@ export default function Header() {
     })
     .then(response => response.json())
     .then(data => {
-      if (!data.badAccessMessage) {
-        dispatch(updateIsLoggedUser(false))
-        setLoggedUser()
-        dispatch(updateLoadedUser(false))
-        const reinitializedTopicDozenState = {
-          currentPage: 1,
-          topicId: ''
-        }
-        dispatch(setCurrentTopicDozen(reinitializedTopicDozenState))
-        toast("Vous êtes déconnecté !")
-      } else {
-        console.log('Echec de la déconnexion !')
+      dispatch(updateIsLoggedUser(false))
+      setLoggedUser(undefined)
+      dispatch(updateLoadedUser(false))
+      const reinitializedTopicDozenState = {
+        currentPage: 1,
+        topicId: ''
       }
+      dispatch(setCurrentTopicDozen(reinitializedTopicDozenState))
+      toast("Vous êtes déconnecté !")
     })
-    .catch(error => console.log(error))
+    .catch(error => {
+      console.log(error)
+    })
+    setLogoutTime(false)
   }
   
   return (

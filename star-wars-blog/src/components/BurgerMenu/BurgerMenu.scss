@@ -8,6 +8,9 @@ $background-color_2: transparent;
 }
 .hamburger-menu-icon {
 	display: none;
+	img {
+		cursor: pointer;
+	}
 }
 /* Ici : media queries pour la première partie tablette */
 @media screen and (max-width: 1580px) {

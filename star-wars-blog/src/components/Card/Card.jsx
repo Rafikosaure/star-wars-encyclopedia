@@ -36,7 +36,9 @@ export default function Card({ item, categoryId }) {
       .then(data => {
         setTranslatedName(data.name.text.replace(/^"|"$/g, ""))
       })
-      .catch(error => console.log(error))
+      .catch(error => {
+        console.log(error)
+      })
     }
       
     }, [item.name, translatedName, location])
@@ -49,7 +51,7 @@ export default function Card({ item, categoryId }) {
         <div className='card card-home'>
           <Link className='card-link' to={`/article/${paramsIds}`}>
             <div className='card-image'>
-              <img src={item.image} alt={item.name} />
+              <img src={item.image} alt={`Carte de l'article "${item.name}"`} />
             </div>
             <div className='card-name-div'>
               {translatedName && (
@@ -65,7 +67,7 @@ export default function Card({ item, categoryId }) {
             onClick={(e) => {dispatch(reinitializeDozen())}}
             >
             <div className='card-image'>
-              <img src={item.image} alt={item.title} />
+              <img src={item.image} alt={`Carte de la catégorie des ${item.title}`} />
             </div>
             <div className='card-name-div'>
               <p className="card-name">{item.title.toLowerCase()}</p>

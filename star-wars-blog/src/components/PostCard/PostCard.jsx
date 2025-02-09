@@ -81,7 +81,9 @@ export default function PostCard({ index, post, topicId, usersList, currentPage 
         .then(data => {
             dispatch(reloadPosts())
         })
-        .catch(error => console.log(error))
+        .catch(error => {
+            console.log(error)
+        })
     }
 
 
@@ -187,7 +189,7 @@ export default function PostCard({ index, post, topicId, usersList, currentPage 
                                 ) : (
                                     null
                                 )}
-                                <a className='post-card-link loggedColor' href={`/topic/${topicId}#citation-post`} title='Citer ce post' onClick={() => saveCurrentCitation()}>➥ Citer</a>
+                                <a className='post-card-link loggedColor' href={`/topic/${topicId}/page/${currentPage}#citation-post`} title='Citer ce post' onClick={() => saveCurrentCitation()}>➥ Citer</a>
                                 <Like post={post} comment={undefined} />
                             </>
                         )}

@@ -12,7 +12,7 @@ $background-color_3: rgba(255, 255, 255, .8);
 	height: fit-content;
 	display: flex;
 	flex-direction: column;
-	width: calc(80% - 4px);
+	width: calc(80% - 2px);
 	border: 1px solid $color_1;
 }
 .topic-div-return {
@@ -217,7 +217,7 @@ $background-color_3: rgba(255, 255, 255, .8);
 /* Ici : media queries pour la seconde partie tablette */
 @media screen and (max-width: 991px) {
 	.topic {
-		width: calc(100% - 4px);
+		width: calc(100% - 2px);
 	}
 	.topic-title {
 		margin-top: 60px;
