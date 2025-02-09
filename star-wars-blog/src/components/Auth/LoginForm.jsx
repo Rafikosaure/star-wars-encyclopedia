@@ -30,6 +30,7 @@ export default function LoginForm() {
             if (data.message) {
                 toast("Identifiants incorrects !")
             } else {
+                sessionStorage.setItem("connect", config.persistentConnect);
                 dispatch(updateIsLoggedUser(true))
                 navigate("/")
                 toast("Vous êtes connecté !")
