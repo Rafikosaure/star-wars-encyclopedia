@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './PostCard.scss'
 import DefaultAvatar from '../../assets/images/EmojiBlitzBobaFett1.webp'
 import Like from '../Like/Like'
+import PencilImage from '../PencilImage/PencilImage'
 import config from '../../config'
 import { useDispatch, useSelector } from 'react-redux'
 import { saveACitation } from '../../redux/slices/citationSlice'
@@ -185,7 +186,7 @@ export default function PostCard({ index, post, topicId, usersList, currentPage 
                         {isLogged && postUser && (
                             <>
                                 {postContentDisplay === 'block' && modifyContentDisplay === "none" && (loggedUser._id === postUser._id || loggedUser.isAdmin) ? (
-                                    <p className='post-card-link loggedColor' title='Modifier ce post' onClick={(e) => modifyDisplayManager(e)}>🖉 Modifier</p>
+                                    <p className='post-card-link loggedColor' title='Modifier ce post' onClick={(e) => modifyDisplayManager(e)}><PencilImage pencilSize='18px' />Modifier</p>
                                 ) : (
                                     null
                                 )}
