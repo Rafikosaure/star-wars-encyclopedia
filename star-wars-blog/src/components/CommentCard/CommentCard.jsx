@@ -3,6 +3,7 @@ import { useState } from 'react'
 import './CommentCard.scss'
 import DefaultAvatar from '../../assets/images/EmojiBlitzBobaFett1.webp'
 import Like from '../Like/Like'
+import PencilImage from '../PencilImage/PencilImage'
 import { useSelector, useDispatch } from 'react-redux'
 import { selectIsLoggedState } from '../../redux/slices/isLoggedUserSlice'
 import { selectLoggedUser } from '../../redux/slices/loggedUserSlice'
@@ -227,7 +228,7 @@ export default function CommentCard({ index, commentId, topicId, postId, usersLi
                 {isLogged && commentUser && (
                     <>
                         {commentContentDisplay === 'block' && modifyContentDisplay === "none" && (loggedUser._id === commentUser._id || loggedUser.isAdmin) ? (
-                            <p className='comment-card-footer-link loggedColor' title='Modifier ce commentaire' onClick={(e) => modifyDisplayManager(e)}>🖉 Modifier</p>
+                            <p className='comment-card-footer-link loggedColor' title='Modifier ce commentaire' onClick={(e) => modifyDisplayManager(e)}><PencilImage pencilSize='12px' /> Modifier</p>
                         ) : (
                             null
                         )}

@@ -137,6 +137,8 @@ $background-color_1: black;
 			justify-content: flex-end;
 			align-items: center;
 			.comment-card-footer-link {
+				overflow: hidden;
+				display: flex;
 				text-decoration: none;
 				margin: 0;
 				padding: 0;
