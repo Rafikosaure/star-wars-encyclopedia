@@ -13,6 +13,7 @@ import Topic from './pages/Topic/Topic'
 import Account from './pages/Account/Account';
 import Admin from './pages/Admin/Admin';
 import Legal from './pages/Legal/Legal';
+import Laboratory from './pages/Laboratory/Laboratory';
 
 
 export default function App() {
@@ -32,6 +33,7 @@ export default function App() {
               <Route path='/admin' element={<Admin />} />
               <Route path='/topic/:topicId/page/:page' element={<Topic />} />
               <Route path='/legal' element={<Legal />} />
+              <Route path='/laboratory' element={<Laboratory />} />
               <Route path='*' element={<Error404 />} />
             </Routes>
           <Footer />

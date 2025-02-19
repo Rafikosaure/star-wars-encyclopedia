@@ -94,16 +94,16 @@ export default function Category() {
               <img className='card-list-spinner spinner-1' style={{display: `${spinnerDisplay}`}} src={Spinner} alt="Premier spinner de chargement" />
               <img className='card-list-spinner spinner-2' style={{display: `${spinnerDisplay}`}} src={Spinner} alt="Second spinner de chargement" />
               <img className='card-list-spinner spinner-3' style={{display: `${spinnerDisplay}`}} src={Spinner} alt="Troisième spinner de chargement" />
-              {articlesArray.length === 0 ?
-                (items.map((item) => 
+              {articlesArray.length !== 1 ? (
+                items.map((item) => 
                   <Card key={item._id} item={item} categoryId={categoryId} />
-                )
-              ) : (
-                articlesArray.map((article) => (
+                
+              )) : (
+                articlesArray.map(article => 
                   <Card key={article._id} item={article} categoryId={categoryId} />
-                ))
-              )
-              }
+                )
+              )}
+              
             </div>
             <div className='arrow-section'>
               <div className='prev-arrow-section' 
