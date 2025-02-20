@@ -6,7 +6,6 @@ const ENV = require('../config/config.js')
 // Traduction des textes du wiki
 exports.translateText = async (req, res) => {
     try {
-        console.log("Requête :", req.body)
         const authKey = ENV.API_KEY;
         const translator = new deepl.Translator(authKey)
 
@@ -20,18 +19,14 @@ exports.translateText = async (req, res) => {
 
             // Traduire les noms de chaque élément du tableau
             const newName = await translator.translateText(element.name, sourceLang, targetLang)
-            let newObject = {
-                id: element.id,
-                image: element.image,
-                name: newName.text
-            }
+            let newObject = element
+            newObject.name = newName.text
 
             // Si l'élément comporte une description, la traduire également
             if (element.description) {
                 const newDescription = await translator.translateText(element.description, sourceLang, targetLang)
                 newObject.description = newDescription.text
             }
-            console.log('Objet traduit :', newObject)
             return newObject
         }))
         

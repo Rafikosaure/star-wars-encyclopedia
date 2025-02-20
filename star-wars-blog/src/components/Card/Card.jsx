@@ -55,7 +55,10 @@ export default function Card({ item, categoryId }) {
         <div className='card card-home'>
           <Link className='card-link' to={`/article/${paramsIds}`}>
             <div className='card-image'>
-              <img src={item.image} alt={`Carte de l'article "${item.name}"`} />
+              {item && (
+                <img src={item.image} alt={`Carte de l'article "${item.name}"`} />
+              )}
+              
             </div>
             <div className='card-name-div'>
               {translatedName && (

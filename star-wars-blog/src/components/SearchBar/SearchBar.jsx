@@ -1,6 +1,6 @@
 import './SearchBar.scss'
 import data from '../../data/localApiCategories.json'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { saveArticlesArray } from '../../redux/slices/articlesArraySlice'
@@ -11,6 +11,7 @@ export default function SearchBar({ category }) {
 
   const [search, setSearch] = useState("")
   const [translatedName, setTranslatedName] = useState("")
+  const [translatedArray, setTranslatedArray] = useState([])
   const [articlesList, setArticlesList] = useState([])
   const [filteredArticles, setFilteredArticles] = useState([])
   const dispatch = useDispatch()
@@ -65,6 +66,29 @@ export default function SearchBar({ category }) {
     }
   }, [search])
 
+  
+  // Fonction de traduction des noms des articles pour l'auto-complétion
+  const translateArticlesNames = useCallback((articles) => {
+    const object = {
+      sourceLang: "fr",
+      targetLang: "EN-US",
+      array: articles,
+    };
+
+    fetch(`${config.serverEndpoint}/translate`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(object),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setTranslatedArray(data.translatedArray);
+      })
+      .catch((error) => console.log(error));
+  }, [setTranslatedArray]);
+
 
   // Récupération des articles pour l'autocomplétion
   useEffect(() => {
@@ -72,17 +96,24 @@ export default function SearchBar({ category }) {
       const filteredArticles = articlesList.filter((article) =>
         article.name.toLowerCase().includes(translatedName.toLowerCase())
       );
-      setFilteredArticles(filteredArticles);
+      setFilteredArticles(filteredArticles.slice(0, 9));
+
+      // Traduction des noms des articles pour l'auto-complétion
+      translateArticlesNames(filteredArticles);
+
     } else {
       setFilteredArticles([])
     }    
-  }, [articlesList, translatedName])
+  }, [articlesList, translatedName, translateArticlesNames])
 
 
   // Enregistrement des articles filtrés dans le store Redux
   useEffect(() => {
     if (filteredArticles.length > 0 && search !== "") {
       dispatch(saveArticlesArray(filteredArticles))
+    } else if(filteredArticles.length > 0 && search === "") {
+      setFilteredArticles([])
+      dispatch(saveArticlesArray([]))
     } else {
       dispatch(saveArticlesArray([]))
     }
@@ -109,6 +140,12 @@ export default function SearchBar({ category }) {
     <div className='search-bar'>
       <form className='search-form' onSubmit={(e) => onFormSubmit(e)}>
         <input type="text" name="search-input" id="search-input" className='search-input' placeholder='Débutez une recherche...' onChange={e => setSearch(e.target.value)} onFocus={(e) => e.target.placeholder = ""} onBlur={(e) => e.target.placeholder = "Débutez une recherche..."} />
+        <div className='search-results'>
+          {translatedArray && (
+            translatedArray.map((article) => (
+              <span id={article.id} className='search-results-name'>Yo les mecs !</span>
+            )))}
+        </div>
       </form>
     </div>
   )
