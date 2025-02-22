@@ -65,12 +65,8 @@ export default function Account() {
       })
       .then(response => response.json())
       .then(data => {
-        // if (data.badAccessMessage) {
-          
-        // } else {
           setAllUsers(data.filter((user) => user.isAdmin !== true))
           dispatch(reloadUsersArrayFunction(true))
-        // }
       })
       .catch(error => {
         console.log(error)
@@ -173,16 +169,12 @@ export default function Account() {
     })
     .then(response => response.json())
     .then(data => {
-      // if (data.badAccessMessage) {
-        
-      // } else {
-        dispatch(updateIsLoggedUser(false))
-        dispatch(updateUserLog({}))
-        dispatch(updateLoadedUser(false))
-        dispatch(reloadUsersArrayFunction())
-        toast('Compte utilisateur supprimé !')
-        navigate('/auth')
-      // }
+      dispatch(updateIsLoggedUser(false))
+      dispatch(updateUserLog({}))
+      dispatch(updateLoadedUser(false))
+      dispatch(reloadUsersArrayFunction())
+      toast('Compte utilisateur supprimé !')
+      navigate('/auth')
     })
     .catch(error => {
       console.log(error)
