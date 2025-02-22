@@ -18,6 +18,7 @@ export default function LoginForm() {
     const title = 'Connexion'
 
 
+    // Connexion de l'utilisateur
     const onSubmit = (data) => {
         fetch(`${config.serverEndpoint}/auth/login`, {
             method: "POST",
