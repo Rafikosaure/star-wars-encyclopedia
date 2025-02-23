@@ -94,14 +94,14 @@ export default function RegisterForm() {
             <p className='unvalid-password-text' style={{display: unvalidPassword}}>Votre mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caracère spécial.</p>
             <div className='div-register-input-file-wrapper'>
                 <div id='div-register-input-file'>
-                    <div className='div-imput-file-content'>Image de profil
+                    <div className='div-imput-file-content'>Avatar (facultatif)
                         <img src={isValid} alt="Upload is valid" className={`input-valid-img ${fileIsLoad}`} />
                     </div>
                     <input className='register-input-file' type="file" id="file" name="picture" accept=".png, .jpg, .jpeg" {...register("picture")} 
                     onChange={(e) => setInputPictureValue(e.target.value)}
                     />
                 </div>
-                <div className={`register-input-file-undo-upload ${fileIsLoad}`} title="Décharger l'image de profil" onClick={(e) => resetProfilePicture(e)} />
+                <div className={`register-input-file-undo-upload ${fileIsLoad}`} title="Décharger l'avatar de profil" onClick={(e) => resetProfilePicture(e)} />
             </div>
             <button type='submit'>S'inscrire</button>
         </form>
