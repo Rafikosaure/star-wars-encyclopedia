@@ -32,7 +32,7 @@ Si vous pensez vraiment que Han n'a pas tiré le premier, créez une discussion 
 
 En tous les cas, tant que vous êtes authentique et désireux de communiquer votre passion pour Star Wars, je vous souhaite la bienvenue au forum de Star Wars Encyclopedia !
 
-L’application est accessible ici : [www.star-wars-encyclopedia.com](https://www.star-wars-encyclopedia.com)
+Portail de l'application : [www.star-wars-encyclopedia.com](https://www.star-wars-encyclopedia.com)
 
 
 3. Stack technique de base du projet :
