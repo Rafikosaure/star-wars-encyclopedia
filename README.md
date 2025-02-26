@@ -31,6 +31,7 @@ On peut s'y rendre pour s'y créer un compte personnalisé, puis participer aux 
 Si vous pensez vraiment que Han n'a pas tiré le premier, créez une discussion et exposez vos arguments ! La communauté sera ravie de débattre et de partager son regard sur ce sujet. Bon, même si pour la plupart d'entre nous cette question est tranchée...
 
 En tous les cas, tant que vous êtes authentique et désireux de communiquer votre passion pour Star Wars, je vous souhaite la bienvenue au forum de Star Wars Encyclopedia !
+
 L’application est accessible ici : [www.star-wars-encyclopedia.com](https://www.star-wars-encyclopedia.com)
 
 
