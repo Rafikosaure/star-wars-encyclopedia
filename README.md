@@ -9,6 +9,7 @@ Ce Wiki avec forum de discussion est un projet visant à promouvoir la culture l
 Je me présente, je suis Rafik Ben Sadi, développeur fullstack basé sur la région parisienne. J'ai eu le plaisir de concevoir ce projet dans le cadre de ma formation en 2024 de concepteur-développeur d'applications, et ce pour l'association fictive loi 1901:
 "Amicale de la 501ème Légion" – 27, place de la Madeleine 75008 Paris, représenté par Jean-Michel Plagueis, son représentant légal (fictif aussi...).
 
+L’application est accessible ici : [www.star-wars-encyclopedia.com](https://www.star-wars-encyclopedia.com)
 
 
 1. Le site est dans un premier temps un wiki :
