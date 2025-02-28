@@ -27,19 +27,18 @@ export default function UserData({ user }) {
         })
         .then(response => response.json())
         .then(data => {
-            if (data.badAccessMessage) {
-                toast("Vous n'êtes pas authentifié !")
-                navigate('/')
-            } else {
-                dispatch(reloadUsersArrayFunction(false))
-                toast('Compte utilisateur supprimé !')
-            }
+            sessionStorage.removeItem("connect");
+            dispatch(reloadUsersArrayFunction(false))
+            toast('Compte utilisateur supprimé !')
         })
         .catch(error => {
             console.log(error)
+            sessionStorage.removeItem("connect");
             toast("Echec de la suppression !")
+            navigate('/')
         })
     }
+
 
     // Apparition / disparition du formulaire de gestion
     const openOrCloseModifyUserForm = (e) => {

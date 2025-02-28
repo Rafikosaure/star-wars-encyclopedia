@@ -23,10 +23,10 @@ export default function Header() {
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const [loggedUser, setLoggedUser] = useState(undefined)
+  const [loggedUser, setLoggedUser] = useState()
   const isLogged = useSelector(selectIsLoggedState)
   const isLoaded = useSelector(selectLoadedState)
-  
+
 
   useEffect(() => {
     // Vérifier la connexion d'un utilisateur

@@ -41,13 +41,9 @@ export default function Admin() {
       })
       .then(response => response.json())
       .then(data => {
-        // if (data.badAccessMessage) {
-          dispatch(reloadUsersArrayFunction(true))
-          
-        // } else {
-          setAllUsers(data.filter((user) => user.isAdmin !== true))
-          dispatch(reloadUsersArrayFunction(true))
-        // }
+        dispatch(reloadUsersArrayFunction(true))
+        setAllUsers(data.filter((user) => user.isAdmin !== true))
+        dispatch(reloadUsersArrayFunction(true))
       })
       .catch(error => {
         console.log(error)

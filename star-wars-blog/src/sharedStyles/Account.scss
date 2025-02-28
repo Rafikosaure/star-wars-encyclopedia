@@ -152,12 +152,11 @@ $background-color_6: transparent;
 	input {
 		border: none;
 		border-radius: 20px;
-		width: 94%;
 		height: 31px;
 		margin: 0;
-		font-size: 18px;
-		padding-left: 15px;
-		padding-right: 15px;
+		font-size: 18px;		
+		margin-left: auto;
+		margin-right: auto;
 		background-color: $background-color_5;
 		&:focus {
 			outline: 1px solid gainsboro;
@@ -190,11 +189,16 @@ input {
 		}
 	}
 }
+.account-input-text-data {
+	padding-left: 15px;
+	padding-right: 15px;
+	width: calc(100% - 30px);
+}
 .account-form-delete-section {
 	input {
 		border: none;
 		border-radius: 20px;
-		width: 94%;
+		width: calc(100% - 30px);
 		height: 31px;
 		margin: 0;
 		font-size: 18px;
@@ -211,13 +215,31 @@ input {
 	gap: 40px;
 	align-items: center;
 }
-
+.div-input-file-wrapper {
+	width: 100%;
+	display: flex;
+	justify-content: space-around;
+	.input-file-undo-upload {
+		width: 33px;
+		height: 33px;
+		margin-left: 6px;
+		background: url('../assets/images/undo.svg') no-repeat center center;
+		background-size: cover;
+		cursor: pointer;
+		transition: transform 0.5s ease;
+	}
+	.input-file-undo-upload:hover {
+		transform: rotate(-360deg);
+	}
+}
 input[type='file'] {
     display: block;
     width: 100%;
     height: 100%;
     border-radius: 20px;
     cursor: pointer;
+	margin-left: auto;
+	margin-right: auto;
 }
 .div-input-file-image {
 	display: flex;
@@ -442,6 +464,11 @@ input[type='file'] {
 	}
 	.link-to-admin {
 		font-size: 18px;
+	}
+	.input-file-undo-upload {
+		width: 25px !important;
+		height: 25px !important;
+		margin-left: 4px !important;
 	}
 }
 /* Ici : media queries pour la première partie smartphone */

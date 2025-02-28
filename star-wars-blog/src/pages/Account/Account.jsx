@@ -30,9 +30,10 @@ export default function Account() {
   const [allUsers, setAllUsers] = useState()
   const isLogged = useSelector(selectIsLoggedState)
   const [fileIsLoad, updateFileIsLoad] = useState('display-none')
+  const [inputPictureValue, setInputPictureValue] = useState()
   const [allowDeletion, setAllowDeletion] = useState(false)
   const [unvalidPassword, setUnvalidPassword] = useState('none')
-  const { register, handleSubmit, reset } = useForm()
+  const { register, handleSubmit, setValue, reset } = useForm()
   const reloadUsers = useSelector(selectReloadUsersState)
   const userData = useSelector(selectLoggedUser)
   const [followedTopics, setFollowedTopics] = useState()
@@ -47,14 +48,14 @@ export default function Account() {
   }, [isLogged, navigate])
 
 
-  // Affichage de l'icone "image chargée"
-  const isValidIcon = (value) => {
-    if (value.length > 0) {
-      updateFileIsLoad('display-flex')
+  // Gestion de l'affichage (picture chargée ou non)
+  useEffect(() => {
+    if (inputPictureValue) {
+        updateFileIsLoad('display-flex')
     } else {
-      updateFileIsLoad('display-none')
+        updateFileIsLoad('display-none')
     }
-  }
+  }, [inputPictureValue, updateFileIsLoad])
 
 
   // Récupération des utilisateurs du site
@@ -65,12 +66,8 @@ export default function Account() {
       })
       .then(response => response.json())
       .then(data => {
-        // if (data.badAccessMessage) {
-          
-        // } else {
           setAllUsers(data.filter((user) => user.isAdmin !== true))
           dispatch(reloadUsersArrayFunction(true))
-        // }
       })
       .catch(error => {
         console.log(error)
@@ -81,10 +78,10 @@ export default function Account() {
   }, [reloadUsers, allUsers, dispatch, navigate])
 
 
-
+  // Récupérer les discussions suivies par l'utilisateur
   useEffect(() => {
-    // Récupérer les discussions suivies par l'utilisateur
-    if (isLogged) {
+    const connect = sessionStorage.getItem("connect");
+    if (userData && isLogged && connect) {
       fetch(`${config.serverEndpoint}/followTopic/getAllFollowedTopics/${userData._id}`)
       .then(response => response.json())
       .then(data => {
@@ -95,6 +92,16 @@ export default function Account() {
       })
     }
   }, [isLogged, userData, reloadFollowedTopics])
+
+
+  // Décharger l'input file
+  function resetProfilePicture(e) {
+    e.preventDefault()
+    if (inputPictureValue) {
+        setValue('picture', [])
+        setInputPictureValue()
+    }
+  }
 
 
   // Mot de passe fort
@@ -136,16 +143,13 @@ export default function Account() {
     })
     .then(response => response.json())
     .then(data => {
-      // if (!data.badAccessMessage) {
-        dispatch(updateUserLog(data))
-        reset()
-        setUnvalidPassword('none')
-        updateFileIsLoad("display-none")
-        dispatch(updateLoadedUser(false))
-        dispatch(reloadUsersArrayFunction())
-        toast("Mise à jour effectuée !")
-      // } else {
-      // }
+      dispatch(updateUserLog(data))
+      reset()
+      setUnvalidPassword('none')
+      updateFileIsLoad("display-none")
+      dispatch(updateLoadedUser(false))
+      dispatch(reloadUsersArrayFunction())
+      toast("Mise à jour effectuée !")
     })
     .catch(error => {
       console.log(error)
@@ -173,19 +177,17 @@ export default function Account() {
     })
     .then(response => response.json())
     .then(data => {
-      // if (data.badAccessMessage) {
-        
-      // } else {
-        dispatch(updateIsLoggedUser(false))
-        dispatch(updateUserLog({}))
-        dispatch(updateLoadedUser(false))
-        dispatch(reloadUsersArrayFunction())
-        toast('Compte utilisateur supprimé !')
-        navigate('/auth')
-      // }
+      sessionStorage.removeItem("connect");
+      dispatch(updateIsLoggedUser(false))
+      dispatch(updateUserLog({}))
+      dispatch(updateLoadedUser(false))
+      dispatch(reloadUsersArrayFunction())
+      toast('Compte utilisateur supprimé !')
+      navigate('/auth')
     })
     .catch(error => {
       console.log(error)
+      sessionStorage.removeItem("connect");
       navigate('/auth')
     })
   }
@@ -231,16 +233,21 @@ export default function Account() {
                 <h2>Mettre à jour vos infos ?</h2>
                 <div>
                   <form className='account-form-update' autoComplete='off' onSubmit={handleSubmit(modifyData)} >
-                    <input type="text" name='name' placeholder='Modifiez votre nom...' {...register("name", {required: false})} onFocus={(e) => e.target.placeholder = ""} onBlur={(e) => e.target.placeholder = 'Modifiez votre nom...'} />
-                    <input type="email" name='email' placeholder='Modifiez votre email...' {...register("email", {required: false})} onFocus={(e) => e.target.placeholder = ""} onBlur={(e) => e.target.placeholder = 'Modifiez votre email...'} />
-                    <input type="password" name='password' placeholder='Modifiez votre mot de passe...' {...register("password", {required: false})} onFocus={(e) => e.target.placeholder = ""} onBlur={(e) => e.target.placeholder = 'Modifiez votre mot de passe...'} />
+                    <input type="text" className='account-input-text-data' name='name' placeholder='Modifiez votre nom...' {...register("name", {required: false})} onFocus={(e) => e.target.placeholder = ""} onBlur={(e) => e.target.placeholder = 'Modifiez votre nom...'} />
+                    <input type="email" className='account-input-text-data' name='email' placeholder='Modifiez votre email...' {...register("email", {required: false})} onFocus={(e) => e.target.placeholder = ""} onBlur={(e) => e.target.placeholder = 'Modifiez votre email...'} />
+                    <input type="password" className='account-input-text-data' name='password' placeholder='Modifiez votre mot de passe...' {...register("password", {required: false})} onFocus={(e) => e.target.placeholder = ""} onBlur={(e) => e.target.placeholder = 'Modifiez votre mot de passe...'} />
                     <p className='unvalid-password-text' style={{display: unvalidPassword}}>Votre mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caracère spécial.</p>
-                    <div id='div-input-file'>
-                      <div className='div-input-file-image'>Image de profil
-                        <img src={PictureIsValid} alt="Upload is valid" className={`input-valid-img ${fileIsLoad}`} />
+
+                    <div className='div-input-file-wrapper'>
+                      <div id='div-input-file'>
+                        <div className='div-input-file-image'>Avatar (facultatif)
+                          <img src={PictureIsValid} alt="Upload is valid" className={`input-valid-img ${fileIsLoad}`} />
+                        </div>
+                        <input className='account-file-input' type="file" id="file" name="picture" accept=".png, .jpg, .jpeg" {...register("picture")} onChange={(e) => setInputPictureValue(e.target.value)} />
                       </div>
-                      <input className='account-file-input' type="file" id="file" name="picture" accept=".png, .jpg, .jpeg" {...register("picture")} onChange={(e) => isValidIcon(e.target.value)} />
+                      <div className={`input-file-undo-upload ${fileIsLoad}`} title="Décharger l'avatar de profil" onClick={(e) => resetProfilePicture(e)} />
                     </div>
+
                     <button className='account-submit-button' type='submit'>Mettre à jour</button>
                   </form>
                 </div>
@@ -252,7 +259,7 @@ export default function Account() {
                   <h2 className='account-profile-title'>Suppression du compte</h2>
                   <div className='account-delete-section'>
                     <form className='account-form-delete-section' onSubmit={(e) => e.preventDefault()}>
-                      <input type="text" onChange={(e) => validateEmail(e.target.value)} placeholder='Entrez votre email...' onFocus={(e) => e.target.placeholder = ""} onBlur={(e) => e.target.placeholder = 'Entrez votre email...'} />
+                      <input className='account-form-delete-input' type="text" onChange={(e) => validateEmail(e.target.value)} placeholder='Entrez votre email...' onFocus={(e) => e.target.placeholder = ""} onBlur={(e) => e.target.placeholder = 'Entrez votre email...'} />
                     </form>
                     {allowDeletion ? (
                       <button className='delete-user' onClick={(e) => deleteCurrentUser(e)}>Supprimer mon compte</button>
