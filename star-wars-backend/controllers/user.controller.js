@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt')
 const User = require('../models/user.model.js')
 const IsMentionned = require('../models/isMentionned.model.js')
+// const FollowTopic = require('../models/followTopic.model.js')
 const sharp = require('sharp')
 const fs = require('fs')
 require('dotenv').config()
@@ -121,6 +122,14 @@ exports.deleteById = async (req, res) => {
             expires: new Date(0)
         })
 
+        // Suppression des abonnements (discussions) de l'utilisateur
+        // const result = deleteUserFromFollowedTopics(id)
+        // if (!result) {
+        //     console.log("An error occurred during unsubscribing of followed topics!")
+        // } else {
+        //     console.log("Unsubscribing is successful!")
+        // }
+
         // Suppression de l'option "isMentionned"
         await IsMentionned.findOneAndDelete({ userId: id })
 
@@ -169,6 +178,14 @@ exports.authDeleteById = async (req, res) => {
         });
         }
 
+        // Suppression des abonnements (discussions) de l'utilisateur
+        // const result = deleteUserFromFollowedTopics(id)
+        // if (!result) {
+        //     console.log("An error occurred during unsubscribing of followed topics!")
+        // } else {
+        //     console.log("Unsubscribing is successful!")
+        // }
+
         // Récupération de l'url de l'image de profil de l'utilisateur
         const picture = user.picture
 
@@ -196,8 +213,21 @@ exports.authDeleteById = async (req, res) => {
 // Récupérer tous les utilisateurs du site
 exports.getAllUsers = (req, res) => {
     User.find()
-        .then((users) => res.status(200).json(users))
-        .catch((error) => res.status(500).json({
-            message: "Users not found"
-        }))
+    .then((users) => res.status(200).json(users))
+    .catch((error) => res.status(500).json({
+        message: "Users not found"
+    }))
 }
+
+// Désabonner un utilisateur de toutes ses discussions suivies
+// exports.deleteUserFromFollowedTopics = async (userId) => {
+//     const followedTopicsWithoutUsers = await FollowTopic.updateMany(
+//         { users: userId }, // Critère de recherche (chercher les groupes contenant cet userId)
+//         { $pull: { users: userId } }, // Retirer cet userId du tableau
+//         { new: true }
+//     )
+//     if (followedTopicsWithoutUsers) {
+//         return true
+//     }
+//     return false
+// }
