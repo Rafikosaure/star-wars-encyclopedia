@@ -80,7 +80,8 @@ export default function Account() {
 
   // Récupérer les discussions suivies par l'utilisateur
   useEffect(() => {
-    if (userData && isLogged) {
+    const connect = sessionStorage.getItem("connect");
+    if (userData && isLogged && connect) {
       fetch(`${config.serverEndpoint}/followTopic/getAllFollowedTopics/${userData._id}`)
       .then(response => response.json())
       .then(data => {
