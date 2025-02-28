@@ -15,7 +15,7 @@
 .other-user-input {
     border: none;
     border-radius: 20px;
-    width: 94%;
+    width: calc(100% - 30px);
     height: 31px;
     margin: 0;
     font-size: 18px;
@@ -23,9 +23,25 @@
     padding-right: 15px;
     background-color: white;
 }
-
 .other-user-input:focus {
     outline: 1px solid gainsboro;
+}
+.div-input-file-wrapper {
+    width: 100%;
+	display: flex;
+	justify-content: space-around;
+	.input-file-undo-upload {
+		width: 33px;
+		height: 33px;
+		margin-left: 6px;
+		background: url('../../assets/images/undo.svg') no-repeat center center;
+		background-size: cover;
+		cursor: pointer;
+		transition: transform 0.5s ease;
+	}
+	.input-file-undo-upload:hover {
+		transform: rotate(-360deg);
+	}
 }
 input[type='file'] {
     display: block;
@@ -78,6 +94,12 @@ input[type='file'] {
 .other-user-submit-button:active, .other-user-submit-button:hover {
     outline: 4px solid gainsboro;
     border-radius: 20px;
+}
+.display-none {
+	display: none;
+}
+.display-flex {
+	display: flex;
 }
 /* Ici : media queries pour la troisième partie tablette */
 @media screen and (max-width: 767px) {

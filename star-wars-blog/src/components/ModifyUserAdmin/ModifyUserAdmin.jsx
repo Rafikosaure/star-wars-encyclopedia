@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form'
 import PictureIsValid from '../../assets/images/is_valid.webp'
 import { toast } from 'sonner';
@@ -14,20 +14,32 @@ import config from '../../config';
 export default function ModifyUserAdmin({ user }) {
 
     const [unvalidPassword, setUnvalidPassword] = useState('none')
-    const [fileIsLoad, setFileIsLoad] = useState('none')
-    const { register, handleSubmit, reset } = useForm()
+    const [fileIsLoad, setFileIsLoad] = useState('display-none')
+    const [inputPictureValue, setInputPictureValue] = useState()
+    const { register, handleSubmit, setValue, reset } = useForm()
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
 
-    // Affichage de l'icone "image chargée" 
-    const isValidIcon = (value) => {
-        if (value.length > 0) {
-            setFileIsLoad('flex')
+    // Gestion de l'affichage (picture chargée ou non)
+    useEffect(() => {
+        if (inputPictureValue) {
+            setFileIsLoad('display-flex')
         } else {
-            setFileIsLoad('none')
+            setFileIsLoad('display-none')
+        }
+    }, [inputPictureValue, fileIsLoad])
+
+
+    // Décharger l'input file
+    function resetProfilePicture(e) {
+        e.preventDefault()
+        if (inputPictureValue) {
+            setValue('picture', [])
+            setInputPictureValue()
         }
     }
+
 
     // Mot de passe fort
     function validatePassword(password) {
@@ -68,18 +80,15 @@ export default function ModifyUserAdmin({ user }) {
         })
         .then(response => response.json())
         .then(data => {
-            if (!data.badAccessMessage) {
-                reset()
-                setUnvalidPassword('none')
-                setFileIsLoad("none")
-                dispatch(reloadUsersArrayFunction())
-                toast("Mise à jour effectuée !")
-            } else {
-                navigate('/')
-            }
+            reset()
+            setUnvalidPassword('none')
+            setInputPictureValue()
+            dispatch(reloadUsersArrayFunction())
+            toast("Mise à jour effectuée !")
         })
         .catch(error => {
             console.error(error)
+            navigate('/')
         });
     }
 
@@ -91,12 +100,15 @@ export default function ModifyUserAdmin({ user }) {
                 <input className='other-user-input' type="email" name='email' placeholder={user.email} {...register("email", {required: false})} onFocus={(e) => e.target.placeholder = ""} onBlur={(e) => e.target.placeholder = `${user.email}`} />
                 <input className='other-user-input' type="password" name='password' placeholder='[mot de passe]' {...register("password", {required: false})} onFocus={(e) => e.target.placeholder = ""} onBlur={(e) => e.target.placeholder = '[mot de passe]'} />
                 <p className='unvalid-password-text' style={{display: unvalidPassword}}>Votre mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caracère spécial.</p>
-                <div id='div-input-file'>
-                    <div className='div-imput-file-content'>
-                        Image de profil
-                        <img src={PictureIsValid} alt="Upload is valid" className={`input-other-user-valid-img`} style={{display: `${fileIsLoad}`}} />
+                <div className='div-input-file-wrapper'>
+                    <div id='div-input-file'>
+                        <div className='div-imput-file-content'>
+                            Avatar (facultatif)
+                            <img src={PictureIsValid} alt="Upload is valid" className={`input-other-user-valid-img ${fileIsLoad}`} />
+                        </div>
+                        <input type="file" id="file" name="picture" accept=".png, .jpg, .jpeg" {...register("picture")} onChange={(e) => setInputPictureValue(e.target.value)} />
                     </div>
-                    <input type="file" id="file" name="picture" accept=".png, .jpg, .jpeg" {...register("picture")} onChange={(e) => isValidIcon(e.target.value)} />
+                    <div className={`input-file-undo-upload ${fileIsLoad}`} title="Décharger l'avatar de profil" onClick={(e) => resetProfilePicture(e)} />
                 </div>
                 <button className='other-user-submit-button' type='submit'>Mettre à jour</button>
             </form>
