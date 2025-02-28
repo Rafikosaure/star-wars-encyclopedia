@@ -26,7 +26,7 @@ export default function RegisterForm() {
         } else {
             updateFileIsLoad('display-none')
         }
-    }, [inputPictureValue, updateFileIsLoad])
+    }, [inputPictureValue, fileIsLoad])
 
 
     // Mot de passe fort obligatoire
@@ -40,7 +40,7 @@ export default function RegisterForm() {
     function resetProfilePicture(e) {
         e.preventDefault()
         if (inputPictureValue) {
-            setValue('picture', undefined)
+            setValue('picture', [])
             setInputPictureValue()
         }
     }
