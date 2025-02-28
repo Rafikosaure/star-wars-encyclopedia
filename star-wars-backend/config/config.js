@@ -16,6 +16,7 @@ const ENV = {
     EMAIL_PORT: process.env.EMAIL_PORT,
     SERVER_PORT: process.env.SERVER_PORT,
     CLIENT_PORT: process.env.CLIENT_PORT,
+    HOST_PATH_TO_APP: process.env.HOST_PATH_TO_APP,
     DEPLOYED_EXPRESS_SERVER_ENDPOINT: process.env.DEPLOYED_EXPRESS_SERVER_ENDPOINT
 };
 
