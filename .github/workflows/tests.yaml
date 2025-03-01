@@ -1,13 +1,10 @@
 name: Backend Tests
 
 on:
-  # Déclenche les tests sur chaque push vers la branche 'main'
   push:
     branches:
       - main
-  # Déclenche les tests lors de l'ouverture, mise à jour, ou réouverture d'une pull request
   pull_request:
-    types: [opened, synchronize, reopened]  # Ne pas tester lors de la fermeture d'une PR, mais lors de son ouverture/synchronisation
 
 jobs:
   test-backend:
@@ -44,3 +41,4 @@ jobs:
           else
             echo "Les tests ont échoué, le déploiement ne sera pas effectué."
             exit 1
+          fi
