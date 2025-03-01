@@ -39,13 +39,20 @@ jobs:
       - name: Set up SSH
         uses: webfactory/ssh-agent@v0.5.3
         with:
-          ssh-private-key: ${{ secrets.DEPLOY_KEY }}
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Test SSH Connection
+        run: |
+          echo "Testing SSH connection..."
+          ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY }} wsxpfyqe@185.22.110.113 "echo 'SSH connection successful!'"
 
       - name: Deploy via SSH
         run: |
-          ssh -o StrictHostKeyChecking=no user@your-server.com << 'EOF'
-            cd /home/wsxpfyqe/star-wars-api
-            git pull origin main
-            npm install
-            node app.js
-          EOF
+          echo "Deploying to the server..."
+          ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY }} wsxpfyqe@185.22.110.113 "
+            cd /home/wsxpfyqe/star-wars-api && \
+            git pull origin main && \
+            npm install && \
+            node app.js"
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
