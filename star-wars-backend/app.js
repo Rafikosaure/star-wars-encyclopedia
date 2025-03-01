@@ -18,16 +18,19 @@ mongoose
     .then(() => console.log('Connexion à MongoDB réussie !'))
     .catch(() => console.log('Connexion à MongoDB échouée !'))
 
+
 // Gestion des erreurs CORS
 app.use(cors({
-        origin: [ENV.CORS_ORIGIN, ENV.CORS_WORKFLOW_ACCESS],
+        origin: ENV.CORS_ORIGIN,
         credentials: true,
         methods: ['GET', 'PUT', 'POST', 'DELETE'],
         allowedHeaders: ['Content-Type', 'Authorization']
 }))
 
+
 // Utilisation du cookie-parser
 app.use(cookieParser())
+
 
 // Application d'un rate-limit
 app.use(
@@ -38,6 +41,7 @@ app.use(
         headers: true,
     })
 )
+
 
 // Configuration de Helmet
 app.use(
@@ -59,7 +63,6 @@ const followTopicRoutes = require('./routes/followTopic.routes')
 const likeRoutes = require('./routes/like.routes')
 const emailRoutes = require('./routes/email.routes')
 const isMentionnedRoutes = require('./routes/isMentionned.routes.js')
-const webhookRoutes = require('./routes/webhook.routes.js')
 
 
 // Middlewares de nos routes
@@ -74,7 +77,6 @@ app.use('/followTopic', followTopicRoutes)
 app.use('/like', likeRoutes)
 app.use('/email', emailRoutes)
 app.use('/isMentionned', isMentionnedRoutes)
-app.use('/webhook', webhookRoutes)
 app.use('/images', express.static(path.join(__dirname, 'images')))
 
 

@@ -28,17 +28,3 @@ jobs:
       run: |
         cd star-wars-backend
         npm test
-
-  deploy:
-    runs-on: ubuntu-latest
-    needs: test-backend  # Cette étape dépend de la réussite du job 'test-backend'
-    steps:
-      - name: Trigger webhook for deployment
-        run: |
-          if [ $? -eq 0 ]; then
-            echo "Tests réussis, déclenchement du webhook de déploiement..."
-            curl -X POST https://star-wars-encyclopedia-api.com/webhook
-          else
-            echo "Les tests ont échoué, le déploiement ne sera pas effectué."
-            exit 1
-          fi
