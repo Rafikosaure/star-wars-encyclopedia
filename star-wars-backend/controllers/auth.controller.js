@@ -5,7 +5,7 @@ const IsMentionned = require('../models/isMentionned.model.js')
 const sharp = require('sharp')
 const ENV = require('../config/config.js')
 
-
+// TEST
 
 // Enregistre un nouvel utilisateur dans la base de données
 exports.register = (req, res) => {
