@@ -9,29 +9,50 @@ import config from '../../config'
 
 export default function SearchBar({ category }) {
 
+  const [articlesList, setArticlesList] = useState([])
   const [search, setSearch] = useState("")
   const [article, setArticle] = useState()
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
 
-  // Recherche vers l'API Star Wars Databank
+  // Récupération du tableau des articles de la catégorie concernée
   useEffect(() => {
-    if (search) {
-      fetch(`${config.starWarsAPI}/${category}/name/${search}`)
-      .then(response => response.json())
-      .then(data => {
-        setArticle(data[0])
-        dispatch(saveAnArticle(article))
-      })
-      .catch(error => {
-        console.log(error)
-      })
-    }
+    fetch(`${config.starWarsAPI}/${category}?page=1&limit=all`)
+    .then(response => response.json())
+    .then(articles => {
+      setArticlesList(articles.data)
+    })
+    .catch(error => {
+      console.log(error)
+    })
+  }, [category])
 
-  }, [category, search, dispatch, article])
-  
-  
+
+  // Recherche dans les articles récupérés depuis l'API
+  useEffect(() => {
+    if (search !== "" && articlesList.length > 0) {
+      const filteredArticles = articlesList.filter((article) =>
+
+        // On compare la recherche avec les noms d'articles récupérés, 
+        // en mettant tout en minuscules et sans les caractères spéciaux
+        article.name.toLowerCase().replace(new RegExp("[^(a-z0-9)]", "g"), '')
+        .includes(search.toLowerCase().replace(new RegExp("[^(a-z0-9)]", "g"), ''))
+      );
+      if (filteredArticles.length === 1) {
+        setArticle(filteredArticles[0])
+        dispatch(saveAnArticle(article))
+      } else {
+        setArticle()
+        dispatch(saveAnArticle())
+      }
+    } else {
+      setArticle()
+      dispatch(saveAnArticle())
+    }
+  }, [search, dispatch, article, articlesList])
+
+
   // Traductions
   const translateSearch = (text) => {
     const object = {
