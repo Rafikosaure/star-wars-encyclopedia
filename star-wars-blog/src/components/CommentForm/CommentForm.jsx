@@ -2,10 +2,10 @@ import React, { useState, useRef } from 'react'
 import './CommentForm.scss'
 import { reinitializeCommentCitation, selectCommentCitation } from '../../redux/slices/commentCitationSlice'
 import { useSelector, useDispatch } from 'react-redux'
-import config from '../../config'
 import { reloadUsersArrayFunction } from '../../redux/slices/reloadUsersArray'
 import { reloadPosts } from '../../redux/slices/postsReload'
 import { selectLoggedUser } from '../../redux/slices/loggedUserSlice'
+import { ServerServices } from '../../api/api-server'
 import mentionsManager from '../../sharedFunctions/mentionsManager'
 import subscribersManager from '../../sharedFunctions/subscribersManager'
 
@@ -30,16 +30,15 @@ export default function CommentForm({ post, usersList, topicId, currentPage }) {
 
 
     // Créer un commentaire
-    const createNewComment = (data) => {
+    const createNewComment = async (data) => {
         if (data.keyCode === 13 && data.shiftKey === false && !isMentionValidated) {
             data.preventDefault()
             if (data.target.value.length === 0) {
                 dispatch(reinitializeCommentCitation())
-                // console.log("Données non-renseignées !")
                 return
             }
-
-            // Construction du corps de la requète
+    
+            // Construction du corps de la requête
             const fetchContent = data.target.value.replace(/\s+/g, ' ').trim()
             let fetchData = {
                 post: post._id,
@@ -49,7 +48,7 @@ export default function CommentForm({ post, usersList, topicId, currentPage }) {
                 },
                 likes: []
             }
-
+    
             // Gestion des éventuelles citations
             if (commentCitationText && commentCitationAuthorId && commentCitationPostId === post._id) {
                 const fetchCitationText = commentCitationText.split("a dit :").at(-1).trim().replace(/^"|"$/g, "")
@@ -58,17 +57,11 @@ export default function CommentForm({ post, usersList, topicId, currentPage }) {
                     citationText: fetchCitationText
                 }
             }
-
-            // Envoi de la requète
-            fetch(`${config.serverEndpoint}/comment/createComment/${post._id}`, {
-                method: "POST",
-                credentials: "include",
-                headers: {"Accept": "application/json", "Content-Type": "application/json"},
-                body: JSON.stringify(fetchData)
-            })
-            .then(response => response.json())
-            .then(result => {
-
+    
+            try {
+                // Envoi de la requête pour créer le commentaire
+                const result = await ServerServices.createCommentRequest(post._id, fetchData);
+    
                 // Gestion des mentions
                 dispatch(reloadUsersArrayFunction(false))
                 mentionsManager(fetchContent, result._id, usersList, topicId, currentPage)
@@ -76,16 +69,17 @@ export default function CommentForm({ post, usersList, topicId, currentPage }) {
                 // Gestion des abonnés à la discussion
                 subscribersManager(topicId, result._id, loggedUser, "commentaire", currentPage)
                 
-                // Rafraichissement des commentaires affichés
+                // Rafraîchissement des commentaires affichés
                 dispatch(reloadPosts())
-            })
-            .catch(error => {
-                console.log(error)
-            })
+            } catch (error) {
+                console.error('Erreur lors de la création du commentaire:', error);
+            }
+    
             setText('')
             dispatch(reinitializeCommentCitation())
         }
     }
+    
 
     // Gestion de l'autocomplétion en cas de mention
     const handleChange = (e) => {
@@ -119,6 +113,7 @@ export default function CommentForm({ post, usersList, topicId, currentPage }) {
         }
     };
 
+
     // Gestion du clavier en cas de mention
     const handleKeyDown = (e) => {
         if (!showSuggestions) return;
@@ -145,6 +140,7 @@ export default function CommentForm({ post, usersList, topicId, currentPage }) {
         }
     };
 
+
     // Gestion des suggestions
     const handleSuggestionClick = (suggestion) => {
         const words = text.split(' ');
@@ -152,7 +148,6 @@ export default function CommentForm({ post, usersList, topicId, currentPage }) {
         setText(words.join(' ') + ' @' + suggestion);
         setShowSuggestions(false);
     };
-
 
 
   return (
