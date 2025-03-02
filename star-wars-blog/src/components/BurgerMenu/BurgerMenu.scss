@@ -7,10 +7,10 @@ $background-color_2: transparent;
 	display: none;
 }
 .hamburger-menu-icon {
+	background: url('../../assets/images/menu_hamburger_mobile.webp') no-repeat center center;
+	background-size: cover;
+	cursor: pointer;
 	display: none;
-	img {
-		cursor: pointer;
-	}
 }
 /* Ici : media queries pour la première partie tablette */
 @media screen and (max-width: 1580px) {
@@ -67,10 +67,6 @@ $background-color_2: transparent;
 		width: 40px;
 		height: 40px;
 		background-color: $background-color_2;
-		img {
-			width: 60px;
-			height: 100%;
-		}
 	}
 }
 /* Ici : media queries pour la partie mobile */

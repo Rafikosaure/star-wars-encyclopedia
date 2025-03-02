@@ -4,7 +4,6 @@ import { NavLink } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { reinitializeDozen } from '../../redux/slices/dozenSlice'
 import './BurgerMenu.scss'
-import Menu from '../../assets/images/menu_hamburger.webp'
 import ClickAwayListener from 'react-click-away-listener'
 
 
@@ -31,9 +30,7 @@ export default function BurgerMenu() {
 
   return (
     <>
-        <div className='hamburger-menu-icon' onClick={(e) => openOrCloseButton(e)}>
-            <img src={Menu} alt="menu hamburger" />
-        </div>
+        <div className='hamburger-menu-icon' onClick={(e) => openOrCloseButton(e)} />
         {isOpen ? (
             <ClickAwayListener onClickAway={(e) => handleClickAway(e)}>
                 <div className='burger-menu'>
