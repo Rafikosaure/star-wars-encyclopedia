@@ -2,9 +2,9 @@ import React from 'react'
 import { useState } from 'react'
 import './FollowedTopicCard.scss'
 import { toast } from 'sonner'
-import config from '../../config'
 import { useDispatch } from 'react-redux'
 import { reloadFollowedTopics } from '../../redux/slices/followedTopicsReload'
+import { ServerServices } from '../../api/api-server'
 
 
 
@@ -15,32 +15,30 @@ export default function FollowedTopicCard({ index, topicData }) {
     // Initialisation de l'état pour savoir si le curseur est sur l'élément
     const [isHovered, setIsHovered] = useState(false);
 
+
     // Fonction pour ne plus suivre la discussion
-    const notFollowAnymore = (e) => {
+    const notFollowAnymore = async (e) => {
         e.preventDefault()
-        fetch(`${config.serverEndpoint}/followTopic/chooseWhetherToFollowOrNot/${topicData._id}`, {
-            method: "PUT",
-            credentials: "include",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ toFollow: false })
-        })
-        .then(response => response.json())
-        .then(data => {
-            dispatch(reloadFollowedTopics())
-            toast("Vous ne suivez plus cette discussion !")
-        })
-        .catch(error => {
-            console.log(error)
-        })
+        try {
+            // Appel à la fonction pour mettre à jour le suivi sans récupérer les données de réponse
+            await ServerServices.updateFollowStatus(topicData._id, false);
+    
+            // Rafraîchissement des sujets suivis et affichage du toast
+            dispatch(reloadFollowedTopics());
+            toast("Vous ne suivez plus cette discussion !");
+        } catch (error) {
+            // Gestion des erreurs
+            console.log(error);
+        }
     }
+
 
     // Styles du contour du bouton
     const strokeStyle = {
         stroke: isHovered ? 'white' : 'rgb(53, 155, 155)', // Change la couleur si le curseur est dessus
         strokeWidth: 2
     }
+
 
     return (
         <div className='del-follow-topic-main'>
