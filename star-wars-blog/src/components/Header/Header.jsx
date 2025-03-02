@@ -16,7 +16,8 @@ import { useState } from 'react'
 import { toast } from 'sonner'
 import BurgerMenu from '../BurgerMenu/BurgerMenu.jsx'
 import { updateUserLog } from '../../redux/slices/loggedUserSlice.js'
-import config from '../../config.js'
+import { ServerServices } from '../../api/api-server.js'
+
 
 
 export default function Header() {
@@ -27,58 +28,51 @@ export default function Header() {
   const isLogged = useSelector(selectIsLoggedState)
   const isLoaded = useSelector(selectLoadedState)
 
-
+    
+  // Vérifier la connexion d'un utilisateur
   useEffect(() => {
-    // Vérifier la connexion d'un utilisateur
     const connect = sessionStorage.getItem("connect");
     if ((!isLoaded || isLogged) && connect) {
-      fetch(`${config.serverEndpoint}/auth/logged`, {
-        credentials: "include"
-      })
-      .then(response => response.json())
-      .then(data => {
-        setLoggedUser(data)
-        dispatch(updateUserLog(data))
-        dispatch(updateIsLoggedUser(true))
-        dispatch(updateLoadedUser(true))
-      })
-      .catch(() => {
-        setLoggedUser(undefined)
-        dispatch(updateUserLog(undefined))
-        dispatch(updateIsLoggedUser(false))
-        dispatch(updateLoadedUser(false))
-      })
+      ServerServices.checkUserConnection()
+        .then(data => {
+          setLoggedUser(data);
+          dispatch(updateUserLog(data));
+          dispatch(updateIsLoggedUser(true));
+          dispatch(updateLoadedUser(true));
+        })
+        .catch(() => {
+          setLoggedUser(undefined);
+          dispatch(updateUserLog(undefined));
+          dispatch(updateIsLoggedUser(false));
+          dispatch(updateLoadedUser(false));
+        });
     }
-    
   }, [isLogged, dispatch, isLoaded])
   
 
   // Fonction de déconnexion d'un utilisateur
-  const logout = (e) => {
-    e.preventDefault()
-    fetch(`${config.serverEndpoint}/auth/logout`, {
-      method: "POST",
-      headers: {"Accept": "application/json", "Content-Type": "application/json"},
-      credentials: "include"
-    })
-    .then(response => response.json())
-    .then(data => {
+  const logout = async (e) => {
+    e.preventDefault();
+    try {
+      await ServerServices.logoutRequest();
       sessionStorage.removeItem("connect");
-      dispatch(updateIsLoggedUser(false))
-      setLoggedUser(undefined)
-      dispatch(updateLoadedUser(false))
+      dispatch(updateIsLoggedUser(false));
+      setLoggedUser(undefined);
+      dispatch(updateLoadedUser(false));
+
       const reinitializedTopicDozenState = {
-        currentPage: 1,
-        topicId: ''
-      }
-      dispatch(setCurrentTopicDozen(reinitializedTopicDozenState))
-      toast("Vous êtes déconnecté !")
-    })
-    .catch(error => {
-      console.log(error)
-    })
-  }
+          currentPage: 1,
+          topicId: ''
+      };
+      dispatch(setCurrentTopicDozen(reinitializedTopicDozenState));
+
+      toast("Vous êtes déconnecté !");
+    } catch (error) {
+      console.error(error);
+    }
+  };
   
+
   return (
     <div className='header'>
       <div className='navbar'>

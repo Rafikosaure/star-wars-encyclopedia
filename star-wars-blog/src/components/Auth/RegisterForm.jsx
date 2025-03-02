@@ -5,8 +5,8 @@ import { useForm } from 'react-hook-form'
 import isValid from '../../assets/images/is_valid.webp'
 import { useDispatch } from 'react-redux'
 import { updateRegisterState } from '../../redux/slices/registerSlice'
-import { toast } from 'sonner';
-import config from '../../config'
+import { ServerServices } from '../../api/api-server'
+
 
 
 export default function RegisterForm() {
@@ -46,42 +46,13 @@ export default function RegisterForm() {
     }
 
 
-    // Fonction d'inscription au site
-    const onSubmit = (data) => {
-        const isValid = validatePassword(data.password)
-        if (!isValid) {
-            toast('Mot de passe trop faible !')
-            setUnvalidPassword('block')
-            return
+    const onSubmit = async (data) => {
+        try {
+            await ServerServices.registerUser(data, dispatch, updateRegisterState, setUnvalidPassword, reset, validatePassword);
+        } catch (error) {
+            console.error("Échec de l'inscription :", error);
         }
-        const formData = new FormData();
-        if (data.picture.length > 0) {
-            formData.append('picture', data.picture[0])
-            delete data.picture
-        } else {
-            delete data.picture
-        }
-        formData.append('name', data.name)
-        formData.append('email', data.email)
-        formData.append('password', data.password)
-        
-        // Appel pour l'inscription du nouvel utilisateur
-        fetch(`${config.serverEndpoint}/auth/register`, {
-            method: "POST",
-            credentials: "include",
-            body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-            setUnvalidPassword('none')
-            dispatch(updateRegisterState(false))
-            toast("Compte utilisateur créé !")
-        })
-        .catch(error => {
-            console.error(error)
-        });
-        reset()
-    }
+    };
 
   
     return (

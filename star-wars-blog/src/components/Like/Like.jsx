@@ -1,10 +1,10 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import './Like.scss'
-import config from '../../config'
 import { useSelector } from 'react-redux'
 import { selectIsLoggedState } from '../../redux/slices/isLoggedUserSlice'
 import { selectLoggedUser } from '../../redux/slices/loggedUserSlice'
+import { ServerServices } from '../../api/api-server'
 
 
 
@@ -19,33 +19,36 @@ export default function Like({ post, comment }) {
     const [commentLike, setCommentLike] = useState()
 
 
+    // Id d'un post ou d'un commentaire ?
+    const isPostOrComment = useCallback(() => {
+        let typeId;
+        if (post) {
+            typeId = post._id;
+            setCommentLike();
+        } else if (comment) {
+            typeId = comment._id;
+            setCommentLike("comment-like");
+        }
+        return typeId;
+    }, [post, comment, setCommentLike]);
+
+
     // Récupération du tableau de likes du post / du commentaire courant
     useEffect(() => {
-        if (post) {
-            setCommentLike()
-            fetch(`${config.serverEndpoint}/like/getLikes/${post._id}`)
-            .then(response => response.json())
-            .then(data => {
-                updateLikeArray(data)
-                setLikeIsHere(false)
-            })
-            .catch(error => {
-                console.log(error)
-            })
-        } else if(comment) {
-            setCommentLike('comment-like')
-            fetch(`${config.serverEndpoint}/like/getLikes/${comment._id}`)
-            .then(response => response.json())
-            .then(data => {
-                updateLikeArray(data)
-                setLikeIsHere(false)
-            })
-            .catch(error => {
-                console.log(error)
-            })
-        }
-        
-    }, [post, comment, likeIsHere])
+        const fetchLikes = async () => {
+            const typeId = isPostOrComment();
+            if (post || comment) {
+                try {
+                    const likesData = await ServerServices.getLikes(typeId);
+                    updateLikeArray(likesData);
+                    setLikeIsHere(false);
+                } catch (error) {
+                    console.log(error);
+                }
+            }
+        };
+        fetchLikes();
+    }, [isPostOrComment, post, comment, likeIsHere]);
 
 
     // Gestion de l'affichage : message "liké" ou non
@@ -63,72 +66,33 @@ export default function Like({ post, comment }) {
 
 
     // Fonction pour liker un post / un commentaire
-    const attributeALike = () => {
-        if (post) {
-            setCommentLike()
-            fetch(`${config.serverEndpoint}/like/attributeLike/${post._id}`, {
-                method: "POST",
-                credentials: "include"
-            })
-            .then(response => response.json())
-            .then(data => {
-                setLikeIsHere(true)
-            })
-            .catch(error => {
-                console.log(error)
-            })
-        } else {
-            setCommentLike('comment-like')
-            fetch(`${config.serverEndpoint}/like/attributeLike/${comment._id}`, {
-                method: "POST",
-                credentials: "include"
-            })
-            .then(response => response.json())
-            .then(data => {
-                setLikeIsHere(true)
-            })
-            .catch(error => {
-                console.log(error)
-            })
+    const attributeALike = async () => {
+        const typeId = isPostOrComment();
+        if (post || comment) {
+            try {
+                await ServerServices.attributeLike(typeId);
+                setLikeIsHere(true);
+            } catch (error) {
+                console.log(error);
+            }
         }
-        
-    }
+    };
 
-    const dislike = () => {
 
-        // "Disliker" un post
-        if (post) {
-            setCommentLike()
-            fetch(`${config.serverEndpoint}/like/dislike/${currentUserLike._id}`, {
-                method: "DELETE",
-                credentials: "include"
-            })
-            .then(response => response.json())
-            .then(data => {
-                setLikeIsHere(true)
-            })
-            .catch(error => {
-                console.log(error)
-            })
-        } else {
-
-            // "Disliker" un commentaire
-            setCommentLike('comment-like')
-            fetch(`${config.serverEndpoint}/like/dislike/${currentUserLike._id}`, {
-                method: "DELETE",
-                credentials: "include"
-            })
-            .then(response => response.json())
-            .then(data => {
-                setLikeIsHere(true)
-            })
-            .catch(error => {
-                console.log(error)
-            })
+    // "Disliker" un post / un commentaire
+    const dislike = async () => {
+        isPostOrComment()
+        if (post || comment) {
+            try {
+                await ServerServices.dislike(currentUserLike._id);
+                setLikeIsHere(true);
+            } catch (error) {
+                console.log(error);
+            }
         }
-        
-    }
+    };
 
+    
     // Appel au like / au dislike (alternance)
     const likeOrDislike = (e) => {
         e.preventDefault()

@@ -4,7 +4,7 @@ import './Card.scss'
 import { Link, useLocation } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { reinitializeDozen } from '../../redux/slices/dozenSlice'
-import config from '../../config'
+import { ServerServices } from '../../api/api-server'
 
 
 
@@ -20,30 +20,16 @@ export default function Card({ item, categoryId }) {
   // Traduction linguistique automatique du sujet traité
   useEffect(() => {
     if (location.pathname !== "/") {
-      const object = {
-        sourceLang: "EN",
-        targetLang: "FR",
-        name: item.name
-      }
-      fetch(`${config.serverEndpoint}/translate`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(object)
-      })
-      .then(response => response.json())
-      .then(data => {
-        setTranslatedName(data.name.text.replace(/^"|"$/g, ""))
-      })
-      .catch(error => {
-        console.log(error)
-      })
+      const fetchTranslation = async () => {
+        const translation = await ServerServices.translateText("EN", "FR", item.name);
+        if (translation) {
+          setTranslatedName(translation);
+        }
+      };
+      fetchTranslation();
     }
-      
-    }, [item.name, translatedName, location])
+    }, [item.name, location])
     
-
 
   return (
     <>

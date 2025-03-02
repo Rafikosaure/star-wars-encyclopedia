@@ -5,9 +5,7 @@ import { useDispatch } from 'react-redux'
 import { updateRegisterState } from '../../redux/slices/registerSlice'
 import { useNavigate } from 'react-router-dom'
 import { updateIsLoggedUser } from '../../redux/slices/isLoggedUserSlice'
-import { toast } from 'sonner'
-import config from '../../config'
-
+import { ServerServices } from '../../api/api-server'
 
 
 export default function LoginForm() {
@@ -19,29 +17,13 @@ export default function LoginForm() {
 
 
     // Connexion de l'utilisateur
-    const onSubmit = (data) => {
-        fetch(`${config.serverEndpoint}/auth/login`, {
-            method: "POST",
-            body: JSON.stringify(data),
-            headers: {"Accept": "application/json", "Content-Type": "application/json"},
-            credentials: "include"
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.message) {
-                toast("Identifiants incorrects !")
-            } else {
-                sessionStorage.setItem("connect", config.persistentConnect);
-                dispatch(updateIsLoggedUser(true))
-                navigate("/")
-                toast("Vous êtes connecté !")
-            }
-        })
-        .catch(error => {
-            console.error(error)
-            dispatch(updateIsLoggedUser(false))
-        });
-    }
+    const onSubmit = async (data) => {
+        try {
+            await ServerServices.loginUser(data, dispatch, updateIsLoggedUser, navigate);
+        } catch (error) {
+            console.error("Échec de la connexion :", error);
+        }
+    };
 
 
   return (
