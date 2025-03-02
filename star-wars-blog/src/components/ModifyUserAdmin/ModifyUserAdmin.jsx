@@ -10,7 +10,6 @@ import './ModifyUserAdmin.scss'
 import config from '../../config';
 
 
-
 export default function ModifyUserAdmin({ user }) {
 
     const [unvalidPassword, setUnvalidPassword] = useState('none')
