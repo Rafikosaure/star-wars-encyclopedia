@@ -1,11 +1,13 @@
 import { toast } from 'sonner'
 import config from '../config'
+import validatePassword from '../sharedFunctions/validatePassword';
+
 
 
 // Appels centralisés vers le serveur Node.JS du projet
 export const ServerServices = {
 
-    // Fonction de connexion au site
+    // Connexion au site
     async loginUser(data, dispatch, updateIsLoggedUser, navigate) {
         try {
         const response = await fetch(`${config.serverEndpoint}/auth/login`, {
@@ -39,8 +41,8 @@ export const ServerServices = {
         }
     },
 
-    // Fonction d'inscription au site
-    async registerUser(data, dispatch, updateRegisterState, setUnvalidPassword, reset, validatePassword) {
+    // Inscription au site
+    async registerUser(data, dispatch, updateRegisterState, setUnvalidPassword, reset) {
         try {
             const isValid = validatePassword(data.password);
             if (!isValid) {
@@ -99,7 +101,7 @@ export const ServerServices = {
         }
     },
 
-    // Fonction pour récupérer un commentaire par son ID
+    // Récupérer un commentaire par son ID
     async getCommentById(commentId) {
         try {
             const response = await fetch(`${config.serverEndpoint}/comment/getOneComment/${commentId}`);
@@ -114,7 +116,7 @@ export const ServerServices = {
         }
     },
 
-    // Fonction pour récupérer l'auteur d'un commentaire
+    // Récupérer l'auteur d'un commentaire
     async getCommentAuthor(authorId) {
         try {
             const response = await fetch(`${config.serverEndpoint}/comment/getCommentAuthor/${authorId}`);
@@ -126,7 +128,7 @@ export const ServerServices = {
         }
     },
 
-    // Fonction pour supprimer un commentaire
+    // Supprimer un commentaire
     async deleteComment(commentId) {
         try {
             const response = await fetch(`${config.serverEndpoint}/comment/deleteAComment/${commentId}`, {
@@ -141,7 +143,7 @@ export const ServerServices = {
         }
     },
 
-    // Fonction pour modifier le commentaire
+    // Modifier le commentaire
     async modifyComment(commentId, newContent) {
         try {
             const response = await fetch(`${config.serverEndpoint}/comment/updateAComment/${commentId}`, {
@@ -164,7 +166,7 @@ export const ServerServices = {
         }
     },
 
-    // Fonction pour créer un commentaire via une requête au serveur
+    // Créer un commentaire
     async createCommentRequest(postId, fetchData) {
         try {
             const response = await fetch(`${config.serverEndpoint}/comment/createComment/${postId}`, {
@@ -189,7 +191,7 @@ export const ServerServices = {
         }
     },
 
-    // Fonction pour mettre à jour l'état du suivi du sujet dans une discussion
+    // Mettre à jour l'état du suivi du sujet dans une discussion
     async updateFollowStatus(topicId, toFollow) {
         try {
             const response = await fetch(`${config.serverEndpoint}/followTopic/chooseWhetherToFollowOrNot/${topicId}`, {
@@ -213,6 +215,7 @@ export const ServerServices = {
         }
     },
 
+    // Vérifier si l'utilisateur est connecté
     async checkUserConnection() {
         try {
             const response = await fetch(`${config.serverEndpoint}/auth/logged`, {
@@ -233,7 +236,7 @@ export const ServerServices = {
         }
     },
 
-    // Fonction pour déconnecter un utilisateur
+    // Déconnexion de l'utilisateur
     async logoutRequest() {
         try {
             const response = await fetch(`${config.serverEndpoint}/auth/logout`, {
@@ -253,7 +256,7 @@ export const ServerServices = {
         }
     },
 
-    // Récupération du tableau de likes du post / du commentaire courant
+    // Récupération des likes du post / du commentaire via son id
     async getLikes(typeId) {
         try {
             const response = await fetch(`${config.serverEndpoint}/like/getLikes/${typeId}`, {
@@ -294,7 +297,7 @@ export const ServerServices = {
         }
     },
 
-    // "Disliker" un post / un commentaire
+    // Disliker un post / un commentaire
     async dislike(likeId) {
         try {
             const response = await fetch(`${config.serverEndpoint}/like/dislike/${likeId}`, {
@@ -310,5 +313,36 @@ export const ServerServices = {
             console.error('Erreur de requête:', error);
             throw error;
         }
+    },
+
+    // Modifier les données d'un utilisateur
+    async updateUserData(userId, data) {
+        if (data.password.length > 0) {
+            const isValid = validatePassword(data.password);
+            if (!isValid) {
+                throw new Error("Mot de passe trop faible !");
+            }
+        }
+
+        const formData = new FormData();
+        if (data.picture && data.picture.length > 0) {
+            formData.append('picture', data.picture[0]);
+            delete data.picture;
+        } else {
+            delete data.picture;
+        }
+
+        formData.append('name', data.name);
+        formData.append('email', data.email);
+        formData.append('password', data.password);
+
+        const response = await fetch(`${config.serverEndpoint}/user/update/${userId}`, {
+            method: "PUT",
+            body: formData,
+            credentials: 'include',
+        });
+
+        const result = await response.json();
+        return result;
     },
 };
