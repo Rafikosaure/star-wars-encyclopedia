@@ -16,6 +16,7 @@ export default function UserData({ user }) {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const [openOrCloseUserForm, updateOpenOrCloseUserForm] = useState('none')
+    const [unvalidPassword, setUnvalidPassword] = useState('none')
 
 
     // Supprimer un utilisateur
@@ -45,6 +46,7 @@ export default function UserData({ user }) {
         e.preventDefault()
         if (openOrCloseUserForm === 'block') {
             updateOpenOrCloseUserForm('none')
+            setUnvalidPassword('none')
         } else {
             updateOpenOrCloseUserForm('block')
         }
@@ -69,7 +71,7 @@ export default function UserData({ user }) {
         <div className='user-data-delete-button' onClick={(e) => deleteUser(e)} title="Supprimer l'utilisateur"><img src={Delete} alt='croix de suppression' className='user-data-delete-image' /></div>
     </div>
     <div className='AdminModifyUserForm' style={{display: `${openOrCloseUserForm}`}}>
-        <ModifyUserAdmin user={user} />
+        <ModifyUserAdmin user={user} unvalidPassword={unvalidPassword} setUnvalidPassword={setUnvalidPassword} />
     </div>
     </>
     

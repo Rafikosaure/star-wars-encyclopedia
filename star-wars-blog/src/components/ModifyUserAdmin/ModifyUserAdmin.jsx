@@ -7,12 +7,12 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { reloadUsersArrayFunction } from '../../redux/slices/reloadUsersArray';
 import './ModifyUserAdmin.scss'
-import config from '../../config';
+import { ServerServices } from '../../api/api-server';
 
 
-export default function ModifyUserAdmin({ user }) {
 
-    const [unvalidPassword, setUnvalidPassword] = useState('none')
+export default function ModifyUserAdmin({ user, unvalidPassword, setUnvalidPassword }) {
+
     const [fileIsLoad, setFileIsLoad] = useState('display-none')
     const [inputPictureValue, setInputPictureValue] = useState()
     const { register, handleSubmit, setValue, reset } = useForm()
@@ -38,57 +38,27 @@ export default function ModifyUserAdmin({ user }) {
             setInputPictureValue()
         }
     }
-
-
-    // Mot de passe fort
-    function validatePassword(password) {
-        var Reg = new RegExp(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/);
-        return Reg.test(password);
-    }
     
     
     // Fonction de modification des données d'un utilisateur
-    const modifyData = (data) => {
-        if (data.name.length <= 0 && data.email.length <= 0 && data.password.length <= 0 && data.picture.length <= 0) {
-            return
-        }
-        const formData = new FormData();
-        if (data.picture.length > 0) {
-            formData.append('picture', data.picture[0])
-            delete data.picture
-        } else {
-            delete data.picture
-        }
-        if (data.password.length > 0) {
-            const isValid = validatePassword(data.password)
-            if (!isValid) {
-                toast('Mot de passe trop faible !')
-                setUnvalidPassword('block')
-                reset()
-                return
+    const modifyData = async (data) => {
+        try {
+            await ServerServices.updateUserData(user._id, data);
+            reset();
+            setUnvalidPassword('none');
+            setInputPictureValue();
+            dispatch(reloadUsersArrayFunction());
+            toast("Mise à jour effectuée !");
+        } catch (error) {
+            if (error.message === "Mot de passe trop faible !") {
+                toast(error.message);
+                setUnvalidPassword('block');
+                reset();
+            } else {
+                console.error(error);
+                navigate('/');
             }
         }
-        formData.append('name', data.name)
-        formData.append('email', data.email)
-        formData.append('password', data.password)
-        
-        fetch(`${config.serverEndpoint}/user/update/${user._id}`, {
-        method: "PUT",
-        body: formData,
-        credentials: 'include'
-        })
-        .then(response => response.json())
-        .then(data => {
-            reset()
-            setUnvalidPassword('none')
-            setInputPictureValue()
-            dispatch(reloadUsersArrayFunction())
-            toast("Mise à jour effectuée !")
-        })
-        .catch(error => {
-            console.error(error)
-            navigate('/')
-        });
     }
 
 
