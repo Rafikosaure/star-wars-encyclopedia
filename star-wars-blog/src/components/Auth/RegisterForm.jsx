@@ -29,13 +29,6 @@ export default function RegisterForm() {
     }, [inputPictureValue, fileIsLoad])
 
 
-    // Mot de passe fort obligatoire
-    function validatePassword(password) {
-        var Reg = new RegExp(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/);
-        return Reg.test(password);
-    }
-
-
     // Décharger l'input file
     function resetProfilePicture(e) {
         e.preventDefault()
@@ -48,7 +41,7 @@ export default function RegisterForm() {
 
     const onSubmit = async (data) => {
         try {
-            await ServerServices.registerUser(data, dispatch, updateRegisterState, setUnvalidPassword, reset, validatePassword);
+            await ServerServices.registerUser(data, dispatch, updateRegisterState, setUnvalidPassword, reset);
         } catch (error) {
             console.error("Échec de l'inscription :", error);
         }
