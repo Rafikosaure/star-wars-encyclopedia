@@ -83,17 +83,30 @@ export const ServerServices = {
     },
 
     // Traduction linguistique automatique du sujet traité
-    async translateText(sourceLang, targetLang, text) {
+    async translateText(sourceLang, targetLang, name, description) {
         try {
+            let object = {
+                sourceLang: sourceLang,
+                targetLang: targetLang,
+                name: name
+            }
+            if (description) {
+                object.description = description
+            }
             const response = await fetch(`${config.serverEndpoint}/translate`, {
                 method: "POST",
                 headers: {
                 "Content-Type": "application/json"
                 },
-                body: JSON.stringify({ sourceLang, targetLang, name: text })
+                body: JSON.stringify(object)
             });
-        
             const result = await response.json();
+            if (description) {
+                return {
+                    name: result.name.text.replace(/^"|"$/g, ""),
+                    description: result.description.text.replace(/^"|"$/g, "")
+                }
+            }
             return result.name.text.replace(/^"|"$/g, ""); // Nettoyage des guillemets inutiles
         } catch (error) {
             console.error("Erreur de traduction :", error);
@@ -129,7 +142,7 @@ export const ServerServices = {
     },
 
     // Supprimer un commentaire
-    async deleteComment(commentId) {
+    async deleteCommentRequest(commentId) {
         try {
             const response = await fetch(`${config.serverEndpoint}/comment/deleteAComment/${commentId}`, {
                 method: "DELETE",
@@ -143,8 +156,8 @@ export const ServerServices = {
         }
     },
 
-    // Modifier le commentaire
-    async modifyComment(commentId, newContent) {
+    // Modifier un commentaire
+    async modifyCommentRequest(commentId, newContent) {
         try {
             const response = await fetch(`${config.serverEndpoint}/comment/updateAComment/${commentId}`, {
                 method: "PUT",
@@ -230,7 +243,6 @@ export const ServerServices = {
             const data = await response.json();
             return data; // Retour des données utilisateurs si la requête est réussie
         } catch (error) {
-            // Gestion des erreurs
             console.error('Erreur de requête:', error);
             throw error; // On relance l'erreur pour qu'elle soit capturée au niveau du composant
         }
@@ -298,7 +310,7 @@ export const ServerServices = {
     },
 
     // Disliker un post / un commentaire
-    async dislike(likeId) {
+    async dislikeRequest(likeId) {
         try {
             const response = await fetch(`${config.serverEndpoint}/like/dislike/${likeId}`, {
                 method: "DELETE",
@@ -345,4 +357,208 @@ export const ServerServices = {
         const result = await response.json();
         return result;
     },
+
+    // Récupérer les options de notification de l'utilisateur
+    async getUserMentionOption(userId) {
+        try {
+            const response = await fetch(`${config.serverEndpoint}/isMentionned/getIsMentionnedOption/${userId}`, {
+                credentials: 'include',
+            });
+    
+            if (!response.ok) {
+                throw new Error("Erreur lors de la récupération des préférences de mention.");
+            }
+
+            const data = await response.json();
+            return data.allowMentions;
+        } catch (error) {
+            console.error(error);
+            return null;
+        }
+    },
+
+    // Autorise ou interdit les notifications si mention
+    async updateMentionOption(userId, newOption) {
+        try {
+            const response = await fetch(`${config.serverEndpoint}/isMentionned/updateIsMentionnedOption/${userId}`, {
+                method: 'PUT',
+                body: JSON.stringify({ mentionOption: newOption }),
+                credentials: "include",
+                headers: { 'Content-Type': 'application/json' }
+            });
+    
+            if (!response.ok) {
+                throw new Error("Erreur lors de la mise à jour de l'option de mention.");
+            }
+    
+            const data = await response.json();
+            return data.newOption;
+        } catch (error) {
+            console.error(error);
+            return null;
+        }
+    },
+
+    // Récupérer l'auteur d'un post
+    async getPostAuthor(postAuthorId) {
+        try {
+            const response = await fetch(`${config.serverEndpoint}/post/getPostAuthor/${postAuthorId}`);
+            if (!response.ok) {
+                throw new Error("Erreur lors de la récupération de l'auteur du post");
+            }
+            return await response.json();
+        } catch (error) {
+            console.error(error);
+            return null;
+        }
+    },
+
+    // Supprimer un post via son identifiant
+    async deletePostById(postId) {
+        try {
+            const response = await fetch(`${config.serverEndpoint}/post/deletePostById/${postId}`, {
+                method: "DELETE",
+                credentials: "include"
+            });
+            if (!response.ok) {
+                throw new Error("Erreur lors de la suppression du post");
+            }
+            return await response.json();
+        } catch (error) {
+            console.error(error);
+            return null;
+        }
+    },
+
+    // Modifier le contenu d'un post
+    async updatePostContent(postId, newContent) {
+        const response = await fetch(`${config.serverEndpoint}/post/updatePost/${postId}`, {
+            method: "PUT",
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+            },
+            credentials: "include",
+            body: JSON.stringify({ content: newContent })
+        });
+        return response.json();
+    },
+
+    // Récupérer tous les utilisateurs du site
+    async getAllUsers() {
+        return fetch(`${config.serverEndpoint}/user/getAll`, {
+            credentials: 'include'
+        })
+        .then(response => response.json())
+        .catch(error => {
+            console.log(error);
+            throw error; // On lance l'erreur si elle se produit
+        });
+    },
+
+    // Récupérer les abonnés d'une discussion
+    async getTopicFollowers(topicId) {
+        try {
+            const response = await fetch(`${config.serverEndpoint}/followTopic/getAllFollowersOfATopic/${topicId}`);
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error(error);
+            return [];
+        }
+    },
+
+    // Supprimer une discussion
+    async deleteTopicById(topicId) {
+        try {
+            const response = await fetch(`${config.serverEndpoint}/topic/deleteTopicById/${topicId}`, {
+                method: "DELETE",
+                credentials: "include"
+            });
+            return await response.json();
+        } catch (error) {
+            console.error(error);
+            return null;
+        }
+    },
+
+    // Suivre / ne plus suivre une discussion
+    async toggleFollowTopic(topicId, toFollow) {
+        try {
+            const response = await fetch(`${config.serverEndpoint}/followTopic/chooseWhetherToFollowOrNot/${topicId}`, {
+                method: "PUT",
+                credentials: "include",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ toFollow })
+            });
+
+            return await response.json();
+        } catch (error) {
+            console.error("Erreur lors du suivi de la discussion :", error);
+            throw error;
+        }
+    },
+
+    // Créer une discussion
+    async createTopicRequest(fetchData, topicsCategoryId) {
+        return fetch(`${config.serverEndpoint}/topic/createTopic/${topicsCategoryId}`, {
+            method: "POST",
+            credentials: "include",
+            headers: {
+                "Accept": "application/json", 
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(fetchData)
+        })
+        .then(response => response.json())
+        .catch(error => {
+            console.log(error)
+            throw error;
+        });
+    },
+
+    // Supprimer un utilisateur par son identifiant
+    async deleteUserById(userId) {
+        return fetch(`${config.serverEndpoint}/user/authDeleteById/${userId}`, {
+            method: 'DELETE',
+            credentials: 'include'
+        })
+        .then(response => response.json())
+    },
+
+    // Récupérer les discussions d'un utilisateur
+    async getFollowedTopics(userId) {
+        return fetch(`${config.serverEndpoint}/followTopic/getAllFollowedTopics/${userId}`)
+        .then(response => response.json())
+        .catch(error => {
+            console.log(error);
+            throw new Error("Failed to fetch followed topics");
+        });
+    }, 
+
+    // Suppression de son propre compte utilisateur
+    async deleteHisOwnUserAccount() {
+        return fetch(`${config.serverEndpoint}/user/deleteById`, {
+            method: "DELETE",
+            credentials: 'include'
+        })
+        .then(response => response.json())
+        .catch(error => {
+            console.log(error);
+            throw error; // On renvoie l'erreur pour la gestion dans le composant
+        });
+    },
+
+    // Récupérer les catégories du Forum
+    async fetchForumCategories() {
+        try {
+            const response = await fetch(`${config.serverEndpoint}/category/getCategories`);
+            return await response.json();
+        } catch (error) {
+            console.log(error);
+            return null;
+        }
+    }
 };
