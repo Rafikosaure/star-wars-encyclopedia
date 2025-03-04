@@ -18,6 +18,7 @@ export default function ModifyUserAdmin({ user, unvalidPassword, setUnvalidPassw
     const { register, handleSubmit, setValue, reset } = useForm()
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const { updateUserData } = ServerServices
 
 
     // Gestion de l'affichage (picture chargée ou non)
@@ -43,7 +44,7 @@ export default function ModifyUserAdmin({ user, unvalidPassword, setUnvalidPassw
     // Fonction de modification des données d'un utilisateur
     const modifyData = async (data) => {
         try {
-            await ServerServices.updateUserData(user._id, data);
+            await updateUserData(user._id, data);
             reset();
             setUnvalidPassword('none');
             setInputPictureValue();
