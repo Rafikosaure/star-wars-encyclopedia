@@ -4,9 +4,9 @@ import '../../sharedStyles/index.scss'
 import './Forum.scss'
 import Code from '../../components/Code/Code'
 import { useNavigate } from 'react-router-dom'
-import config from '../../config'
 import { useDispatch } from 'react-redux'
 import Spinner from '../../assets/images/spinner.svg'
+import { ServerServices } from '../../api/api-server'
 
 
 
@@ -18,26 +18,19 @@ export default function Forum() {
   const [forumCategories, setForumCategories] = useState()
   const [spinnerDisplay, setSpinnerDisplay] = useState('none')
   const dispatch = useDispatch()
+  const { fetchForumCategories } = ServerServices
 
 
+  // Récupérer les catégories du forum
   useEffect(() => {
-
-    // Récupérer les catégories du forum
-    setSpinnerDisplay('flex')
-    fetch(`${config.serverEndpoint}/category/getCategories`)
-    .then(response => response.json())
-    .then(data => {
-      setForumCategories(data)
-      setSpinnerDisplay('none')
-    })
-    .catch(error => {
-      setSpinnerDisplay('none')
-      console.log(error)
-      // navigate("*")
-    })
-    
-  }, [dispatch, navigate])
-
+    setSpinnerDisplay('flex');
+    fetchForumCategories().then(data => {
+      if (data) {
+        setForumCategories(data);
+      }
+      setSpinnerDisplay('none');
+    });
+  }, [dispatch, navigate, fetchForumCategories]);
 
 
   return (
