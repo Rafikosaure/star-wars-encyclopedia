@@ -10,8 +10,8 @@ import { selectTopicDozen } from '../../redux/slices/topicDozenSlice'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import StarsSky from '../../assets/images/ciel_nuit_banniere.webp'
-import config from '../../config'
 import { toast } from 'sonner'
+import { ServerServices } from '../../api/api-server'
 
 
 
@@ -27,6 +27,7 @@ export default function TopicCard({ topic }) {
     const [datetime, updateDateTime] = useState()
     const [followersArray, setFollowersArray] = useState()
     const [currentFollower, setCurrentFollower] = useState()
+    const { getTopicFollowers, deleteTopicById, toggleFollowTopic } = ServerServices
     const [isHovered, setIsHovered] = useState(false); // si le curseur est ou non sur l'élément
 
 
@@ -38,19 +39,10 @@ export default function TopicCard({ topic }) {
 
 
     useEffect(() => {
-
         // Récupération des abonnés à la discussion
         if (!followersArray) {
-            fetch(`${config.serverEndpoint}/followTopic/getAllFollowersOfATopic/${topic._id}`)
-            .then(response => response.json())
-            .then(data => {
-                setFollowersArray(data)
-            })
-            .catch(error => {
-                console.log(error)
-            })
+            getTopicFollowers(topic._id).then(setFollowersArray);
         }
-        
         // Enregistrement de l'utilisateur si il fait partie des abonnés
         if (followersArray !== undefined && followersArray.length > 0 && loggedUser) {
             setCurrentFollower(followersArray.find(follower => loggedUser.email === follower.email))
@@ -61,9 +53,10 @@ export default function TopicCard({ topic }) {
         } else {
             setCurrentFollower()
         }
-    }, [topic, followersArray, loggedUser, currentFollower])
+    }, [topic, followersArray, loggedUser, currentFollower, getTopicFollowers])
 
 
+    // Gestion de la pagination
     useEffect(() => {
         if (topic && currentTopicDozen) {
             if(topic._id === currentTopicDozen.value.topicId) {
@@ -76,65 +69,40 @@ export default function TopicCard({ topic }) {
 
 
     // Supprimer une discussion
-    const deleteTopicFunction = (e) => {
-        e.preventDefault()
-        fetch(`${config.serverEndpoint}/topic/deleteTopicById/${topic._id}`, {
-            method: "DELETE",
-            credentials: "include"
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.message) {
-                toast("Discussion supprimée !")
-            }
-            dispatch(reloadTopics())
-        })
-        .catch(error => {
-            console.log(error)
-        })
-    }
-
-
-    // Suivre une discussion
-    const followThisTopicFunction = (e) => {
-        e.preventDefault()
-        let toFollow;
-        
-        if (!currentFollower) {
-            toFollow = true
-        } else {
-            toFollow = false
+    const deleteTopicFunction = async (e) => {
+        e.preventDefault();
+        const data = await deleteTopicById(topic._id);
+        if (data?.message) {
+            toast("Discussion supprimée !");
         }
+        dispatch(reloadTopics());
+    };
 
-        // Requête pour suivre ou non la discussion 
-        fetch(`${config.serverEndpoint}/followTopic/chooseWhetherToFollowOrNot/${topic._id}`, {
-            method: "PUT",
-            credentials: "include",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ toFollow: toFollow })
-        })
-        .then(response => response.json())
-        .then(data => {
 
+    // Suivre ou non une discussion
+    const followThisTopicFunction = async (e) => {
+        e.preventDefault();
+        const toFollow = !currentFollower;
+        try {
+            const data = await toggleFollowTopic(topic._id, toFollow);
+    
             // Gestion de l'interface si l'utilisateur est ou non un abonné
-            if (data.topicIsFollowed === true) {
-                toast("Vous suivez cette discussion !")
-                setIsFollowedColor('rgb(53, 155, 155)')
-                setIsFollowedTitle('Ne plus suivre cette discussion')
+            if (data.topicIsFollowed) {
+                toast("Vous suivez cette discussion !");
+                setIsFollowedColor('rgb(53, 155, 155)');
+                setIsFollowedTitle('Ne plus suivre cette discussion');
             } else {
-                toast("Vous ne suivez plus cette discussion !")
-                setIsFollowedColor('white')
-                setIsFollowedTitle('Suivre cette discussion')
+                toast("Vous ne suivez plus cette discussion !");
+                setIsFollowedColor('white');
+                setIsFollowedTitle('Suivre cette discussion');
             }
-            setFollowersArray()
-            dispatch(reloadFollowedTopics())
-        })
-        .catch(error => {
-            console.log(error)
-        })
-    }
+    
+            setFollowersArray();
+            dispatch(reloadFollowedTopics());
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
     
     // Styles du contour du bouton de suivi de la discussion
