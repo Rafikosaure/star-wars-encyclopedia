@@ -15,20 +15,21 @@ export default function Card({ item, categoryId }) {
   const itemId = item._id
   const paramsIds = `${categoryId}.${itemId}`
   const [translatedName, setTranslatedName] = useState()
+  const { translateText } = ServerServices
 
   
   // Traduction linguistique automatique du sujet traité
   useEffect(() => {
     if (location.pathname !== "/") {
       const fetchTranslation = async () => {
-        const translation = await ServerServices.translateText("EN", "FR", item.name);
+        const translation = await translateText("EN", "FR", item.name);
         if (translation) {
           setTranslatedName(translation);
         }
       };
       fetchTranslation();
     }
-    }, [item.name, location])
+    }, [item.name, location, translateText])
     
 
   return (
