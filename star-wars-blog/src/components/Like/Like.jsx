@@ -17,6 +17,7 @@ export default function Like({ post, comment }) {
     const [currentUserLike, updateCurrentUserLike] = useState()
     const [likeIsHere, setLikeIsHere] = useState(false)
     const [commentLike, setCommentLike] = useState()
+    const { getLikes, attributeLike, dislikeRequest } = ServerServices
 
 
     // Id d'un post ou d'un commentaire ?
@@ -39,7 +40,7 @@ export default function Like({ post, comment }) {
             const typeId = isPostOrComment();
             if (post || comment) {
                 try {
-                    const likesData = await ServerServices.getLikes(typeId);
+                    const likesData = await getLikes(typeId);
                     updateLikeArray(likesData);
                     setLikeIsHere(false);
                 } catch (error) {
@@ -48,7 +49,7 @@ export default function Like({ post, comment }) {
             }
         };
         fetchLikes();
-    }, [isPostOrComment, post, comment, likeIsHere]);
+    }, [isPostOrComment, post, comment, likeIsHere, getLikes]);
 
 
     // Gestion de l'affichage : message "liké" ou non
@@ -70,7 +71,7 @@ export default function Like({ post, comment }) {
         const typeId = isPostOrComment();
         if (post || comment) {
             try {
-                await ServerServices.attributeLike(typeId);
+                await attributeLike(typeId);
                 setLikeIsHere(true);
             } catch (error) {
                 console.log(error);
@@ -84,7 +85,7 @@ export default function Like({ post, comment }) {
         isPostOrComment()
         if (post || comment) {
             try {
-                await ServerServices.dislike(currentUserLike._id);
+                await dislikeRequest(currentUserLike._id);
                 setLikeIsHere(true);
             } catch (error) {
                 console.log(error);
