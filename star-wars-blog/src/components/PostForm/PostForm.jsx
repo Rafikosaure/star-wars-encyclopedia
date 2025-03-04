@@ -1,9 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './PostForm.scss'
-import config from '../../config';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectIsLoggedState } from '../../redux/slices/isLoggedUserSlice';
 import { selectReloadUsersState, reloadUsersArrayFunction } from '../../redux/slices/reloadUsersArray';
+import { ServerServices } from '../../api/api-server';
 
 
 
@@ -19,6 +19,7 @@ export default function PostForm({ setDescription, toReset, setToReset }) {
     const isLogged = useSelector(selectIsLoggedState)
     const reloadUsers = useSelector(selectReloadUsersState)
     const dispatch = useDispatch()
+    const { getAllUsers } = ServerServices
 
 
     // Reset le textarea
@@ -30,25 +31,20 @@ export default function PostForm({ setDescription, toReset, setToReset }) {
     }, [toReset, setToReset])
 
 
-    // Récupération des utilisateurs
+    // Récupération des utilisateurs du site
     useEffect(() => {    
         if (isLogged && (usersList.length === 0 || !reloadUsers)) {
-            fetch(`${config.serverEndpoint}/user/getAll`, {
-                credentials: 'include'
-            })
-            .then(response => response.json())
+            getAllUsers()
             .then(data => {
-                if (!data.badAccessMessage) {
-                    const usersnames = data.map(user => user.name)
-                    setUsersList(usersnames)
-                }
+                const usersnames = data.map(user => user.name)
+                setUsersList(usersnames)
             })
             .catch(error => {
                 console.log(error)
             })
             dispatch(reloadUsersArrayFunction(true))
         }
-    }, [isLogged, usersList, reloadUsers, dispatch])
+    }, [isLogged, usersList, reloadUsers, dispatch, getAllUsers])
 
 
     // Gérer l'autocomplétion en cas de mention
