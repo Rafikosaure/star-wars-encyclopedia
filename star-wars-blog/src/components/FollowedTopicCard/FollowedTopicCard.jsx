@@ -11,6 +11,7 @@ import { ServerServices } from '../../api/api-server'
 export default function FollowedTopicCard({ index, topicData }) {
 
     const dispatch = useDispatch()
+    const { updateFollowStatus } = ServerServices
 
     // Initialisation de l'état pour savoir si le curseur est sur l'élément
     const [isHovered, setIsHovered] = useState(false);
@@ -21,7 +22,7 @@ export default function FollowedTopicCard({ index, topicData }) {
         e.preventDefault()
         try {
             // Appel à la fonction pour mettre à jour le suivi sans récupérer les données de réponse
-            await ServerServices.updateFollowStatus(topicData._id, false);
+            await updateFollowStatus(topicData._id, false);
     
             // Rafraîchissement des sujets suivis et affichage du toast
             dispatch(reloadFollowedTopics());
