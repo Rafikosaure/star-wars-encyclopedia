@@ -4,7 +4,9 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { saveAnArticle } from '../../redux/slices/articleSlice'
-import config from '../../config'
+import { StarWarsApiServices } from '../../api/api-sw'
+import { ServerServices } from '../../api/api-server'
+
 
 
 export default function SearchBar({ category }) {
@@ -14,19 +16,20 @@ export default function SearchBar({ category }) {
   const [article, setArticle] = useState()
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const { getArticlesByCategory } = StarWarsApiServices
+  const { translateText } = ServerServices
 
 
   // Récupération du tableau des articles de la catégorie concernée
   useEffect(() => {
-    fetch(`${config.starWarsAPI}/${category}?page=1&limit=all`)
-    .then(response => response.json())
-    .then(articles => {
-      setArticlesList(articles.data)
-    })
-    .catch(error => {
-      console.log(error)
-    })
-  }, [category])
+    getArticlesByCategory(category)
+      .then(articles => {
+        setArticlesList(articles);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }, [category, getArticlesByCategory]);
 
 
   // Recherche dans les articles récupérés depuis l'API
@@ -54,27 +57,12 @@ export default function SearchBar({ category }) {
 
 
   // Traductions
-  const translateSearch = (text) => {
-    const object = {
-      sourceLang: "FR",
-      targetLang: "EN-US",
-      name: text
+  const translateSearch = async (text) => {
+    const translation = await translateText("FR", "EN-US", text);
+    if (translation) {
+      setSearch(translation);
     }
-    if (text) {
-      fetch(`${config.serverEndpoint}/translate`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(object)
-      })
-      .then(response => response.json())
-      .then(data => setSearch(data.name.text.replace(/^"|"$/g, "")))
-      .catch(error => {
-        console.log(error)
-      })
-    }
-  }
+  };
 
   
   // Validation du formulaire (redirection vers la page article concernée)
