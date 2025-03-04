@@ -20,7 +20,8 @@ import PictureIsValid from '../../assets/images/is_valid.webp'
 import { toast } from 'sonner'
 import NotifSwitch from '../../components/NotifSwitch/NotifSwitch'
 import FollowedTopicCard from '../../components/FollowedTopicCard/FollowedTopicCard'
-import config from '../../config'
+import { ServerServices } from '../../api/api-server'
+
 
 
 export default function Account() {
@@ -38,6 +39,12 @@ export default function Account() {
   const userData = useSelector(selectLoggedUser)
   const [followedTopics, setFollowedTopics] = useState()
   const reloadFollowedTopics = useSelector(selectReloadFollowedTopicsState)
+  const { 
+    getAllUsers, 
+    getFollowedTopics, 
+    updateUserData, 
+    deleteHisOwnUserAccount 
+  } = ServerServices
 
 
   // Redirection en cas d'utilisateur non-authentifié
@@ -58,40 +65,36 @@ export default function Account() {
   }, [inputPictureValue, updateFileIsLoad])
 
 
-  // Récupération des utilisateurs du site
+  // Récupération des utilisateurs non-admins du site
   useEffect(() => {
     if (!reloadUsers || !allUsers) {
-      fetch(`${config.serverEndpoint}/user/getAll`, {
-        credentials: 'include'
-      })
-      .then(response => response.json())
+      getAllUsers()
       .then(data => {
-          setAllUsers(data.filter((user) => user.isAdmin !== true))
-          dispatch(reloadUsersArrayFunction(true))
+        setAllUsers(data.filter((user) => user.isAdmin !== true))
+        dispatch(reloadUsersArrayFunction(true))
       })
       .catch(error => {
-        console.log(error)
-        dispatch(reloadUsersArrayFunction(true))
-        navigate('/auth')
+          console.log(error)
+          dispatch(reloadUsersArrayFunction(true))
+          navigate('/auth')
       })
     }
-  }, [reloadUsers, allUsers, dispatch, navigate])
+  }, [reloadUsers, allUsers, dispatch, navigate, getAllUsers])
 
 
   // Récupérer les discussions suivies par l'utilisateur
   useEffect(() => {
     const connect = sessionStorage.getItem("connect");
     if (userData && isLogged && connect) {
-      fetch(`${config.serverEndpoint}/followTopic/getAllFollowedTopics/${userData._id}`)
-      .then(response => response.json())
+      getFollowedTopics(userData._id)
       .then(data => {
-        setFollowedTopics(data)
+        setFollowedTopics(data);
       })
       .catch(error => {
-        console.log(error)
-      })
+        console.log(error);
+      });
     }
-  }, [isLogged, userData, reloadFollowedTopics])
+  }, [isLogged, userData, reloadFollowedTopics, getFollowedTopics])
 
 
   // Décharger l'input file
@@ -104,57 +107,30 @@ export default function Account() {
   }
 
 
-  // Mot de passe fort
-  function validatePassword(password){
-    var Reg = new RegExp(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/);
-    return Reg.test(password);
-  }
-
-
   // Modification des informations des utilisateurs
-  const modifyData = (data) => {
+  const modifyData = async (data) => {
     if (data.name.length <= 0 && data.email.length <= 0 && data.password.length <= 0 && data.picture.length <= 0) {
       return
     }
-    const formData = new FormData();
-    if (data.picture.length > 0) {
-      formData.append('picture', data.picture[0])
-      delete data.picture
-    } else {
-      delete data.picture
-    }
-    if (data.password.length > 0) {
-      const isValid = validatePassword(data.password)
-      if (!isValid) {
-        toast('Mot de passe trop faible !')
-        setUnvalidPassword('block')
-        reset()
-        return
-      }
-    }
-    formData.append('name', data.name)
-    formData.append('email', data.email)
-    formData.append('password', data.password)
-
-    fetch(`${config.serverEndpoint}/user/update/noId`, {
-      method: "PUT",
-      body: formData,
-      credentials: 'include'
-    })
-    .then(response => response.json())
-    .then(data => {
-      dispatch(updateUserLog(data))
+    try {
+      const result = await updateUserData("noId", data);
+      dispatch(updateUserLog(result))
       reset()
       setUnvalidPassword('none')
       updateFileIsLoad("display-none")
       dispatch(updateLoadedUser(false))
       dispatch(reloadUsersArrayFunction())
       toast("Mise à jour effectuée !")
-    })
-    .catch(error => {
-      console.log(error)
-      navigate('/auth')
-    });
+    } catch (error) {
+      if (error.message === "Mot de passe trop faible !") {
+        toast('Mot de passe trop faible !')
+        setUnvalidPassword('block')
+        reset()
+      } else {
+        console.log(error)
+        navigate('/auth')
+      }
+    }
   }
 
 
@@ -171,11 +147,7 @@ export default function Account() {
   // Suppression de son propre compte par l'utilisateur
   const deleteCurrentUser = (e) => {
     e.preventDefault()
-    fetch(`${config.serverEndpoint}/user/deleteById`, {
-      method: "DELETE",
-      credentials: 'include'
-    })
-    .then(response => response.json())
+    deleteHisOwnUserAccount()
     .then(data => {
       sessionStorage.removeItem("connect");
       dispatch(updateIsLoggedUser(false))
@@ -186,7 +158,6 @@ export default function Account() {
       navigate('/auth')
     })
     .catch(error => {
-      console.log(error)
       sessionStorage.removeItem("connect");
       navigate('/auth')
     })
