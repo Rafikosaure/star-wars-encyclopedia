@@ -11,8 +11,9 @@ import { useNavigate, Link } from 'react-router-dom'
 import '../../sharedStyles/index.scss'
 import '../../sharedStyles/Account.scss'
 import UserData from '../../components/UserData/UserData'
-import config from '../../config'
 import ReturnArrow from '../../assets/images/return-arrow.webp'
+import { ServerServices } from '../../api/api-server'
+
 
 
 export default function Admin() {
@@ -23,6 +24,7 @@ export default function Admin() {
   const reloadUsers = useSelector(selectReloadUsersState)
   const isLogged = useSelector(selectIsLoggedState)
   const loggedUser = useSelector(selectLoggedUser)
+  const { getAllUsers } = ServerServices
 
 
   // Redirection automatique en cas d'accès non-autorisé
@@ -33,13 +35,10 @@ export default function Admin() {
   }, [isLogged, loggedUser, navigate])
 
 
-  // Récupération des utilisateurs du site
+  // Récupération des utilisateurs non-admins du site
   useEffect(() => {
     if (!reloadUsers || !allUsers) {
-      fetch(`${config.serverEndpoint}/user/getAll`, {
-        credentials: 'include'
-      })
-      .then(response => response.json())
+      getAllUsers()
       .then(data => {
         dispatch(reloadUsersArrayFunction(true))
         setAllUsers(data.filter((user) => user.isAdmin !== true))
@@ -51,8 +50,7 @@ export default function Admin() {
         navigate('/')
       })
     }
-  }, [reloadUsers, allUsers, dispatch, navigate])
-
+  }, [reloadUsers, allUsers, dispatch, navigate, getAllUsers])
   
   
   return (

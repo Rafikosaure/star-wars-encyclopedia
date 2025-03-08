@@ -6,8 +6,8 @@ import { selectIsLoggedState } from '../../redux/slices/isLoggedUserSlice'
 import { selectLoggedUser } from '../../redux/slices/loggedUserSlice'
 import { reloadTopics } from '../../redux/slices/topicsReload.js'
 import './TopicForm.scss'
-import config from '../../config.js'
 import { toast } from 'sonner'
+import { ServerServices } from '../../api/api-server.js'
 
 
 
@@ -18,6 +18,7 @@ export default function TopicForm({ topicsCategoryId }) {
     const isLogged = useSelector(selectIsLoggedState)
     const loggedUser = useSelector(selectLoggedUser)
     const dispatch = useDispatch()
+    const { createTopicRequest } = ServerServices
 
 
     // Apparition / disparition du formulaire
@@ -30,6 +31,7 @@ export default function TopicForm({ topicsCategoryId }) {
             setFormDisplay('none')
         }
     }
+
 
     // Création d'une discussion
     const createNewTopic = (data) => {
@@ -59,13 +61,7 @@ export default function TopicForm({ topicsCategoryId }) {
         }
 
         // Envoi de la requête
-        fetch(`${config.serverEndpoint}/topic/createTopic/${topicsCategoryId}`, {
-            method: "POST",
-            credentials: "include",
-            headers: {"Accept": "application/json", "Content-Type": "application/json"},
-            body: JSON.stringify(fetchData)
-        })
-        .then(response => response.json())
+        createTopicRequest(fetchData, topicsCategoryId)
         .then(data => {
             toast("Nouvelle discussion créee !")
             dispatch(reloadTopics())

@@ -16,6 +16,7 @@ export default function RegisterForm() {
     const [inputPictureValue, setInputPictureValue] = useState()
     const { register, handleSubmit, setValue, reset } = useForm()
     const dispatch = useDispatch()
+    const { registerUser } = ServerServices
     const title = 'Inscription'
 
 
@@ -27,13 +28,6 @@ export default function RegisterForm() {
             updateFileIsLoad('display-none')
         }
     }, [inputPictureValue, fileIsLoad])
-
-
-    // Mot de passe fort obligatoire
-    function validatePassword(password) {
-        var Reg = new RegExp(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/);
-        return Reg.test(password);
-    }
 
 
     // Décharger l'input file
@@ -48,7 +42,7 @@ export default function RegisterForm() {
 
     const onSubmit = async (data) => {
         try {
-            await ServerServices.registerUser(data, dispatch, updateRegisterState, setUnvalidPassword, reset, validatePassword);
+            await registerUser(data, dispatch, updateRegisterState, setUnvalidPassword, reset);
         } catch (error) {
             console.error("Échec de l'inscription :", error);
         }

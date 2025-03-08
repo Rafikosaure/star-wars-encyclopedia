@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { reinitializeDozen, maxDozen, nextDozen, prevDozen, selectDozen } from '../../redux/slices/dozenSlice'
 import { selectArticle } from '../../redux/slices/articleSlice'
-import config from '../../config'
+import { StarWarsApiServices } from '../../api/api-sw'
 
 
 
@@ -27,12 +27,14 @@ export default function Category() {
   const [spinnerDisplay, setSpinnerDisplay] = useState('none')
   const nbDozen = useRef()
   const navigate = useNavigate()
+  const { fetchStarWarsCategoryData } = StarWarsApiServices
   
 
   // Trouver les articles correspondant à la catégorie choisie
   const currentDatas = data.find((item) => item._id === categoryId)
 
 
+  // Récupérer les informations depuis l'API
   useEffect(() => {
 
     // Gestion des mauvaises URLs
@@ -41,25 +43,20 @@ export default function Category() {
     } else {
       updateRightPage(true)
 
-      // Récupérer les informations depuis l'API
+      // Appel à l'API StarWars Databank
       setSpinnerDisplay('block')
-      fetch(`${config.starWarsAPI}/${currentDatas.keyword}?page=${storedDozen}`)
-      .then(response => response.json())
+      fetchStarWarsCategoryData(currentDatas.keyword, storedDozen)
       .then(data => {
-        setInfo(data.info)
-        setItems(data.data)
-        setSpinnerDisplay('none')
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-
-      // Calculer le nombre de dizaines d'articles (arrondi à l'excès)
-      nbDozen.current = Math.ceil(info.total / 10)
+        if (data) {
+          setInfo(data.info);
+          setItems(data.data);
+        }
+        setSpinnerDisplay("none");
+      });
+      nbDozen.current = Math.ceil(info.total / 10);
     }
-  }, [categoryId, currentDatas, navigate, storedDozen, info.total])
+  }, [categoryId, currentDatas, navigate, storedDozen, info.total, fetchStarWarsCategoryData])
   
-
 
   // Gestion du clic sur le bouton 
   // pour voir les articles suivants

@@ -11,6 +11,7 @@ import { ServerServices } from '../../api/api-server'
 export default function LoginForm() {
     
     const { register, handleSubmit } = useForm()
+    const { loginUser } = ServerServices
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const title = 'Connexion'
@@ -19,7 +20,7 @@ export default function LoginForm() {
     // Connexion de l'utilisateur
     const onSubmit = async (data) => {
         try {
-            await ServerServices.loginUser(data, dispatch, updateIsLoggedUser, navigate);
+            await loginUser(data, dispatch, updateIsLoggedUser, navigate);
         } catch (error) {
             console.error("Échec de la connexion :", error);
         }

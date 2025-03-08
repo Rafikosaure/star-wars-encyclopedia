@@ -19,10 +19,9 @@ import PostCard from '../../components/PostCard/PostCard'
 import PostForm from '../../components/PostForm/PostForm'
 import { Link } from 'react-router-dom'
 import ReturnArrow from '../../assets/images/return-arrow.webp'
-import config from '../../config'
 import ArrowNext from '../../assets/images/next-arrow.webp'
 import ArrowPrev from '../../assets/images/back-arrow.webp'
-
+import { ServerServices } from '../../api/api-server'
 
 
 
@@ -47,6 +46,12 @@ export default function Topic() {
     const citationText = currentCitation.text
     const citationAuthorId = currentCitation.authorId
     const dispatch = useDispatch()
+    const { 
+        getTopicPosts, 
+        fetchCategoryFromTopic, 
+        getAllUsers,
+        postNewPost
+    } = ServerServices
 
 
     useEffect(() => {
@@ -61,8 +66,7 @@ export default function Topic() {
             topicId: topicId
         }
         dispatch(setCurrentTopicDozen(currentTopicData))
-        fetch(`${config.serverEndpoint}/post/getPostsByTopicId/${topicId}/posts?page=${currentTopicDozen.value.currentPage}`)
-        .then(response => response.json())
+        getTopicPosts(topicId, currentTopicDozen.value.currentPage)
         .then(data => {
             if (data.error) {
                 navigate("*")
@@ -76,7 +80,7 @@ export default function Topic() {
             console.log(error)
             navigate("*")
         })
-    }, [navigate, dispatch, topicId, page, currentPage, reloadPostsBool, currentTopicDozen])
+    }, [navigate, dispatch, topicId, page, currentPage, reloadPostsBool, currentTopicDozen, getTopicPosts])
 
 
     // Vérifier si la page est valide
@@ -103,38 +107,31 @@ export default function Topic() {
 
     // Récupérer la catégorie de la discussion courante et ses données
     useEffect(() => {
-        fetch(`${config.serverEndpoint}/category/findCategoryFromTopic/${topicId}`)
-        .then(response => response.json())
-        .then(data => {
-            setCurrentCategory(data.category[0])
-        })
-        .catch(error => {
-            console.log(error)
-            navigate("*")
-        })
+        if (topicId) {
+            fetchCategoryFromTopic(topicId)
+            .then((category) => {
+                if (category) {
+                    setCurrentCategory(category);
+                } else {
+                    navigate("*");
+                }
+            });
+        }
+    }, [topicId, navigate, fetchCategoryFromTopic])
 
-    }, [topicId, navigate])
 
-
+    // Récupération des utilisateurs
     useEffect(() => {
-
-        // Récupération des utilisateurs
         if (!reloadUsers || !usersList) {
-            fetch(`${config.serverEndpoint}/user/getAll`, {
-                credentials: 'include'
-            })
-            .then(response => response.json())
-            .then(data => {
-                setUsersList(data)
-            })
+            getAllUsers()
+            .then(data => setUsersList(data))
             .catch(error => {
                 console.log(error)
                 navigate("*")
             })
             dispatch(reloadUsersArrayFunction(true))
         }
-        
-    }, [dispatch, navigate, reloadUsers, usersList])
+    }, [dispatch, navigate, reloadUsers, usersList, getAllUsers])
 
 
     // Fonction pour passer à la page suivante
@@ -171,6 +168,7 @@ export default function Topic() {
     };
 
 
+    // Fonction pour créer un post
     const createNewPost = (data) => {
 
         // Récupération du texte du post
@@ -188,6 +186,7 @@ export default function Topic() {
             likes: []
         }        
 
+        // Gestion des éventuelles citations
         if (citationText && citationAuthorId) {
             const fetchCitationText = citationText.split("a dit :").at(-1).trim().replace(/^"|"$/g, "")
             fetchData.citation = {
@@ -197,13 +196,7 @@ export default function Topic() {
         }
 
         // Envoi de la requète
-        fetch(`${config.serverEndpoint}/post/createPost/${topicId}`, {
-            method: "POST",
-            credentials: "include",
-            headers: {"Accept": "application/json", "Content-Type": "application/json"},
-            body: JSON.stringify(fetchData)
-        })
-        .then(response => response.json())
+        postNewPost(topicId, fetchData)
         .then(result => {
 
             // Gestion des mentions

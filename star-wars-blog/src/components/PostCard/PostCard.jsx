@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import './PostCard.scss'
 import DefaultAvatar from '../../assets/images/EmojiBlitzBobaFett1.webp'
 import Like from '../Like/Like'
-import config from '../../config'
 import { useDispatch, useSelector } from 'react-redux'
 import { saveACitation } from '../../redux/slices/citationSlice'
 import { reloadUsersArrayFunction } from '../../redux/slices/reloadUsersArray'
@@ -12,6 +11,7 @@ import { selectLoggedUser } from '../../redux/slices/loggedUserSlice'
 import CommentCard from '../CommentCard/CommentCard'
 import CommentForm from '../CommentForm/CommentForm'
 import mentionsManager from '../../sharedFunctions/mentionsManager'
+import { ServerServices } from '../../api/api-server'
 
 
 
@@ -24,23 +24,25 @@ export default function PostCard({ index, post, topicId, usersList, currentPage 
     const [postContentDisplay, setPostContentDisplay] = useState('block')
     const [modifyContentDisplay, setModifyContentDisplay] = useState('none')
     const dispatch = useDispatch()
+    const { 
+        getPostAuthor, 
+        deletePostById, 
+        updatePostContent 
+    } = ServerServices
 
 
     // Récupérer l'auteur du post courant
     useEffect(() => {
         if (post) {
-            fetch(`${config.serverEndpoint}/post/getPostAuthor/${post.author.id}`)
-            .then(response => response.json())
-            .then(data => {
-                setPostUser(data)
-            })
-            .catch(error => {
-                console.log(error)
-            })
-            const myDate = new Date(post.createdAt)
-            updateDateTime(myDate)
+            getPostAuthor(post.author.id)
+                .then(data => {
+                    if (data) setPostUser(data);
+                });
+    
+            const myDate = new Date(post.createdAt);
+            updateDateTime(myDate);
         }
-    }, [post])
+    }, [post, getPostAuthor]);
 
 
     // Gestion des citations du post
@@ -61,6 +63,7 @@ export default function PostCard({ index, post, topicId, usersList, currentPage 
         dispatch(saveACitation(citationObject))
     }
 
+
     // Gestion des retours à la ligne
     const textWithBreaks = post.content.split('\n').map((text, index) => (
         <React.Fragment key={index}>
@@ -71,24 +74,17 @@ export default function PostCard({ index, post, topicId, usersList, currentPage 
 
 
     // Supprimer le post courant
-    const deletePostFunction = (e) => {
-        e.preventDefault()
-        fetch(`${config.serverEndpoint}/post/deletePostById/${post._id}`, {
-            method: "DELETE",
-            credentials: "include"
-        })
-        .then(response => response.json())
-        .then(data => {
-            dispatch(reloadPosts())
-        })
-        .catch(error => {
-            console.log(error)
-        })
-    }
+    const deletePostFunction = async (e) => {
+        e.preventDefault();
+        const data = await deletePostById(post._id);
+        if (data) {
+            dispatch(reloadPosts());
+        }
+    };
 
 
     // Modifier le message du post
-    const modifyContent = (e) => {
+    const modifyContent = async (e) => {
         if (e.keyCode === 13 && e.shiftKey === false) {
             e.preventDefault();
 
@@ -106,28 +102,23 @@ export default function PostCard({ index, post, topicId, usersList, currentPage 
             }
 
             // Appel au serveur pour modifier le message du post
-            fetch(`${config.serverEndpoint}/post/updatePost/${post._id}`, {
-                method: "PUT",
-                headers: {"Accept": "application/json", "Content-Type": "application/json"},
-                credentials: "include",
-                body: JSON.stringify({
-                    content: newContent
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-
+            try {
+                const data = await updatePostContent(post._id, newContent);
+    
                 // Gestion des mentions dans le texte modifié
-                dispatch(reloadUsersArrayFunction(false))
-                mentionsManager(newContent, data._id, usersList, topicId, currentPage)
-
-                // Rafraichissement des posts affichés
-                dispatch(reloadPosts())
-            })
+                dispatch(reloadUsersArrayFunction(false));
+                mentionsManager(newContent, data._id, usersList, topicId, currentPage);
+    
+                // Rafraîchissement des posts affichés
+                dispatch(reloadPosts());
+            } catch (error) {
+                console.error(error);
+            }
             setModifyContentDisplay('none')
             setPostContentDisplay('block')
         }
     }
+
 
     // Gestion de l'affichage pour la modification
     const modifyDisplayManager = (e) => {

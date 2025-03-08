@@ -27,34 +27,35 @@ export default function Header() {
   const [loggedUser, setLoggedUser] = useState()
   const isLogged = useSelector(selectIsLoggedState)
   const isLoaded = useSelector(selectLoadedState)
+  const { checkUserConnection, logoutRequest } = ServerServices
 
     
   // Vérifier la connexion d'un utilisateur
   useEffect(() => {
     const connect = sessionStorage.getItem("connect");
     if ((!isLoaded || isLogged) && connect) {
-      ServerServices.checkUserConnection()
-        .then(data => {
-          setLoggedUser(data);
-          dispatch(updateUserLog(data));
-          dispatch(updateIsLoggedUser(true));
-          dispatch(updateLoadedUser(true));
-        })
-        .catch(() => {
-          setLoggedUser(undefined);
-          dispatch(updateUserLog(undefined));
-          dispatch(updateIsLoggedUser(false));
-          dispatch(updateLoadedUser(false));
-        });
+      checkUserConnection()
+      .then(data => {
+        setLoggedUser(data);
+        dispatch(updateUserLog(data));
+        dispatch(updateIsLoggedUser(true));
+        dispatch(updateLoadedUser(true));
+      })
+      .catch(() => {
+        setLoggedUser(undefined);
+        dispatch(updateUserLog(undefined));
+        dispatch(updateIsLoggedUser(false));
+        dispatch(updateLoadedUser(false));
+      });
     }
-  }, [isLogged, dispatch, isLoaded])
+  }, [isLogged, dispatch, isLoaded, checkUserConnection])
   
 
   // Fonction de déconnexion d'un utilisateur
   const logout = async (e) => {
     e.preventDefault();
     try {
-      await ServerServices.logoutRequest();
+      await logoutRequest();
       sessionStorage.removeItem("connect");
       dispatch(updateIsLoggedUser(false));
       setLoggedUser(undefined);

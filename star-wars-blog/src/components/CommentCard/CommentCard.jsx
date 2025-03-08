@@ -25,13 +25,19 @@ export default function CommentCard({ index, commentId, topicId, postId, usersLi
     const isLogged = useSelector(selectIsLoggedState)
     const loggedUser = useSelector(selectLoggedUser)
     const dispatch = useDispatch()
+    const { 
+        getCommentById, 
+        getCommentAuthor, 
+        deleteCommentRequest, 
+        modifyCommentRequest 
+    } = ServerServices
 
 
     // Récupérer le commentaire courant et ses informations
     useEffect(() => {
         const fetchComment = async () => {
             if (commentId) {
-                const comment = await ServerServices.getCommentById(commentId);
+                const comment = await getCommentById(commentId);
                 if (comment) {
                     setCurrentComment(comment);
                     const myDate = new Date(comment.createdAt);
@@ -40,21 +46,21 @@ export default function CommentCard({ index, commentId, topicId, postId, usersLi
             }
         };
         fetchComment();
-    }, [commentId, commentUpdater]);
+    }, [commentId, commentUpdater, getCommentById]);
 
 
     // Récupérer l'auteur du commentaire courant
     useEffect(() => {
         const fetchCommentAuthor = async () => {
             if (currentComment && currentComment.author) {
-                const author = await ServerServices.getCommentAuthor(currentComment.author.id);
+                const author = await getCommentAuthor(currentComment.author.id);
                 if (author) {
                     setCommentUser(author);
                 }
             }
         };
         fetchCommentAuthor();
-    }, [currentComment]);
+    }, [currentComment, getCommentAuthor]);
 
 
     // Mise en forme des retours à la ligne
@@ -74,7 +80,7 @@ export default function CommentCard({ index, commentId, topicId, postId, usersLi
     const deleteCommentFunction = (e) => {
         e.preventDefault();
         const deleteComment = async () => {
-            const result = await ServerServices.deleteComment(currentComment._id);
+            const result = await deleteCommentRequest(currentComment._id);
             if (result) {
                 dispatch(reloadPosts()); // En cas de succès, recharge les posts
             }
@@ -103,7 +109,7 @@ export default function CommentCard({ index, commentId, topicId, postId, usersLi
             }
 
             const modifyComment = async () => {
-                const result = await ServerServices.modifyComment(currentComment._id, newContent);
+                const result = await modifyCommentRequest(currentComment._id, newContent);
                 if (result) {
                     // Gestion des mentions
                     dispatch(reloadUsersArrayFunction(false));

@@ -27,6 +27,7 @@ export default function CommentForm({ post, usersList, topicId, currentPage }) {
     const textareaRef = useRef(null);
     const usernames = usersList.map(user => user.name)
     const dispatch = useDispatch()
+    const { createCommentRequest } = ServerServices
 
 
     // Créer un commentaire
@@ -60,7 +61,7 @@ export default function CommentForm({ post, usersList, topicId, currentPage }) {
     
             try {
                 // Envoi de la requête pour créer le commentaire
-                const result = await ServerServices.createCommentRequest(post._id, fetchData);
+                const result = await createCommentRequest(post._id, fetchData);
     
                 // Gestion des mentions
                 dispatch(reloadUsersArrayFunction(false))

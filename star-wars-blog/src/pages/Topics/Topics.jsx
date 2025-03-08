@@ -10,7 +10,7 @@ import TopicCard from '../../components/TopicCard/TopicCard'
 import { Link } from 'react-router-dom'
 import ReturnArrow from '../../assets/images/return-arrow.webp'
 import TopicForm from '../../components/TopicForm/TopicForm'
-import config from '../../config'
+import { ServerServices } from '../../api/api-server.js'
 
 
 
@@ -21,22 +21,21 @@ export default function Topics() {
   const [topicsData, setTopicsData] = useState()
   const [categoryTitle, setCategoryTitle] = useState()
   const topicsBool = useSelector(selectReloadTopicsState)
+  const { getTopicsByCategoryId } = ServerServices
 
 
   // Récupérer les topics de la catégorie
   useEffect(() => {
-    fetch(`${config.serverEndpoint}/topic/getTopicsByCategory/${topicsCategoryId}`)
-    .then(response => response.json())
+    getTopicsByCategoryId(topicsCategoryId)
     .then(data => {
-        setCategoryTitle(data.title)
-        setTopicsData(data.topics)
+      setCategoryTitle(data.title)
+      setTopicsData(data.topics)
     })
     .catch(error => {
       console.log(error)
       navigate("*")
     })
-  }, [topicsCategoryId, topicsBool, navigate])
-
+  }, [topicsCategoryId, topicsBool, navigate, getTopicsByCategoryId])
 
 
   return (
