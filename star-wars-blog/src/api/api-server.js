@@ -268,7 +268,7 @@ export const ServerServices = {
         }
     },
 
-    // Récupération des likes du post / du commentaire via son id
+    // Récupération des likes du post / du commentaire via son identifiant
     async getLikes(typeId) {
         try {
             const response = await fetch(`${config.serverEndpoint}/like/getLikes/${typeId}`, {
@@ -377,7 +377,7 @@ export const ServerServices = {
         }
     },
 
-    // Autorise ou interdit les notifications si mention
+    // Autorise ou interdit les notifications en cas de mention
     async updateMentionOption(userId, newOption) {
         try {
             const response = await fetch(`${config.serverEndpoint}/isMentionned/updateIsMentionnedOption/${userId}`, {
@@ -551,12 +551,54 @@ export const ServerServices = {
         });
     },
 
-    // Récupérer les catégories du Forum
+    // Récupérer toutes les catégories du Forum
     async fetchForumCategories() {
         try {
             const response = await fetch(`${config.serverEndpoint}/category/getCategories`);
             return await response.json();
         } catch (error) {
+            console.log(error);
+            return null;
+        }
+    },
+
+    // Récupérer les posts d'une discussion
+    async getTopicPosts(topicId, currentPage) {
+        if (topicId && currentPage) {
+            const response = await fetch(`${config.serverEndpoint}/post/getPostsByTopicId/${topicId}/posts?page=${currentPage}`);
+            return response.json();
+        }
+    },
+
+    // Récupérer la catégorie d'une discussion
+    async fetchCategoryFromTopic(topicId) {
+        try {
+            const response = await fetch(`${config.serverEndpoint}/category/findCategoryFromTopic/${topicId}`);
+            const data = await response.json();
+            return data.category[0];
+        } catch (error) {
+            console.log(error);
+            return null;
+        }
+    },
+
+    // Créer un post
+    async postNewPost(topicId, fetchData) {
+        const response = await fetch(`${config.serverEndpoint}/post/createPost/${topicId}`, {
+            method: "POST",
+            credentials: "include",
+            headers: { "Accept": "application/json", "Content-Type": "application/json" },
+            body: JSON.stringify(fetchData)
+        });
+        return response.json();
+    },
+
+    // Récupérer les discussions par identifiant de catégorie
+    async getTopicsByCategoryId(topicsCategoryId) {
+        try {
+            const response = await fetch(`${config.serverEndpoint}/topic/getTopicsByCategory/${topicsCategoryId}`);
+            return response.json()
+        } catch(error) {
             console.log(error);
             return null;
         }
