@@ -11,7 +11,9 @@ import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { reinitializeDozen, maxDozen, nextDozen, prevDozen, selectDozen } from '../../redux/slices/dozenSlice'
 import { selectArticle } from '../../redux/slices/articleSlice'
+import { memorizeLastCategoryId } from '../../redux/slices/lastCategory'
 import { StarWarsApiServices } from '../../api/api-sw'
+import WikiNavbar from '../../components/WikiNavbar/WikiNavbar'
 
 
 
@@ -42,6 +44,7 @@ export default function Category() {
       navigate("*")
     } else {
       updateRightPage(true)
+      dispatch(memorizeLastCategoryId(categoryId))
 
       // Appel à l'API StarWars Databank
       setSpinnerDisplay('block')
@@ -55,7 +58,7 @@ export default function Category() {
       });
       nbDozen.current = Math.ceil(info.total / 10);
     }
-  }, [categoryId, currentDatas, navigate, storedDozen, info.total, fetchStarWarsCategoryData])
+  }, [categoryId, currentDatas, navigate, storedDozen, info.total, fetchStarWarsCategoryData, dispatch])
   
 
   // Gestion du clic sur le bouton 
@@ -84,6 +87,7 @@ export default function Category() {
     <>
       {rightPage ? (
         <div className='app-category'>
+          <WikiNavbar />
           <div className='page-content'>
             <h1>{currentDatas.title}</h1>
             <SearchBar category={currentDatas.keyword} />
