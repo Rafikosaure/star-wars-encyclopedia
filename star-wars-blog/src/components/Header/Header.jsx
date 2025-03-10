@@ -4,19 +4,19 @@ import { NavLink } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { updateIsLoggedUser } from '../../redux/slices/isLoggedUserSlice.js'
 import { updateLoadedUser } from '../../redux/slices/loadedUserSlice.js'
-import { reinitializeDozen } from '../../redux/slices/dozenSlice.js'
+// import { reinitializeDozen } from '../../redux/slices/dozenSlice.js'
 import DefaultAvatar from '../../assets/images/EmojiBlitzBobaFett1.webp'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { selectIsLoggedState } from '../../redux/slices/isLoggedUserSlice.js'
 import { selectLoadedState } from '../../redux/slices/loadedUserSlice.js'
 import { setCurrentTopicDozen } from '../../redux/slices/topicDozenSlice.js'
-import { useEffect } from 'react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { toast } from 'sonner'
 import BurgerMenu from '../BurgerMenu/BurgerMenu.jsx'
 import { updateUserLog } from '../../redux/slices/loggedUserSlice.js'
 import { ServerServices } from '../../api/api-server.js'
+import { selectLastCategoryId } from '../../redux/slices/lastCategory.js'
 
 
 
@@ -24,12 +24,13 @@ export default function Header() {
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const lastCategoryId = useSelector(selectLastCategoryId)
   const [loggedUser, setLoggedUser] = useState()
   const isLogged = useSelector(selectIsLoggedState)
   const isLoaded = useSelector(selectLoadedState)
   const { checkUserConnection, logoutRequest } = ServerServices
 
-    
+
   // Vérifier la connexion d'un utilisateur
   useEffect(() => {
     const connect = sessionStorage.getItem("connect");
@@ -79,7 +80,7 @@ export default function Header() {
       <div className='navbar'>
         <NavLink 
           to="/"
-          onClick={() => dispatch(reinitializeDozen())}
+          // onClick={() => dispatch(reinitializeDozen())}
           className={({ isActive }) =>
             isActive
               ? 'link-logo link-logo-disabled'
@@ -94,42 +95,30 @@ export default function Header() {
                         isActive
                         ? 'navlink-active'
                         : 'navlink-inactive'
-                        } to="/category/f6def03b-7818-4951-9d8a-afbe17aa205b" onClick={() => dispatch(reinitializeDozen())}>personnages</NavLink>
+                        } to={`/category/${lastCategoryId}`}
+                        // onClick={() => dispatch(reinitializeDozen())}
+                        >documentation</NavLink>
             <NavLink className={({ isActive }) =>
                         isActive
                         ? 'navlink-active'
                         : 'navlink-inactive'
-                        } to="/category/645e063c-af40-4576-b674-d44be61b0773" onClick={() => dispatch(reinitializeDozen())}>créatures</NavLink>
+                        } to="/forum" 
+                        // onClick={() => dispatch(reinitializeDozen())}
+                        >Forum</NavLink>
             <NavLink className={({ isActive }) =>
                         isActive
                         ? 'navlink-active'
                         : 'navlink-inactive'
-                        } to="/category/2857b650-12ec-4671-86a8-0d5c5db0518e" onClick={() => dispatch(reinitializeDozen())}>droïds</NavLink>
+                        } to="#" 
+                        // onClick={() => dispatch(reinitializeDozen())}
+                        >Vidéothèque</NavLink>
             <NavLink className={({ isActive }) =>
                         isActive
                         ? 'navlink-active'
                         : 'navlink-inactive'
-                        } to="/category/a5ebca47-0ce4-452c-84c2-2d1c23309458" onClick={() => dispatch(reinitializeDozen())}>lieux</NavLink>
-            <NavLink className={({ isActive }) =>
-                        isActive
-                        ? 'navlink-active'
-                        : 'navlink-inactive'
-                        } to="/category/13043736-7457-4a22-9218-4f9134f61b0c" onClick={() => dispatch(reinitializeDozen())}>organisations</NavLink>
-            <NavLink className={({ isActive }) =>
-                        isActive
-                        ? 'navlink-active'
-                        : 'navlink-inactive'
-                        } to="/category/d4ac0725-f089-42c4-a76b-817764c5e0ab" onClick={() => dispatch(reinitializeDozen())}>espèces</NavLink>
-            <NavLink className={({ isActive }) =>
-                        isActive
-                        ? 'navlink-active'
-                        : 'navlink-inactive'
-                        } to="/category/1812c326-e3a3-4a84-9a69-4dd64f5a298d" onClick={() => dispatch(reinitializeDozen())}>véhicules</NavLink>
-            <NavLink className={({ isActive }) =>
-                        isActive
-                        ? 'navlink-active'
-                        : 'navlink-inactive'
-                        } to="/forum" onClick={() => dispatch(reinitializeDozen())}>Forum</NavLink>
+                        } to="#" 
+                        // onClick={() => dispatch(reinitializeDozen())}
+                        >E-boutique</NavLink>
           </nav>
           <div className='header-div-connection'>
             {!isLogged ? (
@@ -155,6 +144,9 @@ export default function Header() {
           </div>
         </div>
         <BurgerMenu />
+      </div>
+      <div>
+        
       </div>
     </div>
   )
