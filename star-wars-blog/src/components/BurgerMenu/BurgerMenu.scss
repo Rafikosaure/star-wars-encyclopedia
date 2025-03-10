@@ -2,9 +2,21 @@ $color_1: rgb(53, 155, 155);
 $color_2: white;
 $background-color_1: black;
 $background-color_2: transparent;
+@mixin span-wiki-menu-default-style {
+	cursor: pointer;
+	margin-bottom: 0;
+};
+@mixin span-wiki-menu-active-or-not-style {
+	font-size: 18px;
+	text-decoration: none;
+	margin-left: 0 !important;
+	text-transform: lowercase;
+};
+
 
 .burger-menu {
 	display: none;
+	min-width: fit-content !important;
 }
 .hamburger-menu-icon {
 	background: url('../../assets/images/menu_hamburger_mobile.webp') no-repeat center center;
@@ -16,6 +28,23 @@ $background-color_2: transparent;
 @media screen and (max-width: 1580px) {
 	.navlink-display-none {
 		display: none;
+	}
+	.span-wiki-menu {
+		@include span-wiki-menu-default-style;
+		&:hover {
+			color: $color_1 !important;
+		}
+	}
+	.span-wiki-menu--active {
+		@include span-wiki-menu-default-style;
+		color: $color_1;
+	}
+	.wiki-menu {
+		margin-left: 18px !important;
+		a {
+			padding-top: 7px;
+			padding-bottom: 7px;
+		}
 	}
 	.navlink-display-flex {
 		display: flex;
@@ -48,12 +77,13 @@ $background-color_2: transparent;
 		flex-direction: column;
 		width: fit-content;
 		height: fit-content;
-		a {
-			font-size: 18px;
+		a, .span-wiki-menu {
+			@include span-wiki-menu-active-or-not-style;
 			color: $color_2;
-			text-decoration: none;
-			margin-left: 5px;
-			text-transform: lowercase;
+		}
+		.span-wiki-menu--active {
+			@include span-wiki-menu-active-or-not-style;
+			color: $color_1;
 		}
 	}
 	.hamburger-menu-icon {
@@ -73,8 +103,9 @@ $background-color_2: transparent;
 @media only screen and (max-width: 767px) {
 	.burger-menu {
 		margin-left: 10px;
-		a {
+		a, .span-wiki-menu, .span-wiki-menu--active {
 			font-size: 14px;
+			margin-left: 0 !important;
 		}
 	}
 }
