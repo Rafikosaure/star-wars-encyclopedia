@@ -115,11 +115,13 @@ export default function Category() {
               </div>
             </div>
             
-            <div className='dozen-indicator' style={{display: article.value ? 'none' : 'block'}}>
-              {!isNaN(nbDozen.current) && !isNaN(storedDozen) ? (
-                `${storedDozen} / ${nbDozen.current}`
-              ) : null }
-            </div>
+            {spinnerDisplay === 'none' && (
+              <div className='dozen-indicator' style={{display: article.value ? 'none' : 'block'}}>
+                {!isNaN(nbDozen.current) && !isNaN(storedDozen) ? (
+                  `${storedDozen} / ${nbDozen.current}`
+                ) : null }
+              </div>
+            )}
           </div>
         </div>
       ) : null}
