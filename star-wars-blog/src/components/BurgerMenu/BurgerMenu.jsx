@@ -109,12 +109,12 @@ export default function BurgerMenu() {
                         isActive
                         ? 'navlink-display-none'
                         : 'navlink-display-flex'
-                        } to="/" onClick={() => {dispatch(reinitializeDozen()); setIsOpen(false); setOpenWikiLinks('none'); setWikiButtonActive('')}}>Vidéothèque</NavLink>
+                        } to="/movies" onClick={() => {dispatch(reinitializeDozen()); setIsOpen(false); setOpenWikiLinks('none'); setWikiButtonActive('')}}>Vidéothèque</NavLink>
                     <NavLink className={({ isActive }) =>
                         isActive
                         ? 'navlink-display-none'
                         : 'navlink-display-flex'
-                        } to="/" onClick={() => {dispatch(reinitializeDozen()); setIsOpen(false); setOpenWikiLinks('none'); setWikiButtonActive('')}}>E-boutique</NavLink>
+                        } to="/shopping" onClick={() => {dispatch(reinitializeDozen()); setIsOpen(false); setOpenWikiLinks('none'); setWikiButtonActive('')}}>E-boutique</NavLink>
                 </div>
             </ClickAwayListener>
         ) : null
