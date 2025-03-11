@@ -1,6 +1,7 @@
 $color_1: white;
 $color_2: lightcyan;
 $color_3: gainsboro;
+$color_4: rgb(53, 155, 155);
 $font-family_1: 'Starjout';
 $font-family_2: Arial, Helvetica, sans-serif;
 $background-color_1: black;
@@ -77,7 +78,7 @@ $background-color_1: black;
 		gap: 2.2%;
 		font-size: 18px;
 		.navlink-active {
-			color: $color_1;
+			color: $color_4;
 		}
 		.navlink-inactive {
 			color: $color_3;
