@@ -118,12 +118,13 @@ export default function Category() {
                 <img className='arrows' src={NextArrow} alt="next arrow" />
               </div>
             </div>
-            
-            <div className='dozen-indicator' style={{display: article.value ? 'none' : 'block'}}>
-              {!isNaN(nbDozen.current) && !isNaN(storedDozen) ? (
-                `${storedDozen} / ${nbDozen.current}`
-              ) : null }
-            </div>
+            {spinnerDisplay === 'none' && (
+              <div className='dozen-indicator' style={{display: article.value ? 'none' : 'block'}}>
+                {!isNaN(nbDozen.current) && !isNaN(storedDozen) ? (
+                  `${storedDozen} / ${nbDozen.current}`
+                ) : null }
+              </div>
+            )}
           </div>
         </div>
       ) : null}
