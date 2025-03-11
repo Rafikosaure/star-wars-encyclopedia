@@ -109,14 +109,14 @@ export default function Header() {
                         isActive
                         ? 'navlink-active'
                         : 'navlink-inactive'
-                        } to="#" 
+                        } to="/movies" 
                         // onClick={() => dispatch(reinitializeDozen())}
                         >Vidéothèque</NavLink>
             <NavLink className={({ isActive }) =>
                         isActive
                         ? 'navlink-active'
                         : 'navlink-inactive'
-                        } to="#" 
+                        } to="/shopping" 
                         // onClick={() => dispatch(reinitializeDozen())}
                         >E-boutique</NavLink>
           </nav>
