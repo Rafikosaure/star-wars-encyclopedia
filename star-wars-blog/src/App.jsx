@@ -13,6 +13,8 @@ import Topic from './pages/Topic/Topic'
 import Account from './pages/Account/Account';
 import Admin from './pages/Admin/Admin';
 import Legal from './pages/Legal/Legal';
+import ShoppingPage from './pages/ShoppingPage/ShoppingPage';
+import MoviesPage from './pages/MoviesPage/MoviesPage';
 
 
 export default function App() {
@@ -31,6 +33,8 @@ export default function App() {
               <Route path='/account' element={<Account />} />
               <Route path='/admin' element={<Admin />} />
               <Route path='/topic/:topicId/page/:page' element={<Topic />} />
+              <Route path='/movies' element={<MoviesPage />} />
+              <Route path='/shopping' element={<ShoppingPage />} />
               <Route path='/legal' element={<Legal />} />
               <Route path='*' element={<Error404 />} />
             </Routes>
