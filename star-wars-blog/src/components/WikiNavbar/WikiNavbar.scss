@@ -1,4 +1,7 @@
 $background-color_1: black;
+$color_1: rgb(53, 155, 155);
+$color_2: gainsboro;
+
 
 .wikinavbar-wrapper {
     display: flex;
@@ -13,6 +16,12 @@ $background-color_1: black;
         justify-content: space-evenly;
         align-items: center;
     }
+}
+.navlink-active {
+    color: $color_1;
+}
+.navlink-inactive {
+    color: $color_2;
 }
 
 /* Ici : media queries pour la seconde partie desktop */
