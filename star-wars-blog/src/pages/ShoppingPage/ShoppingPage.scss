@@ -1,0 +1,23 @@
+$color_1: white;
+$background-color_1: black;
+$font-family_1: Arial, Helvetica, sans-serif;
+
+
+.shopping-page-wrapper {
+    border: 1px solid $color_1;
+    color: $color_1;
+	width: calc(80% - 2px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: $background-color_1;
+    cursor: default;
+    h2 {
+		margin-top: 50px;
+	}
+    .shopping-page-content {
+        text-align: justify;
+        font-family: $font-family_1;
+        width: 90%;
+    }
+}
