@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import './MoviesPage.scss'
 import '../../sharedStyles/index.scss'
 import BackArrow from '../../assets/images/back-arrow.webp'
@@ -30,7 +30,10 @@ function MoviesPage() {
     const [currentMovieTrailerURL, setCurrentMovieTrailerURL] = useState()
     const [datetime, setDatetime] = useState(new Date())
     const { fetchStarWarsMovies } = TmdbApiServices
-    
+    const listingImageWrapperRef = useRef(null);
+    let startX = 0;
+    let endX = 0;
+
 
     // Récupération des films Star Wars
     useEffect(() => {
@@ -91,6 +94,32 @@ function MoviesPage() {
     }, [currentMediaId])
 
     
+    // Détecter le début du toucher
+    const handleTouchStart = (e) => {
+        if (window.innerWidth > 660) return; // Désactiver le swipe si on n'est pas sur mobile
+        startX = e.touches[0].clientX;
+    };
+
+
+    // Détecter le mouvement du swipe
+    const handleTouchMove = (e) => {
+        if (window.innerWidth > 660) return;
+        endX = e.touches[0].clientX;
+    };
+
+
+    // Détecter la fin du swipe et agir en conséquence
+    const handleTouchEnd = (e) => {
+        if (window.innerWidth > 660) return;
+        const deltaX = endX - startX;
+        if (deltaX > 50 && listingIsDisplayed === 'listing-close') {
+            displayListingFunction(e); // Ouvrir le menu avec un swipe vers la droite
+        } else if (deltaX < -50 && listingIsDisplayed === 'listing-open') {
+            displayListingFunction(e); // Fermer le menu avec un swipe vers la gauche
+        }
+    };
+
+
     // Fonction par défaut pour ouvrir ou fermer la liste des médias
     const displayListingFunction = (e) => {
         e.preventDefault()
@@ -128,8 +157,16 @@ function MoviesPage() {
             </div>
             <h1 className='movies-page-title'>Vidéothèque</h1>
             <div className='movies-page-content'>
-                <aside className={`movies-page-media-listing ${listingIsDisplayed}`}>
-                    <div className='movies-page-media-listing-image-wrapper'>
+                <aside 
+                className={`movies-page-media-listing ${listingIsDisplayed}`}>
+                    <div 
+                        ref={listingImageWrapperRef}
+                        className='movies-page-media-listing-image-wrapper'
+                        onClick={(e) => displayListingFunction(e)}
+                        onTouchStart={(e) => handleTouchStart(e)}
+                        onTouchMove={(e) => handleTouchMove(e)}
+                        onTouchEnd={(e) => handleTouchEnd(e)}
+                        >
                         <img src={listingDisplayArrow} alt="Ouvrir ou fermer la liste des médias" 
                         onClick={(e) => displayListingFunction(e)}
                         title={listingDisplayArrow === BackArrow ? (
