@@ -1,9 +1,7 @@
 $color_1: white;
-$background-color_1: black;
-$background-color_2: #303030;
-$background-color_3: rgba(0, 0, 0, 0.2);
+$background-color_1: rgba(0, 0, 0, 0.7);
+$background-color_2: white;
 $font-family_1: Arial, Helvetica, sans-serif;
-$font-family_2: 'Starjedi';
 
 
 .trailer-modal__open-button {
@@ -11,35 +9,35 @@ $font-family_2: 'Starjedi';
     color: $color_1;
     text-decoration: underline;
     cursor: pointer;
+    height: fit-content;
 }
 .trailer-modal {
     border: none;
-    padding: 30px;
-    background-color: rgba(0, 0, 0, 0.7);
+    padding: 0;
+    background-color: $background-color_1;
     backdrop-filter: blur(5px);
     overflow-x: hidden;
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+    height: fit-content;
   
     &::backdrop {
-        background-color: rgba(0, 0, 0, 0.7);
+        background-color: $background-color_1;
     }
   
     &__content {
         position: relative;
-        background-color: white;
+        background-color: $background-color_2;
         padding-top: 5px;
-        padding-bottom: 5px;
-        padding-left: 3px;
-        padding-right: 3px;
-        // border-radius: 4px;
+        padding-left: 5px;
+        padding-right: 5px;
+        border-radius: 2px;
         box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-        // max-width: 640px;
         width: 100%;
-        min-width: 800px;
+        min-width: 900px;
         height: 100%;
         min-height: 500px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
         .trailer-modal__error {
             color: red;
             font-weight: bold;
@@ -50,7 +48,7 @@ $font-family_2: 'Starjedi';
             cursor: default;
         }
         .trailers-iframe {
-            width: 800px;
+            width: 900px;
             height: 500px;
         }
     }
@@ -58,7 +56,7 @@ $font-family_2: 'Starjedi';
     &__close-button {
         position: absolute;
         top: 10px;
-        right: 12px;
+        right: 22px;
         width: 40px;
         height: 40px;
         background-color: #dc2626;
@@ -76,4 +74,65 @@ $font-family_2: 'Starjedi';
             border: none;
         }
     }
-}  
+}
+
+/* Ici : media queries pour la première partie tablette */
+@media screen and (max-width: 1380px) {
+    .trailer-modal {
+        &__close-button {
+            width: 40px !important;
+            height: 40px !important;
+        }
+    }
+}
+/* Ici : media queries pour la seconde partie tablette */
+@media screen and (max-width: 991px) {
+    .trailer-modal {
+        &__content {
+            width: 100%;
+            min-width: 600px;
+            height: 100%;
+            min-height: 330px;
+            .trailers-iframe {
+                width: 600px;
+                height: 330px;
+            }
+        }
+        &__close-button {
+            font-size: 12px !important;
+            line-height: 10px !important;
+            width: 30px !important;
+            height: 30px !important;
+        }
+    }
+}
+/* Ici : media queries pour la troisième partie tablette */
+@media only screen and (max-width: 767px) {
+	.trailer-modal {
+        &__content {
+            width: 100%;
+            min-width: 500px;
+            height: 100%;
+            min-height: 280px;
+            .trailers-iframe {
+                width: 500px;
+                height: 280px;
+            }
+        }
+    }
+}
+/* Ici : media queries pour la première partie smartphone */
+@media screen and (max-width: 660px) {
+    .trailer-modal {
+        &__content {
+            width: 100%;
+            min-width: 310px;
+            height: 100%;
+            min-height: 172px;
+            .trailers-iframe {
+                width: 310px;
+                height: 172px;
+            }
+        }
+    }
+}
