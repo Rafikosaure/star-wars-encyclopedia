@@ -57,7 +57,7 @@ $font-family_2: 'Starjedi';
             overflow: hidden;
             background-color: black;
             width: fit-content;
-            min-width: 70px;
+            min-width: 30px;
             height: 100%;
             position: absolute;
             z-index: 2;
@@ -86,9 +86,10 @@ $font-family_2: 'Starjedi';
                 overflow: hidden;
                 color: $color_1;
                 text-align: justify;
-                padding-left: 50px;
+                // padding-left: 50px;
+                padding-left: 6%;
                 font-family: $font-family_1;
-                font-size: 22px;
+                font-size: 20px;
                 margin-left: 0;
                 list-style-type: none;
                 .media-listing-title {
@@ -251,4 +252,174 @@ $font-family_2: 'Starjedi';
 @keyframes fadein {
 	0% {opacity: 0}
     100% {opacity: 1}
+}
+
+/* Ici : media queries pour la seconde partie desktop */
+@media screen and (max-width: 1580px) {
+    .movies-page-wrapper {
+        height: 500px !important;
+	}
+    .movies-page-media-listing-content {
+        font-size: 16px !important;
+    }
+    .listing-open {
+        max-width: 500px !important;
+        width: 500px !important;
+    }
+    .movies-page-data-section-title {
+        width: 85%;
+        font-size: 24px;
+    }
+    .movies-page-data-section-text-content {
+        line-height: 1.5 !important;
+    }
+    .alternate-text-to-right {
+        transition: transform ease-out 300ms;
+        transform: translate(50%) !important;
+    }
+}
+/* Ici : media queries pour la première partie tablette */
+@media screen and (max-width: 1380px) {
+    .listing-open {
+        max-width: 410px !important;
+        width: 90% !important;
+    }
+    .movies-page-data-section-title {
+        font-size: 18px;
+    }
+    .movies-page-data-section-alternate-text {
+        max-width: 320px !important;
+        font-size: 20px !important;
+    }
+    .alternate-text-to-right {
+        transition: transform ease-out 300ms;
+        transform: translate(70%) !important;
+    }
+}
+/* Ici : media queries pour la seconde partie tablette */
+@media screen and (max-width: 991px) {
+    .listing-open {
+        max-width: 410px !important;
+        width: 410px !important;
+    }
+    .movies-page-title {
+        font-size: 22px;
+    }
+	.movies-page-wrapper {
+		width: calc(100% - 2px);
+        height: 1200px !important;
+	}
+    .movies-page-media-listing-content {
+        padding-left: 5% !important;
+    }
+    .movies-page-data-section {
+        flex-direction: column;
+        align-items: center;
+        height: fit-content !important;
+        padding-bottom: 40px !important;
+        margin-bottom: 40px !important;
+        .movies-page-data-section-text-wrapper {
+            .movies-page-data-section-release-date {
+                font-size: 14px !important;
+            }
+            .movies-page-data-section-text-content {
+                line-height: 1.5 !important;
+                font-size: 14px !important;
+            }
+            .movies-page-data-section-title {
+                font-size: 18px;
+            }
+            .movies-page-data-section-trailer {
+                font-size: 14px !important;
+                position: relative !important;
+                margin-top: 75px;
+                padding: 0 !important;
+            }
+            .movies-page-data-section-link {
+                font-size: 14px !important;
+                margin-top: -10px !important;
+                position: relative !important;
+                font-family: $font-family_1;
+                color: $color_1;
+            }
+        }
+        .movies-page-data-section-image-actors-creators-wrapper {
+            position: relative;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-around;
+            width: 80%;
+            .movies-page-data-section-image-wrapper {
+                margin-top: 0 !important;
+            }
+            .movies-page-data-section-actors-creators {
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+                // margin: 0 !important;
+                margin-right: 0 !important;
+                margin-top: 0px !important;
+                width: 193px !important;
+                height: fit-content !important;
+                max-height: 290px !important;
+            }
+        }
+    }
+    .movies-page-data-section-title {
+        font-size: 16px;
+    }
+    .movies-page-data-section-alternate-text {
+        max-width: 280px !important;
+        font-size: 18px !important;
+    }
+}
+/* Ici : media queries pour la troisième partie tablette */
+@media only screen and (max-width: 767px) {
+	.listing-open {
+        max-width: 410px !important;
+        width: 90% !important;
+    }
+    .movies-page-data-section-image-actors-creators-wrapper {
+        margin: 0 !important;
+        .movies-page-data-section-image-wrapper {
+            margin-right: 0 !important;
+            margin-right: 0 !important;
+            margin-top: 100px !important;
+        }
+        .movies-page-data-section-actors-creators {
+            display: none !important;
+        }
+    }
+}
+/* Ici : media queries pour la première partie smartphone */
+@media screen and (max-width: 660px) {
+    .movies-page-media-listing {
+        bottom: 0;
+        height: calc(100% - 90px) !important;
+        padding-top: 50px !important;
+        overflow: hidden;
+        .movies-page-media-listing-image-bottom {
+            display: none !important;
+        }
+        .movies-page-media-listing-image-wrapper {
+            position: absolute;
+            right: 0;
+            top: -50px;
+            z-index: 2 !important;
+            max-width: 45px !important;
+            height: 100%;
+            img {
+                display: none;
+            }
+        }
+    }
+    .listing-open {
+        max-width: 370px !important;
+        width: 90% !important;
+    }
+    .listing-close {
+        max-width: 45px !important;
+        width: 45px;
+    }
 }
