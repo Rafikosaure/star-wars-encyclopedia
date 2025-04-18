@@ -111,6 +111,7 @@ export default function Like({ post, comment }) {
         {isLogged ? (
             <svg
                 onClick={(e) => likeOrDislike(e)}
+                tabIndex="0" 
                 className={`like-svg`} 
                 version="1.0"
                 width="512pt"

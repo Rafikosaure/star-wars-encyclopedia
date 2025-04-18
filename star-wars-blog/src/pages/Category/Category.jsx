@@ -105,13 +105,15 @@ export default function Category() {
               }
             </div>
             <div className='arrow-section'>
-              <div className='prev-arrow-section' 
-              style={{display: storedDozen <= 1 || article.value ? 'none' : 'flex'}} 
-              onClick={prevPage}
+              <div className='prev-arrow-section'
+                tabIndex='0'
+                style={{display: storedDozen <= 1 || article.value ? 'none' : 'flex'}} 
+                onClick={prevPage}
               >
                 <img className='arrows' src={BackArrow} alt="back arrow" />
               </div>
-              <div className='next-arrow-section' 
+              <div className='next-arrow-section'
+                tabIndex='0'
                 style={{display: storedDozen >= nbDozen.current || article.value ? 'none' : 'flex'}} 
                 onClick={nextPage}
               >
