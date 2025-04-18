@@ -10,7 +10,7 @@ import { selectIsLoggedState } from '../../redux/slices/isLoggedUserSlice'
 import { selectLoggedUser } from '../../redux/slices/loggedUserSlice'
 import CommentCard from '../CommentCard/CommentCard'
 import CommentForm from '../CommentForm/CommentForm'
-import mentionsManager from '../../sharedFunctions/mentionsManager'
+import mentionsManager from '../../utils/mentionsManager'
 import { ServerServices } from '../../api/api-server'
 
 
@@ -139,7 +139,7 @@ export default function PostCard({ index, post, topicId, usersList, currentPage 
                         <div className='post-card-infos'>
                             {isLogged && loggedUser.isAdmin && index !== 1 && (
                                 
-                                <div className='delete-post-cross' title='Supprimer le post' onClick={(e) => deletePostFunction(e)}>✖</div>
+                                <div tabIndex="0" className='delete-post-cross' title='Supprimer le post' onClick={(e) => deletePostFunction(e)}>✖</div>
                             )}
                             <p className='info-index'>{`# ${index}`}</p><p className='infos-datetime'>{`${datetime.toLocaleDateString("fr-FR", {weekday: "long", year: "numeric", month: "long", day: "numeric", hour: '2-digit', minute: '2-digit' }).replace(':', 'h')}`}</p>
                         </div>
@@ -176,7 +176,7 @@ export default function PostCard({ index, post, topicId, usersList, currentPage 
                         {isLogged && postUser && (
                             <>
                                 {postContentDisplay === 'block' && modifyContentDisplay === "none" && (loggedUser._id === postUser._id || loggedUser.isAdmin) ? (
-                                    <p className='post-card-link loggedColor' title='Modifier ce post' onClick={(e) => modifyDisplayManager(e)}>🖉 Modifier</p>
+                                    <p tabIndex="0" className='post-card-link loggedColor' title='Modifier ce post' onClick={(e) => modifyDisplayManager(e)}>🖉 Modifier</p>
                                 ) : (
                                     null
                                 )}

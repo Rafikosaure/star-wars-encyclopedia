@@ -10,7 +10,7 @@ import { reloadUsersArrayFunction } from '../../redux/slices/reloadUsersArray'
 import { reloadPosts } from '../../redux/slices/postsReload'
 import { saveACommentCitation } from '../../redux/slices/commentCitationSlice'
 import { ServerServices } from '../../api/api-server'
-import mentionsManager from '../../sharedFunctions/mentionsManager'
+import mentionsManager from '../../utils/mentionsManager'
 
 
 
@@ -165,6 +165,7 @@ export default function CommentCard({ index, commentId, topicId, postId, usersLi
             <div className='comment-card-main'>
                 {isLogged && loggedUser.isAdmin && (
                     <div className='comment-card-delete-cross' 
+                        tabIndex="0"
                         title='Supprimer le commentaire' 
                         onClick={(e) => deleteCommentFunction(e)}>
                         ✖
@@ -216,7 +217,7 @@ export default function CommentCard({ index, commentId, topicId, postId, usersLi
                 {isLogged && commentUser && (
                     <>
                         {commentContentDisplay === 'block' && modifyContentDisplay === "none" && (loggedUser._id === commentUser._id || loggedUser.isAdmin) ? (
-                            <p className='comment-card-footer-link loggedColor' title='Modifier ce commentaire' onClick={(e) => modifyDisplayManager(e)}>🖉 Modifier</p>
+                            <p tabIndex="0" className='comment-card-footer-link loggedColor' title='Modifier ce commentaire' onClick={(e) => modifyDisplayManager(e)}>🖉 Modifier</p>
                         ) : (
                             null
                         )}

@@ -13,8 +13,8 @@ import { selectLoggedUser } from '../../redux/slices/loggedUserSlice'
 import { reloadPosts } from '../../redux/slices/postsReload'
 import { selectReloadPostsState } from '../../redux/slices/postsReload'
 import { selectTopicDozen, setCurrentTopicDozen } from '../../redux/slices/topicDozenSlice'
-import mentionsManager from '../../sharedFunctions/mentionsManager'
-import subscribersManager from '../../sharedFunctions/subscribersManager'
+import mentionsManager from '../../utils/mentionsManager'
+import subscribersManager from '../../utils/subscribersManager'
 import PostCard from '../../components/PostCard/PostCard'
 import PostForm from '../../components/PostForm/PostForm'
 import { Link } from 'react-router-dom'
@@ -244,7 +244,9 @@ export default function Topic() {
                     {totalPages > 1 && (
                         <div className='topic-page-buttons'>
                             {currentPage !== 1 && (
-                                <div className='topic-prev-button' onClick={(e) => prevPage(e)} 
+                                <div
+                                tabIndex="0" 
+                                className='topic-prev-button' onClick={(e) => prevPage(e)} 
                                 title='Page précédente'
                                 ><img src={ArrowPrev} className='topic-button-prev-page' alt="Bouton de retour à la page précédente" />
                                 </div>
@@ -253,7 +255,9 @@ export default function Topic() {
                             <span className='topic-page-counter'>Page {currentPage} sur {totalPages}</span>
 
                             {currentPage !== totalPages && (
-                                <div className='topic-next-button' onClick={(e) => nextPage(e)} 
+                                <div 
+                                tabIndex="0"
+                                className='topic-next-button' onClick={(e) => nextPage(e)}
                                 title='Page suivante'
                                 ><img src={ArrowNext} className='topic-button-next-page' alt="Bouton de passage à la page suivante" />
                                 </div>
