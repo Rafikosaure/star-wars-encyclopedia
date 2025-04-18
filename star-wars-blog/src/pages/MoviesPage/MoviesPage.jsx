@@ -39,7 +39,6 @@ function MoviesPage() {
     useEffect(() => {
         fetchStarWarsMovies(1, config.tmdbMoviesListId)
         .then(res => setTmdbMoviesData(res.items))
-        .catch(err => console.error(err));
     }, [fetchStarWarsMovies])
 
 
@@ -47,7 +46,6 @@ function MoviesPage() {
     useEffect(() => {
         fetchStarWarsMovies(1, config.tmdbSeriesListId)
         .then(res => setTmdbSeriesData(res.items))
-        .catch(err => console.error(err));
     }, [fetchStarWarsMovies])
 
 
