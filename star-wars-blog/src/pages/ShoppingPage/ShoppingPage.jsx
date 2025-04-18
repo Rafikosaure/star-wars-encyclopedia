@@ -1,15 +1,57 @@
 import React from 'react'
+import { useEffect } from 'react'
+import { useNavigate, useLocation } from 'react-router-dom'
 import './ShoppingPage.scss'
 import '../../sharedStyles/index.scss'
+import { Outlet } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { selectProducts } from '../../redux/slices/productsSlice.js'
+import { saveProducts } from '../../redux/slices/productsSlice.js'
+import config from '../../config.js'
+import Basket from '../../components/Basket/Basket.jsx'
 
 
 function ShoppingPage() {
+
+    const storedProducts = useSelector(selectProducts)
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+    const location = useLocation()
+    const apiMode = 'test'
+
+
+    // Récupération des articles de l'API depuis le serveur NodeJS
+    useEffect(() => {
+        if (storedProducts.length === 0) {
+            fetch(`${config.serverEndpoint}/shopping/getArticles/${apiMode}`)
+            .then(response => response.json())
+            .then(data => {
+                const activeData = data.filter(item => item.isActive)
+                const sortedData = activeData.sort((a, b) => a.title.localeCompare(b.title));
+                dispatch(saveProducts(sortedData))
+            })
+            .catch(error => console.log(error))
+        }    
+    }, [dispatch, storedProducts])
+
+
+    // Redirection en cas d'erreur d'URL
+    useEffect(() => {
+        if (location.pathname === "/shopping" || location.pathname === "/shopping/") {
+            navigate('/shopping/market')
+        }
+    }, [location, navigate])
+
+
     return (
         <div className='app shopping-page-wrapper'>
-            <h2>Boutique en ligne</h2>
-            <div className='shopping-page-content'>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati eos maxime necessitatibus deleniti possimus dignissimos inventore sapiente corrupti nihil ipsam quia veniam numquam, eius debitis architecto, tempore sint perspiciatis! Accusantium, cumque doloribus omnis quidem consequuntur laborum eaque perspiciatis earum corporis ullam facilis assumenda soluta cum dolores nobis nesciunt adipisci delectus quos culpa et neque? Expedita incidunt ipsa libero consequuntur non est alias enim fugit. Rem consequuntur qui, quibusdam, sint tempore necessitatibus tempora fugit at laudantium nam magnam repudiandae consectetur laborum inventore possimus magni sequi vel officia dolorum excepturi, accusantium exercitationem deleniti? Laudantium consectetur deserunt doloremque dolorem fugiat odio voluptatem quidem, quisquam fugit, repudiandae quaerat aspernatur earum. Facere eos nisi porro quasi, laudantium vel expedita quisquam, laborum aperiam atque dolor, illum aspernatur delectus. Ut aliquid hic iusto magni, mollitia architecto sequi veritatis assumenda? Fugiat, suscipit! Dolorum, vitae, aut nihil modi aliquam nemo dicta impedit consequatur magni amet doloribus facilis facere quae.
+            <div className='shopping-page-background' />
+            <div className='shopping-page-maintenance'>Service de shopping expérimental : achats non-possibles</div>
+            <h2 className='shopping-page-title'>Boutique de Wattoo</h2>
+            <div className='shopping-basket-wrapper'>
+                <Basket />
             </div>
+            <Outlet />
         </div>
     )
 }
