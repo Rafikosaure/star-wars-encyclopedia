@@ -6,7 +6,7 @@
     "price": "250 000",
     "currencyCode": "datari",
     "maxQuantity": 1,
-    "imageUrl": "/images/shopping/holocron_dark_nihilus.webp",
+    "imageUrl": "/Images/shopping/holocron_dark_nihilus.webp",
     "isActive": true,
     "tags": [
       "relique",
@@ -26,7 +26,7 @@
     "price": "75 000",
     "currencyCode": "datari",
     "maxQuantity": 1,
-    "imageUrl": "/images/shopping/sabre_laser_luke_skywalker.webp",
+    "imageUrl": "/Images/shopping/sabre_laser_luke_skywalker.webp",
     "isActive": true,
     "tags": [
       "combat",
@@ -47,7 +47,7 @@
     "price": "40 000",
     "currencyCode": "datari",
     "maxQuantity": 1,
-    "imageUrl": "/images/shopping/casque_dark_vador.webp",
+    "imageUrl": "/Images/shopping/casque_dark_vador.webp",
     "isActive": true,
     "tags": [
       "sith",
@@ -71,7 +71,7 @@
     "price": "8 000",
     "currencyCode": "datari",
     "maxQuantity": 80,
-    "imageUrl": "/images/shopping/cristal_kyber_jedha.webp",
+    "imageUrl": "/Images/shopping/cristal_kyber_jedha.webp",
     "isActive": true,
     "tags": [
       "précieux",
@@ -90,7 +90,7 @@
     "price": "15 000",
     "currencyCode": "datari",
     "maxQuantity": 1,
-    "imageUrl": "/images/shopping/journal_whills.webp",
+    "imageUrl": "/Images/shopping/journal_whills.webp",
     "isActive": true,
     "tags": [
       "jedi",
@@ -111,7 +111,7 @@
     "price": "90 000",
     "currencyCode": "datari",
     "maxQuantity": 1,
-    "imageUrl": "/images/shopping/sabre_laser_dark_maul.webp",
+    "imageUrl": "/Images/shopping/sabre_laser_dark_maul.webp",
     "isActive": true,
     "tags": [
       "sith",
@@ -131,7 +131,7 @@
     "price": "120 000",
     "currencyCode": "datari",
     "maxQuantity": 1,
-    "imageUrl": "/images/shopping/darksaber.webp",
+    "imageUrl": "/Images/shopping/darksaber.webp",
     "isActive": true,
     "tags": [
       "mandalorien",
@@ -153,7 +153,7 @@
     "price": "25 000",
     "currencyCode": "datari",
     "maxQuantity": 1,
-    "imageUrl": "/images/shopping/gant_dark_vador.webp",
+    "imageUrl": "/Images/shopping/gant_dark_vador.webp",
     "isActive": true,
     "tags": [
       "sith",
@@ -174,7 +174,7 @@
     "price": "10 000",
     "currencyCode": "datari",
     "maxQuantity": 1,
-    "imageUrl": "/images/shopping/holocron_obiwan_kenobi.webp",
+    "imageUrl": "/Images/shopping/holocron_obiwan_kenobi.webp",
     "isActive": true,
     "tags": [
       "jedi",
@@ -195,7 +195,7 @@
     "price": "50 000",
     "currencyCode": "datari",
     "maxQuantity": 1,
-    "imageUrl": "/images/shopping/casque_dark_revan.webp",
+    "imageUrl": "/Images/shopping/casque_dark_revan.webp",
     "isActive": true,
     "tags": [
       "mandalorien",
@@ -214,7 +214,7 @@
     "price": "20 000",
     "currencyCode": "datari",
     "maxQuantity": 1,
-    "imageUrl": "/images/shopping/anneau_snoke.webp",
+    "imageUrl": "/Images/shopping/anneau_snoke.webp",
     "isActive": true,
     "tags": [
       "pouvoir",
@@ -235,7 +235,7 @@
     "price": "30 000",
     "currencyCode": "datari",
     "maxQuantity": 1,
-    "imageUrl": "/images/shopping/sabre_laser_yoda.webp",
+    "imageUrl": "/Images/shopping/sabre_laser_yoda.webp",
     "isActive": true,
     "tags": [
       "jedi",
@@ -257,7 +257,7 @@
     "price": "10 000",
     "currencyCode": "datari",
     "maxQuantity": 1,
-    "imageUrl": "/images/shopping/livres_sacres_jedi.webp",
+    "imageUrl": "/Images/shopping/livres_sacres_jedi.webp",
     "isActive": true,
     "tags": [
       "jedi",
@@ -278,7 +278,7 @@
     "price": "5 000",
     "currencyCode": "datari",
     "maxQuantity": 1,
-    "imageUrl": "/images/shopping/collier_kyber_jyn_erso.webp",
+    "imageUrl": "/Images/shopping/collier_kyber_jyn_erso.webp",
     "isActive": true,
     "tags": [
       "héritage",
@@ -299,7 +299,7 @@
     "price": "70 000",
     "currencyCode": "datari",
     "maxQuantity": 1,
-    "imageUrl": "/images/shopping/sabre_laser_anakin_skywalker.webp",
+    "imageUrl": "/Images/shopping/sabre_laser_anakin_skywalker.webp",
     "isActive": true,
     "tags": [
       "jedi",
@@ -320,7 +320,7 @@
     "price": "22 000",
     "currencyCode": "datari",
     "maxQuantity": 1,
-    "imageUrl": "/images/shopping/canne_palpatine.webp",
+    "imageUrl": "/Images/shopping/canne_palpatine.webp",
     "isActive": true,
     "tags": [
       "sith",
@@ -340,7 +340,7 @@
     "price": "20 000",
     "currencyCode": "datari",
     "maxQuantity": 1,
-    "imageUrl": "/images/shopping/boussole_pillio.webp",
+    "imageUrl": "/Images/shopping/boussole_pillio.webp",
     "isActive": true,
     "tags": [
       "sith",
@@ -360,7 +360,7 @@
     "price": "60 000",
     "currencyCode": "datari",
     "maxQuantity": 1,
-    "imageUrl": "/images/shopping/casque_boba_fett.webp",
+    "imageUrl": "/Images/shopping/casque_boba_fett.webp",
     "isActive": true,
     "tags": [
       "mandalorien",
@@ -384,7 +384,7 @@
     "price": "8 000",
     "currencyCode": "datari",
     "maxQuantity": 1,
-    "imageUrl": "/images/shopping/pendentif_padme.webp",
+    "imageUrl": "/Images/shopping/pendentif_padme.webp",
     "isActive": true,
     "tags": [
       "héritage",
@@ -404,7 +404,7 @@
     "price": "90 000",
     "currencyCode": "datari",
     "maxQuantity": 1,
-    "imageUrl": "/images/shopping/sabre_laser_rey.webp",
+    "imageUrl": "/Images/shopping/sabre_laser_rey.webp",
     "isActive": true,
     "tags": [
       "jedi",
@@ -426,7 +426,7 @@
     "price": "220 000",
     "currencyCode": "datari",
     "maxQuantity": 1,
-    "imageUrl": "/images/shopping/holocron_dark_bane.webp",
+    "imageUrl": "/Images/shopping/holocron_dark_bane.webp",
     "isActive": true,
     "tags": [
       "relique",
@@ -447,7 +447,7 @@
     "price": "150 000",
     "currencyCode": "datari",
     "maxQuantity": 1,
-    "imageUrl": "/images/shopping/trone_sith_exegol.webp",
+    "imageUrl": "/Images/shopping/trone_sith_exegol.webp",
     "isActive": true,
     "tags": [
       "sith",
@@ -468,7 +468,7 @@
     "price": "12 000",
     "currencyCode": "datari",
     "maxQuantity": 1,
-    "imageUrl": "/images/shopping/dague_sith_pasaana.webp",
+    "imageUrl": "/Images/shopping/dague_sith_pasaana.webp",
     "isActive": true,
     "tags": [
       "sith",
@@ -489,7 +489,7 @@
     "price": "7 000",
     "currencyCode": "datari",
     "maxQuantity": 4,
-    "imageUrl": "/images/shopping/cape_dark_sidious.webp",
+    "imageUrl": "/Images/shopping/cape_dark_sidious.webp",
     "isActive": true,
     "tags": [
       "pouvoir",
@@ -509,7 +509,7 @@
     "price": "9 500",
     "currencyCode": "datari",
     "maxQuantity": 1,
-    "imageUrl": "/images/shopping/holocron_jocasta_nu.webp",
+    "imageUrl": "/Images/shopping/holocron_jocasta_nu.webp",
     "isActive": true,
     "tags": [
       "jedi",
@@ -530,7 +530,7 @@
     "price": "40 000",
     "currencyCode": "datari",
     "maxQuantity": 1,
-    "imageUrl": "/images/shopping/lance_beskar_din_djarin.webp",
+    "imageUrl": "/Images/shopping/lance_beskar_din_djarin.webp",
     "isActive": true,
     "tags": [
       "mandalorien",
@@ -550,7 +550,7 @@
     "price": "3 000",
     "currencyCode": "datari",
     "maxQuantity": 5000,
-    "imageUrl": "/images/shopping/fusil_disruptor.webp",
+    "imageUrl": "/Images/shopping/fusil_disruptor.webp",
     "isActive": true,
     "tags": [
       "combat",
@@ -572,7 +572,7 @@
     "price": "55 000",
     "currencyCode": "datari",
     "maxQuantity": 1,
-    "imageUrl": "/images/shopping/sabre_laser_cal_kestis.webp",
+    "imageUrl": "/Images/shopping/sabre_laser_cal_kestis.webp",
     "isActive": true,
     "tags": [
       "jedi",
@@ -592,7 +592,7 @@
     "price": "100 000",
     "currencyCode": "datari",
     "maxQuantity": 1,
-    "imageUrl": "/images/shopping/armure_din_djarin.webp",
+    "imageUrl": "/Images/shopping/armure_din_djarin.webp",
     "isActive": true,
     "tags": [
       "mandalorien",
@@ -611,7 +611,7 @@
     "price": "3 500",
     "currencyCode": "datari",
     "maxQuantity": 15000,
-    "imageUrl": "/images/shopping/blaster_han_solo.webp",
+    "imageUrl": "/Images/shopping/blaster_han_solo.webp",
     "isActive": true,
     "tags": [
       "combat",
@@ -632,7 +632,7 @@
     "price": "15 000",
     "currencyCode": "datari",
     "maxQuantity": 1,
-    "imageUrl": "/images/shopping/casque_kylo_ren.webp",
+    "imageUrl": "/Images/shopping/casque_kylo_ren.webp",
     "isActive": true,
     "tags": [
       "sith",
@@ -656,7 +656,7 @@
     "price": "6 000",
     "currencyCode": "datari",
     "maxQuantity": 120,
-    "imageUrl": "/images/shopping/cristal_kyber_rouge_mustafar.webp",
+    "imageUrl": "/Images/shopping/cristal_kyber_rouge_mustafar.webp",
     "isActive": true,
     "tags": [
       "précieux",
@@ -676,7 +676,7 @@
     "price": "45 000",
     "currencyCode": "datari",
     "maxQuantity": 50,
-    "imageUrl": "/images/shopping/sabre_laser_garde_temple_jedi.webp",
+    "imageUrl": "/Images/shopping/sabre_laser_garde_temple_jedi.webp",
     "isActive": true,
     "tags": [
       "jedi",
@@ -697,7 +697,7 @@
     "price": "25 000",
     "currencyCode": "datari",
     "maxQuantity": 1,
-    "imageUrl": "/images/shopping/sabre_laser_vernestra_rwoh.webp",
+    "imageUrl": "/Images/shopping/sabre_laser_vernestra_rwoh.webp",
     "isActive": true,
     "tags": [
       "jedi",
@@ -719,7 +719,7 @@
     "price": "1 200",
     "currencyCode": "datari",
     "maxQuantity": 9,
-    "imageUrl": "/images/shopping/datapad_cassian_andor.webp",
+    "imageUrl": "/Images/shopping/datapad_cassian_andor.webp",
     "isActive": true,
     "tags": [
       "artisanat",
@@ -739,7 +739,7 @@
     "price": "800",
     "currencyCode": "datari",
     "maxQuantity": 200,
-    "imageUrl": "/images/shopping/comlink_leia_organa.webp",
+    "imageUrl": "/Images/shopping/comlink_leia_organa.webp",
     "isActive": true,
     "tags": [
       "rébellion",
@@ -759,7 +759,7 @@
     "price": "35 000",
     "currencyCode": "datari",
     "maxQuantity": 1,
-    "imageUrl": "/images/shopping/etoile_kaiburr.webp",
+    "imageUrl": "/Images/shopping/etoile_kaiburr.webp",
     "isActive": true,
     "tags": [
       "jedi",
@@ -780,7 +780,7 @@
     "price": "10 000",
     "currencyCode": "datari",
     "maxQuantity": 1,
-    "imageUrl": "/images/shopping/respirateur_dark_vador.webp",
+    "imageUrl": "/Images/shopping/respirateur_dark_vador.webp",
     "isActive": true,
     "tags": [
       "sith",
@@ -804,7 +804,7 @@
     "price": "5 000",
     "currencyCode": "datari",
     "maxQuantity": 13,
-    "imageUrl": "/images/shopping/masque_rituel_inquisiteurs.webp",
+    "imageUrl": "/Images/shopping/masque_rituel_inquisiteurs.webp",
     "isActive": true,
     "tags": [
       "côté obscur de la force",
@@ -822,7 +822,7 @@
     "price": "2 500",
     "currencyCode": "datari",
     "maxQuantity": 1,
-    "imageUrl": "/images/shopping/droid_lola_leia.webp",
+    "imageUrl": "/Images/shopping/droid_lola_leia.webp",
     "isActive": true,
     "tags": [
       "espoir",
@@ -840,7 +840,7 @@
     "price": "9 500",
     "currencyCode": "datari",
     "maxQuantity": 1,
-    "imageUrl": "/images/shopping/journal_padme.webp",
+    "imageUrl": "/Images/shopping/journal_padme.webp",
     "isActive": true,
     "tags": [
       "espoir",
@@ -860,7 +860,7 @@
     "price": "4 000",
     "currencyCode": "datari",
     "maxQuantity": 37,
-    "imageUrl": "/images/shopping/crane_fossile_exogorth.webp",
+    "imageUrl": "/Images/shopping/crane_fossile_exogorth.webp",
     "isActive": true,
     "tags": [
       "rare",
@@ -877,7 +877,7 @@
     "price": "10 000",
     "currencyCode": "datari",
     "maxQuantity": 1,
-    "imageUrl": "/images/shopping/coaxium.webp",
+    "imageUrl": "/Images/shopping/coaxium.webp",
     "isActive": true,
     "tags": [
       "précieux",
@@ -897,7 +897,7 @@
     "price": "70 000",
     "currencyCode": "datari",
     "maxQuantity": 1,
-    "imageUrl": "/images/shopping/sabre_laser_mace_windu.webp",
+    "imageUrl": "/Images/shopping/sabre_laser_mace_windu.webp",
     "isActive": true,
     "tags": [
       "jedi",
@@ -920,7 +920,7 @@
     "price": "3 000",
     "currencyCode": "datari",
     "maxQuantity": 30,
-    "imageUrl": "/images/shopping/scanner_force_inquisiteurs.webp",
+    "imageUrl": "/Images/shopping/scanner_force_inquisiteurs.webp",
     "isActive": true,
     "tags": [
       "empire",
@@ -939,7 +939,7 @@
     "price": "200",
     "currencyCode": "datari",
     "maxQuantity": 1,
-    "imageUrl": "/images/shopping/bracelet_esclave_shmi_skywalker.webp",
+    "imageUrl": "/Images/shopping/bracelet_esclave_shmi_skywalker.webp",
     "isActive": true,
     "tags": [
       "espoir",
@@ -957,7 +957,7 @@
     "price": "13 000",
     "currencyCode": "datari",
     "maxQuantity": 1,
-    "imageUrl": "/images/shopping/pierre_sith_exegol.webp",
+    "imageUrl": "/Images/shopping/pierre_sith_exegol.webp",
     "isActive": true,
     "tags": [
       "sith",
@@ -978,7 +978,7 @@
     "price": "9 000",
     "currencyCode": "datari",
     "maxQuantity": 1,
-    "imageUrl": "/images/shopping/compas_eno_cordova.webp",
+    "imageUrl": "/Images/shopping/compas_eno_cordova.webp",
     "isActive": true,
     "tags": [
       "jedi",
@@ -1004,7 +1004,7 @@
     "price": "18 000",
     "currencyCode": "datari",
     "maxQuantity": 1,
-    "imageUrl": "/images/shopping/morceau_etoile_noire_kefbir.webp",
+    "imageUrl": "/Images/shopping/morceau_etoile_noire_kefbir.webp",
     "isActive": true,
     "tags": [
       "empire",
@@ -1028,7 +1028,7 @@
     "price": "2 700",
     "currencyCode": "datari",
     "maxQuantity": 1,
-    "imageUrl": "/images/shopping/blaster_sabine_wren.webp",
+    "imageUrl": "/Images/shopping/blaster_sabine_wren.webp",
     "isActive": true,
     "tags": [
       "jedi",
@@ -1050,7 +1050,7 @@
     "price": "40 000",
     "currencyCode": "datari",
     "maxQuantity": 1,
-    "imageUrl": "/images/shopping/sabre_laser_comte_dooku.webp",
+    "imageUrl": "/Images/shopping/sabre_laser_comte_dooku.webp",
     "isActive": true,
     "tags": [
       "sith",
@@ -1071,7 +1071,7 @@
     "price": "1 200",
     "currencyCode": "datari",
     "maxQuantity": 5,
-    "imageUrl": "/images/shopping/holoprojecteur_leia.webp",
+    "imageUrl": "/Images/shopping/holoprojecteur_leia.webp",
     "isActive": true,
     "tags": [
       "rébellion",
@@ -1092,7 +1092,7 @@
     "price": "15 000",
     "currencyCode": "datari",
     "maxQuantity": 1,
-    "imageUrl": "/images/shopping/droid_ig-88.webp",
+    "imageUrl": "/Images/shopping/droid_ig-88.webp",
     "isActive": true,
     "tags": [
       "chasseur de primes",
@@ -1115,7 +1115,7 @@
     "price": "50 000",
     "currencyCode": "datari",
     "maxQuantity": 1,
-    "imageUrl": "/images/shopping/armure_grievous.webp",
+    "imageUrl": "/Images/shopping/armure_grievous.webp",
     "isActive": true,
     "tags": [
       "sith",
@@ -1139,7 +1139,7 @@
     "price": "85 000",
     "currencyCode": "datari",
     "maxQuantity": 1,
-    "imageUrl": "/images/shopping/sabre_laser_dark_sidious.webp",
+    "imageUrl": "/Images/shopping/sabre_laser_dark_sidious.webp",
     "isActive": true,
     "tags": [
       "sith",
@@ -1161,7 +1161,7 @@
     "price": "6 000",
     "currencyCode": "datari",
     "maxQuantity": 1,
-    "imageUrl": "/images/shopping/signal_jedi.webp",
+    "imageUrl": "/Images/shopping/signal_jedi.webp",
     "isActive": true,
     "tags": [
       "jedi",
@@ -1184,7 +1184,7 @@
     "price": "11 000",
     "currencyCode": "datari",
     "maxQuantity": 1,
-    "imageUrl": "/images/shopping/gant_starkiller.webp",
+    "imageUrl": "/Images/shopping/gant_starkiller.webp",
     "isActive": true,
     "tags": [
       "sith",
@@ -1209,7 +1209,7 @@
     "price": "10 000",
     "currencyCode": "datari",
     "maxQuantity": 2,
-    "imageUrl": "/images/shopping/gantelets_bo-katan.webp",
+    "imageUrl": "/Images/shopping/gantelets_bo-katan.webp",
     "isActive": true,
     "tags": [
       "mandalorien",
@@ -1232,7 +1232,7 @@
     "price": "16 000",
     "currencyCode": "datari",
     "maxQuantity": 1,
-    "imageUrl": "/images/shopping/holocron_sith_malachor.webp",
+    "imageUrl": "/Images/shopping/holocron_sith_malachor.webp",
     "isActive": true,
     "tags": [
       "précieux",
@@ -1255,7 +1255,7 @@
     "price": "1 500",
     "currencyCode": "datari",
     "maxQuantity": 1,
-    "imageUrl": "/images/shopping/casque_c-3po.webp",
+    "imageUrl": "/Images/shopping/casque_c-3po.webp",
     "isActive": true,
     "tags": [
       "rébellion",
@@ -1278,7 +1278,7 @@
     "price": "2 000",
     "currencyCode": "datari",
     "maxQuantity": 1,
-    "imageUrl": "/images/shopping/ceinture_outils_rey.webp",
+    "imageUrl": "/Images/shopping/ceinture_outils_rey.webp",
     "isActive": true,
     "tags": [
       "artisanat",
@@ -1304,7 +1304,7 @@
     "price": "18 000",
     "currencyCode": "datari",
     "maxQuantity": 3,
-    "imageUrl": "/images/shopping/capsule_meditation_dark_vador.webp",
+    "imageUrl": "/Images/shopping/capsule_meditation_dark_vador.webp",
     "isActive": true,
     "tags": [
       "sith",
@@ -1329,7 +1329,7 @@
     "price": "1 000",
     "currencyCode": "datari",
     "maxQuantity": 1,
-    "imageUrl": "/images/shopping/orbe_temple_jedha.webp",
+    "imageUrl": "/Images/shopping/orbe_temple_jedha.webp",
     "isActive": true,
     "tags": [
       "côté lumineux de la force",
@@ -1350,7 +1350,7 @@
     "price": "12 000",
     "currencyCode": "datari",
     "maxQuantity": 1,
-    "imageUrl": "/images/shopping/moteur_ebon_hawk.webp",
+    "imageUrl": "/Images/shopping/moteur_ebon_hawk.webp",
     "isActive": true,
     "tags": [
       "energie",
@@ -1373,7 +1373,7 @@
     "price": "9 500",
     "currencyCode": "datari",
     "maxQuantity": 1,
-    "imageUrl": "/images/shopping/holocron_tera_sinube.webp",
+    "imageUrl": "/Images/shopping/holocron_tera_sinube.webp",
     "isActive": true,
     "tags": [
       "jedi",
@@ -1394,7 +1394,7 @@
     "price": "6 000",
     "currencyCode": "datari",
     "maxQuantity": 10,
-    "imageUrl": "/images/shopping/epee_nightsisters.webp",
+    "imageUrl": "/Images/shopping/epee_nightsisters.webp",
     "isActive": true,
     "tags": [
       "héritage",
@@ -1418,7 +1418,7 @@
     "price": "70 000",
     "currencyCode": "datari",
     "maxQuantity": 2,
-    "imageUrl": "/images/shopping/sabre_laser_ahsoka_tano.webp",
+    "imageUrl": "/Images/shopping/sabre_laser_ahsoka_tano.webp",
     "isActive": true,
     "tags": [
       "combat",
@@ -1439,7 +1439,7 @@
     "price": "3 000",
     "currencyCode": "datari",
     "maxQuantity": 1200,
-    "imageUrl": "/images/shopping/pierre_meditation_jedi.webp",
+    "imageUrl": "/Images/shopping/pierre_meditation_jedi.webp",
     "isActive": true,
     "tags": [
       "jedi",
@@ -1458,7 +1458,7 @@
     "price": "500",
     "currencyCode": "datari",
     "maxQuantity": 1,
-    "imageUrl": "/images/shopping/blason_starlight.webp",
+    "imageUrl": "/Images/shopping/blason_starlight.webp",
     "isActive": true,
     "tags": [
       "jedi",
@@ -1480,7 +1480,7 @@
     "price": "45 000",
     "currencyCode": "datari",
     "maxQuantity": 1,
-    "imageUrl": "/images/shopping/armure_phasma.webp",
+    "imageUrl": "/Images/shopping/armure_phasma.webp",
     "isActive": true,
     "tags": [
       "empire",
@@ -1500,7 +1500,7 @@
     "price": "3 500",
     "currencyCode": "datari",
     "maxQuantity": 1,
-    "imageUrl": "/images/shopping/medaillon_avar_kriss.webp",
+    "imageUrl": "/Images/shopping/medaillon_avar_kriss.webp",
     "isActive": true,
     "tags": [
       "jedi",
@@ -1521,7 +1521,7 @@
     "price": "80 000",
     "currencyCode": "datari",
     "maxQuantity": 1,
-    "imageUrl": "/images/shopping/coffre-fort_grakkus.webp",
+    "imageUrl": "/Images/shopping/coffre-fort_grakkus.webp",
     "isActive": true,
     "tags": [
       "précieux",
@@ -1545,7 +1545,7 @@
     "price": "1 700",
     "currencyCode": "datari",
     "maxQuantity": 1,
-    "imageUrl": "/images/shopping/droid_8D8.webp",
+    "imageUrl": "/Images/shopping/droid_8D8.webp",
     "isActive": true,
     "tags": [
       "artisanat",
@@ -1564,7 +1564,7 @@
     "price": "11 000",
     "currencyCode": "datari",
     "maxQuantity": 3,
-    "imageUrl": "/images/shopping/cristal_kyber_noir.webp",
+    "imageUrl": "/Images/shopping/cristal_kyber_noir.webp",
     "isActive": true,
     "tags": [
       "sith",
@@ -1585,7 +1585,7 @@
     "price": "48 000",
     "currencyCode": "datari",
     "maxQuantity": 1,
-    "imageUrl": "/images/shopping/sabre_laser_ty_yorrick.webp",
+    "imageUrl": "/Images/shopping/sabre_laser_ty_yorrick.webp",
     "isActive": true,
     "tags": [
       "côté obscur de la force",
@@ -1608,7 +1608,7 @@
     "price": "22 000",
     "currencyCode": "datari",
     "maxQuantity": 5,
-    "imageUrl": "/images/shopping/coeur_anil_kesh.webp",
+    "imageUrl": "/Images/shopping/coeur_anil_kesh.webp",
     "isActive": true,
     "tags": [
       "jedi",
@@ -1633,7 +1633,7 @@
     "price": "9 000",
     "currencyCode": "datari",
     "maxQuantity": 1,
-    "imageUrl": "/images/shopping/grotte_du_miroir.webp",
+    "imageUrl": "/Images/shopping/grotte_du_miroir.webp",
     "isActive": true,
     "tags": [
       "jedi",
@@ -1654,7 +1654,7 @@
     "price": "3 000",
     "currencyCode": "datari",
     "maxQuantity": 1,
-    "imageUrl": "/images/shopping/banniere_501e_legion.webp",
+    "imageUrl": "/Images/shopping/banniere_501e_legion.webp",
     "isActive": true,
     "tags": [
       "jedi",
@@ -1676,7 +1676,7 @@
     "price": "2 000",
     "currencyCode": "datari",
     "maxQuantity": 1,
-    "imageUrl": "/images/shopping/collier_sable_luke_skywalker.webp",
+    "imageUrl": "/Images/shopping/collier_sable_luke_skywalker.webp",
     "isActive": true,
     "tags": [
       "héritage",
@@ -1696,7 +1696,7 @@
     "price": "10 000",
     "currencyCode": "datari",
     "maxQuantity": 1,
-    "imageUrl": "/images/shopping/bras_cybernetique_dark_vador.webp",
+    "imageUrl": "/Images/shopping/bras_cybernetique_dark_vador.webp",
     "isActive": true,
     "tags": [
       "sith",
@@ -1720,7 +1720,7 @@
     "price": "2 200",
     "currencyCode": "datari",
     "maxQuantity": 9216,
-    "imageUrl": "/images/shopping/casque_212e_legion.webp",
+    "imageUrl": "/Images/shopping/casque_212e_legion.webp",
     "isActive": true,
     "tags": [
       "jedi",
@@ -1744,7 +1744,7 @@
     "price": "11 500",
     "currencyCode": "datari",
     "maxQuantity": 1,
-    "imageUrl": "/images/shopping/journal_galen_erso.webp",
+    "imageUrl": "/Images/shopping/journal_galen_erso.webp",
     "isActive": true,
     "tags": [
       "empire",
@@ -1765,7 +1765,7 @@
     "price": "1 800",
     "currencyCode": "datari",
     "maxQuantity": 450,
-    "imageUrl": "/images/shopping/fusil_cycleur_tusken.webp",
+    "imageUrl": "/Images/shopping/fusil_cycleur_tusken.webp",
     "isActive": true,
     "tags": [
       "combat",
@@ -1789,7 +1789,7 @@
     "price": "42 000",
     "currencyCode": "datari",
     "maxQuantity": 1,
-    "imageUrl": "/images/shopping/sabre_laser_brise_kanan_jarrus.webp",
+    "imageUrl": "/Images/shopping/sabre_laser_brise_kanan_jarrus.webp",
     "isActive": true,
     "tags": [
       "jedi",
@@ -1810,7 +1810,7 @@
     "price": "4 000",
     "currencyCode": "datari",
     "maxQuantity": 1,
-    "imageUrl": "/images/shopping/medaillon_grogu.webp",
+    "imageUrl": "/Images/shopping/medaillon_grogu.webp",
     "isActive": true,
     "tags": [
       "mandalorien",
@@ -1830,7 +1830,7 @@
     "price": "2 600",
     "currencyCode": "datari",
     "maxQuantity": 2,
-    "imageUrl": "/images/shopping/code_acces_imperial_cassian_andor.webp",
+    "imageUrl": "/Images/shopping/code_acces_imperial_cassian_andor.webp",
     "isActive": true,
     "tags": [
       "rébellion",
@@ -1853,7 +1853,7 @@
     "price": "46 500",
     "currencyCode": "datari",
     "maxQuantity": 1,
-    "imageUrl": "/images/shopping/masque_viceroy_exim_panshard.webp",
+    "imageUrl": "/Images/shopping/masque_viceroy_exim_panshard.webp",
     "isActive": true,
     "tags": [
       "sith",
@@ -1878,7 +1878,7 @@
     "price": "1 300",
     "currencyCode": "datari",
     "maxQuantity": 1200000,
-    "imageUrl": "/images/shopping/droid_b1_orbe_controle.webp",
+    "imageUrl": "/Images/shopping/droid_b1_orbe_controle.webp",
     "isActive": true,
     "tags": [
       "combat",
@@ -1900,7 +1900,7 @@
     "price": "2 700",
     "currencyCode": "datari",
     "maxQuantity": 70,
-    "imageUrl": "/images/shopping/arme_energetique_pykes.webp",
+    "imageUrl": "/Images/shopping/arme_energetique_pykes.webp",
     "isActive": true,
     "tags": [
       "arme",
@@ -1923,7 +1923,7 @@
     "price": "8 000",
     "currencyCode": "datari",
     "maxQuantity": 1,
-    "imageUrl": "/images/shopping/cle_pierre_temple_jedi.webp",
+    "imageUrl": "/Images/shopping/cle_pierre_temple_jedi.webp",
     "isActive": true,
     "tags": [
       "jedi",
@@ -1945,7 +1945,7 @@
     "price": "3 000",
     "currencyCode": "datari",
     "maxQuantity": 1,
-    "imageUrl": "/images/shopping/carnet_secret_luthen_rael.webp",
+    "imageUrl": "/Images/shopping/carnet_secret_luthen_rael.webp",
     "isActive": true,
     "tags": [
       "rébellion",
@@ -1967,7 +1967,7 @@
     "price": "950",
     "currencyCode": "datari",
     "maxQuantity": 2,
-    "imageUrl": "/images/shopping/broche_mon_mothma.webp",
+    "imageUrl": "/Images/shopping/broche_mon_mothma.webp",
     "isActive": true,
     "tags": [
       "pouvoir",
@@ -1988,7 +1988,7 @@
     "price": "1 100",
     "currencyCode": "datari",
     "maxQuantity": 2,
-    "imageUrl": "/images/shopping/chale_bail_organa.webp",
+    "imageUrl": "/Images/shopping/chale_bail_organa.webp",
     "isActive": true,
     "tags": [
       "pouvoir",
@@ -2010,7 +2010,7 @@
     "price": "8 500",
     "currencyCode": "datari",
     "maxQuantity": 7,
-    "imageUrl": "/images/shopping/sceptre_sorcieres_dathomir.webp",
+    "imageUrl": "/Images/shopping/sceptre_sorcieres_dathomir.webp",
     "isActive": true,
     "tags": [
       "magie",
@@ -2033,7 +2033,7 @@
     "price": "150",
     "currencyCode": "datari",
     "maxQuantity": 180,
-    "imageUrl": "/images/shopping/puce_soldat_clone.webp",
+    "imageUrl": "/Images/shopping/puce_soldat_clone.webp",
     "isActive": true,
     "tags": [
       "rébellion",
@@ -2056,7 +2056,7 @@
     "price": "20 000",
     "currencyCode": "datari",
     "maxQuantity": 1,
-    "imageUrl": "/images/shopping/armure_saw_gerrera.webp",
+    "imageUrl": "/Images/shopping/armure_saw_gerrera.webp",
     "isActive": true,
     "tags": [
       "rébellion",
@@ -2081,7 +2081,7 @@
     "price": "2 200",
     "currencyCode": "datari",
     "maxQuantity": 1,
-    "imageUrl": "/images/shopping/lentille_visee_crosshair.webp",
+    "imageUrl": "/Images/shopping/lentille_visee_crosshair.webp",
     "isActive": true,
     "tags": [
       "empire",
@@ -2103,7 +2103,7 @@
     "price": "3 000",
     "currencyCode": "datari",
     "maxQuantity": 1,
-    "imageUrl": "/images/shopping/casque_rex.webp",
+    "imageUrl": "/Images/shopping/casque_rex.webp",
     "isActive": true,
     "tags": [
       "empire",
@@ -2128,7 +2128,7 @@
     "price": "3 700",
     "currencyCode": "datari",
     "maxQuantity": 50,
-    "imageUrl": "/images/shopping/casque_death_watch.webp",
+    "imageUrl": "/Images/shopping/casque_death_watch.webp",
     "isActive": true,
     "tags": [
       "mandalorien",
@@ -2153,7 +2153,7 @@
     "price": "65 000",
     "currencyCode": "datari",
     "maxQuantity": 1,
-    "imageUrl": "/images/shopping/sabre_laser_qui-gon-jinn.webp",
+    "imageUrl": "/Images/shopping/sabre_laser_qui-gon-jinn.webp",
     "isActive": true,
     "tags": [
       "jedi",

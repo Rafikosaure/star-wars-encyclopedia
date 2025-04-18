@@ -63,7 +63,6 @@ const followTopicRoutes = require('./routes/followTopic.routes')
 const likeRoutes = require('./routes/like.routes')
 const emailRoutes = require('./routes/email.routes')
 const isMentionnedRoutes = require('./routes/isMentionned.routes.js')
-const shoppingRoutes = require('./routes/shopping.routes.js')
 
 
 // Middlewares de nos routes
@@ -78,7 +77,6 @@ app.use('/followTopic', followTopicRoutes)
 app.use('/like', likeRoutes)
 app.use('/email', emailRoutes)
 app.use('/isMentionned', isMentionnedRoutes)
-app.use('/shopping', shoppingRoutes)
 app.use('/images', express.static(path.join(__dirname, 'images')))
 
 
