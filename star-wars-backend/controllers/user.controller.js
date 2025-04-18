@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt')
 const User = require('../models/user.model.js')
 const IsMentionned = require('../models/isMentionned.model.js')
-// const FollowTopic = require('../models/followTopic.model.js')
+const FollowTopic = require('../models/followTopic.model.js')
 const sharp = require('sharp')
 const fs = require('fs')
 require('dotenv').config()
@@ -100,14 +100,14 @@ exports.modifyUser = async (req, res) => {
 // Suppression d'un utilisateur via son id
 exports.deleteById = async (req, res) => {
     try {
-        const id = req.user.id;
-        const user = await User.findById(id);
+        const userId = req.user.id;
+        const user = await User.findById(userId);
     
         if (!user) {
         return res.status(404).json({ message: "User not found" });
         }
     
-        if (!user._id.equals(req.user.id)) {
+        if (!user._id.equals(userId)) {
         return res.status(403).json({
             message: "User doesn't have permission to delete another user",
         });
@@ -122,19 +122,17 @@ exports.deleteById = async (req, res) => {
             expires: new Date(0)
         })
 
-        // Suppression des abonnements (discussions) de l'utilisateur
-        // const result = deleteUserFromFollowedTopics(id)
-        // if (!result) {
-        //     console.log("An error occurred during unsubscribing of followed topics!")
-        // } else {
-        //     console.log("Unsubscribing is successful!")
-        // }
+        // Retirer l'utilisateur du tableau 'users' de tous les FollowTopic
+        await FollowTopic.updateMany(
+            { users: userId },
+            { $pull: { users: userId } }
+        );
 
         // Suppression de l'option "isMentionned"
-        await IsMentionned.findOneAndDelete({ userId: id })
+        await IsMentionned.findOneAndDelete({ userId: userId })
 
         // Suppression de l'utilisateur dans la base de données
-        await User.findByIdAndDelete(id);
+        await User.findByIdAndDelete(userId);
 
         // Suppression de l'image de profil de l'utilisateur
         if (picture !== "") {
@@ -165,32 +163,30 @@ exports.authDeleteById = async (req, res) => {
         }
 
         // Trouve l'utilisateur à supprimer
-        const id = req.params.id;
-        const user = await User.findById(id);
+        const userId = req.params.id;
+        const user = await User.findById(userId);
     
         if (!user) {
         return res.status(404).json({ message: "User not found" });
         }
     
-        if (!user._id.equals(id)) {
+        if (!user._id.equals(userId)) {
         return res.status(403).json({
             message: "User doesn't have permission to delete another user",
         });
         }
 
-        // Suppression des abonnements (discussions) de l'utilisateur
-        // const result = deleteUserFromFollowedTopics(id)
-        // if (!result) {
-        //     console.log("An error occurred during unsubscribing of followed topics!")
-        // } else {
-        //     console.log("Unsubscribing is successful!")
-        // }
+        // Retirer l'utilisateur du tableau 'users' de tous les FollowTopic
+        await FollowTopic.updateMany(
+            { users: userId },
+            { $pull: { users: userId } }
+        );
 
         // Récupération de l'url de l'image de profil de l'utilisateur
         const picture = user.picture
 
         // Suppression de l'utilisateur dans la base de données
-        await User.findByIdAndDelete(id);
+        await User.findByIdAndDelete(userId);
 
         // Suppression de l'image de profil de l'utilisateur
         if (picture !== "") {
@@ -218,16 +214,3 @@ exports.getAllUsers = (req, res) => {
         message: "Users not found"
     }))
 }
-
-// Désabonner un utilisateur de toutes ses discussions suivies
-// exports.deleteUserFromFollowedTopics = async (userId) => {
-//     const followedTopicsWithoutUsers = await FollowTopic.updateMany(
-//         { users: userId }, // Critère de recherche (chercher les groupes contenant cet userId)
-//         { $pull: { users: userId } }, // Retirer cet userId du tableau
-//         { new: true }
-//     )
-//     if (followedTopicsWithoutUsers) {
-//         return true
-//     }
-//     return false
-// }
