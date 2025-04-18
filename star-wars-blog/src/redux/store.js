@@ -13,6 +13,8 @@ import commentCitationReducer from "./slices/commentCitationSlice";
 import postsReloadReducer from "./slices/postsReload";
 import followedTopicsReloadReducer from './slices/followedTopicsReload';
 import lastCategoryIdReducer from './slices/lastCategory';
+import productsReducer from './slices/productsSlice';
+import basketReducer from './slices/shoppingBasket'
 
 
 export default configureStore({
@@ -30,6 +32,8 @@ export default configureStore({
         commentCitation: commentCitationReducer,
         postsReload: postsReloadReducer,
         followedTopicsReload: followedTopicsReloadReducer,
-        lastCategory: lastCategoryIdReducer
+        lastCategory: lastCategoryIdReducer,
+        productsReducer: productsReducer,
+        basketReducer: basketReducer
     }
 })
