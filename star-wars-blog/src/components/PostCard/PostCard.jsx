@@ -10,7 +10,7 @@ import { selectIsLoggedState } from '../../redux/slices/isLoggedUserSlice'
 import { selectLoggedUser } from '../../redux/slices/loggedUserSlice'
 import CommentCard from '../CommentCard/CommentCard'
 import CommentForm from '../CommentForm/CommentForm'
-import mentionsManager from '../../utils/mentionsManager'
+import mentionsManager from '../../sharedFunctions/mentionsManager'
 import { ServerServices } from '../../api/api-server'
 
 
