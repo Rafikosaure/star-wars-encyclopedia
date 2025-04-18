@@ -10,7 +10,7 @@ import { reloadUsersArrayFunction } from '../../redux/slices/reloadUsersArray'
 import { reloadPosts } from '../../redux/slices/postsReload'
 import { saveACommentCitation } from '../../redux/slices/commentCitationSlice'
 import { ServerServices } from '../../api/api-server'
-import mentionsManager from '../../sharedFunctions/mentionsManager'
+import mentionsManager from '../../utils/mentionsManager'
 
 
 
