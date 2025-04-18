@@ -114,7 +114,7 @@ export default function BurgerMenu() {
                         isActive
                         ? 'navlink-display-none'
                         : 'navlink-display-flex'
-                        } to="/shopping" onClick={() => {dispatch(reinitializeDozen()); setIsOpen(false); setOpenWikiLinks('none'); setWikiButtonActive('')}}>E-boutique</NavLink>
+                        } to="/shopping/market" onClick={() => {dispatch(reinitializeDozen()); setIsOpen(false); setOpenWikiLinks('none'); setWikiButtonActive('')}}>E-boutique</NavLink>
                 </div>
             </ClickAwayListener>
         ) : null
