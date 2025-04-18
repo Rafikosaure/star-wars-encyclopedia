@@ -2,6 +2,7 @@ $color_1: white;
 $color_2: lightcyan;
 $color_3: gainsboro;
 $color_4: rgb(53, 155, 155);
+$color_5: black;
 $font-family_1: 'Starjout';
 $font-family_2: Arial, Helvetica, sans-serif;
 $background-color_1: black;
@@ -23,7 +24,7 @@ $background-color_1: black;
 	background-image: url(../../assets/images/banner02.webp);
 	background-size: 110%, 110%;
 	background-position: 50%, 50%;
-	border: 1px solid lightcyan;
+	border: 1px solid $color_2;
 	position: relative;
 }
 .link-logo {
@@ -75,10 +76,21 @@ $background-color_1: black;
 		display: flex;
 		flex-wrap: wrap;
 		align-items: center;
-		gap: 2.2%;
+		// gap: 2.2%;
+		gap: 5%;
 		font-size: 18px;
 		.navlink-active {
+			border-radius: 5px;
 			color: $color_4;
+			text-shadow:
+				0 0 7px $color_5,
+				0 0 10px $color_5,
+				0 0 21px $color_5,
+				0 0 42px $color_5,
+				0 0 82px $color_5,
+				0 0 92px $color_5,
+				0 0 102px $color_5,
+				0 0 151px $color_5;
 		}
 		.navlink-inactive {
 			color: $color_3;
@@ -103,7 +115,7 @@ $background-color_1: black;
 	width: 45px;
 	height: 45px;
 	background-color: $background-color_1;
-	outline: 2px solid lightcyan;
+	outline: 2px solid $color_2;
 	border-radius: 50%;
 	cursor: pointer;
 	overflow: hidden;
@@ -112,7 +124,10 @@ $background-color_1: black;
 		height: 100%;
 	}
 	&:hover {
-		outline: 2px solid white;
+		outline: 2px solid $color_1;
+	}
+	&:focus {
+		outline: 2px solid $color_4;
 	}
 }
 .connection-link-logout {

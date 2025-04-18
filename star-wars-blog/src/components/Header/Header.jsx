@@ -97,7 +97,7 @@ export default function Header() {
                         : 'navlink-inactive'
                         } to={`/category/${lastCategoryId}`}
                         // onClick={() => dispatch(reinitializeDozen())}
-                        >documentation</NavLink>
+                        >Documentation</NavLink>
             <NavLink className={({ isActive }) =>
                         isActive
                         ? 'navlink-active'
@@ -116,29 +116,29 @@ export default function Header() {
                         isActive
                         ? 'navlink-active'
                         : 'navlink-inactive'
-                        } to="/shopping" 
+                        } to="/shopping/market" 
                         // onClick={() => dispatch(reinitializeDozen())}
-                        >E-boutique</NavLink>
+                        >Boutique</NavLink>
           </nav>
           <div className='header-div-connection'>
             {!isLogged ? (
-              <p onClick={() => navigate('/auth')} className='connection-link'>Se connecter</p>
+              <p tabIndex="0" onClick={() => navigate('/auth')} className='connection-link'>Se connecter</p>
             ) : (
               <>
               {loggedUser && (
                 <>
                 {loggedUser.picture !== "" ? (
-                  <div className='header-div-logged-image' title='Compte utilisateur' onClick={() => navigate(`/account`)}>
+                  <div tabIndex="0" className='header-div-logged-image' title='Compte utilisateur' onClick={() => navigate(`/account`)}>
                     <img src={loggedUser.picture} alt="Profil de l'utilisateur" />
                   </div>
                 ) : (
-                  <div className='header-div-logged-image' onClick={() => navigate(`/account`)}>
+                  <div tabIndex="0" className='header-div-logged-image' onClick={() => navigate(`/account`)}>
                     <img src={DefaultAvatar} alt="Profil de l'utilisateur" />
                   </div>
                 )}
                 </>                
               )}
-              <p onClick={(e) => logout(e)} className='connection-link-logout'>Déconnexion</p>
+              <p tabIndex="0" onClick={(e) => logout(e)} className='connection-link-logout'>Déconnexion</p>
               </>
             )}
           </div>
