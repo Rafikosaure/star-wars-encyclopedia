@@ -1,6 +1,6 @@
 import { toast } from 'sonner'
 import config from '../config'
-import validatePassword from '../sharedFunctions/validatePassword.js';
+import validatePassword from '../sharedFunctions/validatePassword';
 
 
 
