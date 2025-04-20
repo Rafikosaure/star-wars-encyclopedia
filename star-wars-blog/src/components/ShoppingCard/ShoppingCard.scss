@@ -9,10 +9,10 @@ $font-family_1: Arial, Helvetica, sans-serif;
     inherits: false;
 }
 .shopping-card-wrapper {
+    cursor: pointer;
     position: relative;
 	display: flex;
 	justify-content: center;
-    cursor: pointer;
 	z-index: 2;
 	margin: 15px;
 	width: 280px;
@@ -21,6 +21,72 @@ $font-family_1: Arial, Helvetica, sans-serif;
 	// border: 2px solid lightcyan;
 	border-radius: 20px;
 	background-color: $background-color_1;
+    .shopping-card-stock-limit-overlay {
+        position: absolute;
+        z-index: 6;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.8);
+        border-radius: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: $font-family_1;
+        .shopping-card-stock-limit-text {
+            overflow-wrap: break-word;
+            font-size: 30px;
+            color: rgba(53, 155, 155, .7);
+            text-transform: uppercase;
+            font-weight: bold;
+            transform: rotate(-8deg);
+            -moz-transform: rotate(-8deg);
+            -webkit-transform: rotate(-8deg);
+            -khtml-transform: rotate(-8deg);
+            -ms-transform: rotate(-8deg);
+        }
+    }
+    .shopping-basket-add-or-remove-product-section {
+        position: absolute;
+        display: flex;
+        bottom: 14px;
+        right: 17px;
+        width: fit-content;
+        z-index: 6;
+        font-weight: bold;
+        font-size: 25px;
+        color: $color_1;
+        height: 22px;
+        justify-content: center;
+        align-items: center;
+        .shopping-basket-add-or-remove-product-button {
+            height: 15px;
+            width: 15px;
+            text-align: center;
+            line-height: .6;
+            cursor: pointer;
+        }
+        .add-product-button {
+            margin-left: 20px;
+            line-height: .7;
+        }
+        .remove-product-button {
+            line-height: .6;
+        }
+    }
+    .shopping-basket-remove-text-absolute {
+        position: absolute;
+        z-index: 6;
+        bottom: -9px;
+        right: 16px;
+        height: 16px;
+        width: 16px;
+        line-height: .6;
+        font-weight: bold;
+        font-size: 25px;
+        color: $color_1;
+    }
     .shopping-card-link {
         border-radius: 20px;
         overflow: hidden;
@@ -88,16 +154,6 @@ $font-family_1: Arial, Helvetica, sans-serif;
                 width: 90%;
             }
         }
-    }
-    .shopping-basket-image {
-        position: absolute;
-        bottom: 10px;
-        right: 5%;
-        z-index: 5;
-        cursor: pointer;
-    }
-    .shopping-basket-image:active {
-        filter: invert(1);
     }
 }
 .shopping-card-wrapper::after, .shopping-card-wrapper::before {
