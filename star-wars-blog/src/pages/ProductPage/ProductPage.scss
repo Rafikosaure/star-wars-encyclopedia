@@ -84,12 +84,37 @@ $font-family_2: 'Starjedi';
     justify-content: center;
     align-items: flex-start;
     .product-page-picture-section {
+        position: relative;
         margin-top: 20px;
         background-color: $color_3;
         outline: 3px solid $color_2;
         border-radius: 10px;
         width: 350px;
         height: 350px;
+        .product-page-picture-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .product-page-picture-overlay-text {
+                overflow-wrap: break-word;
+                font-size: 30px;
+                color: rgba(53, 155, 155, .7);
+                text-transform: uppercase;
+                font-weight: bold;
+                transform: rotate(-8deg);
+                -moz-transform: rotate(-8deg);
+                -webkit-transform: rotate(-8deg);
+                -khtml-transform: rotate(-8deg);
+                -ms-transform: rotate(-8deg);
+            }
+        }
         img {
             width: 100%;
             height: auto;
@@ -136,21 +161,21 @@ $font-family_2: 'Starjedi';
                     font-size: 24px;
                     margin: 0 20px 0 25px;
                 }
-                .product-page-data-price-button {
-                    font-size: 42px;
-                    line-height: .5;
-                    margin: 0 0 0 15px;
-                    font-weight: bold;
-                    cursor: pointer;
-                    &:hover {
-                        color: $color_2;
+                .product-page-product-add-remove {
+                    display: flex;
+                    width: fit-content;
+                    .product-page-data-add-and-remove-button {
+                        font-size: 42px;
+                        height: 27px;
+                        line-height: .7;
+                        margin: 0 0 0 25px;
+                        font-weight: bold;
+                        cursor: pointer;
+                        &:hover {
+                            color: $color_2;
+                        }
                     }
                 }
-            }
-            .product-page-buy-icon {
-                transform: scale(180%);
-                margin: 0 0 0 10%;
-                cursor: pointer;
             }
         }
     }

@@ -7,12 +7,14 @@ import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { selectProducts } from '../../redux/slices/productsSlice'
 import { saveProduct, removeProduct, selectBasket } from '../../redux/slices/shoppingBasket'
+import { productQuantityCounter } from '../../utils/productQuantityCounter'
 import { Link } from 'react-router-dom'
 import ReturnArrow from '../../assets/images/return-arrow.webp'
-import { ReactComponent as EmptyBasket } from '../../assets/images/shopping-basket-empty-white.svg'
+// import { ReactComponent as EmptyBasket } from '../../assets/images/shopping-basket-empty-white.svg'
 // import { ReactComponent as FullBasket } from '../../assets/images/shopping-basket-full-white.svg'
 import Currency from '../../assets/images/credit_white.webp'
 import { toast } from 'sonner'
+// import { convertDatariesToEuro } from '../../utils/convertDatariesToEuro'
 
 
 
@@ -56,6 +58,15 @@ function ProductPage() {
     const saveProductFunction = (e) => {
         e.preventDefault()
         if (currentProduct) {
+
+            // Vérification de la quantité d'articles dans le panier
+            const outOfStock = productQuantityCounter(basketContent, currentProduct)
+            if (outOfStock) {
+                toast(`⚠️ Limite de stock atteinte pour "${currentProduct.title}" (max ${currentProduct.maxQuantity}). Aucun ajout effectué.`)
+                return
+            }
+
+            // Enregistrement du produit dans le panier
             dispatch(saveProduct(currentProduct))
             toast(`L'article "${currentProduct.title}" a été ajouté au panier !`);
         }
@@ -82,6 +93,11 @@ function ProductPage() {
             {currentProduct && (
                 <div className="product-page-main">
                     <div className="product-page-picture-section">
+                        {currentProduct.maxQuantity && currentProduct.maxQuantity <= currentProductCount && (
+                            <div className="product-page-picture-overlay">
+                                <p className='product-page-picture-overlay-text'>stock épuisé</p>
+                            </div>
+                        )}
                         <img src={currentProduct.imageUrl} alt={currentProduct.title} />
                     </div>
                     <section className="product-page-data-section">
@@ -95,26 +111,45 @@ function ProductPage() {
                             ))}
                         </div>
                         <div className='product-page-data-footer'>
-                            <div className="product-page-data-price">{currentProduct.price} <img className='product-page-data-price-currency' src={Currency} alt="datarie républicaine" />
-                                {basketContent.includes(currentProduct) && (
+                            <div 
+                                className="product-page-data-price"
+                                >
+                                {/* {convertDatariesToEuro(currentProduct.price)}&nbsp; */}
+                                {currentProduct.price} 
+                                <img 
+                                className='product-page-data-price-currency' 
+                                src={Currency} 
+                                alt="datarie républicaine" 
+                                />
+
+                                {basketContent.includes(currentProduct) ? (
                                     <>
+                                    <div className='product-page-product-add-remove'>
+                                        {!productQuantityCounter(basketContent, currentProduct) && (
+                                            <p className='product-page-data-add-and-remove-button add'
+                                                title='Ajouter un article au panier'
+                                                onClick={(e) => saveProductFunction(e)}
+                                            >+</p>
+                                        )}
+
+                                        <p className='product-page-data-add-and-remove-button remove'
+                                            title='Retirer un article du panier'
+                                            onClick={(e) => removeProductFunction(e)}
+                                        >−</p>
+                                    </div>
+
                                     <p className='product-page-data-price-basket-quantity'>Quantité : {currentProductCount}</p>
-                                    <p className='product-page-data-price-button'
-                                        title='Retirer un article du panier'
-                                        onClick={(e) => removeProductFunction(e)}
-                                    >-</p>
-                                    <p className='product-page-data-price-button'
+                                    </>
+                                    
+                                ) : (
+                                    <div className='product-page-product-add-remove'>
+                                        <p 
+                                        className='product-page-data-add-and-remove-button add'
                                         title='Ajouter un article au panier'
                                         onClick={(e) => saveProductFunction(e)}
-                                    >+</p>
-                                    </>
-                                )}
-                            </div>
-                            <div className='product-page-buy-icon' onClick={(e) => saveProductFunction(e)}>
-                                {basketContent.includes(currentProduct) ? (
-                                    null
-                                ) : (
-                                    <EmptyBasket title='Ajouter cet article au panier' />
+                                        >+</p>
+                                    </div>
+                                    
                                 )}
                             </div>
                         </div>
