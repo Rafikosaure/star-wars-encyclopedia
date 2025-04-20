@@ -3,8 +3,9 @@ import { useState, useEffect, useCallback } from 'react'
 import './MarketPage.scss'
 import '../../sharedStyles/index.scss'
 import ShoppingCard from '../../components/ShoppingCard/ShoppingCard.jsx'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { selectProducts } from '../../redux/slices/productsSlice.js'
+import { selectShoppingPage, setCurrentShoppingPage } from '../../redux/slices/shoppingPaginate.js'
 import Currency from '../../assets/images/credit_white.webp'
 import BackArrow from '../../assets/images/back-arrow.webp'
 import NextArrow from '../../assets/images/next-arrow.webp'
@@ -12,22 +13,26 @@ import NextArrow from '../../assets/images/next-arrow.webp'
 
 function MarketPage() {
 
+    const dispatch = useDispatch()
+    const currentPage = useSelector(selectShoppingPage)
     const storedProducts = useSelector(selectProducts)
     const [filteredProducts, setFilteredProducts] = useState()
     const [filterCategory, setFilterCategory] = useState('all')
     const [filterButtonsActive, setFilterButtonsActive] = useState('1')
 
     // Variables de pagination
-    const productsPerPage = 100
-    const currentPage = 1
+    const productsPerPage = 6
 
     // Calculer les bornes de pagination
     const indexOfLastProduct = currentPage * productsPerPage
     const indexOfFirstProduct = indexOfLastProduct - productsPerPage
     let currentProducts;
     if (filteredProducts) {
-        currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct)
+        currentProducts = filteredProducts
+        ? filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct)
+        : []
     }
+    const totalPages = Math.ceil((filteredProducts?.length || 0) / productsPerPage)
 
 
     // Gestion des filtres des produits à afficher
@@ -61,12 +66,10 @@ function MarketPage() {
     useEffect(() => {
         const savedFilter = localStorage.getItem('selectedFilter')
         const savedButtonId = localStorage.getItem('activeButtonId')
-    
         if (savedFilter) {
             setFilterCategory(savedFilter)
             productFiltersFunction()
         }
-    
         if (savedButtonId) {
             setFilterButtonsActive(savedButtonId)
         }
@@ -76,12 +79,24 @@ function MarketPage() {
     // Filtrage indépendant du rendu
     useEffect(() => {
         productFiltersFunction()
-    }, [productFiltersFunction])
+    }, [productFiltersFunction, dispatch])
 
 
     // Style des boutons actifs / non actifs
     const filterButtonsStylesFunction = (e) => {
         setFilterButtonsActive(e.target.id)
+    }
+
+
+    // Avancer à la page suivante
+    const handleNextPage = () => {
+        dispatch(setCurrentShoppingPage(Math.min(currentPage + 1, totalPages)))
+    }
+    
+    
+    // Reculer à la page précédente
+    const handlePreviousPage = () => {
+        dispatch(setCurrentShoppingPage(Math.max(currentPage - 1, 1)))
     }
 
 
@@ -96,6 +111,7 @@ function MarketPage() {
                     id='1' 
                     className={`filter-button ${filterButtonsActive === "1" ? "active" : ""}`}
                     onClick={(e) => {
+                        dispatch(setCurrentShoppingPage(1))
                         productFiltersFunction(e.target.value)
                         setFilterCategory(e.target.value); 
                         filterButtonsStylesFunction(e)
@@ -108,6 +124,7 @@ function MarketPage() {
                     id='2' 
                     className={`filter-button ${filterButtonsActive === "2" ? "active" : ""}`}
                     onClick={(e) => {
+                        dispatch(setCurrentShoppingPage(1))
                         productFiltersFunction(e.target.value)
                         setFilterCategory(e.target.value); 
                         filterButtonsStylesFunction(e)
@@ -120,6 +137,7 @@ function MarketPage() {
                     id='3' 
                     className={`filter-button ${filterButtonsActive === "3" ? "active" : ""}`}
                     onClick={(e) => {
+                        dispatch(setCurrentShoppingPage(1))
                         productFiltersFunction(e.target.value)
                         setFilterCategory(e.target.value); 
                         filterButtonsStylesFunction(e)
@@ -132,6 +150,7 @@ function MarketPage() {
                     id='4' 
                     className={`filter-button ${filterButtonsActive === "4" ? "active" : ""}`}
                     onClick={(e) => {
+                        dispatch(setCurrentShoppingPage(1))
                         productFiltersFunction(e.target.value)
                         setFilterCategory(e.target.value); 
                         filterButtonsStylesFunction(e)
@@ -144,6 +163,7 @@ function MarketPage() {
                     id='5' 
                     className={`filter-button empire-filter-button ${filterButtonsActive === "5" ? "active" : ""}`}
                     onClick={(e) => {
+                        dispatch(setCurrentShoppingPage(1))
                         productFiltersFunction(e.target.value)
                         setFilterCategory(e.target.value); 
                         filterButtonsStylesFunction(e)
@@ -156,6 +176,7 @@ function MarketPage() {
                     id='6' 
                     className={`filter-button ${filterButtonsActive === "6" ? "active" : ""}`}
                     onClick={(e) => {
+                        dispatch(setCurrentShoppingPage(1))
                         productFiltersFunction(e.target.value)
                         setFilterCategory(e.target.value); 
                         filterButtonsStylesFunction(e)
@@ -164,10 +185,30 @@ function MarketPage() {
                     }}>- de 5000&nbsp;<img className='market-filter-currency' src={Currency} alt="datarie républicaine" /></button>
                 
                 </div>
-                <div className='market-arrow-page-counter'>page / total</div>
+                <div className='market-arrow-page-counter'>{currentPage} / {totalPages}</div>
                 <div className='market-arrows-section'>
-                    <div tabIndex="0" className='market-arrow back'><img src={BackArrow} alt="retour aux produits précédents" /></div>
-                    <div tabIndex="0" className='market-arrow next'><img src={NextArrow} alt="avance vers les produits suivants" /></div>
+
+                    {currentPage > 1 && (
+                    <div tabIndex="0" className='market-arrow back'
+                        >
+                        <img 
+                        onClick={() => handlePreviousPage()}
+                        src={BackArrow} 
+                        alt="retour aux produits précédents" />
+                    </div>
+                    )}
+
+                    {currentPage < totalPages && (
+                    <div tabIndex="0" 
+                    className='market-arrow next'
+                        >
+                        <img 
+                        onClick={() => handleNextPage()}
+                        src={NextArrow} 
+                        alt="avance vers les produits suivants" />
+                    </div>
+                    )}
+
                 </div>
                 <div className='shopping-page-content'>
                     {currentProducts && (

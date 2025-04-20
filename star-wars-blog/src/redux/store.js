@@ -15,6 +15,7 @@ import followedTopicsReloadReducer from './slices/followedTopicsReload';
 import lastCategoryIdReducer from './slices/lastCategory';
 import productsReducer from './slices/productsSlice';
 import basketReducer from './slices/shoppingBasket'
+import shoppingPageReducer from './slices/shoppingPaginate'
 
 
 export default configureStore({
@@ -34,6 +35,7 @@ export default configureStore({
         followedTopicsReload: followedTopicsReloadReducer,
         lastCategory: lastCategoryIdReducer,
         productsReducer: productsReducer,
-        basketReducer: basketReducer
+        basketReducer: basketReducer,
+        shoppingPageReducer: shoppingPageReducer
     }
 })
