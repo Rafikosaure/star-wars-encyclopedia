@@ -41,7 +41,7 @@ function ShoppingPage() {
     return (
         <div className='app shopping-page-wrapper'>
             <div className='shopping-page-background' />
-            <div className='shopping-page-maintenance'>Service de shopping expérimental : achats non-possibles</div>
+            <div className='shopping-page-maintenance'>Service de shopping expérimental : achats simulés</div>
             <h2 className='shopping-page-title'>Boutique de Wattoo</h2>
             <div className='shopping-basket-wrapper'>
                 <Basket />
