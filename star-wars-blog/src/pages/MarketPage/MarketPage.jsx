@@ -100,6 +100,17 @@ function MarketPage() {
     }
 
 
+    // Gestion des fonctions des filtres
+    const handleFilterButtonClick = (e) => {
+        dispatch(setCurrentShoppingPage(1))
+        productFiltersFunction(e.target.value)
+        setFilterCategory(e.target.value); 
+        filterButtonsStylesFunction(e)
+        localStorage.setItem('selectedFilter', e.target.value)
+        localStorage.setItem('activeButtonId', e.target.id)
+    }
+
+
     return (
         <div className='shopping-page-section'>
             {storedProducts && filteredProducts && (
@@ -110,79 +121,55 @@ function MarketPage() {
                     value={'all'} 
                     id='1' 
                     className={`filter-button ${filterButtonsActive === "1" ? "active" : ""}`}
-                    onClick={(e) => {
-                        dispatch(setCurrentShoppingPage(1))
-                        productFiltersFunction(e.target.value)
-                        setFilterCategory(e.target.value); 
-                        filterButtonsStylesFunction(e)
-                        localStorage.setItem('selectedFilter', e.target.value)
-                        localStorage.setItem('activeButtonId', e.target.id)
-                    }}>Tous</button>
+                    onClick={(e) => handleFilterButtonClick(e)}
+                    onKeyDown={(e) => e.key === 'Enter' && handleFilterButtonClick(e)}
+                    title='Afficher tous les produits'
+                    >Tous</button>
                     
                     <button 
                     value={'jedi'} 
                     id='2' 
                     className={`filter-button ${filterButtonsActive === "2" ? "active" : ""}`}
-                    onClick={(e) => {
-                        dispatch(setCurrentShoppingPage(1))
-                        productFiltersFunction(e.target.value)
-                        setFilterCategory(e.target.value); 
-                        filterButtonsStylesFunction(e)
-                        localStorage.setItem('selectedFilter', e.target.value)
-                        localStorage.setItem('activeButtonId', e.target.id)
-                    }}>Jedi</button>
+                    onClick={(e) => handleFilterButtonClick(e)}
+                    onKeyDown={(e) => e.key === 'Enter' && handleFilterButtonClick(e)}
+                    title='Afficher les produits Jedi'
+                    >Jedi</button>
                     
                     <button 
                     value={'sith'} 
                     id='3' 
                     className={`filter-button ${filterButtonsActive === "3" ? "active" : ""}`}
-                    onClick={(e) => {
-                        dispatch(setCurrentShoppingPage(1))
-                        productFiltersFunction(e.target.value)
-                        setFilterCategory(e.target.value); 
-                        filterButtonsStylesFunction(e)
-                        localStorage.setItem('selectedFilter', e.target.value)
-                        localStorage.setItem('activeButtonId', e.target.id)
-                    }}>Sith</button>
+                    onClick={(e) => handleFilterButtonClick(e)}
+                    onKeyDown={(e) => e.key === 'Enter' && handleFilterButtonClick(e)}
+                    title='Afficher les produits Sith'
+                    >Sith</button>
                     
                     <button 
                     value={'rebellion'} 
                     id='4' 
                     className={`filter-button ${filterButtonsActive === "4" ? "active" : ""}`}
-                    onClick={(e) => {
-                        dispatch(setCurrentShoppingPage(1))
-                        productFiltersFunction(e.target.value)
-                        setFilterCategory(e.target.value); 
-                        filterButtonsStylesFunction(e)
-                        localStorage.setItem('selectedFilter', e.target.value)
-                        localStorage.setItem('activeButtonId', e.target.id)
-                    }}>Rébellion</button>
+                    onClick={(e) => handleFilterButtonClick(e)}
+                    onKeyDown={(e) => e.key === 'Enter' && handleFilterButtonClick(e)}
+                    title='Afficher les produits de la Rébellion'
+                    >Rébellion</button>
                     
                     <button 
                     value={'empire'} 
                     id='5' 
                     className={`filter-button empire-filter-button ${filterButtonsActive === "5" ? "active" : ""}`}
-                    onClick={(e) => {
-                        dispatch(setCurrentShoppingPage(1))
-                        productFiltersFunction(e.target.value)
-                        setFilterCategory(e.target.value); 
-                        filterButtonsStylesFunction(e)
-                        localStorage.setItem('selectedFilter', e.target.value)
-                        localStorage.setItem('activeButtonId', e.target.id)
-                    }}>Empire / Premier Ordre</button>
+                    onClick={(e) => handleFilterButtonClick(e)}
+                    onKeyDown={(e) => e.key === 'Enter' && handleFilterButtonClick(e)}
+                    title="Afficher les produits de l'Empire / du Premier Ordre"
+                    >Empire / Premier Ordre</button>
 
                     <button 
                     value={'cheapest'} 
                     id='6' 
                     className={`filter-button ${filterButtonsActive === "6" ? "active" : ""}`}
-                    onClick={(e) => {
-                        dispatch(setCurrentShoppingPage(1))
-                        productFiltersFunction(e.target.value)
-                        setFilterCategory(e.target.value); 
-                        filterButtonsStylesFunction(e)
-                        localStorage.setItem('selectedFilter', e.target.value)
-                        localStorage.setItem('activeButtonId', e.target.id)
-                    }}>- de 5000&nbsp;<img className='market-filter-currency' src={Currency} alt="datarie républicaine" /></button>
+                    onClick={(e) => handleFilterButtonClick(e)}
+                    onKeyDown={(e) => e.key === 'Enter' && handleFilterButtonClick(e)}
+                    title='Afficher les produits à moins de 5000 dataries'
+                    >- de 5000&nbsp;<img className='market-filter-currency' src={Currency} alt="datarie républicaine" /></button>
                 
                 </div>
                 <div className='market-arrow-page-counter'>{currentPage} / {totalPages}</div>
@@ -190,9 +177,11 @@ function MarketPage() {
 
                     {currentPage > 1 && (
                     <div tabIndex="0" className='market-arrow back'
+                        onKeyDown={(e) => e.key === 'Enter' && handlePreviousPage()}
                         >
                         <img 
                         onClick={() => handlePreviousPage()}
+                        title='Retourner à la page précédente'
                         src={BackArrow} 
                         alt="retour aux produits précédents" />
                     </div>
@@ -201,9 +190,11 @@ function MarketPage() {
                     {currentPage < totalPages && (
                     <div tabIndex="0" 
                     className='market-arrow next'
+                    onKeyDown={(e) => e.key === 'Enter' && handleNextPage()}
                         >
                         <img 
                         onClick={() => handleNextPage()}
+                        title='Aller à la page suivante'
                         src={NextArrow} 
                         alt="avance vers les produits suivants" />
                     </div>

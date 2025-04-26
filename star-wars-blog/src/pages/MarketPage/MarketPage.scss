@@ -14,19 +14,19 @@ $font-family_2: 'Starjedi';
     width: 90%;
     height: fit-content;
     min-height: 800px;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
     .shopping-page-filters {
-        width: 80%;
-        height: 50px;
+        width: 40%;
+        // height: 140px;
+        min-height: 140px;
         display: flex;
         justify-content: center;
         align-items: center;
         flex-wrap: wrap;
-        gap: 4%;
-        margin-bottom: 60px;
+        gap: 12%;
         .filter-button {
             width: 123px;
             height: 45px;
@@ -73,8 +73,7 @@ $font-family_2: 'Starjedi';
         justify-content: space-between;
         .market-arrow {
             position: sticky;
-            top: 250px;
-            margin-top: 100px;
+            top: 450px;
             border-radius: 50%;
             width: 70px;
             height: 70px;
