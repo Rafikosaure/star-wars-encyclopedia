@@ -10,11 +10,8 @@ import { saveProduct, removeProduct, selectBasket } from '../../redux/slices/sho
 import { productQuantityCounter } from '../../utils/productQuantityCounter'
 import { Link } from 'react-router-dom'
 import ReturnArrow from '../../assets/images/return-arrow.webp'
-// import { ReactComponent as EmptyBasket } from '../../assets/images/shopping-basket-empty-white.svg'
-// import { ReactComponent as FullBasket } from '../../assets/images/shopping-basket-full-white.svg'
 import Currency from '../../assets/images/credit_white.webp'
 import { toast } from 'sonner'
-// import { convertDatariesToEuro } from '../../utils/convertDatariesToEuro'
 
 
 
@@ -114,7 +111,6 @@ function ProductPage() {
                             <div 
                                 className="product-page-data-price"
                                 >
-                                {/* {convertDatariesToEuro(currentProduct.price)}&nbsp; */}
                                 {currentProduct.price} 
                                 <img 
                                 className='product-page-data-price-currency' 
@@ -128,13 +124,17 @@ function ProductPage() {
                                         {!productQuantityCounter(basketContent, currentProduct) && (
                                             <p className='product-page-data-add-and-remove-button add'
                                                 title='Ajouter un article au panier'
+                                                tabIndex="0"
                                                 onClick={(e) => saveProductFunction(e)}
+                                                onKeyDown={(e) => e.key === 'Enter' && saveProductFunction(e)}
                                             >+</p>
                                         )}
 
                                         <p className='product-page-data-add-and-remove-button remove'
                                             title='Retirer un article du panier'
+                                            tabIndex="0"
                                             onClick={(e) => removeProductFunction(e)}
+                                            onKeyDown={(e) => e.key === 'Enter' && removeProductFunction(e)}
                                         >−</p>
                                     </div>
 
@@ -146,7 +146,9 @@ function ProductPage() {
                                         <p 
                                         className='product-page-data-add-and-remove-button add'
                                         title='Ajouter un article au panier'
+                                        tabIndex="0"
                                         onClick={(e) => saveProductFunction(e)}
+                                        onKeyDown={(e) => e.key === 'Enter' && saveProductFunction(e)}
                                         >+</p>
                                     </div>
                                     
