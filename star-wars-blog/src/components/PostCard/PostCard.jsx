@@ -139,7 +139,12 @@ export default function PostCard({ index, post, topicId, usersList, currentPage 
                         <div className='post-card-infos'>
                             {isLogged && loggedUser.isAdmin && index !== 1 && (
                                 
-                                <div tabIndex="0" className='delete-post-cross' title='Supprimer le post' onClick={(e) => deletePostFunction(e)}>✖</div>
+                                <div tabIndex="0" 
+                                className='delete-post-cross' 
+                                title='Supprimer le post' 
+                                onClick={(e) => deletePostFunction(e)}
+                                onKeyDown={(e) => e.key === 'Enter' && deletePostFunction(e)}
+                                >✖</div>
                             )}
                             <p className='info-index'>{`# ${index}`}</p><p className='infos-datetime'>{`${datetime.toLocaleDateString("fr-FR", {weekday: "long", year: "numeric", month: "long", day: "numeric", hour: '2-digit', minute: '2-digit' }).replace(':', 'h')}`}</p>
                         </div>
@@ -165,7 +170,11 @@ export default function PostCard({ index, post, topicId, usersList, currentPage 
                             {post && (
                                 <>
                                     <p style={{display: `${postContentDisplay}`}}>{textWithBreaks}</p>
-                                    <form style={{display: `${modifyContentDisplay}`}} className='post-card-modify-message' onKeyDown={(e) => modifyContent(e)}>
+                                    <form 
+                                    style={{display: `${modifyContentDisplay}`}} 
+                                    className='post-card-modify-message' 
+                                    onKeyDown={(e) => modifyContent(e)}
+                                    >
                                         <textarea defaultValue={post.content.split("\n\n").at(-1)} maxLength={500} className='textarea-scroll' />
                                     </form>
                                 </>
@@ -176,11 +185,23 @@ export default function PostCard({ index, post, topicId, usersList, currentPage 
                         {isLogged && postUser && (
                             <>
                                 {postContentDisplay === 'block' && modifyContentDisplay === "none" && (loggedUser._id === postUser._id || loggedUser.isAdmin) ? (
-                                    <p tabIndex="0" className='post-card-link loggedColor' title='Modifier ce post' onClick={(e) => modifyDisplayManager(e)}>🖉 Modifier</p>
+                                    <p 
+                                    tabIndex="0" 
+                                    className='post-card-link loggedColor' 
+                                    title='Modifier ce post' 
+                                    onClick={(e) => modifyDisplayManager(e)}
+                                    onKeyDown={(e) => e.key === 'Enter' && modifyDisplayManager(e)}
+                                    >🖉 Modifier</p>
                                 ) : (
                                     null
                                 )}
-                                <a className='post-card-link loggedColor' href={`/topic/${topicId}/page/${currentPage}#citation-post`} title='Citer ce post' onClick={() => saveCurrentCitation()}>➥ Citer</a>
+                                <a 
+                                className='post-card-link loggedColor' 
+                                href={`/topic/${topicId}/page/${currentPage}#citation-post`} 
+                                title='Citer ce post' 
+                                onClick={() => saveCurrentCitation()}
+                                onKeyDown={(e) => e.key === 'Enter' && saveCurrentCitation()}
+                                >➥ Citer</a>
                                 <Like post={post} comment={undefined} />
                             </>
                         )}

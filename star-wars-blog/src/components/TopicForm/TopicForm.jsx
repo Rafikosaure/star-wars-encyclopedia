@@ -78,7 +78,12 @@ export default function TopicForm({ topicsCategoryId }) {
         <div className='creation-topic-main'>
             {isLogged && (
                 <>
-                <div className='creation-topic-display-button' onClick={(e) => displayManager(e)}>Créez une discussion</div>
+                <div className='creation-topic-display-button' 
+                onClick={(e) => displayManager(e)}
+                onKeyDown={(e) => e.key === 'Enter' && displayManager(e)}
+                tabIndex="0"
+                title='Créez une discussion'
+                >Créez une discussion</div>
                 <form className='creation-topic-form' style={{display:`${formDisplay}`}} onSubmit={handleSubmit(createNewTopic)}>
                     <input className='creation-topic-input-title' name='title' type="text" placeholder='Titre du topic' {...register("title")} maxLength={56} required />
                     <textarea className='creation-topic-textarea-question' name='question' type="text" placeholder='Question du topic' {...register("question")} maxLength={220} required />

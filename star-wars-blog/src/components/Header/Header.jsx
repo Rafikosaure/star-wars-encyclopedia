@@ -122,23 +122,33 @@ export default function Header() {
           </nav>
           <div className='header-div-connection'>
             {!isLogged ? (
-              <p tabIndex="0" onClick={() => navigate('/auth')} className='connection-link'>Se connecter</p>
+              <p 
+              tabIndex="0" 
+              onClick={() => navigate('/auth')} 
+              onKeyDown={(e) => e.key === 'Enter' && navigate('/auth')}
+              className='connection-link'>Se connecter</p>
             ) : (
               <>
               {loggedUser && (
-                <>
-                {loggedUser.picture !== "" ? (
-                  <div tabIndex="0" className='header-div-logged-image' title='Compte utilisateur' onClick={() => navigate(`/account`)}>
-                    <img src={loggedUser.picture} alt="Profil de l'utilisateur" />
+                  <div tabIndex="0" 
+                  className='header-div-logged-image' 
+                  title='Compte utilisateur' 
+                  onClick={() => navigate(`/account`)}
+                  onKeyDown={(e) => e.key === 'Enter' && navigate(`/account`)}
+                  >
+                    {loggedUser.picture !== "" ? (
+                      <img src={loggedUser.picture} alt="Profil de l'utilisateur" />
+                    ) : (
+                      <img src={DefaultAvatar} alt="Profil de l'utilisateur" />
+                    )}
                   </div>
-                ) : (
-                  <div tabIndex="0" className='header-div-logged-image' onClick={() => navigate(`/account`)}>
-                    <img src={DefaultAvatar} alt="Profil de l'utilisateur" />
-                  </div>
-                )}
-                </>                
               )}
-              <p tabIndex="0" onClick={(e) => logout(e)} className='connection-link-logout'>Déconnexion</p>
+              <p 
+              tabIndex="0" 
+              onClick={(e) => logout(e)}
+              onKeyDown={(e) => e.key === 'Enter' && logout(e)} 
+              className='connection-link-logout'
+              >Déconnexion</p>
               </>
             )}
           </div>

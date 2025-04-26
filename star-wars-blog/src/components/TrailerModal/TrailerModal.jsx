@@ -50,7 +50,8 @@ const TrailerModal = ({ videoURL }) => {
 
 
     // Ouvrir la fenêtre modale
-    const openModal = () => {
+    const openModal = (e) => {
+        e.preventDefault();
         if (dialogRef.current) {
             setIframeSrc("");
             dialogRef.current.showModal();
@@ -60,7 +61,8 @@ const TrailerModal = ({ videoURL }) => {
 
 
     // Fermer la fenêtre modale
-    const closeModal = () => {
+    const closeModal = (e) => {
+        e.preventDefault();
         if (dialogRef.current) {
             setIframeSrc(""); // Vide l'iframe pour stopper la vidéo
             dialogRef.current.close();
@@ -69,22 +71,30 @@ const TrailerModal = ({ videoURL }) => {
 
 
     // Ferme la modale uniquement si l'utilisateur clique sur l'arrière-plan
-    const handleBackdropClick = (event) => {
-        if (event.target === dialogRef.current) {
-            closeModal();
+    const handleBackdropClick = (e) => {
+        if (e.target === dialogRef.current) {
+            closeModal(e);
         }
     };
 
 
     return (
         <>
-        <p onClick={openModal} className="trailer-modal__open-button">
+        <p 
+        tabIndex='0'
+        onClick={(e) => openModal(e)} 
+        onKeyDown={(e) => e.key === "Enter" && openModal(e)}
+        className="trailer-modal__open-button">
             Voir le trailer
         </p>
 
-        <dialog ref={dialogRef} className="trailer-modal" onClick={handleBackdropClick}>
+        <dialog ref={dialogRef} className="trailer-modal" onClick={(e) => handleBackdropClick(e)}>
             <div className="trailer-modal__content">
-                <button className="trailer-modal__close-button" onClick={closeModal}>
+                <button 
+                className="trailer-modal__close-button" 
+                onClick={(e) => closeModal(e)}
+                onKeyDown={(e) => e.key === "Enter" && closeModal(e)}
+                >
                     ✖
                 </button>
 

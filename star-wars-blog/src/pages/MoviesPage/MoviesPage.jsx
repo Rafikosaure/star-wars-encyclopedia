@@ -147,11 +147,42 @@ function MoviesPage() {
     }
 
 
+    // Fonction de sélection du menu (films ou séries)
+    const menuControlFunction = (e, mediaType) => {
+        setMediaType(mediaType)
+        setCurrentMediaId(); 
+        setCurrentMovie(); 
+        openListingFunction(e)
+    }
+
+
+    // Fonction de sélection d'un film ou d'une série
+    const selectMovieFunction = (e, movie) => {
+        setCurrentMediaId(movie.id)
+        displayListingFunction(e)
+    }
+
+
     return (
         <div className='app movies-page-wrapper'>
             <div className='movies-media-navbar'>
-                <div className={`div-movies ${isActiveMoviesColor}`} onClick={(e) => {setMediaType('films'); setCurrentMediaId(); setCurrentMovie(); openListingFunction(e)}}>films</div>
-                <div className={`div-series ${isActiveSeriesColor}`} onClick={(e) => {setMediaType('series'); setCurrentMediaId(); setCurrentMovie(); openListingFunction(e)}}>séries</div>
+
+                <div 
+                className={`div-movies ${isActiveMoviesColor}`} 
+                tabIndex="0"
+                title='Sélectionner les films'
+                onClick={(e) => menuControlFunction(e, 'films')}
+                onKeyDown={(e) => e.key === 'Enter' && menuControlFunction(e, 'films')}
+                >films</div>
+
+                <div 
+                className={`div-series ${isActiveSeriesColor}`} 
+                tabIndex="0"
+                title='Sélectionner les séries'
+                onClick={(e) => menuControlFunction(e, 'series')}
+                onKeyDown={(e) => e.key === 'Enter' && menuControlFunction(e, 'series')}
+                >séries</div>
+
             </div>
             <h1 className='movies-page-title'>Vidéothèque</h1>
             <div className='movies-page-content'>
@@ -167,6 +198,8 @@ function MoviesPage() {
                         >
                         <img src={listingDisplayArrow} alt="Ouvrir ou fermer la liste des médias" 
                         onClick={(e) => displayListingFunction(e)}
+                        onKeyDown={(e) => e.key === 'Enter' && displayListingFunction(e)}
+                        tabIndex="0"
                         title={listingDisplayArrow === BackArrow ? (
                             'Fermer le menu'
                         ) : ('Ouvrir le menu')}
@@ -179,14 +212,20 @@ function MoviesPage() {
                                 <li 
                                 key={movie.id}
                                 className={`media-listing-title`}
-                                onClick={(e) => {setCurrentMediaId(movie.id); displayListingFunction(e)}}
+                                tabIndex="0"
+                                onClick={(e) => selectMovieFunction(e, movie)}
+                                onKeyDown={(e) => e.key === 'Enter' && selectMovieFunction(e, movie)}
+                                title={movie.title}
                                 style={{ color: movie.id === currentMediaId && 'rgb(53, 155, 155)' }}
                                 >{movie.title}</li>
                             ) : (
                                 <li
                                 key={movie.id}
                                 className={`media-listing-title`}
-                                onClick={(e) => {setCurrentMediaId(movie.id); displayListingFunction(e)}}
+                                tabIndex="0"
+                                onClick={(e) => selectMovieFunction(e, movie)}
+                                onKeyDown={(e) => e.key === 'Enter' && selectMovieFunction(e, movie)}
+                                title={movie.name}
                                 style={{ color: movie.id === currentMediaId && 'rgb(53, 155, 155)' }}
                                 >{movie.name}</li>
                             ))
@@ -195,6 +234,8 @@ function MoviesPage() {
                     <div className='movies-page-media-listing-image-wrapper movies-page-media-listing-image-bottom'>
                         <img src={listingDisplayArrow} alt="Ouvrir ou fermer la liste des médias" 
                         onClick={(e) => displayListingFunction(e)}
+                        onKeyDown={(e) => e.key === 'Enter' && displayListingFunction(e)}
+                        tabIndex="0"
                         title={listingDisplayArrow === BackArrow ? (
                             'Fermer le menu'
                         ) : ('Ouvrir le menu')}
@@ -228,6 +269,7 @@ function MoviesPage() {
                             mediaType === "films" ? (
                                 <a 
                                 className='movies-page-data-section-link'
+                                title='Accéder au film sur Disney +'
                                 href={currentMovieURL} 
                                 target='_blank'
                                 rel="noopener noreferrer"
@@ -236,6 +278,7 @@ function MoviesPage() {
                             ) : (
                                 <a 
                                 className='movies-page-data-section-link'
+                                title='Accéder à la série sur Disney +'
                                 href={currentMovieURL} 
                                 target='_blank'
                                 rel="noopener noreferrer"

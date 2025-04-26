@@ -272,7 +272,13 @@ export default function Topic() {
                             <h2 className='creation-post-form-title'>Créez un post</h2>
                             {citationText && (
                                 <div className='citation-div'>
-                                    <span className='citation-cancel' title='Annuler la citation' onClick={() => dispatch(reinitializeCitation())}>✖</span>
+                                    <span 
+                                    className='citation-cancel' 
+                                    title='Annuler la citation' 
+                                    tabIndex="0"
+                                    onClick={() => dispatch(reinitializeCitation())}
+                                    onKeyDown={(e) => e.key === 'Enter' && dispatch(reinitializeCitation())}
+                                    >✖</span>
                                     <p className='citation-content'>{citationText}</p>
                                 </div>
                             )}

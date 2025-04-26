@@ -109,6 +109,8 @@ export default function Category() {
                 tabIndex='0'
                 style={{display: storedDozen <= 1 || article.value ? 'none' : 'flex'}} 
                 onClick={prevPage}
+                onKeyDown={(e) => e.key === 'Enter' && prevPage()}
+                title='Retourner à la page précédente'
               >
                 <img className='arrows' src={BackArrow} alt="back arrow" />
               </div>
@@ -116,6 +118,8 @@ export default function Category() {
                 tabIndex='0'
                 style={{display: storedDozen >= nbDozen.current || article.value ? 'none' : 'flex'}} 
                 onClick={nextPage}
+                onKeyDown={(e) => e.key === 'Enter' && nextPage()}
+                title='Aller à la page suivante'
               >
                 <img className='arrows' src={NextArrow} alt="next arrow" />
               </div>

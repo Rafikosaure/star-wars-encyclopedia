@@ -55,6 +55,9 @@ function ShoppingCard({ product }) {
             {product && product.maxQuantity && product.maxQuantity && productQuantityCounter(basketContent, product) && (
                 <div className='shopping-card-stock-limit-overlay' 
                 onClick={() => navigate(`/shopping/product/${product.id}`)}
+                onKeyDown={(e) => e.key === 'Enter' && navigate(`/shopping/product/${product.id}`)}
+                tabIndex="0"
+                title='Aller vers la page du produit'
                 >
                     <p className='shopping-card-stock-limit-text'>
                         stock épuisé
@@ -69,12 +72,16 @@ function ShoppingCard({ product }) {
                     <>
                     <p className='shopping-basket-add-or-remove-product-button remove-product-button'
                     onClick={(e) => removeProductFunction(e, product)}
+                    onKeyDown={(e) => e.key === 'Enter' && removeProductFunction(e, product)}
+                    tabIndex="0"
                     title='Retirer un article du panier'
                     >−</p>
 
                     {!productQuantityCounter(basketContent, product) && (
                         <p className='shopping-basket-add-or-remove-product-button add-product-button'
                         onClick={(e) => registerAProduct(e)}
+                        onKeyDown={(e) => e.key === 'Enter' && registerAProduct(e)}
+                        tabIndex="0"
                         title='Ajouter un article au panier'
                         >+</p>
                     )}
@@ -82,6 +89,8 @@ function ShoppingCard({ product }) {
                 ) : (
                     <p className='shopping-basket-add-or-remove-product-button add-product-button'
                     onClick={(e) => registerAProduct(e)}
+                    onKeyDown={(e) => e.key === 'Enter' && registerAProduct(e)}
+                    tabIndex="0"
                     title='Ajouter un article au panier'
                     >+</p>
                 )}

@@ -52,6 +52,7 @@ export default function Card({ item, categoryId }) {
           <Link className='card-link' 
             to={`/category/${itemId}`}
             onClick={(e) => {dispatch(reinitializeDozen())}}
+            onKeyDown={(e) => e.key === 'Enter' && dispatch(reinitializeDozen())}
             >
             <div className='card-image'>
               <img src={item.image} alt={`Carte de la catégorie des ${item.title}`} />
