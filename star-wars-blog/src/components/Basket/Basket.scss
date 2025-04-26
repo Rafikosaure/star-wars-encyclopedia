@@ -1,6 +1,16 @@
 $color_1: rgb(53, 155, 155);
 $color_2: black;
 $font-family_1: Arial, Helvetica, sans-serif;
+@mixin basket-content-links {
+    width: 40%;
+    height: 10px;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    &:hover {
+        color: $color_1;
+    }
+}
 @property --angle {
     syntax: "<angle>";
     initial-value: 0deg;
@@ -36,6 +46,16 @@ $font-family_1: Arial, Helvetica, sans-serif;
         max-height: 130px;
         margin-bottom: 15px;
         overflow: scroll;
+        .basket-content-manager-section {
+            display: flex;
+            .basket-empty-button {
+                @include basket-content-links;
+            }
+            .basket-page-link {
+                @include basket-content-links;
+                margin-left: 10px;
+            }
+        }
         .basket-product-wrapper {
             line-height: 1.5;
             width: 95%;
@@ -53,6 +73,10 @@ $font-family_1: Arial, Helvetica, sans-serif;
 }
 .basket-product-remove-cross {
     cursor: pointer;
+    &:hover {
+        color: $color_1;
+        font-weight: bold;
+    }
 }
 .basket-wrapper::after, .basket-wrapper::before {
     content: "";
