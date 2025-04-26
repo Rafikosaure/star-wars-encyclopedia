@@ -1,0 +1,160 @@
+$color_1: white;
+$color_2: rgb(53, 155, 155);
+$color_3: black;
+$background-color_1: black;
+$font-family_1: Arial, Helvetica, sans-serif;
+$font-family_2: 'Starjedi';
+@property --angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+}
+
+
+.basket-page-wrapper {
+    position: relative;
+    width: calc(80% - 2px);
+    color: $color_1;
+    font-family: $font-family_1;
+    background: url('../../assets/images/watto.webp') no-repeat center center;
+    background-size: cover;
+    border: 1px solid $color_1;
+    .basket-page-maintenance {
+        background-color: lightgreen;
+        cursor: default;
+        width: 100%;
+        height: 40px;
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        color: $color_3;
+        font-family: $font-family_1;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .basket-page-background {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 0;
+        background: rgba($color: $color_3, $alpha: .67);
+    }
+    .basket-page-title {
+        margin-top: 50px;
+        z-index: 1;
+        font-family: $font-family_2;
+        text-transform: lowercase;
+        cursor: default;
+    }
+    .basket-page-text {
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+        z-index: 1;
+        font-size: 18px;
+        cursor: default;
+        font-family: $font-family_1;
+        margin-top: 50px;
+        text-align: justify;
+    }
+    .basket-page-return-arrow-wrapper {
+        position: absolute;
+        top: 35px;
+        left: 5%;
+        z-index: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .basket-page-return-arrow {
+            position: absolute;
+            top: 35px;
+            left: 5%;
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            cursor: pointer;
+            background-color: $background-color_1;
+            transition-property: all;
+            transition-duration: .2s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            &:hover { 
+                background-color: $color_2;
+            }
+            .basket-page-return-arrow-image {
+                width: 78px;
+                height: 78px;
+                overflow: hidden;
+            }
+        }
+        .basket-page-return-arrow::after, .basket-page-return-arrow::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            background-image: conic-gradient(from var(--angle), $color_3, $color_2);
+            z-index: -1;
+            padding: 4px;
+            border-radius: 50%;
+            animation: 3s spin linear infinite;
+        }
+        .basket-page-return-arrow::before {
+            filter: blur(1.5rem);
+            opacity: .5;
+        }
+    }
+    .basket-page-content {
+        display: flex;
+        cursor: default;
+        width: 80%;
+        height: fit-content;
+        justify-content: space-around;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        margin-bottom: 100px;
+        .basket-page-empty {
+            margin-top: 110px;
+        }
+        .basket-page-full {
+            // outline: 1px solid $color_1;
+            width: 200px;
+            height: 200px;
+            margin-top: 70px;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            .basket-page-full-content {
+                width: 100%;
+                height: fit-content;
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+        .basket-page-empty, .basket-page-full {
+            z-index: 1;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            font-family: $font-family_1;
+        }
+    }
+}
+@keyframes spin {
+    to {
+        --angle: 0deg;
+    } to {
+        --angle: 360deg;
+    }
+}

@@ -17,6 +17,7 @@ import ShoppingPage from './pages/ShoppingPage/ShoppingPage';
 import MoviesPage from './pages/MoviesPage/MoviesPage';
 import MarketPage from './pages/MarketPage/MarketPage';
 import ProductPage from './pages/ProductPage/ProductPage';
+import BasketPage from './pages/BasketPage/BasketPage';
 
 
 export default function App() {
@@ -40,6 +41,7 @@ export default function App() {
                 <Route path='market' element={<MarketPage />} />
                 <Route path='product/:productId' element={<ProductPage />} />
               </Route>
+              <Route path='/basket' element={<BasketPage />} />
               <Route path='/legal' element={<Legal />} />
               <Route path='*' element={<Error404 />} />
             </Routes>
