@@ -1,0 +1,193 @@
+$color_1: white;
+$color_2: rgb(53, 155, 155);
+$color_3: black;
+$background-color_1: black;
+$font-family_1: Arial, Helvetica, sans-serif;
+$font-family_2: 'Starjedi';
+
+.basket-page-product {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    // margin-bottom: 30px;
+    height: fit-content;
+    min-height: 120px;
+    padding: 0 10px;
+    font-size: 12px;
+    text-align: start;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    outline: 1px solid $color_1;
+    border-radius: 10px;
+    background-color: rgba($color: $color_3, $alpha: .5);
+    .basket-page-product-image {
+        width: 100px;
+        height: 100px;
+        border-radius: 10px;
+        overflow: hidden;
+        outline: 1px solid $color_1;
+        background-color: $background-color_1;
+        cursor: pointer;
+        &:focus {
+            outline: 1px solid $color_2;
+        }
+    }
+    .basket-page-product-details {
+        width: calc(98% - 90px);
+        height: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        // background-color: green;
+        .basket-page-product-title-wrapper {
+            display: flex;
+            // flex: .4;
+            width: 25%;
+            padding: 0 10px;
+            // min-width: 100px;
+            height: 80%;
+            max-height: 80%;
+            min-height: 80px;
+            // background-color: red;
+            font-family: $font-family_1;
+            text-align: start;
+            overflow-wrap: break-word;
+            font-size: 18px;
+        }                        
+        .basket-page-product-description {
+            display: flex;
+            // flex: .5;
+            width: 25%;
+            height: 80%;
+            padding: 0 10px;
+            min-height: 80px;
+            max-height: 80%;
+            // background-color: blue;
+            font-size: 13px;
+            text-align: start;
+            overflow-wrap: break-word;
+            font-family: $font-family_1;
+        }
+        .basket-page-product-price {
+            display: flex;
+            // flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            // background-color: yellow;
+            // flex: .5;
+            width: 30%;
+            // min-width: 100px;
+            height: 80%;
+            padding: 0 5px;
+            min-height: 80px;
+            max-height: 80%;
+            font-size: 14px;
+            .basket-page-product-price-section {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                width: 50%;
+                gap: 5px;
+                cursor: default;
+                .basket-page-product-price-content {
+                    display: flex;
+                    justify-content: center;
+                    align-items: flex-start;
+                    // background-color: orange;
+                    width: fit-content;
+                    // font-size: 16px;
+                    // height: 100%;
+                    font-family: $font-family_1;
+                    .basket-page-product-price-text {
+                        // font-weight: bold;
+                        text-align: start;
+                        margin: 0;
+                        // background-color: limegreen;
+                        height: fit-content;
+                        width: 100%;
+                        overflow-wrap: break-word;
+                    }
+                    .basket-page-product-price-currency {
+                        width: 9px;
+                        height: 15px;
+                        margin-left: 5px;
+                        // background-color: lightseagreen;
+                    }
+                }
+            }
+            .basket-page-product-quantity {
+                outline: 1px solid $color_1;
+                padding: 2px;
+                border-radius: 10px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: flex-start;
+                width: 45%;
+                cursor: default;
+                // background-color: blue;
+                .basket-page-product-quantity-counter {
+                    font-size: 14px;
+                    width: 100%;
+                    // min-width: 120px;
+                    // margin-bottom: 10px;
+                    font-weight: bold;
+                    text-align: center;
+                    // background-color: lightcoral;
+                }
+                .basket-page-product-quantity-manage {
+                    margin-top: 5px;
+                    display: flex;
+                    width: 100%;
+                    justify-content: space-evenly;
+                    // background-color: pink;
+                    .basket-page-product-quantity-button {
+                        font-size: 26px;
+                        font-weight: bold;
+                        text-align: center;
+                        width: 30px;
+                        // background-color: limegreen;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+        .basket-page-product-total-price {
+            // background-color: lightskyblue;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            cursor: default;
+            // flex: .5;
+            width: 15%;
+            height: 80%;
+            min-height: 80px;
+            max-height: 80%;
+            font-size: 14px;
+            font-weight: bold;
+            .basket-page-product-total-price-title {
+                margin: 0;
+                font-weight: bold;
+                // background-color: lightcoral;
+                text-decoration: underline;
+                text-transform: uppercase;
+            }
+            .basket-page-product-total-price-euros {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                // background-color: lightcoral;
+            }
+            .basket-page-product-total-price-dataries-currency {
+                width: 8px;
+                height: 13px;
+                margin-left: 5px;
+                // background-color: lightseagreen;
+            }
+        }
+    }
+}
