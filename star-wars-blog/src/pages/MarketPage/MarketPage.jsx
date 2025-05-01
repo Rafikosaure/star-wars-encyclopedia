@@ -4,8 +4,15 @@ import './MarketPage.scss'
 import '../../sharedStyles/index.scss'
 import ShoppingCard from '../../components/ShoppingCard/ShoppingCard.jsx'
 import { useSelector, useDispatch } from 'react-redux'
-import { selectProducts } from '../../redux/slices/productsSlice.js'
-import { selectShoppingPage, setCurrentShoppingPage } from '../../redux/slices/shoppingPaginate.js'
+import { 
+    fetchProducts, 
+    selectProducts, 
+    selectProductsStatus 
+} from '../../redux/slices/productsSlice.js'
+import { 
+    selectShoppingPage, 
+    setCurrentShoppingPage 
+} from '../../redux/slices/shoppingPaginate.js'
 import Currency from '../../assets/images/credit_white.webp'
 import BackArrow from '../../assets/images/back-arrow.webp'
 import NextArrow from '../../assets/images/next-arrow.webp'
@@ -16,9 +23,11 @@ function MarketPage() {
     const dispatch = useDispatch()
     const currentPage = useSelector(selectShoppingPage)
     const storedProducts = useSelector(selectProducts)
+    const productsStatus = useSelector(selectProductsStatus);
     const [filteredProducts, setFilteredProducts] = useState()
     const [filterCategory, setFilterCategory] = useState('all')
     const [filterButtonsActive, setFilterButtonsActive] = useState('1')
+    
 
     // Variables de pagination
     const productsPerPage = 6
@@ -60,6 +69,14 @@ function MarketPage() {
             }))
         }
     }, [filterCategory, storedProducts])
+
+
+    // Récupération des données de l'API
+    useEffect(() => {
+        if (productsStatus === 'idle') {
+          dispatch(fetchProducts());
+        }
+    }, [dispatch, productsStatus]);
 
 
     // Persistance des filtres
@@ -109,6 +126,11 @@ function MarketPage() {
         localStorage.setItem('selectedFilter', e.target.value)
         localStorage.setItem('activeButtonId', e.target.id)
     }
+
+
+    // Gestion de l'affichage asynchrone
+    if (productsStatus === 'loading') return <p>Chargement...</p>;
+    if (productsStatus === 'failed') return <p>Erreur lors du chargement.</p>;
 
 
     return (
@@ -203,7 +225,7 @@ function MarketPage() {
                 </div>
                 <div className='shopping-page-content'>
                     {currentProducts && (
-                        currentProducts.map((product, index) => (
+                        currentProducts.map((product) => (
                             <ShoppingCard key={product.id} product={product} />
                         ))
                     )}
