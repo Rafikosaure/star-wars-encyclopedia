@@ -2,12 +2,18 @@ import React from 'react'
 import './ShoppingCard.scss'
 import { Link } from 'react-router-dom'
 import Avatar from '../../assets/images/EmojiBlitzBobaFett1.webp'
-// import { ReactComponent as EmptyBasket } from '../../assets/images/shopping-basket-empty-white.svg'
-// import { ReactComponent as FullBasket } from '../../assets/images/shopping-basket-full-white.svg'
 import { toast } from 'sonner'
-import { saveProduct, removeProduct, selectBasket } from '../../redux/slices/shoppingBasket'
+import { selectProducts } from '../../redux/slices/productsSlice.js'
+import { 
+    saveProduct, 
+    removeProduct, 
+    selectBasket 
+} from '../../redux/slices/shoppingBasket.js'
 import { useDispatch, useSelector } from 'react-redux'
-import { productQuantityCounter } from '../../utils/productQuantityCounter'
+import { 
+    productQuantityCounter,
+    mergeBasketWithCatalog 
+} from '../../utils/shoppingUtils.js'
 import Currency from '../../assets/images/credit_white.webp'
 import { useNavigate } from 'react-router-dom'
 
@@ -16,7 +22,9 @@ import { useNavigate } from 'react-router-dom'
 function ShoppingCard({ product }) {
 
     const dispatch = useDispatch()
-    const basketContent = useSelector(selectBasket)
+    const storedProducts = useSelector(selectProducts)
+    const rawBasket = useSelector(selectBasket)
+    const basketContent = mergeBasketWithCatalog(rawBasket, storedProducts);
     const navigate = useNavigate()
 
 
@@ -25,15 +33,17 @@ function ShoppingCard({ product }) {
         e.preventDefault()
 
         // Vérification de la quantité d'articles dans le panier
-        const outOfStock = productQuantityCounter(basketContent, product)
-        if (outOfStock) {
-            toast(`⚠️ Limite de stock atteinte pour "${product.title}" (max ${product.maxQuantity}). Aucun ajout effectué.`)
-            return
+        if (basketContent) {
+            const outOfStock = productQuantityCounter(basketContent, product)
+            if (outOfStock) {
+                toast(`⚠️ Limite de stock atteinte pour "${product.title}" (max ${product.maxQuantity}). Aucun ajout effectué.`)
+                return
+            }
         }
-
+        
         // Enregistrement du produit dans le panier
-        dispatch(saveProduct(product))
-        toast(`L'article "${product.title}" a été ajouté au panier !`);
+        dispatch(saveProduct({ id: product.id, maxQuantity: product.maxQuantity }))
+        toast(`Un exemplaire de "${product.title}" a été ajouté au panier !`);
     }
     
 
@@ -41,11 +51,10 @@ function ShoppingCard({ product }) {
     const removeProductFunction = (e) => {
         e.preventDefault()
         if (product) {
-            dispatch(removeProduct(product))
+            dispatch(removeProduct({ id: product.id }))
+            toast(`Un exemplaire de "${product.title}" a été retiré du panier !`)
         }
     }
-
-
 
 
     return (
@@ -68,14 +77,17 @@ function ShoppingCard({ product }) {
             className='shopping-basket-add-or-remove-product-section' 
             title='Ajouter au panier'
             >
-                {basketContent.includes(product) ? (
+                {product && (
                     <>
-                    <p className='shopping-basket-add-or-remove-product-button remove-product-button'
-                    onClick={(e) => removeProductFunction(e, product)}
-                    onKeyDown={(e) => e.key === 'Enter' && removeProductFunction(e, product)}
-                    tabIndex="0"
-                    title='Retirer un article du panier'
-                    >−</p>
+                    {basketContent.find(item => item.id === product.id) && (
+                        <p className='shopping-basket-add-or-remove-product-button remove-product-button'
+                        onClick={(e) => removeProductFunction(e)}
+                        onKeyDown={(e) => e.key === 'Enter' && removeProductFunction(e)}
+                        tabIndex="0"
+                        title='Retirer un article du panier'
+                        >−</p>
+                    )}
+                    
 
                     {!productQuantityCounter(basketContent, product) && (
                         <p className='shopping-basket-add-or-remove-product-button add-product-button'
@@ -86,15 +98,9 @@ function ShoppingCard({ product }) {
                         >+</p>
                     )}
                     </>
-                ) : (
-                    <p className='shopping-basket-add-or-remove-product-button add-product-button'
-                    onClick={(e) => registerAProduct(e)}
-                    onKeyDown={(e) => e.key === 'Enter' && registerAProduct(e)}
-                    tabIndex="0"
-                    title='Ajouter un article au panier'
-                    >+</p>
                 )}
             </div>
+
             {product && (
                 <Link className='shopping-card-link'
                 to={`/shopping/product/${product.id}`}
