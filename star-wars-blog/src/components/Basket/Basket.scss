@@ -42,7 +42,8 @@ $font-family_1: Arial, Helvetica, sans-serif;
         }
     }
     .basket-content {
-        width: 100%;
+        padding: 0 5%;
+        width: 90%;
         max-height: 130px;
         margin-bottom: 15px;
         overflow: scroll;
@@ -63,6 +64,9 @@ $font-family_1: Arial, Helvetica, sans-serif;
             display: flex;
             justify-content: space-around;
         }
+    }
+    .basket-content-empty {
+        outline: 1px solid white;
     }
 }
 .basket-product {

@@ -1,6 +1,11 @@
 import React from 'react'
 import './Basket.scss'
+import { 
+    mergeBasketWithCatalog,
+    basketTotalProductsCalc, 
+} from '../../utils/shoppingUtils.js'
 import { useSelector, useDispatch } from 'react-redux'
+import { selectProducts } from '../../redux/slices/productsSlice.js'
 import { selectBasket } from '../../redux/slices/shoppingBasket'
 import { emptyBasket, removeProduct } from '../../redux/slices/shoppingBasket'
 import { ReactComponent as EmptyBasket } from '../../assets/images/shopping-basket-empty-white.svg'
@@ -12,6 +17,7 @@ import { useNavigate } from 'react-router-dom'
 function Basket() {
 
     const basketContent = useSelector(selectBasket)
+    const productsArray = useSelector(selectProducts)
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
@@ -36,20 +42,16 @@ function Basket() {
     const removeProductFunction = (e, product) => {
         e.preventDefault()
         dispatch(removeProduct(product))
-        toast(`L'article "${product.title}" a été retiré du panier !`)
+        toast(`Un exemplaire de "${product.title}" a été retiré du panier !`)
     }
 
 
+    // Compte des produits dans le panier
+    const totalBasketProducts = basketTotalProductsCalc(basketContent)
+
+
     // Regrouper les articles par ID avec leur quantité
-    const groupedBasketMap = basketContent.reduce((acc, product) => {
-        if (acc[product.id]) {
-            acc[product.id].quantity += 1
-        } else {
-            acc[product.id] = { ...product, quantity: 1 }
-        }
-        return acc
-    }, {})
-    const groupedBasket = Object.values(groupedBasketMap)
+    const groupedBasket = mergeBasketWithCatalog(basketContent, productsArray)
 
 
     return (
@@ -69,10 +71,10 @@ function Basket() {
                     tabIndex="0"
                     ><FullBasket /></div>
                 )}
-                <h1 className='basket-title'>Nombre d'articles : {basketContent.length}</h1>
+                <h1 className='basket-title'>Nombre de produits : {totalBasketProducts}</h1>
             </span>
             
-            <div className='basket-content'>
+            <div className={`basket-content ${basketContent.length !== 0 && 'basket-content-empty'}`}>
                 {basketContent.length !== 0 ? (
                     <>
                     <span className='basket-content-manager-section'>
@@ -95,7 +97,7 @@ function Basket() {
                     
 
                     <p className='basket-product'><strong>Contenu du panier :</strong></p>
-                    {groupedBasket.map((product, index) => (
+                    {groupedBasket.map((product) => (
                         
                         <span key={product.id} className='basket-product-wrapper'>
                             <p className='basket-product'>
