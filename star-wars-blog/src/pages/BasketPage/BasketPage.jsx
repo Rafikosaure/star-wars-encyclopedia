@@ -1,27 +1,60 @@
 import './BasketPage.scss'
 import '../../sharedStyles/index.scss'
 import ReturnArrow from '../../assets/images/return-arrow.webp'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { 
+    selectProducts,
+    selectProductsStatus,
+    fetchProducts 
+} from '../../redux/slices/productsSlice.js'
 import { selectBasket } from '../../redux/slices/shoppingBasket'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import BasketCard from '../../components/BasketCard/BasketCard'
+import { 
+    convertDatariesToEuro,
+    mergeBasketWithCatalog,
+    basketTotalProductsCalc,
+    eurosToPay  
+} from '../../utils/shoppingUtils.js'
+
 
 
 function BasketPage() {
 
-    const basketContent = useSelector(selectBasket)
+    const rawBasket = useSelector(selectBasket)
+    const storedProducts = useSelector(selectProducts)
+    const productsStatus = useSelector(selectProductsStatus)
+    const dispatch = useDispatch()
+    const [basketContent, setBasketContent] = useState([])
 
-    // Regrouper les articles par ID avec leur quantité
-    const groupedBasketMap = basketContent.reduce((acc, product) => {
-        if (acc[product.id]) {
-            acc[product.id].quantity += 1
-        } else {
-            acc[product.id] = { ...product, quantity: 1 }
+    // Calculer le nombre total de produits dans le panier
+    const totalBasketProducts = basketTotalProductsCalc(basketContent)
+
+
+    // Récupération des données de l'API
+    useEffect(() => {
+        if (productsStatus === 'idle') {
+          dispatch(fetchProducts());
         }
-        return acc
-    }, {})
-    const groupedBasket = Object.values(groupedBasketMap)
-    console.log('Produits :', groupedBasket)
+    }, [dispatch, productsStatus]);
+
+
+
+    // Reconstitution des données des produits depuis leur id
+    useEffect(() => {
+        if (storedProducts && storedProducts.length > 0) {
+            setBasketContent(mergeBasketWithCatalog(rawBasket, storedProducts));
+        }
+    }, [storedProducts, rawBasket])
+
+
+    // Calcul du coût total en euros
+    const totalEuros = convertDatariesToEuro(eurosToPay(basketContent))
+
+
+    // Gestion de l'affichage asynchrone
+    if (productsStatus === 'loading') return <p>Chargement...</p>;
+    if (productsStatus === 'failed') return <p>Erreur lors du chargement.</p>;
 
 
     return (
@@ -48,16 +81,29 @@ function BasketPage() {
                     </div>
                 ) : (
                     <div className='basket-page-full'>
-                        <p className='basket-page-full-text'>Votre panier contient {basketContent.length} articles</p>
+                        <p className='basket-page-full-text'>Votre panier contient {totalBasketProducts} {totalBasketProducts > 1 ? 'produits' : 'produit'}</p>
 
                         <div className='basket-page-full-content'>
-                            {groupedBasket.map((product, index) => (
-                                <BasketCard key={product.id} product={product} index={index} />
+                            {basketContent.map((product) => (
+                                <BasketCard key={product.id} product={product} />
                             ))}
                         </div>
                     </div>
                 )}
             </section>
+            {basketContent.length > 0 && (
+                <section className='basket-page-total'>
+                    <div className='basket-page-total-content'>
+                        <p className='basket-page-total-text'>Total : {totalEuros}</p>
+                    </div>
+                    <div className='basket-page-total-legal'>
+                        <p className='basket-page-total-legal-text'>En cliquant sur "Valider la commande", vous acceptez nos <a className='basket-page-total-legal-text-link' href="/legal#CGV">conditions générales de vente</a>.</p>
+                    </div>
+                    <div className='basket-page-total-button-wrapper'>
+                        <button className='basket-page-total-button'>Valider la commande</button>
+                    </div>
+                </section>
+            )}
         </div>
     )
 }
