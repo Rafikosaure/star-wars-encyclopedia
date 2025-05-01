@@ -3,7 +3,6 @@ import config from '../config'
 import validatePassword from '../utils/validatePassword';
 
 
-
 // Appels centralisés vers le serveur Node.JS du projet
 export const ServerServices = {
 

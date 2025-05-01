@@ -7,7 +7,8 @@ const config = {
     tmdbMoviesListId: process.env.REACT_APP_TMDB_MOVIES_LIST_ID,
     tmdbSeriesListId: process.env.REACT_APP_TMDB_SERIES_LIST_ID,
     tmdbMovieImagePath: process.env.REACT_APP_TMDB_MOVIE_IMAGE_PATH,
-    tmdbApiEndpoint: process.env.REACT_APP_TMDB_API_ENDPOINT
+    tmdbApiEndpoint: process.env.REACT_APP_TMDB_API_ENDPOINT,
+    starWarsShoppingApi: process.env.REACT_APP_STAR_WARS_SHOPPING_API
 }
 
 export default config
