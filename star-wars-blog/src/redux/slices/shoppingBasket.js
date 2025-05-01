@@ -1,9 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { 
+  loadBasketFromLocalStorage, 
+  saveBasketToLocalStorage,
+  clearBasketFromLocalStorage 
+} from '../../utils/basketLocalStorage';
+
 
 
 const initialState = {
-  products: []
-}
+  items: loadBasketFromLocalStorage() || []
+};
 
 
 export const basketSlice = createSlice({
@@ -11,35 +17,54 @@ export const basketSlice = createSlice({
   initialState,
   reducers: {
     saveProduct: (state, action) => {
-      const productToAdd = action.payload;
+      const { id, maxQuantity } = action.payload;
 
-      // Compter combien de fois ce produit est déjà présent dans le panier
-      const currentCount = state.products.reduce((acc, item) => {
-        return item.id === productToAdd.id ? acc + 1 : acc;
-      }, 0);
+      // Vérifier si le produit est déjà dans le panier
+      const existingItem = state.items.find(item => item.id === id);
 
-      // Vérifier la limite de stock
-      if (productToAdd.maxQuantity && currentCount >= productToAdd.maxQuantity) {
-        return; // On empêche l'ajout
+      // Si le produit existe déjà, on vérifie la limite de stock
+      if (existingItem) {
+        if (!maxQuantity || existingItem.quantity < maxQuantity) {
+
+          // Si c'est bon, on incrémente la quantité
+          existingItem.quantity += 1;
+        }
+
+        // Sinon : ne pas dépasser le stock, on ne fait rien
+      } else {
+        state.items.push({ id, quantity: 1 });
       }
 
-      // Sinon, on ajoute le produit
-      state.products.push(productToAdd);
+      // On sauvegarde dans le localStorage
+      saveBasketToLocalStorage(state.items);
     },
     removeProduct: (state, action) => {
-      const index = state.products.findIndex(product => product.id === action.payload.id)
-      if (index !== -1) {
-        state.products.splice(index, 1)
+      const idToRemove = action.payload.id;
+      const existingItem = state.items.find(item => item.id === idToRemove);
+
+      if (existingItem) {
+        if (existingItem.quantity > 1) {
+          existingItem.quantity -= 1;
+        } else {
+          // Si quantité = 1, on supprime l’entrée
+          state.items = state.items.filter(item => item.id !== idToRemove);
+        }
+
+        // On sauvegarde dans le localStorage
+        saveBasketToLocalStorage(state.items);
       }
     },
     emptyBasket: (state, action) => {
-      state.products = []
+      state.items = []
+
+      // Supprimer complètement du localStorage
+      clearBasketFromLocalStorage();
     }
   }
 });
 
 export const { saveProduct, removeProduct, emptyBasket } = basketSlice.actions;
 
-export const selectBasket = (state) => state.basketReducer.products
+export const selectBasket = (state) => state.basketReducer.items
 
 export default basketSlice.reducer;
