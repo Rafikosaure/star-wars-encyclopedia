@@ -10,6 +10,7 @@ export default function Footer() {
           <ul>
             <li><a href="/legal">Politique de confidentialité</a></li>
             <li><a href='/legal#CGU'>Conditions Générales d'Utilisation</a></li>
+            <li><a href='/legal#CGV'>Conditions Générales de Vente</a></li>
             <li><a href='/legal#RGPD'>Gestion des données personnelles</a></li>
             <li><a href='/legal#cookies'>Politique des cookies</a></li>
           </ul>
