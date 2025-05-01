@@ -5,9 +5,20 @@ import { useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { selectProducts } from '../../redux/slices/productsSlice'
-import { saveProduct, removeProduct, selectBasket } from '../../redux/slices/shoppingBasket'
-import { productQuantityCounter } from '../../utils/productQuantityCounter'
+import { 
+    selectProducts,
+    selectProductsStatus, 
+    fetchProducts, 
+} from '../../redux/slices/productsSlice'
+import { 
+    saveProduct, 
+    removeProduct, 
+    selectBasket 
+} from '../../redux/slices/shoppingBasket'
+import { 
+    productQuantityCounter,
+    getProductCountInBasket 
+} from '../../utils/shoppingUtils.js'
 import { Link } from 'react-router-dom'
 import ReturnArrow from '../../assets/images/return-arrow.webp'
 import Currency from '../../assets/images/credit_white.webp'
@@ -20,35 +31,42 @@ function ProductPage() {
     const { productId } = useParams()
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const productsArray = useSelector(selectProducts)
+    const storedProducts = useSelector(selectProducts)
+    const productsStatus = useSelector(selectProductsStatus);
     const basketContent = useSelector(selectBasket)
     const [currentProduct, setCurrentProduct] = useState()
     const [currentProductCount, setCurrentProductCount] = useState()
 
+    
+    // Récupération des données de l'API
+    useEffect(() => {
+        if (productsStatus === 'idle') {
+          dispatch(fetchProducts());
+        }
+    }, [dispatch, productsStatus]);
+
 
     // Récupération de l'article depuis l'API
     useEffect(() => {
-        if (productsArray) {
-            const product = productsArray.find((product) => product.id.toString(10) === productId)
+        if (storedProducts) {
+            const product = storedProducts.find((product) => product.id.toString(10) === productId)
             if (product) {
                 setCurrentProduct(product)
             } else {
-                navigate("*")
+                // navigate("/shopping/market")
             }
         } else {
             navigate("*");
         }
-    }, [productsArray, productId, currentProduct, navigate]);
+    }, [storedProducts, basketContent, productId, currentProduct, navigate]);
 
 
     // Compteur d'occurrence du produit courant dans le panier
     useEffect(() => {
-        if (productsArray && currentProduct) {
-            setCurrentProductCount(basketContent.reduce((acc, product) => {
-                return product === currentProduct ? acc + 1 : acc
-            }, 0))
+        if (basketContent && currentProduct) {
+            setCurrentProductCount(getProductCountInBasket(basketContent, currentProduct))
         }
-    }, [currentProduct, productsArray, basketContent])
+    }, [currentProduct, basketContent])
 
 
     // Enregistrer un exemplaire du produit courant dans le panier
@@ -78,6 +96,11 @@ function ProductPage() {
             toast(`L'article "${currentProduct.title}" a été retiré du panier !`)
         }
     }
+
+
+    // Gestion de l'affichage asynchrone
+    if (productsStatus === 'loading') return <p>Chargement...</p>;
+    if (productsStatus === 'failed') return <p>Erreur lors du chargement.</p>;
 
 
     return (
@@ -118,11 +141,11 @@ function ProductPage() {
                                 alt="datarie républicaine" 
                                 />
 
-                                {basketContent.includes(currentProduct) ? (
+                                {currentProduct && (
                                     <>
                                     <div className='product-page-product-add-remove'>
                                         {!productQuantityCounter(basketContent, currentProduct) && (
-                                            <p className='product-page-data-add-and-remove-button add'
+                                            <p className='product-page-data-add-and-remove-button'
                                                 title='Ajouter un article au panier'
                                                 tabIndex="0"
                                                 onClick={(e) => saveProductFunction(e)}
@@ -130,29 +153,20 @@ function ProductPage() {
                                             >+</p>
                                         )}
 
-                                        <p className='product-page-data-add-and-remove-button remove'
-                                            title='Retirer un article du panier'
-                                            tabIndex="0"
-                                            onClick={(e) => removeProductFunction(e)}
-                                            onKeyDown={(e) => e.key === 'Enter' && removeProductFunction(e)}
-                                        >−</p>
+                                        {basketContent.find(product => product.id === currentProduct.id) && (
+                                            <p className='product-page-data-add-and-remove-button'
+                                                title='Retirer un article du panier'
+                                                tabIndex="0"
+                                                onClick={(e) => removeProductFunction(e)}
+                                                onKeyDown={(e) => e.key === 'Enter' && removeProductFunction(e)}
+                                            >−</p>
+                                        )}
                                     </div>
-
+                                    
                                     <p className='product-page-data-price-basket-quantity'>Quantité : {currentProductCount}</p>
                                     </>
-                                    
-                                ) : (
-                                    <div className='product-page-product-add-remove'>
-                                        <p 
-                                        className='product-page-data-add-and-remove-button add'
-                                        title='Ajouter un article au panier'
-                                        tabIndex="0"
-                                        onClick={(e) => saveProductFunction(e)}
-                                        onKeyDown={(e) => e.key === 'Enter' && saveProductFunction(e)}
-                                        >+</p>
-                                    </div>
-                                    
                                 )}
+                                    
                             </div>
                         </div>
                     </section>
