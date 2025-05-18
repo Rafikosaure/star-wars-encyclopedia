@@ -1,4 +1,3 @@
-import React from 'react'
 import './ShoppingCard.scss'
 import { Link } from 'react-router-dom'
 import Avatar from '../../assets/images/EmojiBlitzBobaFett1.webp'
@@ -63,10 +62,10 @@ function ShoppingCard({ product }) {
         >   
             {product && product.maxQuantity && product.maxQuantity && productQuantityCounter(basketContent, product) && (
                 <div className='shopping-card-stock-limit-overlay' 
-                onClick={() => navigate(`/shopping/product/${product.id}`)}
-                onKeyDown={(e) => e.key === 'Enter' && navigate(`/shopping/product/${product.id}`)}
-                tabIndex="0"
-                title='Aller vers la page du produit'
+                    onClick={() => navigate(`/shopping/product/${product.id}`)}
+                    onKeyDown={(e) => e.key === 'Enter' && navigate(`/shopping/product/${product.id}`)}
+                    tabIndex="0"
+                    title='Aller vers la page du produit'
                 >
                     <p className='shopping-card-stock-limit-text'>
                         stock épuisé

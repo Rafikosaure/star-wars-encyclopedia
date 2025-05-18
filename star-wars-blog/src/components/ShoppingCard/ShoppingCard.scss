@@ -171,6 +171,10 @@ $font-family_1: Arial, Helvetica, sans-serif;
     filter: blur(1.5rem);
     opacity: .5;
 }
+.shopping-card-price-currency {
+    width: 8px;
+    height: 12px;
+}
 @keyframes spin {
     to {
         --angle: 0deg;
@@ -178,25 +182,47 @@ $font-family_1: Arial, Helvetica, sans-serif;
         --angle: 360deg;
     }
 }
-.shopping-card-price-currency {
-    width: 8px;
-    height: 12px;
+
+/* Ici : media queries pour la seconde partie tablette */
+@media screen and (max-width: 991px) {
+    .shopping-card-wrapper {
+		margin-bottom: 10px;
+		width: calc(280px * 80 / 100) !important;
+		height: calc(380px * 80 / 100) !important;
+	}
+    .shopping-basket-add-or-remove-product-section {
+        bottom: 5px !important;
+        .shopping-basket-add-or-remove-product-button {
+            height: 13px;
+            width: 13px;
+        }
+    }
+    .shopping-card-description-section {
+        margin-bottom: 30px !important;
+        .shopping-card-description {
+            font-size: 10px !important;
+        }
+    }
+    .shopping-card-price {
+        position: absolute;
+        bottom: -3px;
+        left: 10px;
+        font-size: 12px;
+        font-weight: bold;
+        .shopping-card-price-currency {
+            width: 7px;
+            height: 11px;
+        }
+    }
+    .shopping-card-stock-limit-text {
+        font-size: 22px !important;
+    }
+    .shopping-card-image {
+        height: 170px !important;
+        width: 170px !important;
+    }
 }
-
-
-
 /* Ici : media queries pour la première partie smartphone */
 @media screen and (max-width: 660px) {
-	.shopping-card-wrapper {
-		margin-bottom: 10px;
-		width: 240px;
-		height: 100px;
-	}
-	.shopping-card-name-div {
-		min-height: 0;
-	}
-	.shopping-card-name {
-		font-size: 16px;
-		height: fit-content;
-	}
+	
 }
