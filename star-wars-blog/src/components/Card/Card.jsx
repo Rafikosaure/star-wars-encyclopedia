@@ -1,4 +1,3 @@
-import React from 'react'
 import { useState, useEffect } from 'react'
 import './Card.scss'
 import { Link, useLocation } from 'react-router-dom'
@@ -35,6 +34,7 @@ export default function Card({ item, categoryId }) {
   return (
     <>
       {location.pathname !== "/" ? (
+        item && item.name && item.image && translatedName && (
         <div className='card card-home'>
           <Link className='card-link' to={`/article/${paramsIds}`}>
             <div className='card-image'>
@@ -42,11 +42,12 @@ export default function Card({ item, categoryId }) {
             </div>
             <div className='card-name-div'>
               {translatedName && (
-                  <p className="card-name">{translatedName}</p> 
+                <p className="card-name">{translatedName}</p>
               )}
             </div>
           </Link>
         </div>
+        )
       ) : (
         <div className='card'>  
           <Link className='card-link' 
