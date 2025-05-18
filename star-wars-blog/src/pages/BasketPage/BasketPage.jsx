@@ -1,7 +1,7 @@
 import './BasketPage.scss'
 import '../../sharedStyles/index.scss'
 import ReturnArrow from '../../assets/images/return-arrow.webp'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { 
     selectProducts,
     selectProductsStatus,
@@ -9,6 +9,7 @@ import {
 } from '../../redux/slices/productsSlice.js'
 import { selectBasket } from '../../redux/slices/shoppingBasket'
 import { useSelector, useDispatch } from 'react-redux'
+import { emptyBasket } from '../../redux/slices/shoppingBasket.js'
 import BasketCard from '../../components/BasketCard/BasketCard'
 import { 
     convertDatariesToEuro,
@@ -16,6 +17,7 @@ import {
     basketTotalProductsCalc,
     eurosToPay  
 } from '../../utils/shoppingUtils.js'
+import config from '../../config.js'
 
 
 
@@ -55,6 +57,52 @@ function BasketPage() {
     // Gestion de l'affichage asynchrone
     if (productsStatus === 'loading') return <p>Chargement...</p>;
     if (productsStatus === 'failed') return <p>Erreur lors du chargement.</p>;
+
+
+    // Envoi des achats au serveur (paiement avec Stripe)
+    const handleCheckout = async () => {
+        const basketItems = basketContent.map(product => {
+
+            // Construction de l'objet item pour chaque produit
+            const item = {
+                name: product.title,
+                description: product.description,
+
+                price:
+                    // Conversion du prix en euros
+                    convertDatariesToEuro(product.price)
+
+                    // Enlève les espaces, les caractères non numériques et le symbole euro 
+                    .split(',')[0]
+                    .replace(/[\s\u00A0\u202F€]/g, ''),
+                    
+                quantity: product.quantity
+            }
+            return item
+        })
+
+        try {
+            const response = await fetch(`${config.serverEndpoint}/shopping/create-checkout-session`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    basketItems: basketItems
+                }),
+            });
+            const data = await response.json();
+
+            if (data.url) {
+                dispatch(emptyBasket()) // Vider le panier avant de rediriger
+                window.location.href = data.url; // Redirection vers Stripe
+            } else {
+                console.error('Erreur lors de la récupération de l’URL de session');
+            }
+        } catch (error) {
+            console.error('Erreur lors du paiement :', error);
+        }
+    };
 
 
     return (
@@ -100,7 +148,10 @@ function BasketPage() {
                         <p className='basket-page-total-legal-text'>En cliquant sur "Valider la commande", vous acceptez nos <a className='basket-page-total-legal-text-link' href="/legal#CGV">conditions générales de vente</a>.</p>
                     </div>
                     <div className='basket-page-total-button-wrapper'>
-                        <button className='basket-page-total-button'>Valider la commande</button>
+                        <button 
+                        className='basket-page-total-button'
+                        onClick={handleCheckout}
+                        >Valider la commande</button>
                     </div>
                 </section>
             )}
