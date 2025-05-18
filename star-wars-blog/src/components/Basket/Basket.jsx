@@ -1,5 +1,6 @@
-import React from 'react'
+import '../../sharedStyles/index.scss'
 import './Basket.scss'
+import { useState, useRef } from 'react'
 import { 
     mergeBasketWithCatalog,
     basketTotalProductsCalc, 
@@ -12,6 +13,9 @@ import { ReactComponent as EmptyBasket } from '../../assets/images/shopping-bask
 import { ReactComponent as FullBasket } from '../../assets/images/shopping-basket-full-white.svg'
 import { toast } from 'sonner'
 import { useNavigate } from 'react-router-dom'
+import useClickOutside from '../../hooks/useClickOutside.js'
+import useEscapeKey from '../../hooks/useEscapeKey.js'
+
 
 
 function Basket() {
@@ -20,6 +24,55 @@ function Basket() {
     const productsArray = useSelector(selectProducts)
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const [isOpenBasket, setIsOpenBasket] = useState(false)
+    const [basketFade, setBasketFade] = useState("fade-in")
+    const [basketDisplay, setBasketDisplay] = useState("none")
+    const basketComponentRef = useRef(null);
+    const basketButtonRef = useRef(null);
+
+
+    // Fermer le panier
+    const closeBasket = () => {
+        setIsOpenBasket(false);
+        setBasketFade("fade-out");
+        setTimeout(() => {
+            setBasketDisplay("none");
+        }, 300);
+    }
+
+
+    // Ouvrir le panier
+    const openBasket = () => {
+        setIsOpenBasket(true)
+        setBasketFade("fade-in")
+        setBasketDisplay("block")
+    }
+
+
+    // Gérer le clic en dehors du panier
+    useClickOutside(
+        [basketComponentRef, basketButtonRef],
+        closeBasket
+    )
+
+
+    // Gérer la touche "Échap" pour fermer le panier
+    useEscapeKey(() => {
+        if (isOpenBasket) {
+            closeBasket()
+        }
+    })
+
+
+    // Ouvrir ou fermer le panier
+    const openOrCloseBasket = (e) => {
+        e.preventDefault()
+        if (isOpenBasket) {
+            closeBasket()
+        } else {
+            openBasket()
+        }
+    }
 
 
     // Se rendre sur la page de panier
@@ -29,6 +82,7 @@ function Basket() {
             navigate("/basket")
         }
     }
+
 
     // Vider le panier
     const emptyBasketFunction = (e) => {
@@ -55,12 +109,32 @@ function Basket() {
 
 
     return (
-        <div className='basket-wrapper'>
+        <>
+
+        <div
+            className='is-open-basket-button'
+            ref={basketButtonRef}
+            onClick={(e) => openOrCloseBasket(e)}
+            onKeyDown={(e) => e.key === 'Enter' && openOrCloseBasket(e)}
+            tabIndex="0"
+            title={isOpenBasket ? 'Fermer le panier' : 'Ouvrir le panier'}
+        >{basketContent.length === 0 ? (
+            <EmptyBasket />
+        ) : (
+            <FullBasket />
+        )}
+        </div>
+
+        <div className={`basket-wrapper ${basketFade}`}
+        style={{ display: basketDisplay }}
+        ref={basketComponentRef}
+        >
             <span className='basket-title-all'
             >
                 {basketContent.length === 0 ? (
                     <div
                     title='Le panier est vide'
+                    className='basket-title-empty-basket'
                     ><EmptyBasket /></div>
                 ) : (
                     <div 
@@ -119,6 +193,8 @@ function Basket() {
                 )}
             </div>
         </div>
+        </>
+        
     )
 }
 
