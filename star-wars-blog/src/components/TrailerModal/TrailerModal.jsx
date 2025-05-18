@@ -1,13 +1,36 @@
 import { useRef, useState, useEffect, useCallback } from "react";
+import useClickOutside from "../../hooks/useClickOutside.js";
+import useEscapeKey from "../../hooks/useEscapeKey.js";
+import config from "../../config";
 import "./TrailerModal.scss";
 
 
 
-const TrailerModal = ({ videoURL }) => {
+const TrailerModal = ({ videoLink }) => {
     
     const dialogRef = useRef(null);
+    const modalContentRef = useRef(null);
     const [iframeSrc, setIframeSrc] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
+    const videoURL = `${config.youtubeTrailersEndpoint}/${videoLink}`
+
+
+    // Fermer la modale si l'utilisateur clique en dehors
+    useClickOutside([modalContentRef], () => {
+        if (dialogRef.current?.open) {
+            setIframeSrc('');
+            dialogRef.current.close();
+        }
+    });
+
+
+    // Fermer la modale si l'utilisateur appuie sur la touche "Échap"
+    useEscapeKey(() => {
+        if (dialogRef.current?.open) {
+            setIframeSrc('');
+            dialogRef.current.close();
+        }
+    });
 
 
     // Fonction pour extraire l'ID de la vidéo depuis une URL complète
@@ -21,7 +44,7 @@ const TrailerModal = ({ videoURL }) => {
     // Fonction pour vérifier si la miniature YouTube existe
     const checkVideoThumbnail = useCallback((videoId) => {
         const img = new Image();
-        img.src = `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
+        img.src = `${config.youtubeImgThumbnailEndpoint}/vi/${videoId}/mqdefault.jpg`;
     
         img.onload = () => {
             setErrorMessage(""); // Aucune erreur, la vidéo existe
@@ -70,14 +93,6 @@ const TrailerModal = ({ videoURL }) => {
     };
 
 
-    // Ferme la modale uniquement si l'utilisateur clique sur l'arrière-plan
-    const handleBackdropClick = (e) => {
-        if (e.target === dialogRef.current) {
-            closeModal(e);
-        }
-    };
-
-
     return (
         <>
         <p 
@@ -88,8 +103,8 @@ const TrailerModal = ({ videoURL }) => {
             Voir le trailer
         </p>
 
-        <dialog ref={dialogRef} className="trailer-modal" onClick={(e) => handleBackdropClick(e)}>
-            <div className="trailer-modal__content">
+        <dialog ref={dialogRef} className="trailer-modal">
+            <div className="trailer-modal__content" ref={modalContentRef}>
                 <button 
                 className="trailer-modal__close-button" 
                 onClick={(e) => closeModal(e)}
