@@ -1,4 +1,3 @@
-import React from 'react'
 import { useState, useEffect, useCallback } from 'react'
 import './MarketPage.scss'
 import '../../sharedStyles/index.scss'

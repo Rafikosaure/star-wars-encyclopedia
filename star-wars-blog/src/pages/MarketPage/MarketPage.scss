@@ -11,7 +11,7 @@ $font-family_2: 'Starjedi';
     margin-top: 150px;
     text-align: justify;
     font-family: $font-family_1;
-    width: 90%;
+    width: 95%;
     height: fit-content;
     min-height: 800px;
     margin-bottom: 20px;
@@ -55,7 +55,7 @@ $font-family_2: 'Starjedi';
     }
     .shopping-page-content {
         display: flex;
-        width: 85%;
+        width: 75%;
         height: fit-content;
         justify-content: space-around;
         align-items: flex-start;
@@ -110,21 +110,84 @@ $font-family_2: 'Starjedi';
         font-size: 18px;
     }
 }
-
+/* Ici : media queries pour la première partie tablette */
+@media screen and (max-width: 1023px) {
+    .shopping-page-content {
+        width: 75%;
+    }
+    .filter-button {
+        width: 123px !important;
+        height: 45px !important;
+    }
+}
 /* Ici : media queries pour la seconde partie tablette */
 @media screen and (max-width: 991px) {
     .shopping-page-section {
         width: calc(100% - 2px);
+        .shopping-page-filters {
+            z-index: 2;
+            max-width: 300px;
+        }
+        .shopping-page-content {
+            width: 75%;
+            z-index: 1;
+        }
         .market-arrow-page-counter {
             top: 83%;
         }
         .market-arrows-section {
+            z-index: 1;
+            width: 95%;
+            .market-arrow {
+                width: 60px;
+                height: 60px;
+                z-index: 2;
+            }
             .back {
-                left: 10px;
+                left: 0;
             }
             .next {
-                right: 10px;
+                right: 0;
             }
         }
+        .shopping-page-filters {
+            width: 70%;
+            min-height: 140px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            .filter-button {
+                font-size: 11px;
+                width: 75px !important;
+                height: 35px !important;
+                background-color: $background-color_1;
+                color: $color_1;
+                border: none;
+                outline: 3px solid $color_2;
+                .market-filter-currency {
+                    width: 5px;
+                    height: 10px;
+                }
+            }
+            .empire-filter-button {
+                font-size: 9px;
+            }
+            .active {
+                background-color: $color_1;
+                color: $color_3;
+                outline: 3px solid $color_2;
+                .market-filter-currency {
+                    filter: invert(1);
+                }
+            }
+        }
+    }
+}
+/* Ici : media queries pour la première partie smartphone */
+@media screen and (max-width: 660px) {
+    .shopping-page-content {
+        width: 260px !important;
     }
 }
