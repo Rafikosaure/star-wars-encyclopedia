@@ -118,7 +118,7 @@ export default function Header() {
                         : 'navlink-inactive'
                         } to="/shopping/market" 
                         // onClick={() => dispatch(reinitializeDozen())}
-                        >Boutique</NavLink>
+                        >Boutique de Wattoo</NavLink>
           </nav>
           <div className='header-div-connection'>
             {!isLogged ? (
