@@ -30,7 +30,7 @@ $background-color_2: transparent;
 	}
 	.span-wiki-menu {
 		@include span-wiki-menu-default-style;
-		&:hover {
+		&:hover, &:focus {
 			color: $color_1 !important;
 		}
 	}
