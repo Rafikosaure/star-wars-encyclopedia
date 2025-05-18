@@ -1,5 +1,5 @@
-import React from 'react'
 import './ProductPage.scss'
+import Avatar from '../../assets/images/EmojiBlitzBobaFett1.webp'
 import '../../sharedStyles/index.scss'
 import { useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
@@ -118,7 +118,11 @@ function ProductPage() {
                                 <p className='product-page-picture-overlay-text'>stock épuisé</p>
                             </div>
                         )}
-                        <img src={currentProduct.imageUrl} alt={currentProduct.title} />
+                        {currentProduct.largeImageUrl !== "" ? (
+                            <img src={currentProduct.largeImageUrl} alt={currentProduct.title} />
+                        ) : (
+                            <img src={Avatar} alt={currentProduct.title} />
+                        )}
                     </div>
                     <section className="product-page-data-section">
                         <h2 className='product-page-data-title'>{currentProduct.title}</h2>
