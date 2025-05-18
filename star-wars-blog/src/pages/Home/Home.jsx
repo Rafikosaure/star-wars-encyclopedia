@@ -20,7 +20,7 @@ export default function Home() {
       <div className='div-categories'>
         <div className='transition1' />
         <div className='transition2' />
-        <h2>catégories</h2>
+        <h2>Documentation</h2>
         <div className='card-list'>
           {data.map((item) => 
               <Card key={item._id} item={item} />
