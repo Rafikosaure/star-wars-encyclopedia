@@ -1,4 +1,3 @@
-import React from 'react'
 import { useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import './ShoppingPage.scss'
@@ -11,7 +10,7 @@ import Basket from '../../components/Basket/Basket.jsx'
 function ShoppingPage() {
 
     const navigate = useNavigate()
-    const location = useLocation()
+    const location = useLocation() 
 
 
     // Redirection en cas d'erreur d'URL
@@ -26,11 +25,14 @@ function ShoppingPage() {
         <div className='app shopping-page-wrapper'>
             <div className='shopping-page-background' />
             <div className='shopping-page-maintenance'>Service de shopping expérimental : achats simulés</div>
-            <h2 className='shopping-page-title'>Boutique de Watto</h2>
+            <h2 className='shopping-page-title'>Boutique de Wattoo</h2>
             <div className='shopping-basket-wrapper'>
                 <Basket />
             </div>
-            <Outlet />
+            <div className='shopping-page-outlet'>
+                <Outlet />
+            </div>
+            
         </div>
     )
 }
