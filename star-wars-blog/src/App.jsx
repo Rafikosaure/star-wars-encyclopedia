@@ -18,6 +18,8 @@ import MoviesPage from './pages/MoviesPage/MoviesPage';
 import MarketPage from './pages/MarketPage/MarketPage';
 import ProductPage from './pages/ProductPage/ProductPage';
 import BasketPage from './pages/BasketPage/BasketPage';
+import Success from './pages/Success/Success';
+
 
 
 export default function App() {
@@ -43,6 +45,7 @@ export default function App() {
               </Route>
               <Route path='/basket' element={<BasketPage />} />
               <Route path='/legal' element={<Legal />} />
+              <Route path='/success' element={<Success />} />
               <Route path='*' element={<Error404 />} />
             </Routes>
           <Footer />
