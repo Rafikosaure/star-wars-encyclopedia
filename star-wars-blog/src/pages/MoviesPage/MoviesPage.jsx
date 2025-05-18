@@ -262,7 +262,7 @@ function MoviesPage() {
                         <p className='movies-page-data-section-text-content'>{currentMovie.overview}</p>
                         {currentMovieTrailerURL !== "" && (
                             <div className='movies-page-data-section-trailer'>
-                                <TrailerModal videoURL={currentMovieTrailerURL} />
+                                <TrailerModal videoLink={currentMovieTrailerURL} />
                             </div>
                         )}
                         {currentMovieURL && (
@@ -270,7 +270,7 @@ function MoviesPage() {
                                 <a 
                                 className='movies-page-data-section-link'
                                 title='Accéder au film sur Disney +'
-                                href={currentMovieURL} 
+                                href={`${config.disneyPlusEndpoint}/${currentMovieURL}`} 
                                 target='_blank'
                                 rel="noopener noreferrer"
                                 >Accéder au film sur Disney +
@@ -279,7 +279,7 @@ function MoviesPage() {
                                 <a 
                                 className='movies-page-data-section-link'
                                 title='Accéder à la série sur Disney +'
-                                href={currentMovieURL} 
+                                href={`${config.disneyPlusEndpoint}/${currentMovieURL}`} 
                                 target='_blank'
                                 rel="noopener noreferrer"
                                 >Accéder à la série sur Disney +

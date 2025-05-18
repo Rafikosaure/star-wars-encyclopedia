@@ -8,7 +8,10 @@ const config = {
     tmdbSeriesListId: process.env.REACT_APP_TMDB_SERIES_LIST_ID,
     tmdbMovieImagePath: process.env.REACT_APP_TMDB_MOVIE_IMAGE_PATH,
     tmdbApiEndpoint: process.env.REACT_APP_TMDB_API_ENDPOINT,
-    starWarsShoppingApi: process.env.REACT_APP_STAR_WARS_SHOPPING_API
+    youtubeTrailersEndpoint: process.env.REACT_APP_YOUTUBE_TRAILERS_ENDPOINT,
+    youtubeImgThumbnailEndpoint: process.env.REACT_APP_YOUTUBE_IMG_THUMBNAIL_ENDPOINT,
+    disneyPlusEndpoint: process.env.REACT_APP_DISNEY_PLUS_ENDPOINT,
+    starWarsShoppingApi: process.env.REACT_APP_STAR_WARS_SHOPPING_API,
 }
 
 export default config
