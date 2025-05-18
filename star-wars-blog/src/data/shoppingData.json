@@ -7,6 +7,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 1,
     "imageUrl": "/Images/shopping/holocron_dark_nihilus.webp",
+    "largeImageUrl": "/Images/shopping/large/holocron_dark_nihilus_large.webp",
     "isActive": true,
     "tags": [
       "relique",
@@ -27,6 +28,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 1,
     "imageUrl": "/Images/shopping/sabre_laser_luke_skywalker.webp",
+    "largeImageUrl": "/Images/shopping/large/sabre_laser_luke_skywalker_large.webp",
     "isActive": true,
     "tags": [
       "combat",
@@ -48,9 +50,11 @@
     "currencyCode": "dataries",
     "maxQuantity": 1,
     "imageUrl": "/Images/shopping/casque_dark_vador.webp",
+    "largeImageUrl": "/Images/shopping/large/casque_dark_vador_large.webp",
     "isActive": true,
     "tags": [
       "sith",
+      "empire",
       "armure",
       "survie",
       "côté obscur de la force"
@@ -72,6 +76,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 80,
     "imageUrl": "/Images/shopping/cristal_kyber_jedha.webp",
+    "largeImageUrl": "/Images/shopping/large/cristal_kyber_jedha_large.webp",
     "isActive": true,
     "tags": [
       "précieux",
@@ -91,6 +96,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 1,
     "imageUrl": "/Images/shopping/journal_whills.webp",
+    "largeImageUrl": "/Images/shopping/large/journal_whills_large.webp",
     "isActive": true,
     "tags": [
       "jedi",
@@ -112,6 +118,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 1,
     "imageUrl": "/Images/shopping/sabre_laser_dark_maul.webp",
+    "largeImageUrl": "/Images/shopping/large/sabre_laser_dark_maul_large.webp",
     "isActive": true,
     "tags": [
       "sith",
@@ -132,6 +139,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 1,
     "imageUrl": "/Images/shopping/darksaber.webp",
+    "largeImageUrl": "/Images/shopping/large/darksaber_large.webp",
     "isActive": true,
     "tags": [
       "mandalorien",
@@ -154,6 +162,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 1,
     "imageUrl": "/Images/shopping/gant_dark_vador.webp",
+    "largeImageUrl": "/Images/shopping/large/gant_dark_vador_large.webp",
     "isActive": true,
     "tags": [
       "sith",
@@ -175,6 +184,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 1,
     "imageUrl": "/Images/shopping/holocron_obiwan_kenobi.webp",
+    "largeImageUrl": "/Images/shopping/large/holocron_obiwan_kenobi_large.webp",
     "isActive": true,
     "tags": [
       "jedi",
@@ -196,6 +206,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 1,
     "imageUrl": "/Images/shopping/casque_dark_revan.webp",
+    "largeImageUrl": "/Images/shopping/large/casque_dark_revan_large.webp",
     "isActive": true,
     "tags": [
       "mandalorien",
@@ -215,6 +226,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 1,
     "imageUrl": "/Images/shopping/anneau_snoke.webp",
+    "largeImageUrl": "/Images/shopping/large/anneau_snoke_large.webp",
     "isActive": true,
     "tags": [
       "pouvoir",
@@ -236,6 +248,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 1,
     "imageUrl": "/Images/shopping/sabre_laser_yoda.webp",
+    "largeImageUrl": "/Images/shopping/large/sabre_laser_yoda_large.webp",
     "isActive": true,
     "tags": [
       "jedi",
@@ -258,6 +271,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 1,
     "imageUrl": "/Images/shopping/livres_sacres_jedi.webp",
+    "largeImageUrl": "/Images/shopping/large/livres_sacres_jedi_large.webp",
     "isActive": true,
     "tags": [
       "jedi",
@@ -279,6 +293,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 1,
     "imageUrl": "/Images/shopping/collier_kyber_jyn_erso.webp",
+    "largeImageUrl": "/Images/shopping/large/collier_kyber_jyn_erso_large.webp",
     "isActive": true,
     "tags": [
       "héritage",
@@ -300,6 +315,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 1,
     "imageUrl": "/Images/shopping/sabre_laser_anakin_skywalker.webp",
+    "largeImageUrl": "/Images/shopping/large/sabre_laser_anakin_skywalker_large.webp",
     "isActive": true,
     "tags": [
       "jedi",
@@ -321,6 +337,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 1,
     "imageUrl": "/Images/shopping/canne_palpatine.webp",
+    "largeImageUrl": "/Images/shopping/large/canne_palpatine_large.webp",
     "isActive": true,
     "tags": [
       "sith",
@@ -341,6 +358,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 1,
     "imageUrl": "/Images/shopping/boussole_pillio.webp",
+    "largeImageUrl": "/Images/shopping/large/boussole_pillio_large.webp",
     "isActive": true,
     "tags": [
       "sith",
@@ -361,6 +379,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 1,
     "imageUrl": "/Images/shopping/casque_boba_fett.webp",
+    "largeImageUrl": "/Images/shopping/large/casque_boba_fett_large.webp",
     "isActive": true,
     "tags": [
       "mandalorien",
@@ -385,6 +404,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 1,
     "imageUrl": "/Images/shopping/pendentif_padme.webp",
+    "largeImageUrl": "/Images/shopping/large/pendentif_padme_large.webp",
     "isActive": true,
     "tags": [
       "héritage",
@@ -405,6 +425,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 1,
     "imageUrl": "/Images/shopping/sabre_laser_rey.webp",
+    "largeImageUrl": "/Images/shopping/large/sabre_laser_rey_large.webp",
     "isActive": true,
     "tags": [
       "jedi",
@@ -427,6 +448,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 1,
     "imageUrl": "/Images/shopping/holocron_dark_bane.webp",
+    "largeImageUrl": "/Images/shopping/large/holocron_dark_bane_large.webp",
     "isActive": true,
     "tags": [
       "relique",
@@ -448,6 +470,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 1,
     "imageUrl": "/Images/shopping/trone_sith_exegol.webp",
+    "largeImageUrl": "/Images/shopping/large/trone_sith_exegol_large.webp",
     "isActive": true,
     "tags": [
       "sith",
@@ -469,6 +492,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 1,
     "imageUrl": "/Images/shopping/dague_sith_pasaana.webp",
+    "largeImageUrl": "/Images/shopping/large/dague_sith_pasaana_large.webp",
     "isActive": true,
     "tags": [
       "sith",
@@ -479,6 +503,7 @@
     ],
     "materials": [
       "ivoire fossile",
+      "bois de brylark",
       "duracier"
     ]
   },
@@ -490,6 +515,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 4,
     "imageUrl": "/Images/shopping/cape_dark_sidious.webp",
+    "largeImageUrl": "/Images/shopping/large/cape_dark_sidious_large.webp",
     "isActive": true,
     "tags": [
       "pouvoir",
@@ -510,6 +536,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 1,
     "imageUrl": "/Images/shopping/holocron_jocasta_nu.webp",
+    "largeImageUrl": "/Images/shopping/large/holocron_jocasta_nu_large.webp",
     "isActive": true,
     "tags": [
       "jedi",
@@ -531,6 +558,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 1,
     "imageUrl": "/Images/shopping/lance_beskar_din_djarin.webp",
+    "largeImageUrl": "/Images/shopping/large/lance_beskar_din_djarin_large.webp",
     "isActive": true,
     "tags": [
       "mandalorien",
@@ -551,6 +579,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 5000,
     "imageUrl": "/Images/shopping/fusil_disruptor.webp",
+    "largeImageUrl": "/Images/shopping/large/fusil_disruptor_large.webp",
     "isActive": true,
     "tags": [
       "combat",
@@ -573,6 +602,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 1,
     "imageUrl": "/Images/shopping/sabre_laser_cal_kestis.webp",
+    "largeImageUrl": "/Images/shopping/large/sabre_laser_cal_kestis_large.webp",
     "isActive": true,
     "tags": [
       "jedi",
@@ -593,6 +623,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 1,
     "imageUrl": "/Images/shopping/armure_din_djarin.webp",
+    "largeImageUrl": "/Images/shopping/large/armure_din_djarin_large.webp",
     "isActive": true,
     "tags": [
       "mandalorien",
@@ -612,6 +643,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 15000,
     "imageUrl": "/Images/shopping/blaster_han_solo.webp",
+    "largeImageUrl": "/Images/shopping/large/blaster_han_solo_large.webp",
     "isActive": true,
     "tags": [
       "combat",
@@ -633,6 +665,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 1,
     "imageUrl": "/Images/shopping/casque_kylo_ren.webp",
+    "largeImageUrl": "/Images/shopping/large/casque_kylo_ren_large.webp",
     "isActive": true,
     "tags": [
       "sith",
@@ -657,6 +690,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 120,
     "imageUrl": "/Images/shopping/cristal_kyber_rouge_mustafar.webp",
+    "largeImageUrl": "/Images/shopping/large/cristal_kyber_rouge_mustafar_large.webp",
     "isActive": true,
     "tags": [
       "précieux",
@@ -677,6 +711,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 50,
     "imageUrl": "/Images/shopping/sabre_laser_garde_temple_jedi.webp",
+    "largeImageUrl": "/Images/shopping/large/sabre_laser_garde_temple_jedi_large.webp",
     "isActive": true,
     "tags": [
       "jedi",
@@ -698,6 +733,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 1,
     "imageUrl": "/Images/shopping/sabre_laser_vernestra_rwoh.webp",
+    "largeImageUrl": "/Images/shopping/large/sabre_laser_vernestra_rwoh_large.webp",
     "isActive": true,
     "tags": [
       "jedi",
@@ -720,6 +756,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 9,
     "imageUrl": "/Images/shopping/datapad_cassian_andor.webp",
+    "largeImageUrl": "/Images/shopping/large/datapad_cassian_andor_large.webp",
     "isActive": true,
     "tags": [
       "artisanat",
@@ -740,6 +777,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 200,
     "imageUrl": "/Images/shopping/comlink_leia_organa.webp",
+    "largeImageUrl": "/Images/shopping/large/comlink_leia_organa_large.webp",
     "isActive": true,
     "tags": [
       "rébellion",
@@ -760,6 +798,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 1,
     "imageUrl": "/Images/shopping/etoile_kaiburr.webp",
+    "largeImageUrl": "/Images/shopping/large/etoile_kaiburr_large.webp",
     "isActive": true,
     "tags": [
       "jedi",
@@ -768,9 +807,7 @@
       "rare"
     ],
     "materials": [
-      "cristal kyber",
-      "carbocéramique",
-      "cuivre"
+      "cristal kyber"
     ]
   },
   {
@@ -781,6 +818,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 1,
     "imageUrl": "/Images/shopping/respirateur_dark_vador.webp",
+    "largeImageUrl": "/Images/shopping/large/respirateur_dark_vador_large.webp",
     "isActive": true,
     "tags": [
       "sith",
@@ -805,6 +843,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 13,
     "imageUrl": "/Images/shopping/masque_rituel_inquisiteurs.webp",
+    "largeImageUrl": "/Images/shopping/large/masque_rituel_inquisiteurs_large.webp",
     "isActive": true,
     "tags": [
       "côté obscur de la force",
@@ -823,6 +862,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 1,
     "imageUrl": "/Images/shopping/droid_lola_leia.webp",
+    "largeImageUrl": "/Images/shopping/large/droid_lola_leia_large.webp",
     "isActive": true,
     "tags": [
       "espoir",
@@ -841,6 +881,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 1,
     "imageUrl": "/Images/shopping/journal_padme.webp",
+    "largeImageUrl": "/Images/shopping/large/journal_padme_large.webp",
     "isActive": true,
     "tags": [
       "espoir",
@@ -861,6 +902,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 37,
     "imageUrl": "/Images/shopping/crane_fossile_exogorth.webp",
+    "largeImageUrl": "/Images/shopping/large/crane_fossile_exogorth_large.webp",
     "isActive": true,
     "tags": [
       "rare",
@@ -878,6 +920,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 1,
     "imageUrl": "/Images/shopping/coaxium.webp",
+    "largeImageUrl": "/Images/shopping/large/coaxium_large.webp",
     "isActive": true,
     "tags": [
       "précieux",
@@ -898,6 +941,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 1,
     "imageUrl": "/Images/shopping/sabre_laser_mace_windu.webp",
+    "largeImageUrl": "/Images/shopping/large/sabre_laser_mace_windu_large.webp",
     "isActive": true,
     "tags": [
       "jedi",
@@ -921,6 +965,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 30,
     "imageUrl": "/Images/shopping/scanner_force_inquisiteurs.webp",
+    "largeImageUrl": "/Images/shopping/large/scanner_force_inquisiteurs_large.webp",
     "isActive": true,
     "tags": [
       "empire",
@@ -940,6 +985,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 1,
     "imageUrl": "/Images/shopping/bracelet_esclave_shmi_skywalker.webp",
+    "largeImageUrl": "/Images/shopping/large/bracelet_esclave_shmi_skywalker_large.webp",
     "isActive": true,
     "tags": [
       "espoir",
@@ -958,6 +1004,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 1,
     "imageUrl": "/Images/shopping/pierre_sith_exegol.webp",
+    "largeImageUrl": "/Images/shopping/large/pierre_sith_exegol_large.webp",
     "isActive": true,
     "tags": [
       "sith",
@@ -979,6 +1026,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 1,
     "imageUrl": "/Images/shopping/compas_eno_cordova.webp",
+    "largeImageUrl": "/Images/shopping/large/compas_eno_cordova_large.webp",
     "isActive": true,
     "tags": [
       "jedi",
@@ -1005,6 +1053,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 1,
     "imageUrl": "/Images/shopping/morceau_etoile_noire_kefbir.webp",
+    "largeImageUrl": "/Images/shopping/large/morceau_etoile_noire_kefbir_large.webp",
     "isActive": true,
     "tags": [
       "empire",
@@ -1029,13 +1078,15 @@
     "currencyCode": "dataries",
     "maxQuantity": 1,
     "imageUrl": "/Images/shopping/blaster_sabine_wren.webp",
+    "largeImageUrl": "/Images/shopping/large/blaster_sabine_wren_large.webp",
     "isActive": true,
     "tags": [
       "jedi",
       "combat",
       "arme",
       "artisanat",
-      "rare"
+      "rare",
+      "rébellion"
     ],
     "materials": [
       "duracier",
@@ -1051,6 +1102,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 1,
     "imageUrl": "/Images/shopping/sabre_laser_comte_dooku.webp",
+    "largeImageUrl": "/Images/shopping/large/sabre_laser_comte_dooku_large.webp",
     "isActive": true,
     "tags": [
       "sith",
@@ -1072,6 +1124,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 5,
     "imageUrl": "/Images/shopping/holoprojecteur_leia.webp",
+    "largeImageUrl": "/Images/shopping/large/holoprojecteur_leia_large.webp",
     "isActive": true,
     "tags": [
       "rébellion",
@@ -1093,6 +1146,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 1,
     "imageUrl": "/Images/shopping/droid_ig-88.webp",
+    "largeImageUrl": "/Images/shopping/large/droid_ig-88_large.webp",
     "isActive": true,
     "tags": [
       "chasseur de primes",
@@ -1116,6 +1170,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 1,
     "imageUrl": "/Images/shopping/armure_grievous.webp",
+    "largeImageUrl": "/Images/shopping/large/armure_grievous_large.webp",
     "isActive": true,
     "tags": [
       "sith",
@@ -1140,6 +1195,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 1,
     "imageUrl": "/Images/shopping/sabre_laser_dark_sidious.webp",
+    "largeImageUrl": "/Images/shopping/large/sabre_laser_dark_sidious_large.webp",
     "isActive": true,
     "tags": [
       "sith",
@@ -1162,6 +1218,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 1,
     "imageUrl": "/Images/shopping/signal_jedi.webp",
+    "largeImageUrl": "/Images/shopping/large/signal_jedi_large.webp",
     "isActive": true,
     "tags": [
       "jedi",
@@ -1185,6 +1242,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 1,
     "imageUrl": "/Images/shopping/gant_starkiller.webp",
+    "largeImageUrl": "/Images/shopping/large/gant_starkiller_large.webp",
     "isActive": true,
     "tags": [
       "sith",
@@ -1210,6 +1268,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 2,
     "imageUrl": "/Images/shopping/gantelets_bo-katan.webp",
+    "largeImageUrl": "/Images/shopping/large/gantelets_bo-katan_large.webp",
     "isActive": true,
     "tags": [
       "mandalorien",
@@ -1233,6 +1292,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 1,
     "imageUrl": "/Images/shopping/holocron_sith_malachor.webp",
+    "largeImageUrl": "/Images/shopping/large/holocron_sith_malachor_large.webp",
     "isActive": true,
     "tags": [
       "précieux",
@@ -1256,6 +1316,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 1,
     "imageUrl": "/Images/shopping/casque_c-3po.webp",
+    "largeImageUrl": "/Images/shopping/large/casque_c-3po_large.webp",
     "isActive": true,
     "tags": [
       "rébellion",
@@ -1279,6 +1340,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 1,
     "imageUrl": "/Images/shopping/ceinture_outils_rey.webp",
+    "largeImageUrl": "/Images/shopping/large/ceinture_outils_rey_large.webp",
     "isActive": true,
     "tags": [
       "artisanat",
@@ -1305,6 +1367,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 3,
     "imageUrl": "/Images/shopping/capsule_meditation_dark_vador.webp",
+    "largeImageUrl": "/Images/shopping/large/capsule_meditation_dark_vador_large.webp",
     "isActive": true,
     "tags": [
       "sith",
@@ -1330,6 +1393,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 1,
     "imageUrl": "/Images/shopping/orbe_temple_jedha.webp",
+    "largeImageUrl": "/Images/shopping/large/orbe_temple_jedha_large.webp",
     "isActive": true,
     "tags": [
       "côté lumineux de la force",
@@ -1351,6 +1415,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 1,
     "imageUrl": "/Images/shopping/moteur_ebon_hawk.webp",
+    "largeImageUrl": "/Images/shopping/large/moteur_ebon_hawk_large.webp",
     "isActive": true,
     "tags": [
       "energie",
@@ -1374,6 +1439,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 1,
     "imageUrl": "/Images/shopping/holocron_tera_sinube.webp",
+    "largeImageUrl": "/Images/shopping/large/holocron_tera_sinube_large.webp",
     "isActive": true,
     "tags": [
       "jedi",
@@ -1395,6 +1461,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 10,
     "imageUrl": "/Images/shopping/epee_nightsisters.webp",
+    "largeImageUrl": "/Images/shopping/large/epee_nightsisters_large.webp",
     "isActive": true,
     "tags": [
       "héritage",
@@ -1419,6 +1486,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 2,
     "imageUrl": "/Images/shopping/sabre_laser_ahsoka_tano.webp",
+    "largeImageUrl": "/Images/shopping/large/sabre_laser_ahsoka_tano_large.webp",
     "isActive": true,
     "tags": [
       "combat",
@@ -1440,6 +1508,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 1200,
     "imageUrl": "/Images/shopping/pierre_meditation_jedi.webp",
+    "largeImageUrl": "/Images/shopping/large/pierre_meditation_jedi_large.webp",
     "isActive": true,
     "tags": [
       "jedi",
@@ -1459,6 +1528,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 1,
     "imageUrl": "/Images/shopping/blason_starlight.webp",
+    "largeImageUrl": "/Images/shopping/large/blason_starlight_large.webp",
     "isActive": true,
     "tags": [
       "jedi",
@@ -1481,6 +1551,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 1,
     "imageUrl": "/Images/shopping/armure_phasma.webp",
+    "largeImageUrl": "/Images/shopping/large/armure_phasma_large.webp",
     "isActive": true,
     "tags": [
       "empire",
@@ -1501,6 +1572,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 1,
     "imageUrl": "/Images/shopping/medaillon_avar_kriss.webp",
+    "largeImageUrl": "/Images/shopping/large/medaillon_avar_kriss_large.webp",
     "isActive": true,
     "tags": [
       "jedi",
@@ -1522,6 +1594,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 1,
     "imageUrl": "/Images/shopping/coffre-fort_grakkus.webp",
+    "largeImageUrl": "/Images/shopping/large/coffre-fort_grakkus_large.webp",
     "isActive": true,
     "tags": [
       "précieux",
@@ -1546,6 +1619,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 1,
     "imageUrl": "/Images/shopping/droid_8D8.webp",
+    "largeImageUrl": "/Images/shopping/large/droid_8D8_large.webp",
     "isActive": true,
     "tags": [
       "artisanat",
@@ -1565,6 +1639,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 3,
     "imageUrl": "/Images/shopping/cristal_kyber_noir.webp",
+    "largeImageUrl": "/Images/shopping/large/cristal_kyber_noir_large.webp",
     "isActive": true,
     "tags": [
       "sith",
@@ -1586,6 +1661,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 1,
     "imageUrl": "/Images/shopping/sabre_laser_ty_yorrick.webp",
+    "largeImageUrl": "/Images/shopping/large/sabre_laser_ty_yorrick_large.webp",
     "isActive": true,
     "tags": [
       "côté obscur de la force",
@@ -1609,6 +1685,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 5,
     "imageUrl": "/Images/shopping/coeur_anil_kesh.webp",
+    "largeImageUrl": "/Images/shopping/large/coeur_anil_kesh_large.webp",
     "isActive": true,
     "tags": [
       "jedi",
@@ -1634,6 +1711,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 1,
     "imageUrl": "/Images/shopping/grotte_du_miroir.webp",
+    "largeImageUrl": "/Images/shopping/large/grotte_du_miroir_large.webp",
     "isActive": true,
     "tags": [
       "jedi",
@@ -1655,6 +1733,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 1,
     "imageUrl": "/Images/shopping/banniere_501e_legion.webp",
+    "largeImageUrl": "/Images/shopping/large/banniere_501e_legion_large.webp",
     "isActive": true,
     "tags": [
       "jedi",
@@ -1677,6 +1756,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 1,
     "imageUrl": "/Images/shopping/collier_sable_luke_skywalker.webp",
+    "largeImageUrl": "/Images/shopping/large/collier_sable_luke_skywalker_large.webp",
     "isActive": true,
     "tags": [
       "héritage",
@@ -1697,6 +1777,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 1,
     "imageUrl": "/Images/shopping/bras_cybernetique_dark_vador.webp",
+    "largeImageUrl": "/Images/shopping/large/bras_cybernetique_dark_vador_large.webp",
     "isActive": true,
     "tags": [
       "sith",
@@ -1721,6 +1802,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 9216,
     "imageUrl": "/Images/shopping/casque_212e_legion.webp",
+    "largeImageUrl": "/Images/shopping/large/casque_212e_legion_large.webp",
     "isActive": true,
     "tags": [
       "jedi",
@@ -1745,16 +1827,18 @@
     "currencyCode": "dataries",
     "maxQuantity": 1,
     "imageUrl": "/Images/shopping/journal_galen_erso.webp",
+    "largeImageUrl": "/Images/shopping/large/journal_galen_erso_large.webp",
     "isActive": true,
     "tags": [
       "empire",
+      "rébellion",
       "espoir",
       "rare",
       "artisanat",
       "précieux"
     ],
     "materials": [
-      "parchemin",
+      "flimsiplast",
       "encre"
     ]
   },
@@ -1766,6 +1850,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 450,
     "imageUrl": "/Images/shopping/fusil_cycleur_tusken.webp",
+    "largeImageUrl": "/Images/shopping/large/fusil_cycleur_tusken_large.webp",
     "isActive": true,
     "tags": [
       "combat",
@@ -1790,6 +1875,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 1,
     "imageUrl": "/Images/shopping/sabre_laser_brise_kanan_jarrus.webp",
+    "largeImageUrl": "/Images/shopping/large/sabre_laser_brise_kanan_jarrus_large.webp",
     "isActive": true,
     "tags": [
       "jedi",
@@ -1811,6 +1897,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 1,
     "imageUrl": "/Images/shopping/medaillon_grogu.webp",
+    "largeImageUrl": "/Images/shopping/large/medaillon_grogu_large.webp",
     "isActive": true,
     "tags": [
       "mandalorien",
@@ -1831,6 +1918,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 2,
     "imageUrl": "/Images/shopping/code_acces_imperial_cassian_andor.webp",
+    "largeImageUrl": "/Images/shopping/large/code_acces_imperial_cassian_andor_large.webp",
     "isActive": true,
     "tags": [
       "rébellion",
@@ -1854,6 +1942,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 1,
     "imageUrl": "/Images/shopping/masque_viceroy_exim_panshard.webp",
+    "largeImageUrl": "/Images/shopping/large/masque_viceroy_exim_panshard_large.webp",
     "isActive": true,
     "tags": [
       "sith",
@@ -1879,6 +1968,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 1200000,
     "imageUrl": "/Images/shopping/droid_b1_orbe_controle.webp",
+    "largeImageUrl": "/Images/shopping/large/droid_b1_orbe_controle_large.webp",
     "isActive": true,
     "tags": [
       "combat",
@@ -1901,6 +1991,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 70,
     "imageUrl": "/Images/shopping/arme_energetique_pykes.webp",
+    "largeImageUrl": "/Images/shopping/large/arme_energetique_pykes_large.webp",
     "isActive": true,
     "tags": [
       "arme",
@@ -1924,6 +2015,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 1,
     "imageUrl": "/Images/shopping/cle_pierre_temple_jedi.webp",
+    "largeImageUrl": "/Images/shopping/large/cle_pierre_temple_jedi_large.webp",
     "isActive": true,
     "tags": [
       "jedi",
@@ -1933,8 +2025,8 @@
       "héritage"
     ],
     "materials": [
+      "pierre naturelle",
       "orichalque",
-      "cristal kyber",
       "electrum"
     ]
   },
@@ -1946,6 +2038,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 1,
     "imageUrl": "/Images/shopping/carnet_secret_luthen_rael.webp",
+    "largeImageUrl": "/Images/shopping/large/carnet_secret_luthen_rael_large.webp",
     "isActive": true,
     "tags": [
       "rébellion",
@@ -1968,6 +2061,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 2,
     "imageUrl": "/Images/shopping/broche_mon_mothma.webp",
+    "largeImageUrl": "/Images/shopping/large/broche_mon_mothma_large.webp",
     "isActive": true,
     "tags": [
       "pouvoir",
@@ -1989,6 +2083,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 2,
     "imageUrl": "/Images/shopping/chale_bail_organa.webp",
+    "largeImageUrl": "/Images/shopping/large/chale_bail_organa_large.webp",
     "isActive": true,
     "tags": [
       "pouvoir",
@@ -2011,6 +2106,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 7,
     "imageUrl": "/Images/shopping/sceptre_sorcieres_dathomir.webp",
+    "largeImageUrl": "/Images/shopping/large/sceptre_sorcieres_dathomir_large.webp",
     "isActive": true,
     "tags": [
       "magie",
@@ -2034,6 +2130,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 180,
     "imageUrl": "/Images/shopping/puce_soldat_clone.webp",
+    "largeImageUrl": "/Images/shopping/large/puce_soldat_clone_large.webp",
     "isActive": true,
     "tags": [
       "rébellion",
@@ -2057,6 +2154,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 1,
     "imageUrl": "/Images/shopping/armure_saw_gerrera.webp",
+    "largeImageUrl": "/Images/shopping/large/armure_saw_gerrera_large.webp",
     "isActive": true,
     "tags": [
       "rébellion",
@@ -2082,6 +2180,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 1,
     "imageUrl": "/Images/shopping/lentille_visee_crosshair.webp",
+    "largeImageUrl": "/Images/shopping/large/lentille_visee_crosshair_large.webp",
     "isActive": true,
     "tags": [
       "empire",
@@ -2104,6 +2203,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 1,
     "imageUrl": "/Images/shopping/casque_rex.webp",
+    "largeImageUrl": "/Images/shopping/large/casque_rex_large.webp",
     "isActive": true,
     "tags": [
       "empire",
@@ -2129,6 +2229,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 50,
     "imageUrl": "/Images/shopping/casque_death_watch.webp",
+    "largeImageUrl": "/Images/shopping/large/casque_death_watch_large.webp",
     "isActive": true,
     "tags": [
       "mandalorien",
@@ -2154,6 +2255,7 @@
     "currencyCode": "dataries",
     "maxQuantity": 1,
     "imageUrl": "/Images/shopping/sabre_laser_qui-gon-jinn.webp",
+    "largeImageUrl": "/Images/shopping/large/sabre_laser_qui-gon-jinn_large.webp",
     "isActive": true,
     "tags": [
       "jedi",
