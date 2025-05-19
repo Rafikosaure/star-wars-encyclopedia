@@ -18,12 +18,12 @@ function useClickOutside(refs, handler) {
             }
         }
 
-        document.addEventListener('mousedown', listener)
-        document.addEventListener('touchstart', listener)
+        document.addEventListener('mouseup', listener)
+        document.addEventListener('touchend', listener)
 
         return () => {
-            document.removeEventListener('mousedown', listener)
-            document.removeEventListener('touchstart', listener)
+            document.removeEventListener('mouseup', listener)
+            document.removeEventListener('touchend', listener)
         }
     }, [refs, handler])
 }

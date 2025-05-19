@@ -17,6 +17,7 @@ export default function BurgerMenu() {
     const [isOpen, setIsOpen] = useState(false)
     const [openWikiLinks, setOpenWikiLinks] = useState('none')
     const [wikiButtonActive, setWikiButtonActive] = useState('')
+    const burgerButtonRef = useRef(null)
     const burgerMenuRef = useRef(null)
 
 
@@ -66,7 +67,7 @@ export default function BurgerMenu() {
 
     // Utilisation du hook personnalisé pour gérer 
     // les clics en dehors du menu burger
-    useClickOutside([burgerMenuRef], (e) => {
+    useClickOutside([burgerMenuRef, burgerButtonRef], (e) => {
         setIsOpen(false)
         setOpenWikiLinks('none')
         setWikiButtonActive('')
@@ -87,6 +88,7 @@ export default function BurgerMenu() {
   return (
     <>
         <div className='hamburger-menu-icon' 
+        ref={burgerButtonRef}
         onClick={(e) => openOrCloseButton(e)} 
         onKeyDown={(e) => e.key === 'Enter' && openOrCloseButton(e)}
         tabIndex="0"
