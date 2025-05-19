@@ -13,7 +13,7 @@ import { ReactComponent as EmptyBasket } from '../../assets/images/shopping-bask
 import { ReactComponent as FullBasket } from '../../assets/images/shopping-basket-full-white.svg'
 import { toast } from 'sonner'
 import { useNavigate } from 'react-router-dom'
-import useClickOutside from '../../hooks/useClickOutside.js'
+// import useClickOutside from '../../hooks/useClickOutside.js'
 import useEscapeKey from '../../hooks/useEscapeKey.js'
 
 
@@ -27,7 +27,7 @@ function Basket() {
     const [isOpenBasket, setIsOpenBasket] = useState(false)
     const [basketFade, setBasketFade] = useState("fade-in")
     const [basketDisplay, setBasketDisplay] = useState("none")
-    const basketComponentRef = useRef(null);
+    const basketMenuRef = useRef(null);
     const basketButtonRef = useRef(null);
 
 
@@ -50,10 +50,10 @@ function Basket() {
 
 
     // Gérer le clic en dehors du panier
-    useClickOutside(
-        [basketComponentRef, basketButtonRef],
-        closeBasket
-    )
+    // useClickOutside(
+    //     [basketMenuRef, basketButtonRef],
+    //     closeBasket
+    // )
 
 
     // Gérer la touche "Échap" pour fermer le panier
@@ -127,21 +127,21 @@ function Basket() {
 
         <div className={`basket-wrapper ${basketFade}`}
         style={{ display: basketDisplay }}
-        ref={basketComponentRef}
+        ref={basketMenuRef}
         >
             <span className='basket-title-all'
             >
                 {basketContent.length === 0 ? (
                     <div
                     title='Le panier est vide'
-                    className='basket-title-empty-basket'
+                    className='basket-title-empty-basket basket-title-style'
                     ><EmptyBasket /></div>
                 ) : (
                     <div 
                     onClick={(e) => goToBasket(e)}
                     onKeyDown={(e) => e.key === 'Enter' && goToBasket(e)}
                     title='Aller au panier'
-                    className='basket-title-full-basket'
+                    className='basket-title-full-basket basket-title-style'
                     tabIndex="0"
                     ><FullBasket /></div>
                 )}
