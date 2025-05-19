@@ -95,9 +95,11 @@ $font-family_2: 'Starjedi';
     }
     .market-arrow-page-counter {
         position: sticky;
-        top: 730px;
+        // top: 730px;
+        top: 83%;
         z-index: 3;
-        left: calc(50% - 75px);
+        left: 50%;
+        transform: translateX(-50%);
         width: 150px;
         height: 70px;
         background-color: $color_3;
@@ -119,6 +121,12 @@ $font-family_2: 'Starjedi';
         width: 123px !important;
         height: 45px !important;
     }
+    .market-arrow-page-counter {
+        width: 120px !important;
+        height: 55px !important;
+        font-size: 16px !important;
+        top: 86%;
+    }
 }
 /* Ici : media queries pour la seconde partie tablette */
 @media screen and (max-width: 991px) {
@@ -133,7 +141,11 @@ $font-family_2: 'Starjedi';
             z-index: 1;
         }
         .market-arrow-page-counter {
-            top: 83%;
+            width: 90px !important;
+            height: 40px !important;
+            font-size: 13px !important;
+            border-radius: 10px;
+            top: 90%;
         }
         .market-arrows-section {
             z-index: 1;
