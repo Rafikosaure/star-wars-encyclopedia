@@ -6,6 +6,7 @@ import { reinitializeDozen } from '../../redux/slices/dozenSlice'
 import useClickOutside from '../../hooks/useClickOutside.js'
 import useEscapeKey from '../../hooks/useEscapeKey.js'
 import './BurgerMenu.scss'
+import '../../sharedStyles/index.scss'
 import CategoryData from '../../data/localApiCategories.json'
 
 
@@ -17,8 +18,10 @@ export default function BurgerMenu() {
     const [isOpen, setIsOpen] = useState(false)
     const [openWikiLinks, setOpenWikiLinks] = useState('none')
     const [wikiButtonActive, setWikiButtonActive] = useState('')
+    const [burgerMenuFade, setBurgerMenuFade] = useState('fade-in')
     const burgerButtonRef = useRef(null)
     const burgerMenuRef = useRef(null)
+    
 
 
     useEffect(() => {
@@ -56,21 +59,17 @@ export default function BurgerMenu() {
     const openOrCloseButton = (e) => {
         e.preventDefault()
         if (isOpen) {
-            setIsOpen(false)
-            setOpenWikiLinks('none')
-            setWikiButtonActive('')
+            closeMenu()
         } else {
-            setIsOpen(true)
+            openMenu()
         }
     }
 
 
-    // Utilisation du hook personnalisé pour gérer 
+    // Utilisation du hook spécifique pour gérer 
     // les clics en dehors du menu burger
     useClickOutside([burgerMenuRef, burgerButtonRef], (e) => {
-        setIsOpen(false)
-        setOpenWikiLinks('none')
-        setWikiButtonActive('')
+        closeMenu()
     })
 
 
@@ -78,11 +77,27 @@ export default function BurgerMenu() {
     // lorsque la touche "Escape" est pressée
     useEscapeKey(() => {
         if (isOpen) {
+            closeMenu()
+        }
+    })
+
+
+    // Ouvrir le menu
+    const openMenu = () => {
+        setIsOpen(true)
+        setBurgerMenuFade("fade-in")
+    }
+
+
+    // Fermer le menu
+    const closeMenu = () => {
+        setBurgerMenuFade("fade-out")
+        setTimeout(() => {
             setIsOpen(false)
             setOpenWikiLinks('none')
             setWikiButtonActive('')
-        }
-    })
+        }, 300);
+    }
 
 
   return (
@@ -94,7 +109,7 @@ export default function BurgerMenu() {
         tabIndex="0"
         />
         {isOpen ? (
-            <div className='burger-menu'
+            <div className={`burger-menu ${burgerMenuFade}`}
             ref={burgerMenuRef}
             >
                 <NavLink className={({ isActive }) =>
