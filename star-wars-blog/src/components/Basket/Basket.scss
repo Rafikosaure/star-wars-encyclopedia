@@ -20,9 +20,10 @@ $font-family_1: Arial, Helvetica, sans-serif;
 .is-open-basket-button {
     position: absolute;
     top: 0;
-    right: -60px;
+    right: -65px;
     width: 50px;
     height: 50px;
+    scale: 1.15;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -30,7 +31,7 @@ $font-family_1: Arial, Helvetica, sans-serif;
     outline: 3px solid $color_1;
     border-radius: 50%;
     cursor: pointer;
-    &:focus {
+    &:focus, &:hover {
         outline: 3px solid $color_3;
     }
 }
@@ -53,9 +54,12 @@ $font-family_1: Arial, Helvetica, sans-serif;
         .basket-title-full-basket {
             cursor: pointer;
         }
+        .basket-title-style {
+            scale: .8;
+        }
         .basket-title {
             font-size: 18px;
-            padding-left: 10px;
+            padding-left: 6px;
             align-items: center;
         }
     }
@@ -122,8 +126,8 @@ $font-family_1: Arial, Helvetica, sans-serif;
         font-size: 10px !important;
         padding-left: 3px !important;
     }
-    .basket-title-full-basket, .basket-title-empty-basket {
-        scale: .6;
+    .basket-title-style {
+        scale: .6 !important;
     }
     .basket-content {
         padding: 0 2px !important;
