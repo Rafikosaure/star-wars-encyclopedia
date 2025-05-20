@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import './PostForm.scss'
 import { useSelector, useDispatch } from 'react-redux';
 import { selectIsLoggedState } from '../../redux/slices/isLoggedUserSlice';

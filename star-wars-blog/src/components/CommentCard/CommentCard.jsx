@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react'
-import { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './CommentCard.scss'
 import DefaultAvatar from '../../assets/images/EmojiBlitzBobaFett1.webp'
 import Like from '../Like/Like'

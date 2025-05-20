@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import './ShoppingPage.scss'
-import '../../sharedStyles/index.scss'
+import '../../theme/index.scss'
 import { Outlet } from 'react-router-dom'
 import Basket from '../../components/Basket/Basket.jsx'
 

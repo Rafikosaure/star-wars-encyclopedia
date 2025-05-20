@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import './Category.scss'
 import Card from '../../components/Card/Card'
 import SearchBar from '../../components/SearchBar/SearchBar'

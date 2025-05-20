@@ -1,4 +1,4 @@
-import '../../sharedStyles/index.scss'
+import '../../theme/index.scss'
 import './Basket.scss'
 import { useState, useRef } from 'react'
 import { 

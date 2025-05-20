@@ -6,7 +6,7 @@ import { reinitializeDozen } from '../../redux/slices/dozenSlice'
 import useClickOutside from '../../hooks/useClickOutside.js'
 import useEscapeKey from '../../hooks/useEscapeKey.js'
 import './BurgerMenu.scss'
-import '../../sharedStyles/index.scss'
+import '../../theme/index.scss'
 import CategoryData from '../../data/localApiCategories.json'
 
 

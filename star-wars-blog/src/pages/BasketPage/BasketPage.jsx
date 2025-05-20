@@ -1,5 +1,5 @@
 import './BasketPage.scss'
-import '../../sharedStyles/index.scss'
+import '../../theme/index.scss'
 import ReturnArrow from '../../assets/images/return-arrow.webp'
 import { useEffect, useState } from 'react'
 import { 

@@ -1,6 +1,6 @@
 import './ProductPage.scss'
 import Avatar from '../../assets/images/EmojiBlitzBobaFett1.webp'
-import '../../sharedStyles/index.scss'
+import '../../theme/index.scss'
 import { useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'

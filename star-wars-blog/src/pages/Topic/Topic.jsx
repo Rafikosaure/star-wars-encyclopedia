@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import './Topic.scss'
 import { useParams } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'

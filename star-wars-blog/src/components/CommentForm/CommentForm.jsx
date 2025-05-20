@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import { useState, useRef } from 'react'
 import './CommentForm.scss'
 import { reinitializeCommentCitation, selectCommentCitation } from '../../redux/slices/commentCitationSlice'
 import { useSelector, useDispatch } from 'react-redux'

@@ -1,4 +1,3 @@
-import React from 'react'
 import './WikiNavbar.scss'
 import { NavLink } from 'react-router-dom'
 import { useDispatch } from 'react-redux'

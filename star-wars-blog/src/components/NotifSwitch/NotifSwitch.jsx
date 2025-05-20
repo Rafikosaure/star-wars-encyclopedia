@@ -1,4 +1,3 @@
-import React from 'react'
 import { useState, useEffect } from 'react'
 import './NotifSwitch.scss'
 import { ServerServices } from '../../api/api-server' 

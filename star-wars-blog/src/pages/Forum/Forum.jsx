@@ -1,6 +1,5 @@
-import React from 'react'
 import { useEffect, useState } from 'react'
-import '../../sharedStyles/index.scss'
+import '../../theme/index.scss'
 import './Forum.scss'
 import Code from '../../components/Code/Code'
 import { useNavigate } from 'react-router-dom'

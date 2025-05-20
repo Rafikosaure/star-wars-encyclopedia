@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import './MoviesPage.scss'
-import '../../sharedStyles/index.scss'
+import '../../theme/index.scss'
 import BackArrow from '../../assets/images/back-arrow.webp'
 import NextArrow from '../../assets/images/next-arrow.webp'
 import { TmdbApiServices } from '../../api/api-tmdb'

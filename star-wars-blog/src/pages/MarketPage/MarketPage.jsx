@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
 import './MarketPage.scss'
-import '../../sharedStyles/index.scss'
+import '../../theme/index.scss'
 import ShoppingCard from '../../components/ShoppingCard/ShoppingCard.jsx'
 import { useSelector, useDispatch } from 'react-redux'
 import { 

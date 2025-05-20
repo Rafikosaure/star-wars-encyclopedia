@@ -1,4 +1,3 @@
-import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import './BasketCard.scss'
 import Currency from '../../assets/images/credit_white.webp'

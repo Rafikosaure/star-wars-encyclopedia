@@ -1,6 +1,5 @@
-import React from 'react'
 import { Link } from 'react-router-dom'
-import '../../sharedStyles/index.scss'
+import '../../theme/index.scss'
 import './Success.scss'
 
 export default function Error404() {
