@@ -23,8 +23,8 @@ exports.createCheckoutSession = async (req, res) => {
             payment_method_types: ['card'],
             mode: 'payment',
             line_items,
-            success_url: `${ENV.CORS_ORIGIN}/success`,
-            cancel_url: `${ENV.CORS_ORIGIN}/shopping/market`,
+            success_url: `${ENV.CLIENT_ENDPOINT}/success`,
+            cancel_url: `${ENV.CLIENT_ENDPOINT}/shopping/market`,
         });
 
         res.status(200).json({ url: session.url });

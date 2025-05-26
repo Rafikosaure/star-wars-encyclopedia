@@ -64,7 +64,7 @@ app.use(
 
 // Gestion des erreurs CORS
 app.use(cors({
-        origin: ENV.CORS_ORIGIN,
+        origin: ENV.CLIENT_ENDPOINT,
         credentials: true,
         methods: ['GET', 'PUT', 'POST', 'DELETE'],
         allowedHeaders: ['Content-Type', 'Authorization']
