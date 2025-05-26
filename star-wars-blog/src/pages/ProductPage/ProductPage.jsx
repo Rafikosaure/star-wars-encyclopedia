@@ -105,7 +105,7 @@ function ProductPage() {
 
     return (
         <div className='product-page-wrapper'>
-            <div className='product-page-div-return' title='Retour vers la page principale de la boutique'>
+            <div className='product-page-div-return' title='Retour vers la liste des produits'>
                 <Link to={`/shopping/market`} className='product-page-arrow-link'>
                     <img src={ReturnArrow} alt="Retour vers la page principale de la boutique" />
                 </Link>
