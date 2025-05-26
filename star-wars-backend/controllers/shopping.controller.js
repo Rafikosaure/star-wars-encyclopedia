@@ -1,4 +1,5 @@
 const stripe = require('../config/stripe.js');
+const ENV = require('../config/config.js');
 
 
 // Créer une session checkout avec Stripe
@@ -22,8 +23,8 @@ exports.createCheckoutSession = async (req, res) => {
             payment_method_types: ['card'],
             mode: 'payment',
             line_items,
-            success_url: 'http://localhost:3000/success',
-            cancel_url: 'http://localhost:3000/cancel',
+            success_url: `${ENV.CORS_ORIGIN}/success`,
+            cancel_url: `${ENV.CORS_ORIGIN}/shopping/market`,
         });
 
         res.status(200).json({ url: session.url });
