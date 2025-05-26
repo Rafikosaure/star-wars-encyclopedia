@@ -35,6 +35,30 @@ if (ENV.NODE_ENV === 'production') {
 }
 
 
+// Gestion des erreurs CORS
+app.use(cors({
+        origin: ENV.CORS_ORIGIN,
+        credentials: true,
+        methods: ['GET', 'PUT', 'POST', 'DELETE'],
+        allowedHeaders: ['Content-Type', 'Authorization']
+}))
+
+
+// Utilisation du cookie-parser
+app.use(cookieParser())
+
+
+// Application d'un rate-limit
+app.use(
+    rateLimit({
+        windowMs: 60 * 1000,
+        max: 1000,
+        message: 'Vous avez atteint la limite de 1000 requêtes par minute !',
+        headers: true,
+    })
+)
+
+
 // Configuration de Helmet
 app.use(
     helmet({
@@ -60,30 +84,6 @@ app.use(
 //         },
 //     })(req, res, next);
 // });
-
-
-// Gestion des erreurs CORS
-app.use(cors({
-        origin: ENV.CORS_ORIGIN,
-        credentials: true,
-        methods: ['GET', 'PUT', 'POST', 'DELETE'],
-        allowedHeaders: ['Content-Type', 'Authorization']
-}))
-
-
-// Utilisation du cookie-parser
-app.use(cookieParser())
-
-
-// Application d'un rate-limit
-app.use(
-    rateLimit({
-        windowMs: 60 * 1000,
-        max: 1000,
-        message: 'Vous avez atteint la limite de 1000 requêtes par minute !',
-        headers: true,
-    })
-)
 
 
 // Routes de l'application
