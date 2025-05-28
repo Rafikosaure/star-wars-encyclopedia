@@ -197,9 +197,9 @@ $font-family_2: 'Starjedi';
         }
     }
 }
-/* Ici : media queries pour la première partie smartphone */
-@media screen and (max-width: 660px) {
+/* Ici : media queries pour la partie smartphone */
+@media screen and (max-width: 767px) {
     .shopping-page-content {
-        width: 260px !important;
+        width: 55% !important;
     }
 }
