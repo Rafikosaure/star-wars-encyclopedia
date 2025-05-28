@@ -25,6 +25,7 @@ function ShoppingCard({ product }) {
     const rawBasket = useSelector(selectBasket)
     const basketContent = mergeBasketWithCatalog(rawBasket, storedProducts);
     const navigate = useNavigate()
+    const currencyName = "dataries républicaines"
 
 
     // Ajouter un exemplaire du produit au panier
@@ -104,7 +105,7 @@ function ShoppingCard({ product }) {
                 <Link className='shopping-card-link'
                 to={`/shopping/product/${product.id}`}
                 >
-                    <div className='shopping-card-image'>
+                    <div className='shopping-card-image' title='Aller vers la page du produit'>
                         <div className='shopping-card-image-overlay' />
                         {product.imageUrl !== "" ? (
                             <img src={product.imageUrl} alt={product.title} />
@@ -116,7 +117,15 @@ function ShoppingCard({ product }) {
                     <h2 className='shopping-card-title'>{product.title}</h2>
                     <div className='shopping-card-description-section'>
                         <p className='shopping-card-description'>{product.description}</p>
-                        <p className='shopping-card-price'>{product.price}&nbsp;&nbsp;<img className='shopping-card-price-currency' alt='datarie républicaine' src={Currency} />
+                        <p 
+                        className='shopping-card-price' 
+                        title={`${product.price} ${currencyName}`}
+                        >{product.price}&nbsp;&nbsp;
+                            <img 
+                            className='shopping-card-price-currency' 
+                            alt={currencyName} 
+                            src={Currency} 
+                            />
                         </p>
                     </div>                    
                 </Link>

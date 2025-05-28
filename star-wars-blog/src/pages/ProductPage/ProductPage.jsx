@@ -36,6 +36,7 @@ function ProductPage() {
     const basketContent = useSelector(selectBasket)
     const [currentProduct, setCurrentProduct] = useState()
     const [currentProductCount, setCurrentProductCount] = useState()
+    const currencyName = "dataries républicaines"
 
     
     // Récupération des données de l'API
@@ -137,12 +138,13 @@ function ProductPage() {
                         <div className='product-page-data-footer'>
                             <div 
                                 className="product-page-data-price"
+                                title={`${currentProduct.price} ${currencyName}`}
                                 >
                                 {currentProduct.price} 
                                 <img 
                                 className='product-page-data-price-currency' 
                                 src={Currency} 
-                                alt="datarie républicaine" 
+                                alt={currencyName}
                                 />
 
                                 {currentProduct && (

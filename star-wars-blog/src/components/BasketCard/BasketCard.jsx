@@ -18,6 +18,7 @@ function BasketCard({  product }) {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const basketContent = useSelector(selectBasket)
+    const currencyName = "dataries républicaines"
     
 
     // Redirection vers la page produit
@@ -67,26 +68,37 @@ function BasketCard({  product }) {
 
     return (
         <div className='basket-page-product'>
-            <img 
-            src={product.imageUrl} 
-            alt={product.title} 
-            className='basket-page-product-image'
+            <div 
+            className='basket-page-product-image-wrapper'
             onClick={(e) => handleProductClick(e)}
-            onKeyDown={(e) => handleProductClick(e)}
+            onKeyDown={(e) => e.key === 'Enter' && handleProductClick(e)}
             tabIndex="0"
             title='Aller vers la page du produit'
-            />
+            >
+                <img 
+                src={product.imageUrl} 
+                alt={product.title} 
+                className='basket-page-product-image'
+                />
+                <div className='basket-page-product-image-overlay' />
+            </div>
+            
             <div className='basket-page-product-details'>
                 <h3 className='basket-page-product-title-wrapper'>{product.title}</h3>
                 <p className='basket-page-product-description'>{product.description}</p>
                 <p className='basket-page-product-price'>
                     <span className='basket-page-product-price-section'>
-                        <span className='basket-page-product-price-content'>
-                            <span className='basket-page-product-price-text'>Prix : {product.price}</span>
+                        <span 
+                        className='basket-page-product-price-content'
+                        title={`${product.price} ${currencyName}`}
+                        >
+                            <span 
+                                className='basket-page-product-price-text'
+                            >Prix : {product.price}</span>
                             <img 
                                 className='basket-page-product-price-currency' 
                                 src={Currency} 
-                                alt="datarie républicaine"
+                                alt={currencyName}
                             />
                         </span>
                         <span className='basket-page-product-price-content'>
@@ -125,7 +137,17 @@ function BasketCard({  product }) {
                 
                 <div className='basket-page-product-total-price'>
                     <h3 className='basket-page-product-total-price-title'>Total :</h3>
-                    <span className='basket-page-product-total-price-dataries'>{datariesPriceTotalCalc()}<img className='basket-page-product-total-price-dataries-currency' src={Currency} alt="datarie" /></span>
+                    <span 
+                        className='basket-page-product-total-price-dataries'
+                        title={`Total : ${datariesPriceTotalCalc()} ${currencyName}`}
+                        >{datariesPriceTotalCalc()}
+                        <img 
+                        className='basket-page-product-total-price-dataries-currency' 
+                        src={Currency} 
+                        alt={currencyName} 
+                        title={currencyName} 
+                        />
+                    </span>
                     
                     <span className='basket-page-product-total-price-euros'>
                         <span className='basket-page-product-total-price-euros-text'>({totalEuros})</span>
