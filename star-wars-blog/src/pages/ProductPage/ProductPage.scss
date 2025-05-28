@@ -226,7 +226,7 @@ $font-family_2: 'Starjedi';
         }
     }
 }
-/* Ici : media queries pour la première partie tablette */
+/* Ici : media queries pour la partie tablette */
 @media screen and (max-width: 1023px) {
     .product-page-picture-section {
         width: 270px !important;
@@ -242,7 +242,7 @@ $font-family_2: 'Starjedi';
         }
     }
 }
-/* Ici : media queries pour la troisième partie tablette */
+/* Ici : media queries pour la partie smartphone */
 @media screen and (max-width: 767px) {
 	.product-page-main {
         flex-direction: column;

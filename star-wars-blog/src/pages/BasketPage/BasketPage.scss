@@ -9,7 +9,6 @@ $font-family_2: 'Starjedi';
     initial-value: 0deg;
     inherits: false;
 }
-
 .basket-page-wrapper {
     position: relative;
     width: calc(80% - 2px);
@@ -230,5 +229,58 @@ $font-family_2: 'Starjedi';
         --angle: 0deg;
     } to {
         --angle: 360deg;
+    }
+}
+
+/* Ici : media queries pour la seconde partie desktop */
+@media screen and (max-width: 1380px) {
+	.basket-page-return-arrow {
+        width: 70px !important;
+        height: 70px !important;
+        .basket-page-return-arrow-image {
+            width: 60px !important;
+            height: 60px !important;
+        }
+    }
+}
+/* Ici : media queries pour la première partie tablette */
+@media screen and (max-width: 1023px) {
+    .basket-page-content {
+        margin-bottom: 50px !important;
+        width: 100% !important;
+    }
+    .basket-page-total {
+        margin-bottom: 50px !important;
+    }
+}
+/* Ici : media queries pour la seconde partie tablette */
+@media screen and (max-width: 991px) {
+    .basket-page-maintenance {
+        font-size: 12px;
+        height: 30px !important;
+    }
+	.basket-page-wrapper {
+		width: calc(100% - 2px);
+	}
+    .basket-page-title {
+        margin-top: 60px;
+		font-size: 22px;
+    }
+    .basket-page-full-text {
+        font-size: 14px;
+    }
+    .basket-page-return-arrow {
+        width: 60px !important;
+        height: 60px !important;
+        .basket-page-return-arrow-image {
+            width: 50px !important;
+            height: 50px !important;
+        }
+    }
+    .basket-page-total-text {
+        font-size: 16px !important;
+    }
+    .basket-page-total-legal-text {
+        font-size: 14px !important;
     }
 }
