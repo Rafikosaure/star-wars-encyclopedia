@@ -222,7 +222,49 @@ $font-family_1: Arial, Helvetica, sans-serif;
         width: 170px !important;
     }
 }
-/* Ici : media queries pour la première partie smartphone */
-@media screen and (max-width: 660px) {
-	
+/* Ici : media queries pour la partie mobile */
+@media screen and (max-width: 767px) {
+    .shopping-card-wrapper {
+		margin-bottom: 10px;
+        width: calc(280px * 60 / 100) !important;
+		height: calc(380px * 60 / 100) !important;
+	}
+    .shopping-basket-add-or-remove-product-section {
+        bottom: 3px !important;
+        height: 20px !important;
+        .shopping-basket-add-or-remove-product-button {
+            font-size: 18px !important;
+        }
+        .add-product-button {
+            margin-left: 10px !important;
+        }
+    }
+    .shopping-card-title {
+        font-size: 9px !important;
+        margin-top: 7px !important;
+    }
+    .shopping-card-description-section {
+        margin-bottom: 30px !important;
+        .shopping-card-description {
+            font-size: 9px !important;
+        }
+    }
+    .shopping-card-price {
+        position: absolute;
+        bottom: -3px;
+        left: 10px;
+        font-size: 12px;
+        font-weight: bold;
+        .shopping-card-price-currency {
+            width: 7px;
+            height: 11px;
+        }
+    }
+    .shopping-card-stock-limit-text {
+        font-size: 18px !important;
+    }
+    .shopping-card-image {
+        height: 100px !important;
+        width: 100px !important;
+    }
 }
