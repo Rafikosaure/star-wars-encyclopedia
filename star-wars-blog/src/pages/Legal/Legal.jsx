@@ -1,10 +1,16 @@
+import { Link } from 'react-router-dom'
 import './Legal.scss'
+import { selectBasket } from '../../redux/slices/shoppingBasket'
+import { useSelector } from 'react-redux'
 
 
 
 // Cette page est dédiée aux mentions légales du site.
 // Depuis l'interface du site, elle est accessible depuis les liens du footer.
 export default function Legal() {
+
+    // Contenu courant du panier (partie e-commerce)
+    const basketContent = useSelector(selectBasket)
 
     return (
         <div className='legal-page'>
@@ -252,6 +258,10 @@ export default function Legal() {
 
             N'oubliez pas : ces artefacts ne sont pas réels, mais la passion, elle, l'est.
             À bientôt dans les étoiles, et que la Force guide chacun de vos clics !</p>
+            {basketContent.length > 0 && (
+                <Link to={'/basket'}>Retourner au panier</Link>
+            )}
+            
         </div>
     )
 }
