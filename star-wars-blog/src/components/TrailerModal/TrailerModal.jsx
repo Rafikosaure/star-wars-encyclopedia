@@ -108,7 +108,7 @@ const TrailerModal = ({ videoLink }) => {
                 <button 
                 className="trailer-modal__close-button" 
                 onClick={(e) => closeModal(e)}
-                onKeyDown={(e) => e.key === "Enter" && closeModal(e)}
+                onKeyDown={(e) => e.key === ("Enter" || "Escape") && closeModal(e)}
                 >
                     ✖
                 </button>
