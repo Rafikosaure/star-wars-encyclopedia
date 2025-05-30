@@ -2,6 +2,7 @@ import './BasketPage.scss'
 import '../../theme/index.scss'
 import ReturnArrow from '../../assets/images/return-arrow.webp'
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { 
     selectProducts,
     selectProductsStatus,
@@ -94,12 +95,16 @@ function BasketPage() {
             const data = await response.json();
 
             if (data.url) {
-                dispatch(emptyBasket()) // Vider le panier avant de rediriger
+                sessionStorage.setItem('shoppingStringSession', config.shoppingStringSession);
                 window.location.href = data.url; // Redirection vers Stripe
             } else {
+                dispatch(emptyBasket()); // Vider le panier si problème URL
+                alert("Erreur lors du chargement du formulaire de paiement ! Panier vidé !");
                 console.error('Erreur lors de la récupération de l’URL de session');
             }
         } catch (error) {
+            dispatch(emptyBasket()); // Vider le panier si erreur
+            alert("Erreur lors du paiement ! Panier vidé !");
             console.error('Erreur lors du paiement :', error);
         }
     };
@@ -125,7 +130,11 @@ function BasketPage() {
             <section className='basket-page-content'>
                 {basketContent.length === 0 ? (
                     <div className='basket-page-empty'>
-                        <p className='basket-page-empty-text'>Votre panier est vide</p>
+                        <p 
+                        className='basket-page-empty-text'
+                        >Votre panier est vide<br />
+                        <Link to={"/shopping/market"}>Retourner au marché</Link>
+                        </p>
                     </div>
                 ) : (
                     <div className='basket-page-full'>
