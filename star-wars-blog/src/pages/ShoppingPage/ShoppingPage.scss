@@ -1,0 +1,101 @@
+$color_1: white;
+$background-color_1: black;
+$font-family_1: Arial, Helvetica, sans-serif;
+$font-family_2: 'Starjedi';
+
+.shopping-page-wrapper {
+    position: relative;
+    border: 1px solid $color_1;
+    color: $color_1;
+	width: calc(80% - 2px);
+    min-height: 200px;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: $background-color_1;
+    cursor: default;
+    .shopping-page-maintenance {
+        background-color: lightgreen;
+        width: 100%;
+        height: 40px;
+        position: absolute;
+        top: 0;
+        color: black;
+        font-family: $font-family_1;
+        font-size: 16px;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .shopping-page-background {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: url('../../assets/images/magasin_de_Watto.webp') no-repeat center center fixed;
+        background-size: cover;
+        filter: brightness(.6);
+        z-index: 0;
+    }
+    .shopping-page-title {
+        position: absolute;
+        z-index: 1;
+        font-size: 32px;
+        text-transform: lowercase;
+        cursor: default;
+        font-family: $font-family_2;
+		margin-top: 50px;
+	}
+    .shopping-basket-wrapper {
+        z-index: 2;
+        margin-top: 30px;
+        position: sticky;
+        display: flex;
+        justify-content: flex-end;
+        margin-right: 200px;
+        top: 10px;
+        width: 100%;
+        height: 0;
+    }
+    .shopping-page-outlet {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+    }
+}
+/* Ici : media queries pour la seconde partie tablette */
+@media screen and (max-width: 991px) {
+    .shopping-page-wrapper {
+        width: calc(100% - 2px);
+        height: fit-content;
+        .shopping-page-title {
+            font-size: 22px;
+        }
+        .shopping-page-maintenance {
+            font-size: 12px;
+            height: 30px;
+        }
+        .shopping-basket-wrapper {
+            margin-right: 3%;
+            top: 14px;
+            margin-bottom: 210px;
+        }
+        .shopping-page-outlet {
+            position: relative;
+            align-items: flex-start;
+            z-index: 0;
+            margin-top: -260px;
+            width: 100%;
+            height: 100%;
+        }
+    }
+}
+/* Ici : media queries pour la première partie smartphone */
+@media screen and (max-width: 660px) {
+	.shopping-page-wrapper {
+        width: calc(100% - 2px);
+    }
+}

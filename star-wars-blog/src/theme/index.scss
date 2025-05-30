@@ -1,0 +1,65 @@
+$font-family_1: 'Starjedi';
+$font-family_2: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+$background-color_1: black;
+
+@font-face {
+	font-family: 'Starjedi';
+	src: local('Starjedi'), url(../assets/fonts/Starjedi.ttf) format('truetype');
+}
+@font-face {
+	font-family: 'Starjout';
+	src: local('Starjout'), url(../assets/fonts/Starjout.ttf) format('truetype');
+}
+html {
+	scroll-behavior: smooth;
+}
+body {
+	margin: 0;
+	font-family: $font-family_1;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	background: url(../assets/images/stars.webp) no-repeat center center fixed;
+	background-size: cover;
+}
+.app {
+	width: 80%;
+	min-height: 100vh;
+	margin-left: auto;
+	margin-right: auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: baseline;
+	align-items: center;
+	background-color: $background-color_1;
+}
+code {
+	font-family: $font-family_2;
+}
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+@keyframes fadeout {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+.fade-in {
+    animation: fadein 0.3s;
+}
+.fade-out {
+    animation: fadeout 0.32s;
+}
+/* Ici : media queries pour la seconde partie tablette */
+@media screen and (max-width: 991px) {
+	.app {
+		width: 100%;
+	}
+}

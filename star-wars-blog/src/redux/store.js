@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import dozenManager from './slices/dozenSlice'
+import dozenManager from './slices/dozenSlice';
 import topicDozenManager from './slices/topicDozenSlice'
 import articleReducer from './slices/articleSlice'
 import registerManager from "./slices/registerSlice";
@@ -11,7 +11,11 @@ import topicsReloadReducer from './slices/topicsReload';
 import citationReducer from './slices/citationSlice';
 import commentCitationReducer from "./slices/commentCitationSlice";
 import postsReloadReducer from "./slices/postsReload";
-import followedTopicsReloadReducer from './slices/followedTopicsReload'
+import followedTopicsReloadReducer from './slices/followedTopicsReload';
+import lastCategoryIdReducer from './slices/lastCategory';
+import productsReducer from './slices/productsSlice';
+import basketReducer from './slices/shoppingBasket'
+import shoppingPageReducer from './slices/shoppingPaginate'
 
 
 export default configureStore({
@@ -28,6 +32,10 @@ export default configureStore({
         citation: citationReducer,
         commentCitation: commentCitationReducer,
         postsReload: postsReloadReducer,
-        followedTopicsReload: followedTopicsReloadReducer
+        followedTopicsReload: followedTopicsReloadReducer,
+        lastCategory: lastCategoryIdReducer,
+        productsReducer: productsReducer,
+        basketReducer: basketReducer,
+        shoppingPageReducer: shoppingPageReducer
     }
 })

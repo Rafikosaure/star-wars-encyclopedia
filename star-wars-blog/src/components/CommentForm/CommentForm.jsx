@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import { useState, useRef } from 'react'
 import './CommentForm.scss'
 import { reinitializeCommentCitation, selectCommentCitation } from '../../redux/slices/commentCitationSlice'
 import { useSelector, useDispatch } from 'react-redux'
@@ -6,8 +6,8 @@ import { reloadUsersArrayFunction } from '../../redux/slices/reloadUsersArray'
 import { reloadPosts } from '../../redux/slices/postsReload'
 import { selectLoggedUser } from '../../redux/slices/loggedUserSlice'
 import { ServerServices } from '../../api/api-server'
-import mentionsManager from '../../sharedFunctions/mentionsManager'
-import subscribersManager from '../../sharedFunctions/subscribersManager'
+import mentionsManager from '../../utils/mentionsManager'
+import subscribersManager from '../../utils/subscribersManager'
 
 
 

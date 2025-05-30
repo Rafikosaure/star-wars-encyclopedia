@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import './Category.scss'
 import Card from '../../components/Card/Card'
 import SearchBar from '../../components/SearchBar/SearchBar'
@@ -11,7 +11,9 @@ import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { reinitializeDozen, maxDozen, nextDozen, prevDozen, selectDozen } from '../../redux/slices/dozenSlice'
 import { selectArticle } from '../../redux/slices/articleSlice'
+import { memorizeLastCategoryId } from '../../redux/slices/lastCategory'
 import { StarWarsApiServices } from '../../api/api-sw'
+import WikiNavbar from '../../components/WikiNavbar/WikiNavbar'
 
 
 
@@ -42,6 +44,7 @@ export default function Category() {
       navigate("*")
     } else {
       updateRightPage(true)
+      dispatch(memorizeLastCategoryId(categoryId))
 
       // Appel à l'API StarWars Databank
       setSpinnerDisplay('block')
@@ -55,7 +58,7 @@ export default function Category() {
       });
       nbDozen.current = Math.ceil(info.total / 10);
     }
-  }, [categoryId, currentDatas, navigate, storedDozen, info.total, fetchStarWarsCategoryData])
+  }, [categoryId, currentDatas, navigate, storedDozen, info.total, fetchStarWarsCategoryData, dispatch])
   
 
   // Gestion du clic sur le bouton 
@@ -84,6 +87,7 @@ export default function Category() {
     <>
       {rightPage ? (
         <div className='app-category'>
+          <WikiNavbar />
           <div className='page-content'>
             <h1>{currentDatas.title}</h1>
             <SearchBar category={currentDatas.keyword} />
@@ -101,20 +105,25 @@ export default function Category() {
               }
             </div>
             <div className='arrow-section'>
-              <div className='prev-arrow-section' 
-              style={{display: storedDozen <= 1 || article.value ? 'none' : 'flex'}} 
-              onClick={prevPage}
+              <div className='prev-arrow-section'
+                tabIndex='0'
+                style={{display: storedDozen <= 1 || article.value ? 'none' : 'flex'}} 
+                onClick={prevPage}
+                onKeyDown={(e) => e.key === 'Enter' && prevPage()}
+                title='Retourner à la page précédente'
               >
                 <img className='arrows' src={BackArrow} alt="back arrow" />
               </div>
-              <div className='next-arrow-section' 
+              <div className='next-arrow-section'
+                tabIndex='0'
                 style={{display: storedDozen >= nbDozen.current || article.value ? 'none' : 'flex'}} 
                 onClick={nextPage}
+                onKeyDown={(e) => e.key === 'Enter' && nextPage()}
+                title='Aller à la page suivante'
               >
                 <img className='arrows' src={NextArrow} alt="next arrow" />
               </div>
             </div>
-            
             {spinnerDisplay === 'none' && (
               <div className='dozen-indicator' style={{display: article.value ? 'none' : 'block'}}>
                 {!isNaN(nbDozen.current) && !isNaN(storedDozen) ? (

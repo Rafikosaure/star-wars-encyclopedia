@@ -1,8 +1,10 @@
-import React from 'react'
 import { Link } from 'react-router-dom'
-import '../../sharedStyles/index.scss'
+import '../../theme/index.scss'
 import './Error404.scss'
 
+
+// Page d'erreur 404
+// Affiche un message d'erreur et un lien pour revenir à la page d'accueil
 export default function Error404() {
   return (
     <div className='app error-page'>

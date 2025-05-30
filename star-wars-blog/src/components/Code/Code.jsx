@@ -1,4 +1,3 @@
-import React from 'react'
 import './Code.scss'
 import code from '../../data/code.txt'
 

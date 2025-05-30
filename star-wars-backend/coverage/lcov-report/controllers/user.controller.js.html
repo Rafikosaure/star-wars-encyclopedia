@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">14.13% </span>
+                <span class="strong">14.73% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>13/92</span>
+                <span class='fraction'>14/95</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">14.13% </span>
+                <span class="strong">14.73% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>13/92</span>
+                <span class='fraction'>14/95</span>
             </div>
         
             
@@ -278,6 +278,8 @@
 <a name='L213'></a><a href='#L213'>213</a>
 <a name='L214'></a><a href='#L214'>214</a>
 <a name='L215'></a><a href='#L215'>215</a>
+<a name='L216'></a><a href='#L216'>216</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <a name='L216'></a><a href='#L216'>216</a>
 <a name='L217'></a><a href='#L217'>217</a>
 <a name='L218'></a><a href='#L218'>218</a>
@@ -431,6 +433,12 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -479,6 +487,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -530,7 +544,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const bcrypt = require('bcrypt')
 const User = require('../models/user.model.js')
 const IsMentionned = require('../models/isMentionned.model.js')
-// const FollowTopic = require('../models/followTopic.model.js')
+const FollowTopic = require('../models/followTopic.model.js')
 const sharp = require('sharp')
 const fs = require('fs')
 require('dotenv').config()
@@ -629,14 +643,14 @@ exports.modifyUser = <span class="fstat-no" title="function not covered" >as</sp
 // Suppression d'un utilisateur via son id
 exports.deleteById = <span class="fstat-no" title="function not covered" >as</span>ync (req, res) =&gt; {
 <span class="cstat-no" title="statement not covered" >    try {</span>
-        const id = <span class="cstat-no" title="statement not covered" >req.user.id;</span>
-        const user = <span class="cstat-no" title="statement not covered" >await User.findById(id);</span>
+        const userId = <span class="cstat-no" title="statement not covered" >req.user.id;</span>
+        const user = <span class="cstat-no" title="statement not covered" >await User.findById(userId);</span>
     
 <span class="cstat-no" title="statement not covered" >        if (!user) {</span>
 <span class="cstat-no" title="statement not covered" >        return res.status(404).json({ message: "User not found" });</span>
         }
     
-<span class="cstat-no" title="statement not covered" >        if (!user._id.equals(req.user.id)) {</span>
+<span class="cstat-no" title="statement not covered" >        if (!user._id.equals(userId)) {</span>
 <span class="cstat-no" title="statement not covered" >        return res.status(403).json({</span>
             message: "User doesn't have permission to delete another user",
         });
@@ -651,6 +665,11 @@ exports.deleteById = <span class="fstat-no" title="function not covered" >as</sp
             expires: new Date(0)
         })
 &nbsp;
+        // Retirer l'utilisateur du tableau 'users' de tous les FollowTopic
+<span class="cstat-no" title="statement not covered" >        await FollowTopic.updateMany(</span>
+            { users: userId },
+            { $pull: { users: userId } }
+        );
         // Suppression des abonnements (discussions) de l'utilisateur
         // const result = deleteUserFromFollowedTopics(id)
         // if (!result) {
@@ -660,10 +679,10 @@ exports.deleteById = <span class="fstat-no" title="function not covered" >as</sp
         // }
 &nbsp;
         // Suppression de l'option "isMentionned"
-<span class="cstat-no" title="statement not covered" >        await IsMentionned.findOneAndDelete({ userId: id })</span>
+<span class="cstat-no" title="statement not covered" >        await IsMentionned.findOneAndDelete({ userId: userId })</span>
 &nbsp;
         // Suppression de l'utilisateur dans la base de données
-<span class="cstat-no" title="statement not covered" >        await User.findByIdAndDelete(id);</span>
+<span class="cstat-no" title="statement not covered" >        await User.findByIdAndDelete(userId);</span>
 &nbsp;
         // Suppression de l'image de profil de l'utilisateur
 <span class="cstat-no" title="statement not covered" >        if (picture !== "") {</span>
@@ -694,19 +713,24 @@ exports.authDeleteById = <span class="fstat-no" title="function not covered" >as
         }
 &nbsp;
         // Trouve l'utilisateur à supprimer
-        const id = <span class="cstat-no" title="statement not covered" >req.params.id;</span>
-        const user = <span class="cstat-no" title="statement not covered" >await User.findById(id);</span>
+        const userId = <span class="cstat-no" title="statement not covered" >req.params.id;</span>
+        const user = <span class="cstat-no" title="statement not covered" >await User.findById(userId);</span>
     
 <span class="cstat-no" title="statement not covered" >        if (!user) {</span>
 <span class="cstat-no" title="statement not covered" >        return res.status(404).json({ message: "User not found" });</span>
         }
     
-<span class="cstat-no" title="statement not covered" >        if (!user._id.equals(id)) {</span>
+<span class="cstat-no" title="statement not covered" >        if (!user._id.equals(userId)) {</span>
 <span class="cstat-no" title="statement not covered" >        return res.status(403).json({</span>
             message: "User doesn't have permission to delete another user",
         });
         }
 &nbsp;
+        // Retirer l'utilisateur du tableau 'users' de tous les FollowTopic
+<span class="cstat-no" title="statement not covered" >        await FollowTopic.updateMany(</span>
+            { users: userId },
+            { $pull: { users: userId } }
+        );
         // Suppression des abonnements (discussions) de l'utilisateur
         // const result = deleteUserFromFollowedTopics(id)
         // if (!result) {
@@ -719,7 +743,7 @@ exports.authDeleteById = <span class="fstat-no" title="function not covered" >as
         const picture = <span class="cstat-no" title="statement not covered" >user.picture</span>
 &nbsp;
         // Suppression de l'utilisateur dans la base de données
-<span class="cstat-no" title="statement not covered" >        await User.findByIdAndDelete(id);</span>
+<span class="cstat-no" title="statement not covered" >        await User.findByIdAndDelete(userId);</span>
 &nbsp;
         // Suppression de l'image de profil de l'utilisateur
 <span class="cstat-no" title="statement not covered" >        if (picture !== "") {</span>
@@ -746,6 +770,7 @@ exports.getAllUsers = (req, res) =&gt; {
     .catch(<span class="fstat-no" title="function not covered" >(e</span>rror) =&gt; <span class="cstat-no" title="statement not covered" >res.status(500).json({</span>
         message: "Users not found"
     }))
+}</pre></td></tr></table></pre>
 }
 &nbsp;
 // Désabonner un utilisateur de toutes ses discussions suivies
@@ -766,7 +791,7 @@ exports.getAllUsers = (req, res) =&gt; {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-05-26T12:28:24.771Z
+                at 2025-05-30T12:30:37.160Z
             </div>
         <script src="../prettify.js"></script>
         <script>

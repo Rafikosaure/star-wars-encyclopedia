@@ -1,5 +1,6 @@
-import React from 'react'
 import './Footer.scss'
+
+
 
 export default function Footer() {
   return (
@@ -10,6 +11,7 @@ export default function Footer() {
           <ul>
             <li><a href="/legal">Politique de confidentialité</a></li>
             <li><a href='/legal#CGU'>Conditions Générales d'Utilisation</a></li>
+            <li><a href='/legal#CGV'>Conditions Générales de Vente</a></li>
             <li><a href='/legal#RGPD'>Gestion des données personnelles</a></li>
             <li><a href='/legal#cookies'>Politique des cookies</a></li>
           </ul>
@@ -26,7 +28,9 @@ export default function Footer() {
         <div className='footer-content-block'>
           <h2>Contact</h2>
           <ul>
-            <li><a href="mailto:rafikbensadi@live.fr?subject=Contact%20depuis%20rafikbensadi.com">Contact par email</a></li>
+            <li><a href="mailto:rafikbensadi@live.fr?subject=Contact%20depuis%20rafikbensadi.com">Envoyez-moi un email</a></li>
+            <li><a href="https://github.com/Rafikosaure" target='_blank' rel="noreferrer">Visitez mon profil Github</a></li>
+            <li><a href="https://rafikbensadi.com" target='_blank' rel="noreferrer">Visitez mon portfolio de développeur</a></li>
             {/* <li><a href="tel:+33649363839">Contact par téléphone</a></li> */}
           </ul>
         </div>

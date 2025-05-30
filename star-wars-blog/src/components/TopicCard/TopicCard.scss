@@ -25,7 +25,7 @@ $background-color_1: black;
 	align-items: center;
 	background-color: $background-color_1;
 	transition: all 0.4s;
-	&:hover { 
+	&:hover, &:focus { 
 		background-color: transparent;
 	}
 }

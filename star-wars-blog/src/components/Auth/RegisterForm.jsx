@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import '../../sharedStyles/Auth.scss'
+import { useEffect } from 'react'
+import '../../theme/Auth.scss'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import isValid from '../../assets/images/is_valid.webp'

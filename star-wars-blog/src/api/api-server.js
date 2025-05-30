@@ -1,7 +1,6 @@
 import { toast } from 'sonner'
 import config from '../config'
-import validatePassword from '../sharedFunctions/validatePassword';
-
+import validatePassword from '../utils/validatePassword';
 
 
 // Appels centralisés vers le serveur Node.JS du projet

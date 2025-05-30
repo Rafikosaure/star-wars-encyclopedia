@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react'
-import { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './CommentCard.scss'
 import DefaultAvatar from '../../assets/images/EmojiBlitzBobaFett1.webp'
 import Like from '../Like/Like'
@@ -10,7 +9,7 @@ import { reloadUsersArrayFunction } from '../../redux/slices/reloadUsersArray'
 import { reloadPosts } from '../../redux/slices/postsReload'
 import { saveACommentCitation } from '../../redux/slices/commentCitationSlice'
 import { ServerServices } from '../../api/api-server'
-import mentionsManager from '../../sharedFunctions/mentionsManager'
+import mentionsManager from '../../utils/mentionsManager'
 
 
 
@@ -165,8 +164,11 @@ export default function CommentCard({ index, commentId, topicId, postId, usersLi
             <div className='comment-card-main'>
                 {isLogged && loggedUser.isAdmin && (
                     <div className='comment-card-delete-cross' 
+                        tabIndex="0"
                         title='Supprimer le commentaire' 
-                        onClick={(e) => deleteCommentFunction(e)}>
+                        onClick={(e) => deleteCommentFunction(e)}
+                        onKeyDown={(e) => e.key === 'Enter' && deleteCommentFunction(e)}
+                        >
                         ✖
                     </div>          
                 )}
@@ -216,11 +218,24 @@ export default function CommentCard({ index, commentId, topicId, postId, usersLi
                 {isLogged && commentUser && (
                     <>
                         {commentContentDisplay === 'block' && modifyContentDisplay === "none" && (loggedUser._id === commentUser._id || loggedUser.isAdmin) ? (
-                            <p className='comment-card-footer-link loggedColor' title='Modifier ce commentaire' onClick={(e) => modifyDisplayManager(e)}>🖉 Modifier</p>
+                            <p 
+                            tabIndex="0" 
+                            className='comment-card-footer-link loggedColor' 
+                            title='Modifier ce commentaire' 
+                            onClick={(e) => modifyDisplayManager(e)}
+                            onKeyDown={(e) => e.key === 'Enter' && modifyDisplayManager(e)}
+                            >🖉 Modifier</p>
                         ) : (
                             null
                         )}
-                        <a className='comment-card-footer-link loggedColor' href={`/topic/${topicId}`} title='Citer ce commentaire' onClick={(e) => saveCurrentCitation(e)}>➥ Citer</a>
+                        <a 
+                        tabIndex="0"
+                        className='comment-card-footer-link loggedColor' 
+                        href={`/topic/${topicId}`} 
+                        title='Citer ce commentaire' 
+                        onClick={(e) => saveCurrentCitation(e)}
+                        onKeyDown={(e) => e.key === 'Enter' && saveCurrentCitation(e)}
+                        >➥ Citer</a>
                         <Like post={undefined} comment={currentComment}/>
                     </>
                 )}

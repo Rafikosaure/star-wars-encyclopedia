@@ -1,11 +1,17 @@
-import React from 'react'
+import { Link } from 'react-router-dom'
 import './Legal.scss'
+import { selectBasket } from '../../redux/slices/shoppingBasket'
+import { useSelector } from 'react-redux'
 
 
+
+// Cette page est dédiée aux mentions légales du site.
+// Depuis l'interface du site, elle est accessible depuis les liens du footer.
 export default function Legal() {
 
-    // Cette page est dédiée aux mentions légales du site.
-    // Depuis l'interface du site, elle est accessible depuis les liens du footer.
+    // Contenu courant du panier (partie e-commerce)
+    const basketContent = useSelector(selectBasket)
+
     return (
         <div className='legal-page'>
             <h1>Politique de confidentialité</h1>
@@ -217,6 +223,45 @@ export default function Legal() {
                 <p>
             Tout litige en relation avec l’utilisation du site <a href="https://www.star-wars-encyclopedia.com">https://www.star-wars-encyclopedia.com</a> est soumis au droit français. 
             En dehors des cas où la loi ne le permet pas, il est fait attribution exclusive de juridiction aux tribunaux compétents de Paris.</p>
+
+            <p></p>
+            <h2 id="CGV">11. Conditions Générales de Vente (CGV)</h2>
+
+            <p>Bienvenue, jeune Padawan, Chevalier Jedi, ou même humble contrebandier, sur <a href='https://www.star-wars-encyclopedia.com'>https://www.star-wars-encyclopedia.com</a>, le site où la passion pour la galaxie lointaine, très lointaine prend vie à travers une expérience e-commerce... fictive !
+            Avant de vous lancer dans l'acquisition virtuelle de nos artefacts inspirés de Star Wars, veuillez prendre connaissance de nos Conditions Générales de Vente.
+
+            Que la Force de la transparence soit avec vous.</p>
+
+            <h3>11.1 Informations générales</h3>
+            <p>Le site <a href="https://www.star-wars-encyclopedia.com">https://www.star-wars-encyclopedia.com</a> est édité par Rafik Ben Sadi, domicilié à l'adresse : Amicale de la 501ème Légion – 27, place de la Madeleine 75008 Paris. Contact : rafikbensadi@live.fr</p>
+
+            <h3>11.2 Nature du service</h3>
+            <p>Le service proposé est une vente fictive d'artefacts inspirés de l'univers Star Wars, sans livraison réelle de produits.</p>
+
+            <h3>11.3 Commandes et paiement</h3>
+            <p>Les commandes passées sont fictives. Le site simule un paiement fictif via Stripe, sans véritable transaction monétaire.</p>
+
+            <h3>11.4 Livraison</h3>
+            <p>Il n'y a aucune livraison réelle. Nos produits ne seront expédiés que dans votre imagination !</p>
+
+            <h3>11.5 Droit de rétractation</h3>
+            <p>Conformément au droit de la consommation simulé, vous disposez d'un délai fictif de 14 jours pour changer d'avis.</p>
+
+            <h3>11.6 Responsabilité</h3>
+            <p>Les visuels proposés sont inspirés de l'univers Star Wars, générés par intelligence artificielle ou provenant de contenus libres de droits, sans affiliation directe avec Lucasfilm ou Disney.</p>
+
+            <h3>11.7 Loi applicable</h3>
+            <p>Ces Conditions Générales de Vente sont régies par la loi française.</p>
+
+            <p>Merci d’avoir pris le temps de consulter nos Conditions Générales de Vente.
+            Nous espérons que votre aventure parmi nos collections fictives vous transportera aussi sûrement qu'un hyperdrive bien réglé.
+
+            N'oubliez pas : ces artefacts ne sont pas réels, mais la passion, elle, l'est.
+            À bientôt dans les étoiles, et que la Force guide chacun de vos clics !</p>
+            {basketContent.length > 0 && (
+                <Link to={'/basket'}>Retourner au panier</Link>
+            )}
+            
         </div>
     )
 }

@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import ScrollToTop from './sharedFunctions/scrollToTop';
+import ScrollToTop from './utils/scrollToTop';
 import Home from './pages/Home/Home';
 import Auth from './pages/Auth/Auth';
 import Category from './pages/Category/Category';
@@ -13,6 +13,13 @@ import Topic from './pages/Topic/Topic'
 import Account from './pages/Account/Account';
 import Admin from './pages/Admin/Admin';
 import Legal from './pages/Legal/Legal';
+import ShoppingPage from './pages/ShoppingPage/ShoppingPage';
+import MoviesPage from './pages/MoviesPage/MoviesPage';
+import MarketPage from './pages/MarketPage/MarketPage';
+import ProductPage from './pages/ProductPage/ProductPage';
+import BasketPage from './pages/BasketPage/BasketPage';
+import Success from './pages/Success/Success';
+
 
 
 export default function App() {
@@ -31,7 +38,14 @@ export default function App() {
               <Route path='/account' element={<Account />} />
               <Route path='/admin' element={<Admin />} />
               <Route path='/topic/:topicId/page/:page' element={<Topic />} />
+              <Route path='/movies' element={<MoviesPage />} />
+              <Route path='/shopping' element={<ShoppingPage />}>
+                <Route path='market' element={<MarketPage />} />
+                <Route path='product/:productId' element={<ProductPage />} />
+              </Route>
+              <Route path='/basket' element={<BasketPage />} />
               <Route path='/legal' element={<Legal />} />
+              <Route path='/success' element={<Success />} />
               <Route path='*' element={<Error404 />} />
             </Routes>
           <Footer />

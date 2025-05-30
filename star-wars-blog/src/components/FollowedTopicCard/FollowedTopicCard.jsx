@@ -1,4 +1,3 @@
-import React from 'react'
 import { useState } from 'react'
 import './FollowedTopicCard.scss'
 import { toast } from 'sonner'

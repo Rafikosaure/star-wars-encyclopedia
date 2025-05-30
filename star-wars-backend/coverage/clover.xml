@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1748608237379" clover="3.2.0">
+  <project timestamp="1748608237379" name="All files">
+    <metrics statements="425" coveredstatements="170" conditionals="102" coveredconditionals="17" methods="42" coveredmethods="11" elements="569" coveredelements="198" complexity="0" loc="425" ncloc="425" packages="3" files="15" classes="15"/>
+
 <coverage generated="1748262504978" clover="3.2.0">
   <project timestamp="1748262504978" name="All files">
     <metrics statements="422" coveredstatements="169" conditionals="102" coveredconditionals="17" methods="42" coveredmethods="11" elements="566" coveredelements="197" complexity="0" loc="422" ncloc="422" packages="3" files="15" classes="15"/>
+
     <package name="config">
       <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="config.js" path="C:\Users\rafik\Projets de code\SIELI\Projet\Blog STAR WARS\star-wars-backend\config\config.js">
@@ -9,11 +14,11 @@
         <line num="1" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
         <line num="5" count="1" type="stmt"/>
-        <line num="22" count="1" type="stmt"/>
+        <line num="24" count="1" type="stmt"/>
       </file>
     </package>
     <package name="controllers">
-      <metrics statements="392" coveredstatements="139" conditionals="102" coveredconditionals="17" methods="42" coveredmethods="11"/>
+      <metrics statements="395" coveredstatements="140" conditionals="102" coveredconditionals="17" methods="42" coveredmethods="11"/>
       <file name="comment.controller.js" path="C:\Users\rafik\Projets de code\SIELI\Projet\Blog STAR WARS\star-wars-backend\controllers\comment.controller.js">
         <metrics statements="66" coveredstatements="31" conditionals="16" coveredconditionals="7" methods="6" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
@@ -330,7 +335,7 @@
         <line num="159" count="0" type="stmt"/>
       </file>
       <file name="user.controller.js" path="C:\Users\rafik\Projets de code\SIELI\Projet\Blog STAR WARS\star-wars-backend\controllers\user.controller.js">
-        <metrics statements="92" coveredstatements="13" conditionals="40" coveredconditionals="0" methods="9" coveredmethods="2"/>
+        <metrics statements="95" coveredstatements="14" conditionals="40" coveredconditionals="0" methods="9" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -387,6 +392,13 @@
         <line num="111" count="0" type="stmt"/>
         <line num="117" count="0" type="stmt"/>
         <line num="120" count="0" type="stmt"/>
+        <line num="126" count="0" type="stmt"/>
+        <line num="132" count="0" type="stmt"/>
+        <line num="135" count="0" type="stmt"/>
+        <line num="138" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="139" count="0" type="stmt"/>
+        <line num="140" count="0" type="stmt"/>
+        <line num="141" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="134" count="0" type="stmt"/>
         <line num="137" count="0" type="stmt"/>
         <line num="140" count="0" type="cond" truecount="0" falsecount="2"/>
@@ -394,6 +406,35 @@
         <line num="142" count="0" type="stmt"/>
         <line num="143" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="144" count="0" type="stmt"/>
+        <line num="149" count="0" type="stmt"/>
+        <line num="151" count="0" type="stmt"/>
+        <line num="156" count="1" type="stmt"/>
+        <line num="157" count="0" type="stmt"/>
+        <line num="159" count="0" type="stmt"/>
+        <line num="160" count="0" type="stmt"/>
+        <line num="161" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="162" count="0" type="stmt"/>
+        <line num="166" count="0" type="stmt"/>
+        <line num="167" count="0" type="stmt"/>
+        <line num="169" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="170" count="0" type="stmt"/>
+        <line num="173" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="174" count="0" type="stmt"/>
+        <line num="180" count="0" type="stmt"/>
+        <line num="186" count="0" type="stmt"/>
+        <line num="189" count="0" type="stmt"/>
+        <line num="192" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="193" count="0" type="stmt"/>
+        <line num="194" count="0" type="stmt"/>
+        <line num="195" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="196" count="0" type="stmt"/>
+        <line num="198" count="0" type="stmt"/>
+        <line num="203" count="0" type="stmt"/>
+        <line num="205" count="0" type="stmt"/>
+        <line num="210" count="1" type="stmt"/>
+        <line num="211" count="1" type="stmt"/>
+        <line num="212" count="1" type="stmt"/>
+        <line num="213" count="0" type="stmt"/>
         <line num="146" count="0" type="stmt"/>
         <line num="151" count="0" type="stmt"/>
         <line num="153" count="0" type="stmt"/>
@@ -441,9 +482,9 @@
       </file>
       <file name="followTopic.model.js" path="C:\Users\rafik\Projets de code\SIELI\Projet\Blog STAR WARS\star-wars-backend\models\followTopic.model.js">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="2" type="stmt"/>
-        <line num="4" count="2" type="stmt"/>
-        <line num="18" count="2" type="stmt"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="4" count="3" type="stmt"/>
+        <line num="18" count="3" type="stmt"/>
       </file>
       <file name="isMentionned.model.js" path="C:\Users\rafik\Projets de code\SIELI\Projet\Blog STAR WARS\star-wars-backend\models\isMentionned.model.js">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>

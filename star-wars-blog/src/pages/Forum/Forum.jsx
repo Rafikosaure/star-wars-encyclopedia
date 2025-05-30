@@ -1,6 +1,5 @@
-import React from 'react'
 import { useEffect, useState } from 'react'
-import '../../sharedStyles/index.scss'
+import '../../theme/index.scss'
 import './Forum.scss'
 import Code from '../../components/Code/Code'
 import { useNavigate } from 'react-router-dom'
@@ -49,7 +48,14 @@ export default function Forum() {
         <div className='forum-div-categories'>
         <h2>{forumTitle2.toLowerCase()}</h2>
         {forumCategories.map((category) => 
-          <div className='div-category' key={category._id} onClick={() => navigate(`/topics/${category._id}`)}>
+          <div 
+          className='div-category' 
+          key={category._id} 
+          tabIndex='0'
+          onClick={() => navigate(`/topics/${category._id}`)}
+          onKeyDown={(e) => e.key === 'Enter' && navigate(`/topics/${category._id}`)}
+          title={`Accéder à la page de la catégorie "${category.title}"`}
+          >
             <h3>{category.title}</h3>
           </div>
         )}

@@ -23,7 +23,7 @@ $background-color_1: black;
 	transition-property: all;
 	transition-duration: 1s;
 	&:hover { 
-		border: 2px solid white;
+		border: 2px solid $color_1;
 	}
 	.card-home {
 		animation: fadein 1s;
@@ -61,7 +61,7 @@ $background-color_1: black;
 	opacity: 0.7;
 	transition-property: all;
 	transition-duration: 1s;
-	&:hover { 
+	&:hover, &:focus, &:active { 
 		opacity: 1;
 	}
 }

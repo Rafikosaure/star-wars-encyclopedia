@@ -79,7 +79,7 @@ export default function SearchBar({ category }) {
   return (
     <div className='search-bar'>
       <form className='search-form' onSubmit={(e) => onFormSubmit(e)}>
-        <input type="text" name="search-input" id="search-input" className='search-input' placeholder='Débutez une recherche...' onChange={e => translateSearch(e.target.value)} onFocus={(e) => e.target.placeholder = ""} onBlur={(e) => e.target.placeholder = "Débutez une recherche..."} />
+        <input type="text" name="search-input" id="search-input" className='search-input' placeholder='Débutez une recherche...' onChange={e => translateSearch(e.target.value)} onFocus={(e) => e.target.placeholder = ""} onBlur={(e) => e.target.placeholder = "Débutez une recherche..."} autoFocus />
       </form>
     </div>
   )

@@ -1,5 +1,4 @@
-import React from 'react'
-import '../../sharedStyles/Auth.scss'
+import '../../theme/Auth.scss'
 import { useForm } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
 import { updateRegisterState } from '../../redux/slices/registerSlice'
