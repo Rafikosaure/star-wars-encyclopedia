@@ -83,8 +83,6 @@ $font-family_1: Arial, Helvetica, sans-serif;
 /* Ici : media queries pour la troisième partie tablette */
 @media screen and (max-width: 767px) {
 	.div-welcome {
-		background: url(../../assets/images/background05_small.webp) no-repeat center center;
-		background-size: cover;
 		height: 400px;
 		padding-top: 50px;
 	}
