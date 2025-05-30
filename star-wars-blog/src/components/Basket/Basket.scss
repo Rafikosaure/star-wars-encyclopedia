@@ -3,7 +3,7 @@ $color_2: black;
 $color_3: white;
 $font-family_1: Arial, Helvetica, sans-serif;
 @mixin basket-content-links {
-    width: 40%;
+    width: 45%;
     height: 10px;
     font-size: 12px;
     font-weight: bold;
@@ -69,6 +69,7 @@ $font-family_1: Arial, Helvetica, sans-serif;
         max-height: 130px;
         margin-bottom: 15px;
         overflow: scroll;
+        scrollbar-width: thin;
         .basket-content-manager-section {
             display: flex;
             .basket-empty-button {
