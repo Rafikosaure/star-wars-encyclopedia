@@ -27,6 +27,8 @@ function MarketPage() {
     const [filterCategory, setFilterCategory] = useState('all')
     const [filterButtonsActive, setFilterButtonsActive] = useState('1')
     
+    // Supprimer le jeton de transaction dans le stockage de session
+    sessionStorage.removeItem('shoppingStringSession')
 
     // Variables de pagination
     const productsPerPage = 6
