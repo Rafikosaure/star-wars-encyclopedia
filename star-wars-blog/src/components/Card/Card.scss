@@ -1,14 +1,6 @@
 $color_1: white;
 $background-color_1: black;
 
-@keyframes fadein {
-	from {
-		opacity: 0;
-	}
-	to {
-		opacity: 1;
-	}
-}
 .card {
 	display: flex;
 	justify-content: center;
@@ -25,20 +17,17 @@ $background-color_1: black;
 	&:hover { 
 		border: 2px solid $color_1;
 	}
-	.card-home {
-		animation: fadein 1s;
-	}
-	.card-image {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		height: 100%;
-		width: 110%;
-		overflow: hidden;
-		img { 
-			width: 100%;
-			height: auto;
-		}
+}
+.card-image {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	width: 110%;
+	overflow: hidden;
+	img { 
+		width: 100%;
+		height: auto;
 	}
 }
 .card-name-div {

@@ -4,6 +4,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { reinitializeDozen } from '../../redux/slices/dozenSlice'
 import { ServerServices } from '../../api/api-server'
+import '../../theme/index.scss'
 
 
 
@@ -35,10 +36,10 @@ export default function Card({ item, categoryId }) {
     <>
       {location.pathname !== "/" ? (
         item && item.name && item.image && translatedName && (
-        <div className='card card-home'>
+        <div className='card card-appears-animation'>
           <Link className='card-link' to={`/article/${paramsIds}`}>
             <div className='card-image'>
-              <img src={item.image} alt={`Carte de l'article "${item.name}"`} />
+              <img src={item.image} loading='lazy' alt={`Carte de l'article "${item.name}"`} />
             </div>
             <div className='card-name-div'>
               {translatedName && (

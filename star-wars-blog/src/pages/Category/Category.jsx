@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import './Category.scss'
 import Card from '../../components/Card/Card'
+import CardObserverWrapper from '../../components/CardObserverWrapper/CardObserverWrapper'
 import SearchBar from '../../components/SearchBar/SearchBar'
 import data from '../../data/localApiCategories.json'
 import NextArrow from '../../assets/images/next-arrow.webp'
@@ -96,11 +97,12 @@ export default function Category() {
               <img className='card-list-spinner spinner-2' style={{display: `${spinnerDisplay}`}} src={Spinner} alt="Second spinner de chargement" />
               <img className='card-list-spinner spinner-3' style={{display: `${spinnerDisplay}`}} src={Spinner} alt="Troisième spinner de chargement" />
               {article.value === undefined ? 
-                (items.map((item) => 
-                  <Card key={item._id} item={item} categoryId={categoryId} />
-                )
+                (
+                  items.map((item) =>
+                    <CardObserverWrapper key={item._id} item={item} categoryId={categoryId} />
+                  )
                 ) : (
-                  <Card key={article._id} item={article.value} categoryId={categoryId} />
+                    <Card key={article._id} item={article.value} categoryId={categoryId} />
                 )
               }
             </div>

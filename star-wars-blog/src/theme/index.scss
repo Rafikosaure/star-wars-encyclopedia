@@ -51,11 +51,22 @@ code {
         opacity: 0;
     }
 }
+@keyframes scale {
+	0% {
+		transform: scaleX(0) scaleY(0);
+	}
+	100% {
+		transform: scaleX(1) scaleY(1);
+	}
+}
 .fade-in {
     animation: fadein 0.3s;
 }
 .fade-out {
     animation: fadeout 0.32s;
+}
+.card-appears-animation {
+	animation: fadein 2s, scale .5s;
 }
 /* Ici : media queries pour la seconde partie tablette */
 @media screen and (max-width: 991px) {
