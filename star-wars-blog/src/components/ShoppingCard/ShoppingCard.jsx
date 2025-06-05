@@ -1,4 +1,5 @@
 import './ShoppingCard.scss'
+import '../../theme/index.scss'
 import { Link } from 'react-router-dom'
 import Avatar from '../../assets/images/EmojiBlitzBobaFett1.webp'
 import { toast } from 'sonner'
@@ -59,7 +60,7 @@ function ShoppingCard({ product }) {
 
     return (
         <div 
-        className='shopping-card-wrapper'
+        className='shopping-card-wrapper card-appears-animation'
         >   
             {product && product.maxQuantity && product.maxQuantity && productQuantityCounter(basketContent, product) && (
                 <div className='shopping-card-stock-limit-overlay' 
