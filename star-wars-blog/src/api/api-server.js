@@ -1,6 +1,6 @@
 import { toast } from 'sonner'
 import config from '../config'
-import validatePassword from '../utils/validatePassword';
+import { validatePassword } from '../utils/passwordValidationFunctions';
 
 
 // Appels centralisés vers le serveur Node.JS du projet
@@ -41,12 +41,13 @@ export const ServerServices = {
     },
 
     // Inscription au site
-    async registerUser(data, dispatch, updateRegisterState, setUnvalidPassword, reset) {
+    async registerUser(data, dispatch, updateRegisterState, setUnvalidPassword, reset, setValue) {
         try {
             const isValid = validatePassword(data.password);
             if (!isValid) {
                 toast("Mot de passe trop faible !");
                 setUnvalidPassword("block");
+                setValue('password', undefined)
                 return;
             }
 
@@ -75,7 +76,7 @@ export const ServerServices = {
 
             return result;
 
-        } catch (error) {
+        } catch(error) {
             console.error("Erreur lors de l'inscription :", error);
             throw error;
         }
@@ -331,7 +332,7 @@ export const ServerServices = {
         if (data.password.length > 0) {
             const isValid = validatePassword(data.password);
             if (!isValid) {
-                throw new Error("Mot de passe trop faible !");
+                return 'Mot de passe trop faible !'
             }
         }
 

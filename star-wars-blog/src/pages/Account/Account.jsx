@@ -20,6 +20,8 @@ import { toast } from 'sonner'
 import NotifSwitch from '../../components/NotifSwitch/NotifSwitch'
 import FollowedTopicCard from '../../components/FollowedTopicCard/FollowedTopicCard'
 import { ServerServices } from '../../api/api-server'
+import PasswordValidatorBar from '../../components/PasswordValidatorBar/PasswordValidatorBar'
+import { passwordTypeManagment } from '../../utils/passwordValidationFunctions'
 
 
 
@@ -33,7 +35,8 @@ export default function Account() {
   const [inputPictureValue, setInputPictureValue] = useState()
   const [allowDeletion, setAllowDeletion] = useState(false)
   const [unvalidPassword, setUnvalidPassword] = useState('none')
-  const { register, handleSubmit, setValue, reset } = useForm()
+  const { register, handleSubmit, setValue, reset, watch } = useForm()
+  const initialPasswordValue = watch('password')
   const reloadUsers = useSelector(selectReloadUsersState)
   const userData = useSelector(selectLoggedUser)
   const [followedTopics, setFollowedTopics] = useState()
@@ -113,22 +116,22 @@ export default function Account() {
     }
     try {
       const result = await updateUserData("noId", data);
-      dispatch(updateUserLog(result))
-      reset()
-      setUnvalidPassword('none')
-      updateFileIsLoad("display-none")
-      dispatch(updateLoadedUser(false))
-      dispatch(reloadUsersArrayFunction())
-      toast("Mise à jour effectuée !")
-    } catch (error) {
-      if (error.message === "Mot de passe trop faible !") {
-        toast('Mot de passe trop faible !')
+      if (result === 'Mot de passe trop faible !') {
+        toast(result)
         setUnvalidPassword('block')
-        reset()
+        setValue('password', undefined)
       } else {
-        console.log(error)
-        navigate('/auth')
+        dispatch(updateUserLog(result))
+        reset()
+        setUnvalidPassword('none')
+        updateFileIsLoad("display-none")
+        dispatch(updateLoadedUser(false))
+        dispatch(reloadUsersArrayFunction())
+        toast("Mise à jour effectuée !")
       }
+    } catch (error) {
+      console.log(error)
+      navigate('/auth')
     }
   }
 
@@ -205,7 +208,12 @@ export default function Account() {
                   <form className='account-form-update' autoComplete='off' onSubmit={handleSubmit(modifyData)} >
                     <input type="text" className='account-input-text-data' name='name' placeholder='Modifiez votre nom...' {...register("name", {required: false})} onFocus={(e) => e.target.placeholder = ""} onBlur={(e) => e.target.placeholder = 'Modifiez votre nom...'} />
                     <input type="email" className='account-input-text-data' name='email' placeholder='Modifiez votre email...' {...register("email", {required: false})} onFocus={(e) => e.target.placeholder = ""} onBlur={(e) => e.target.placeholder = 'Modifiez votre email...'} />
-                    <input type="password" className='account-input-text-data' name='password' placeholder='Modifiez votre mot de passe...' {...register("password", {required: false})} onFocus={(e) => e.target.placeholder = ""} onBlur={(e) => e.target.placeholder = 'Modifiez votre mot de passe...'} />
+                    
+                    <div className='account-input-password-div'>
+                      <input type="password" className='account-input-text-data' name='password' placeholder='Modifiez votre mot de passe...' {...register ("password", {required: false})} onFocus={(e) => e.target.placeholder = ""} onBlur={(e) => e.target.placeholder = 'Modifiez votre mot de passe...'} />
+                      <PasswordValidatorBar password={passwordTypeManagment(initialPasswordValue)} />
+                    </div>
+                    
                     <p className='unvalid-password-text' style={{display: unvalidPassword}}>Votre mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caracère spécial.</p>
 
                     <div className='div-input-file-wrapper'>

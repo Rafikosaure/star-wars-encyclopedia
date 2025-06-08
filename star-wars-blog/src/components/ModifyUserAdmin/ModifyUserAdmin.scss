@@ -12,6 +12,13 @@
     gap: 40px;
     align-items: center;
 }
+.other-user-password-input-div {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
 .other-user-input {
     border: none;
     border-radius: 20px;
