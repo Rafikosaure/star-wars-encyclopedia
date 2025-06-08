@@ -7,6 +7,8 @@ import { useNavigate } from 'react-router-dom';
 import { reloadUsersArrayFunction } from '../../redux/slices/reloadUsersArray';
 import './ModifyUserAdmin.scss'
 import { ServerServices } from '../../api/api-server';
+import PasswordValidatorBar from '../PasswordValidatorBar/PasswordValidatorBar';
+import { passwordTypeManagment } from '../../utils/passwordValidationFunctions';
 
 
 
@@ -14,7 +16,8 @@ export default function ModifyUserAdmin({ user, unvalidPassword, setUnvalidPassw
 
     const [fileIsLoad, setFileIsLoad] = useState('display-none')
     const [inputPictureValue, setInputPictureValue] = useState()
-    const { register, handleSubmit, setValue, reset } = useForm()
+    const { register, handleSubmit, setValue, reset, watch } = useForm()
+    const passwordValue = watch('password')
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const { updateUserData } = ServerServices
@@ -43,21 +46,21 @@ export default function ModifyUserAdmin({ user, unvalidPassword, setUnvalidPassw
     // Fonction de modification des données d'un utilisateur
     const modifyData = async (data) => {
         try {
-            await updateUserData(user._id, data);
-            reset();
-            setUnvalidPassword('none');
-            setInputPictureValue();
-            dispatch(reloadUsersArrayFunction());
-            toast("Mise à jour effectuée !");
-        } catch (error) {
-            if (error.message === "Mot de passe trop faible !") {
-                toast(error.message);
+            const result = await updateUserData(user._id, data);
+            if (result === 'Mot de passe trop faible !') {
+                toast(result);
                 setUnvalidPassword('block');
-                reset();
+                setValue('password', undefined);
             } else {
-                console.error(error);
-                navigate('/');
+                reset();
+                setUnvalidPassword('none');
+                setInputPictureValue();
+                dispatch(reloadUsersArrayFunction());
+                toast("Mise à jour effectuée !");
             }
+        } catch (error) {
+            console.error(error);
+            navigate('/');
         }
     }
 
@@ -67,7 +70,11 @@ export default function ModifyUserAdmin({ user, unvalidPassword, setUnvalidPassw
             <form className='other-user-form-update' autoComplete='off' onSubmit={handleSubmit(modifyData)}>
                 <input className='other-user-input' type="text" name='name' placeholder={user.name} {...register("name", {required: false})} onFocus={(e) => e.target.placeholder = ""} onBlur={(e) => e.target.placeholder = `${user.name}`} />
                 <input className='other-user-input' type="email" name='email' placeholder={user.email} {...register("email", {required: false})} onFocus={(e) => e.target.placeholder = ""} onBlur={(e) => e.target.placeholder = `${user.email}`} />
-                <input className='other-user-input' type="password" name='password' placeholder='[mot de passe]' {...register("password", {required: false})} onFocus={(e) => e.target.placeholder = ""} onBlur={(e) => e.target.placeholder = '[mot de passe]'} />
+                <div className='other-user-password-input-div'>
+                    <input className='other-user-input' type="password" name='password' placeholder='[mot de passe]' {...register("password", {required: false})} onFocus={(e) => e.target.placeholder = ""} onBlur={(e) => e.target.placeholder = '[mot de passe]'} />
+                    <PasswordValidatorBar password={passwordTypeManagment(passwordValue)} />
+                </div>
+                
                 <p className='unvalid-password-text' style={{display: unvalidPassword}}>Votre mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caracère spécial.</p>
                 <div className='div-input-file-wrapper'>
                     <div id='div-input-file'>

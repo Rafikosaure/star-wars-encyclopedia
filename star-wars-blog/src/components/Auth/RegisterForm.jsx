@@ -6,7 +6,8 @@ import isValid from '../../assets/images/is_valid.webp'
 import { useDispatch } from 'react-redux'
 import { updateRegisterState } from '../../redux/slices/registerSlice'
 import { ServerServices } from '../../api/api-server'
-
+import PasswordValidatorBar from '../PasswordValidatorBar/PasswordValidatorBar.jsx'
+import { passwordTypeManagment } from '../../utils/passwordValidationFunctions.js'
 
 
 export default function RegisterForm() {
@@ -14,7 +15,8 @@ export default function RegisterForm() {
     const [fileIsLoad, updateFileIsLoad] = useState('display-none')
     const [unvalidPassword, setUnvalidPassword] = useState('none')
     const [inputPictureValue, setInputPictureValue] = useState()
-    const { register, handleSubmit, setValue, reset } = useForm()
+    const { register, handleSubmit, setValue, reset, watch } = useForm()
+    const initialPasswordValue = watch('password')
     const dispatch = useDispatch()
     const { registerUser } = ServerServices
     const title = 'Inscription'
@@ -40,9 +42,10 @@ export default function RegisterForm() {
     }
 
 
+    // Valider ou non l'inscription
     const onSubmit = async (data) => {
         try {
-            await registerUser(data, dispatch, updateRegisterState, setUnvalidPassword, reset);
+            await registerUser(data, dispatch, updateRegisterState, setUnvalidPassword, reset, setValue);
         } catch (error) {
             console.error("Échec de l'inscription :", error);
         }
@@ -55,7 +58,10 @@ export default function RegisterForm() {
         <form className='login-form' onSubmit={handleSubmit(onSubmit)}>
             <input type="text" className='login-form-input' name='name' placeholder='Entrez votre nom...' {...register("name")} onFocus={(e) => e.target.placeholder = ""} onBlur={(e) => e.target.placeholder = 'Entrez votre nom...'} required/>
             <input type="email" className='login-form-input' name='email' placeholder='Entrez votre email...' {...register("email")} onFocus={(e) => e.target.placeholder = ""} onBlur={(e) => e.target.placeholder = 'Entrez votre email...'} required/>
-            <input type="password" className='login-form-input' name='password' placeholder='Entrez votre mot de passe...' {...register("password")} onFocus={(e) => e.target.placeholder = ""} onBlur={(e) => e.target.placeholder = 'Entrez votre mot de passe...'} required/>
+            <div className='login-form-password-div'>
+                <input type="password" className='login-form-input' name='password' placeholder='Entrez votre mot de passe...' {...register("password")} onFocus={(e) => e.target.placeholder = ""} onBlur={(e) => e.target.placeholder = 'Entrez votre mot de passe...'} required />
+                <PasswordValidatorBar password={passwordTypeManagment(initialPasswordValue)} />
+            </div>
             <p className='unvalid-password-text' style={{display: unvalidPassword}}>Votre mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caracère spécial.</p>
             <div className='div-register-input-file-wrapper'>
                 <div id='div-register-input-file'>
