@@ -10,6 +10,7 @@ Je me présente, je suis Rafik Ben Sadi, développeur fullstack basé sur la ré
 "Amicale de la 501ème Légion" – 27, place de la Madeleine 75008 Paris, représenté par Jean-Michel Plagueis, son représentant légal (fictif aussi...).
 
 
+
 1. Le site est dans un premier temps un wiki :
 
 Il met en place une interface responsive et conviviale pour rechercher, explorer ou même flâner en immersion dans cet univers, ses personnages, ses créatures, ses lieux iconiques et tout ce qui constitue ce magistral space-opera de légende. On y va pour apprendre, pour découvrir, pour se documenter ou pour approfondir ses connaissances.
@@ -35,12 +36,48 @@ En tous les cas, tant que vous êtes authentique et désireux de communiquer vot
 Portail de l'application : [www.star-wars-encyclopedia.com](https://www.star-wars-encyclopedia.com)
 
 
-3. Stack technique de base du projet :
+
+3. Une vidéothèque dédiée aux films et séries Star Wars :
+
+La plateforme embarque une vidéothèque interactive permettant aux utilisateurs de parcourir les films et séries de l'univers Star Wars.
+
+- Le menu latéral gauche affiche une liste déroulante des médias classés par date de sortie (films ou séries).
+- En cliquant sur un titre, l'utilisateur peut accéder à une fiche complète : titre, résumé, date de sortie, bande-annonce en français (via YouTube), informations sur les créateurs et les acteurs.
+- Un lien externe permet également d'accéder au film ou à la série sur Disney+.
+- La vidéothèque est **responsive** et adaptée aux smartphones : le menu peut s'ouvrir et se fermer à l’aide d’un bouton ou d’un **mouvement de swipe** du doigt.
+- En cas d'erreur (vidéo supprimée ou inaccessible), un message explicatif s’affiche à la place de la vidéo.
+
+Cette fonctionnalité a été conçue pour offrir une expérience riche, immersive et pratique, que ce soit sur desktop ou mobile.
+
+
+
+4. La boutique de Wattoo : un espace shopping immersif
+
+Le projet propose également une fonctionnalité de boutique : la boutique de Wattoo. Accessible depuis l'application, cette section permet de découvrir et de simuler des achats d'artefacts inspirés de l'univers de Star Wars.
+
+Les artefacts sont classés par catégorie et peuvent être issus de l'univers Canon, Legends ou bien totalement originaux, créés à partir du lore de Star Wars.
+
+Une page "Panier" permet de consulter les articles sélectionnés, leur quantité et le montant total.
+
+Les paiements sont simulés grâce à Stripe, via son mode bac à sable intégré pour les tests.
+
+Les transactions peuvent être testées avec les informations suivantes :
+
+- Numéro de carte : 4242 4242 4242 4242
+- Date d'expiration : toute date future (ex. 12/34)
+- CVC : trois chiffres aléatoires (ex. 123)
+
+Les produits sont actuellement chargés depuis un fichier JSON local, mais une API REST est en cours de développement pour les gérer dynamiquement à terme. Le projet de cette API est accessible sur GitHub à cette adresse : [github.com/Rafikosaure/star-wars-artefacts-api](https://github.com/Rafikosaure/star-wars-artefacts-api)
+
+
+
+5. Stack technique de base du projet :
 - frontend: React JS, SASS; 
 - backend: Node JS, Express; 
 - base de données: MongoDB; 
 - ORM: Mongoose; 
-- APIs frontend: Star Wars Databank, Deepl API; 
+- APIs frontend: Star Wars Databank, Deepl API, TMDB API; 
+- Paiement: Stripe en mode bac à sable;
 - Hébergement: https://vercel.com/
 - Service d'emailing utilisé: Gmail
 
