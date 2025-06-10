@@ -96,6 +96,7 @@ $background-color_1: black;
 	flex-direction: row;
 	justify-content: space-evenly;
 	align-items: flex-start;
+	z-index: 2;
 }
 .card-list-spinner {
 	position: absolute;
