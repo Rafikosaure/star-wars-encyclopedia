@@ -4,10 +4,10 @@
 
 Le wiki convivial pour découvrir l'univers Star Wars, ainsi que pour partager sa passion avec la communauté de fans !
 
-Ce Wiki avec forum de discussion est un projet visant à promouvoir la culture liée à l'univers Star Wars, ainsi qu'à satisfaire la soif de connaissance des fans de la dernière comme de la première heure sur cet univers de science-fiction iconique.
+Cet espace de documentation est un projet visant à promouvoir la culture liée à l'univers Star Wars, ainsi qu'à satisfaire la soif de connaissance des fans de la dernière comme de la première heure sur cet univers de science-fiction iconique.
 
-Je me présente, je suis Rafik Ben Sadi, développeur fullstack basé sur la région parisienne. J'ai eu le plaisir de concevoir ce projet dans le cadre de ma formation en 2024 de concepteur-développeur d'applications, et ce pour l'association fictive loi 1901:
-"Amicale de la 501ème Légion" – 27, place de la Madeleine 75008 Paris, représenté par Jean-Michel Plagueis, son représentant légal (fictif aussi...).
+Je suis Rafik Ben Sadi, développeur fullstack basé sur la région parisienne. J'ai eu le plaisir d'initier la conception de ce projet dans le cadre de ma formation en 2024 de concepteur-développeur d'applications, et ce pour l'association fictive loi 1901:
+"Amicale de la 501ème Légion" – 27, place de la Madeleine 75008 Paris, représenté par Jean-Michel Plagueis, son représentant légal.
 
 
 
@@ -37,7 +37,7 @@ Portail de l'application : [www.star-wars-encyclopedia.com](https://www.star-war
 
 
 
-3. Une vidéothèque dédiée aux films et séries Star Wars 🎥:
+3. Ce projet inclue également une vidéothèque dédiée aux films et séries Star Wars 🎥:
 
 La saga Star Wars est avant tout une saga cinématographique, et il m'est apparu intuitif d'intégrer sur cette plateforme une vidéothèque interactive permettant aux utilisateurs de parcourir les films et séries de l'univers Star Wars.
 
@@ -51,7 +51,7 @@ Cette fonctionnalité a été conçue pour offrir une expérience riche, immersi
 
 
 
-4. La boutique de Wattoo 🛒: un espace shopping immersif
+4. Enfin, visitez la boutique de Wattoo 🛒: un espace shopping immersif
 
 Le projet propose également une fonctionnalité de boutique : la boutique de Wattoo. Cette section permet de découvrir et de simuler des achats d'artefacts inspirés de l'univers de Star Wars. On y trouve de tout : du sabre laser de Mace Windu au journal personnel de Padme Amidala, en passant par le carnet secret de Luthen Rael et le casque de Dark Revan.
 
