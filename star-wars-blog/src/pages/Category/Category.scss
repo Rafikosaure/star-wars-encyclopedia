@@ -89,7 +89,7 @@ $background-color_1: black;
 	animation: fadein 3s;
 }
 .card-list {
-	width: 80%;
+	width: calc(80% - 160px);
 	padding: 5%;
 	display: flex;
 	flex-wrap: wrap;
@@ -119,6 +119,15 @@ $background-color_1: black;
 		width: 60px;
 		height: 60px;
 	}
+	.card-list {
+		width: calc(80% - 120px) !important;
+	}
+}
+/* Ici : media queries pour la première partie tablette */
+@media screen and (max-width: 1023px) {
+	.card-list {
+		width: calc(80% - 200px) !important;
+	}
 }
 /* Ici : media queries pour la seconde partie tablette */
 @media screen and (max-width: 991px) {
@@ -140,6 +149,9 @@ $background-color_1: black;
 	.next-arrow-section {
 		margin-left: 10px;
 	}
+	.card-list {
+		width: 55% !important;
+	}
 }
 /* Ici : media queries pour la troisième partie tablette */
 @media screen and (max-width: 767px) {
@@ -158,5 +170,9 @@ $background-color_1: black;
 	.card-list-spinner {
 		width: 200px;
 		height: 200px;
+	}
+	.card-list {
+		width: 53% !important;
+		justify-content: center;
 	}
 }
