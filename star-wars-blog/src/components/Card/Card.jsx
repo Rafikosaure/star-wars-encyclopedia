@@ -36,8 +36,8 @@ export default function Card({ item, categoryId }) {
     <>
       {location.pathname !== "/" ? (
         item && item.name && item.image && translatedName && (
-        <div className='card card-appears-animation'>
-          <Link className='card-link' to={`/article/${paramsIds}`}>
+        <Link className='card card-appears-animation' to={`/article/${paramsIds}`}>
+          <div className='card-content'>
             <div className='card-image'>
               <img src={item.image} loading='lazy' alt={`Carte de l'article "${item.name}"`} />
             </div>
@@ -46,12 +46,12 @@ export default function Card({ item, categoryId }) {
                 <p className="card-name">{translatedName}</p>
               )}
             </div>
-          </Link>
-        </div>
+          </div>
+        </Link>
         )
       ) : (
         <div className='card'>  
-          <Link className='card-link' 
+          <Link className='card-content' 
             to={`/category/${itemId}`}
             onClick={(e) => {dispatch(reinitializeDozen())}}
             onKeyDown={(e) => e.key === 'Enter' && dispatch(reinitializeDozen())}
