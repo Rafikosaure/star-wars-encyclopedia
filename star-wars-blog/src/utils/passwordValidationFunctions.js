@@ -8,21 +8,20 @@ export function validatePassword(password) {
 
 // Mot de passe fort : renseigner si chaque critère est respecté
 export function passwordConditionsValidator(password) {
-    
-    // Constitution des expressions régulières
-    const Reg1 = new RegExp(/^.{8,}$/) // Condition 5 : 8 caractères minimum
-    const Reg2 = new RegExp(/(?=.*[A-Z])/) // Condition 1 : au moins une majuscule
-    const Reg3 = new RegExp(/(?=.*[a-z])/) // Condition 2 : au moins une minuscule
-    const Reg4 = new RegExp(/(?=.*[0-9])/) // Condition 3 : au moins un chiffre
-    const Reg5 = new RegExp(/(?=.*[#?!@$%^&*-])/) // Condition 4 : au moins un caractère spécial
 
-    // Constitution de l'objet à retourner
+    // Conditions de validation du mot de passe :
+    // - minCharNumberCondition : 8 caractères minimum
+    // - majCondition : au moins une majuscule
+    // - minCondition : au moins une minuscule
+    // - numberCondition : au moins un chiffre
+    // - specialCharCondition : au moins un caractère spécial
+    
     return {
-        "minCharNumberCondition": conditionManager(Reg1, password),
-        "majCondition": conditionManager(Reg2, password),
-        "minCondition": conditionManager(Reg3, password),
-        "numberCondition": conditionManager(Reg4, password),
-        "specialCharCondition": conditionManager(Reg5, password)
+        "minCharNumberCondition": conditionManager(new RegExp(/^.{8,}$/), password),
+        "majCondition": conditionManager(new RegExp(/(?=.*[A-Z])/), password),
+        "minCondition": conditionManager(new RegExp(/(?=.*[a-z])/), password),
+        "numberCondition": conditionManager(new RegExp(/(?=.*[0-9])/), password),
+        "specialCharCondition": conditionManager(new RegExp(/(?=.*[#?!@$%^&*-])/), password)
     }
 }
 
