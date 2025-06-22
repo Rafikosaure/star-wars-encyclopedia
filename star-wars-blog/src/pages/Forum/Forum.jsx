@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import Spinner from '../../assets/images/spinner.svg'
 import { ServerServices } from '../../api/api-server'
-
+import ReturnToTop from '../../components/ReturnToTop/ReturnToTop'
 
 
 export default function Forum() {
@@ -34,6 +34,7 @@ export default function Forum() {
 
   return (
     <div className='app forum'>
+      <ReturnToTop />
       <div className='forum-overlay'/>
       <div className='forum-content'>
         <h1 className='forum-title'>{forumTitle1.toLowerCase()}</h1>

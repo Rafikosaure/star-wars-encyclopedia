@@ -15,6 +15,7 @@ import { memorizeLastCategoryId } from '../../redux/slices/lastCategory'
 import { StarWarsApiServices } from '../../api/api-sw'
 import { ServerServices } from '../../api/api-server'
 import WikiNavbar from '../../components/WikiNavbar/WikiNavbar'
+import ReturnToTop from '../../components/ReturnToTop/ReturnToTop'
 
 
 
@@ -104,6 +105,7 @@ export default function Category() {
     <>
       {rightPage ? (
         <div className='app-category'>
+          <ReturnToTop />
           <WikiNavbar />
           <div className='page-content'>
             <h1>{currentDatas.title}</h1>
@@ -142,7 +144,7 @@ export default function Category() {
                 <img className='arrows' src={NextArrow} alt="next arrow" />
               </div>
             </div>
-            
+
             {spinnerDisplay === 'none' && (
             <div className='dozen-indicator' style={{display: article.value ? 'none' : 'block'}}>
               {!isNaN(nbDozen.current) && !isNaN(storedDozen) ? (
