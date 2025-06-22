@@ -110,6 +110,9 @@ $font-family_2: 'Starjedi';
         align-items: center;
         font-weight: bold;
         font-size: 18px;
+        .market-arrow-page-counter-text {
+            animation: fadein 3s;
+        }
     }
 }
 /* Ici : media queries pour la première partie tablette */
