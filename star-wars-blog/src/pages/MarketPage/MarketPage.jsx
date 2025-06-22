@@ -195,7 +195,12 @@ function MarketPage() {
                     >- de 5000&nbsp;<img className='market-filter-currency' src={Currency} alt="datarie républicaine" /></button>
                 
                 </div>
-                <div className='market-arrow-page-counter'>{currentPage} / {totalPages}</div>
+                <div className='market-arrow-page-counter'>
+                    <span 
+                        className='market-arrow-page-counter-text'>
+                        {currentPage} / {totalPages}
+                    </span>
+                </div>
                 <div className='market-arrows-section'>
 
                     {currentPage > 1 && (
