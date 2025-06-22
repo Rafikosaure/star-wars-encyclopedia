@@ -7,7 +7,6 @@ const mongoose = require('mongoose')
 const path = require('path')
 const helmet = require('helmet')
 const rateLimit = require('express-rate-limit')
-// const crypto = require('crypto');
 const cors = require('cors')
 const cookieParser = require('cookie-parser')
 const ENV = require('./config/config.js')
@@ -22,13 +21,6 @@ mongoose
     .catch(() => console.log('Connexion à MongoDB échouée !'))
 
 
-// Middleware pour générer un nonce unique à chaque requête
-// app.use((req, res, next) => {
-//     res.locals.nonce = crypto.randomBytes(16).toString('base64');
-//     next();
-// });
-
-
 // Helmet HSTS -> si mode production, obliger l'accès au site via HTTPS
 if (ENV.NODE_ENV === 'production') {
     app.use(helmet.hsts({ maxAge: 31536000 })); // Durée : 1 an en secondes
@@ -41,25 +33,6 @@ app.use(
         crossOriginResourcePolicy: { policy: 'cross-origin' }
     })
 )
-// Configuration de Helmet : CSP + autorisations Stripe
-// app.use((req, res, next) => {
-//     helmet({
-//         crossOriginResourcePolicy: { policy: 'cross-origin' },
-//         contentSecurityPolicy: {
-//             directives: {
-//                 defaultSrc: ["'self'"],
-//                 scriptSrc: ["'self'", "https://js.stripe.com"],
-//                 styleSrc: ["'self'", `'nonce-${res.locals.nonce}'`],
-//                 connectSrc: ["'self'", "https://api.stripe.com"],
-//                 frameSrc: ["'self'", "https://js.stripe.com"],
-//                 imgSrc: ["'self'", "data:", "https://*.stripe.com"],
-//                 objectSrc: ["'none'"],
-//                 baseUri: ["'self'"],
-//                 formAction: ["'self'"],
-//             },
-//         },
-//     })(req, res, next);
-// });
 
 
 // Gestion des erreurs CORS
