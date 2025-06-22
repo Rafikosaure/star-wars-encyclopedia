@@ -104,8 +104,9 @@ export default function Category() {
   return (
     <>
       {rightPage ? (
+        <>
+        <ReturnToTop />
         <div className='app-category'>
-          <ReturnToTop />
           <WikiNavbar />
           <div className='page-content'>
             <h1>{currentDatas.title}</h1>
@@ -156,6 +157,7 @@ export default function Category() {
             )}
           </div>
         </div>
+        </>
       ) : null}
     </>
   )

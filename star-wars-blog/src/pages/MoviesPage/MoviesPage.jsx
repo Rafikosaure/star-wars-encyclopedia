@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import './MoviesPage.scss'
 import '../../theme/index.scss'
 import BackArrow from '../../assets/images/back-arrow.webp'
@@ -7,6 +7,7 @@ import { TmdbApiServices } from '../../api/api-tmdb'
 import config from '../../config'
 import DisneyPlusMoviesData from '../../data/moviesDisneyPlusURLs.json'
 import TrailerModal from '../../components/TrailerModal/TrailerModal'
+import ReturnToTop from '../../components/ReturnToTop/ReturnToTop'
 
 
 
@@ -165,6 +166,7 @@ function MoviesPage() {
 
     return (
         <div className='app movies-page-wrapper'>
+            <ReturnToTop />
             <div className='movies-media-navbar'>
 
                 <div 
