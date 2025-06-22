@@ -4,6 +4,7 @@ import './ShoppingPage.scss'
 import '../../theme/index.scss'
 import { Outlet } from 'react-router-dom'
 import Basket from '../../components/Basket/Basket.jsx'
+import ReturnToTop from '../../components/ReturnToTop/ReturnToTop.jsx'
 
 
 
@@ -23,6 +24,7 @@ function ShoppingPage() {
 
     return (
         <div className='app shopping-page-wrapper'>
+            <ReturnToTop />
             <div className='shopping-page-background' />
             <div className='shopping-page-maintenance'>Service de shopping expérimental : achats simulés</div>
             <h2 className='shopping-page-title'>Boutique de Wattoo</h2>
