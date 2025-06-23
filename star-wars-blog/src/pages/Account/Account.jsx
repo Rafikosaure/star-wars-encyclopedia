@@ -35,7 +35,13 @@ export default function Account() {
   const [inputPictureValue, setInputPictureValue] = useState()
   const [allowDeletion, setAllowDeletion] = useState(false)
   const [unvalidPassword, setUnvalidPassword] = useState('none')
-  const { register, handleSubmit, setValue, reset, watch } = useForm()
+  const { 
+    register, 
+    handleSubmit, 
+    setValue, 
+    reset, 
+    watch 
+  } = useForm()
   const initialPasswordValue = watch('password')
   const reloadUsers = useSelector(selectReloadUsersState)
   const userData = useSelector(selectLoggedUser)
@@ -111,15 +117,14 @@ export default function Account() {
 
   // Modification des informations des utilisateurs
   const modifyData = async (data) => {
-    if (data.name.length <= 0 && data.email.length <= 0 && data.password.length <= 0 && data.picture.length <= 0) {
-      return
-    }
     try {
       const result = await updateUserData("noId", data);
       if (result === 'Mot de passe trop faible !') {
         toast(result)
         setUnvalidPassword('block')
         setValue('password', undefined)
+      } else if (result === 'Aucune donnée renseignée !') {
+        toast(result)
       } else {
         dispatch(updateUserLog(result))
         reset()

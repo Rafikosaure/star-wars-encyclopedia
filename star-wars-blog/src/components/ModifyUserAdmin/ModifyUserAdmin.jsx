@@ -51,6 +51,8 @@ export default function ModifyUserAdmin({ user, unvalidPassword, setUnvalidPassw
                 toast(result);
                 setUnvalidPassword('block');
                 setValue('password', undefined);
+            } else if (result === 'Aucune donnée renseignée !') {
+                toast(result)
             } else {
                 reset();
                 setUnvalidPassword('none');
