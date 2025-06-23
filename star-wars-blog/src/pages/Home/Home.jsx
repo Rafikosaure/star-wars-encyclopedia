@@ -2,7 +2,6 @@ import '../../theme/index.scss'
 import './Home.scss'
 import data from '../../data/localApiCategories.json'
 import Card from '../../components/Card/Card'
-import ReturnToTop from '../../components/ReturnToTop/ReturnToTop'
 
 
 
@@ -12,7 +11,6 @@ export default function Home() {
 
   return (
     <div className='app home-page'>
-      <ReturnToTop />
       <div className='div-welcome'>
         <p className='welcome-message'>
           {homeText}

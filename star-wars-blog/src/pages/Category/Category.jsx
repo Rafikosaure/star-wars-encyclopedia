@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, useCallback } from 'react'
 import './Category.scss'
+import '../../theme/index.scss'
 import Card from '../../components/Card/Card'
 import SearchBar from '../../components/SearchBar/SearchBar'
 import data from '../../data/localApiCategories.json'
@@ -15,7 +16,6 @@ import { memorizeLastCategoryId } from '../../redux/slices/lastCategory'
 import { StarWarsApiServices } from '../../api/api-sw'
 import { ServerServices } from '../../api/api-server'
 import WikiNavbar from '../../components/WikiNavbar/WikiNavbar'
-import ReturnToTop from '../../components/ReturnToTop/ReturnToTop'
 
 
 
@@ -104,9 +104,7 @@ export default function Category() {
   return (
     <>
       {rightPage ? (
-        <>
-        <ReturnToTop />
-        <div className='app-category'>
+        <div className='app app-category'>
           <WikiNavbar />
           <div className='page-content'>
             <h1>{currentDatas.title}</h1>
@@ -157,7 +155,6 @@ export default function Category() {
             )}
           </div>
         </div>
-        </>
       ) : null}
     </>
   )

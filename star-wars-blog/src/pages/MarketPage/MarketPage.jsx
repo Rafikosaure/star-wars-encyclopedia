@@ -135,7 +135,7 @@ function MarketPage() {
 
 
     return (
-        <div className='shopping-page-section'>
+        <div className='app shopping-page-section'>
             {storedProducts && filteredProducts && (
                 <>
                 <div className='shopping-page-filters'>

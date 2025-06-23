@@ -12,6 +12,9 @@ $font-family_2: 'Starjedi';
     text-align: justify;
     font-family: $font-family_1;
     width: 95%;
+    margin-left: calc(5% / 2);
+    margin-right: calc(5% / 2);
+    background-color: transparent;
     height: fit-content;
     min-height: 800px;
     margin-bottom: 20px;
@@ -135,6 +138,8 @@ $font-family_2: 'Starjedi';
 @media screen and (max-width: 991px) {
     .shopping-page-section {
         width: calc(100% - 2px);
+        margin-left: 0;
+        margin-right: 0;
         .shopping-page-filters {
             z-index: 2;
             max-width: 300px;

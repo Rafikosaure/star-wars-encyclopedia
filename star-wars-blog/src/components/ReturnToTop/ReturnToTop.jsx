@@ -6,9 +6,12 @@ import ArrowToTop from '../../assets/images/arrow_to_top.svg';
 
 
 function ReturnToTop() {
+
     const [isVisible, setIsVisible] = useState(false);
     const [fadeEffect, setFadeEffect] = useState('fade-in');
 
+
+    // Afficher ou non le bouton selon la hauteur de la page
     useEffect(() => {
         const toggleVisibility = () => {
             if (window.scrollY > 0) {
@@ -30,12 +33,15 @@ function ReturnToTop() {
         };
     }, []);
 
+
+    // Retourner en haut de page
     const scrollToTop = () => {
         window.scrollTo({
             top: 0,
             behavior: 'smooth',
         });
     };
+
 
     return (
         isVisible && (
