@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import './Legal.scss'
+import '../../theme/index.scss'
 import { selectBasket } from '../../redux/slices/shoppingBasket'
 import { useSelector } from 'react-redux'
 
@@ -13,7 +14,7 @@ export default function Legal() {
     const basketContent = useSelector(selectBasket)
 
     return (
-        <div className='legal-page'>
+        <div className='app legal-page'>
             <h1>Politique de confidentialité</h1>
             <h2>Définitions</h2>
             <p><b>Client :</b> tout professionnel ou personne physique capable au sens des articles 1123 et suivants du Code civil, ou personne morale, qui visite le Site objet des présentes conditions générales.<br/>

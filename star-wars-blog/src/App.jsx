@@ -19,6 +19,7 @@ import MarketPage from './pages/MarketPage/MarketPage';
 import ProductPage from './pages/ProductPage/ProductPage';
 import BasketPage from './pages/BasketPage/BasketPage';
 import Success from './pages/Success/Success';
+import ReturnToTop from './components/ReturnToTop/ReturnToTop'
 
 
 
@@ -48,6 +49,7 @@ export default function App() {
               <Route path='/success' element={<Success />} />
               <Route path='*' element={<Error404 />} />
             </Routes>
+            <ReturnToTop />
           <Footer />
       </Router>
     </>

@@ -7,7 +7,7 @@ import { TmdbApiServices } from '../../api/api-tmdb'
 import config from '../../config'
 import DisneyPlusMoviesData from '../../data/moviesDisneyPlusURLs.json'
 import TrailerModal from '../../components/TrailerModal/TrailerModal'
-import ReturnToTop from '../../components/ReturnToTop/ReturnToTop'
+
 
 
 
@@ -166,7 +166,6 @@ function MoviesPage() {
 
     return (
         <div className='app movies-page-wrapper'>
-            <ReturnToTop />
             <div className='movies-media-navbar'>
 
                 <div 
