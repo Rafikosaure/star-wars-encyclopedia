@@ -329,6 +329,10 @@ export const ServerServices = {
 
     // Modifier les données d'un utilisateur
     async updateUserData(userId, data) {
+        if (data.name === "" && data.password === "" && data.email === "" && data.picture.length === 0) {
+            return 'Aucune donnée renseignée !'
+        }
+
         if (data.password.length > 0) {
             const isValid = validatePassword(data.password);
             if (!isValid) {
