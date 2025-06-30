@@ -33,6 +33,7 @@ exports.modifyUser = async (req, res) => {
         picture: profilePicture,
         email: req.body.email,
         password: req.body.password,
+        isMod: req.body.isMod,
         isAdmin: false
     }
 
@@ -63,6 +64,9 @@ exports.modifyUser = async (req, res) => {
     }
     if (userObject.password === "") {
         userObject.password = initialUser.password
+    }
+    if (userObject.isMod === undefined) {
+        userObject.isMod = initialUser.isMod
     } else {
         const newPassword = await bcrypt.hash(userObject.password, parseInt(ENV.NB_HASH))
         userObject.password = newPassword

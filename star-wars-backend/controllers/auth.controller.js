@@ -31,6 +31,7 @@ exports.register = (req, res) => {
                 picture: profilePicture,
                 email: userObject.email,
                 password: hash,
+                isMod: false,
                 isAdmin: userObject.isAdmin
             })
             user.save()

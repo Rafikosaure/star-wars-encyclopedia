@@ -58,14 +58,14 @@ export default function Category() {
   useEffect(() => {
 
     // Gestion des mauvaises URLs
-    if (!categoryId || !currentDatas) {
+    if (!categoryId || !currentDatas) { 
       navigate("*")
     } else {
       updateRightPage(true)
       dispatch(memorizeLastCategoryId(categoryId))
 
       // Appel à l'API StarWars Databank
-      setSpinnerDisplay('block')
+      setSpinnerDisplay('block') 
       fetchStarWarsCategoryData(currentDatas.keyword, storedDozen)
       .then(data => {
         if (data) {
@@ -106,13 +106,32 @@ export default function Category() {
       {rightPage ? (
         <div className='app app-category'>
           <WikiNavbar />
+          
           <div className='page-content'>
             <h1>{currentDatas.title}</h1>
+            
             <SearchBar category={currentDatas.keyword} />
+            
             <div className='card-list'>
-              <img className='card-list-spinner spinner-1' style={{display: `${spinnerDisplay}`}} src={Spinner} alt="Premier spinner de chargement" />
-              <img className='card-list-spinner spinner-2' style={{display: `${spinnerDisplay}`}} src={Spinner} alt="Second spinner de chargement" />
-              <img className='card-list-spinner spinner-3' style={{display: `${spinnerDisplay}`}} src={Spinner} alt="Troisième spinner de chargement" />
+              <img 
+                className='card-list-spinner spinner-1' 
+                style={{display: `${spinnerDisplay}`}} 
+                src={Spinner} 
+                alt="Premier spinner de chargement" 
+              />
+              <img 
+                className='card-list-spinner spinner-2' 
+                style={{display: `${spinnerDisplay}`}} 
+                src={Spinner} 
+                alt="Second spinner de chargement" 
+              />
+              <img 
+                className='card-list-spinner spinner-3' 
+                style={{display: `${spinnerDisplay}`}} 
+                src={Spinner} 
+                alt="Troisième spinner de chargement" 
+              />
+
               {article.value === undefined ? 
                 (
                   translatedItems.map((item) =>
@@ -123,7 +142,9 @@ export default function Category() {
                 )
               }
             </div>
+            
             <div className='arrow-section'>
+              
               <div className='prev-arrow-section'
                 tabIndex='0'
                 style={{display: storedDozen <= 1 || article.value ? 'none' : 'flex'}} 
@@ -133,6 +154,7 @@ export default function Category() {
               >
                 <img className='arrows' src={BackArrow} alt="back arrow" />
               </div>
+              
               <div className='next-arrow-section'
                 tabIndex='0'
                 style={{display: storedDozen >= nbDozen.current || article.value ? 'none' : 'flex'}} 
@@ -141,15 +163,18 @@ export default function Category() {
                 title='Aller à la page suivante'
               >
                 <img className='arrows' src={NextArrow} alt="next arrow" />
+              
               </div>
             </div>
 
             {spinnerDisplay === 'none' && (
             <div className='dozen-indicator' style={{display: article.value ? 'none' : 'block'}}>
               {!isNaN(nbDozen.current) && !isNaN(storedDozen) ? (
+                
                 <span className='dozen-indicator-text'>
                   {`${storedDozen} / ${nbDozen.current}`}
                 </span>
+              
               ) : null }
             </div>
             )}
