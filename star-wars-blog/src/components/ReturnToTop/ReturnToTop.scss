@@ -16,13 +16,11 @@ $font-family_1: Arial, Helvetica, sans-serif;
     justify-content: center;
     align-items: center;
     background-color: $color_2;
-    outline: 3px solid $color_1;
     border-radius: 50%;
     cursor: pointer;
-    &:focus, &:hover {
-        outline: 3px solid $color_3;
-    }
     .return-to-top-button {
+        border-radius: 50%;
+        outline: 3px solid $color_1;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -30,9 +28,11 @@ $font-family_1: Arial, Helvetica, sans-serif;
         height: 100%;
         background-color: transparent;
         border: none;
-        outline: none;
         color: $color_1;
         font-size: 24px;
+        &:focus, &:hover {
+            outline: 3px solid $color_3;
+        }
         .arrow-to-top {
             width: 25px;
             height: auto;
@@ -45,5 +45,9 @@ $font-family_1: Arial, Helvetica, sans-serif;
     .return-to-top-content {
         scale: 0.8;
         right: 3%;
+        .return-to-top-button {
+            width: 100% !important;
+            height: 100% !important;
+        }
     }
 }
