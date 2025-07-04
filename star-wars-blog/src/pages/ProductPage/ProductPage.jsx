@@ -113,7 +113,7 @@ function ProductPage() {
             </div>
             {currentProduct && (
                 <div className="product-page-main">
-                    <div className="product-page-picture-section">
+                    <div className="product-page-picture-section fade-in-long">
                         {currentProduct.maxQuantity && currentProduct.maxQuantity <= currentProductCount && (
                             <div className="product-page-picture-overlay">
                                 <p className='product-page-picture-overlay-text'>stock épuisé</p>
@@ -125,7 +125,7 @@ function ProductPage() {
                             <img src={Avatar} alt={currentProduct.title} />
                         )}
                     </div>
-                    <section className="product-page-data-section">
+                    <section className="product-page-data-section fade-in-long">
                         <h2 className='product-page-data-title'>{currentProduct.title}</h2>
                         <p className="product-page-data">{currentProduct.description}</p>
                         <br />

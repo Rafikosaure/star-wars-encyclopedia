@@ -59,6 +59,9 @@ code {
 		transform: scaleX(1) scaleY(1);
 	}
 }
+.fade-in-long {
+	animation: fadein 0.7s;
+}
 .fade-in {
     animation: fadein 0.3s;
 }
