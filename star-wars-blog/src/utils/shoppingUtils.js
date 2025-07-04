@@ -3,7 +3,7 @@
 
 // Formate les données issues de l'API
 export async function formateApiData(shoppingData) {
-    const activeData = await shoppingData.filter(item => item.isActive)
+    const activeData = await shoppingData.data.filter(item => item.isActive)
     const sortedData = await activeData.sort((a, b) => a.title.localeCompare(b.title));
     return await sortedData
 }

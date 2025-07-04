@@ -89,7 +89,18 @@ export default function Header() {
               <img src={Logo} alt="logo" title="Page d'accueil" />
         </NavLink>
         <div className='title-and-links'>
-          <h1>Star Wars Encyclopedia</h1>
+          <h1>
+            <NavLink
+              to="/"
+              // onClick={() => dispatch(reinitializeDozen())}
+              className={({ isActive }) =>
+                isActive
+                  ? 'main-title-navlink-inactive'
+                  : 'main-title-navlink-active'
+                  }
+              >Star Wars Encyclopedia
+            </NavLink>
+          </h1>
           <nav>
             <NavLink className={({ isActive }) =>
                         isActive

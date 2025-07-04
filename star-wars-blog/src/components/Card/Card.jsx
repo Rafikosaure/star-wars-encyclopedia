@@ -1,8 +1,8 @@
+import '../../theme/index.scss'
 import './Card.scss'
 import { Link, useLocation } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { reinitializeDozen } from '../../redux/slices/dozenSlice'
-import '../../theme/index.scss'
 
 
 
@@ -12,12 +12,13 @@ export default function Card({ item, categoryId }) {
   const location = useLocation()
   const itemId = item._id
   const paramsIds = `${categoryId}.${itemId}`
-    
+  
 
   return (
     <>
       {location.pathname !== "/" ? (
-        item && item.name && item.image && (
+
+        // Carte différente que dans la page "Home"
         <Link className='card card-appears-animation' to={`/article/${paramsIds}`}>
           <div className='card-content'>
             <div className='card-image'>
@@ -30,8 +31,10 @@ export default function Card({ item, categoryId }) {
             </div>
           </div>
         </Link>
-        )
+        
       ) : (
+
+        // Carte en page "Home"
         <div className='card'>  
           <Link className='card-content' 
             to={`/category/${itemId}`}
@@ -42,7 +45,7 @@ export default function Card({ item, categoryId }) {
               <img src={item.image} alt={`Carte de la catégorie des ${item.title}`} />
             </div>
             <div className='card-name-div'>
-              <p className="card-name">{item.title.toLowerCase()}</p>
+              <p className="card-name">{item.title}</p>
             </div>
           </Link>
         </div>  

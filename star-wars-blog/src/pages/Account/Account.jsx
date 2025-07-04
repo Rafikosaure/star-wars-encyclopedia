@@ -188,6 +188,12 @@ export default function Account() {
               
               <div className='account-user-detail'><p className='account-user-key'>Nom :</p><p className='account-user-value'>{userData.name}</p></div>
               <div className='account-user-detail'><p className='account-user-key'>Email :</p><p className='account-user-value'>{userData.email}</p></div>
+              {userData.isMod && !userData.isAdmin && (
+                <div className='account-user-detail'><p className='account-user-key'>Statut :</p><p className='account-user-value'>Modérateur</p></div>
+              )}
+              {userData.isAdmin && userData.isAdmin && (
+                <div className='account-user-detail'><p className='account-user-key'>Statut :</p><p className='account-user-value'>Administrateur</p></div>
+              )}
               <div className='account-section-separator'/>
               <div className='notifs-section'>
                 <h2 className='account-profile-title'>Notifications</h2>

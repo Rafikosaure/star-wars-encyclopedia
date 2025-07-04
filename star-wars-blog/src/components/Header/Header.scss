@@ -45,10 +45,10 @@ $background-color_1: black;
 		height: auto;
 	}
 }
-.link-logo-enabled {
+.link-logo-enabled, .main-title-navlink-active {
 	cursor: pointer;
 }
-.link-logo-disabled {
+.link-logo-disabled, .main-title-navlink-inactive {
 	cursor: default;
 }
 .title-and-links {
@@ -68,6 +68,10 @@ $background-color_1: black;
 		margin-top: 0;
 		margin-right: 0;
 		cursor: default;
+		a {
+			text-decoration: none;
+			color: $color_1;
+		}
 	}
 	nav {
 		width: 99%;
