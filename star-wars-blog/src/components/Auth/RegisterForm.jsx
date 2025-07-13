@@ -3,7 +3,8 @@ import '../../theme/Auth.scss'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import isValid from '../../assets/images/is_valid.webp'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { selectIsLoggedState } from '../../redux/slices/isLoggedUserSlice.js'
 import { updateRegisterState } from '../../redux/slices/registerSlice'
 import { ServerServices } from '../../api/api-server'
 import PasswordValidatorBar from '../PasswordValidatorBar/PasswordValidatorBar.jsx'
@@ -18,6 +19,7 @@ export default function RegisterForm() {
     const { register, handleSubmit, setValue, reset, watch } = useForm()
     const initialPasswordValue = watch('password')
     const dispatch = useDispatch()
+    const isLogged = useSelector(selectIsLoggedState)
     const { registerUser } = ServerServices
     const title = 'Inscription'
 
@@ -76,7 +78,9 @@ export default function RegisterForm() {
             </div>
             <button type='submit'>S'inscrire</button>
         </form>
-        <p className='link-switch' onClick={(e) => {dispatch(updateRegisterState(false))}}>Déjà inscrit ? Connectez-vous ici !</p>
+        {!isLogged && (
+            <p className='link-switch' onClick={(e) => {dispatch(updateRegisterState(false))}}>Déjà inscrit ? Connectez-vous ici !</p>
+        )}
     </div>
   )
 }
