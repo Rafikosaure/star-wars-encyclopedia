@@ -14,6 +14,7 @@ import { setCurrentTopicDozen } from '../../redux/slices/topicDozenSlice.js'
 import { useEffect, useState } from 'react'
 import { toast } from 'sonner'
 import BurgerMenu from '../BurgerMenu/BurgerMenu.jsx'
+import { ReactComponent as ArrowToRight } from '../../assets/images/right-arrow-next.svg'
 import { updateUserLog } from '../../redux/slices/loggedUserSlice.js'
 import { ServerServices } from '../../api/api-server.js'
 import { selectLastCategoryId } from '../../redux/slices/lastCategory.js'
@@ -137,7 +138,7 @@ export default function Header() {
               tabIndex="0" 
               onClick={() => navigate('/auth')} 
               onKeyDown={(e) => e.key === 'Enter' && navigate('/auth')}
-              className='connection-link'>Se connecter</p>
+              className='connection-link'><ArrowToRight className="arrow-to-right-svg" /> Se connecter /<br />créer un compte</p>
             ) : (
               <>
               {loggedUser && (
@@ -154,12 +155,21 @@ export default function Header() {
                     )}
                   </div>
               )}
-              <p 
-              tabIndex="0" 
-              onClick={(e) => logout(e)}
-              onKeyDown={(e) => e.key === 'Enter' && logout(e)} 
-              className='connection-link-logout'
-              >Déconnexion</p>
+              <div className='auth-links-div'>
+                <p 
+                tabIndex="0" 
+                onClick={(e) => logout(e)}
+                onKeyDown={(e) => e.key === 'Enter' && logout(e)} 
+                className='connection-link-logout'
+                ><ArrowToRight className="arrow-to-right-svg" /> Déconnexion</p>
+                <p 
+                tabIndex="0" 
+                onClick={() => navigate('/auth')}
+                onKeyDown={(e) => e.key === 'Enter' && navigate('/auth')} 
+                className='connection-link-logout'
+                ><ArrowToRight className="arrow-to-right-svg" /> Créer un compte</p>
+              </div>
+              
               </>
             )}
           </div>
