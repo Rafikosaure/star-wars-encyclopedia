@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { updateIsLoggedUser } from '../../redux/slices/isLoggedUserSlice.js'
 import { updateLoadedUser } from '../../redux/slices/loadedUserSlice.js'
+import { updateRegisterState } from '../../redux/slices/registerSlice.js'
 // import { reinitializeDozen } from '../../redux/slices/dozenSlice.js'
 import DefaultAvatar from '../../assets/images/EmojiBlitzBobaFett1.webp'
 import { useNavigate } from 'react-router-dom'
@@ -134,11 +135,18 @@ export default function Header() {
           </nav>
           <div className='header-div-connection'>
             {!isLogged ? (
-              <p 
-              tabIndex="0" 
-              onClick={() => navigate('/auth')} 
-              onKeyDown={(e) => e.key === 'Enter' && navigate('/auth')}
-              className='connection-link'><ArrowToRight className="arrow-to-right-svg" /> Se connecter /<br />créer un compte</p>
+              <div className='header-div-connection-not-logged'>
+                <p 
+                tabIndex="0" 
+                onClick={() => dispatch(updateRegisterState(false)) && navigate('/auth')} 
+                onKeyDown={(e) => e.key === 'Enter' && navigate('/auth')}
+                className='connection-link'><ArrowToRight className="arrow-to-right-svg" /> Se connecter</p>
+                <p
+                tabIndex="0"
+                onClick={() => dispatch(updateRegisterState(true)) && navigate('/auth')}
+                onKeyDown={(e) => e.key === 'Enter' && navigate('/auth')}
+                className='connection-link'><ArrowToRight className="arrow-to-right-svg" /> Créer un compte</p>
+              </div>
             ) : (
               <>
               {loggedUser && (
