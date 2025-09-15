@@ -1,0 +1,184 @@
+$color_1: white;
+$color_3: lightcyan;
+$background-color_1: black;
+
+@keyframes fadein {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+.app-category {
+	width: calc(80% - 2px);
+	min-height: 100vh;
+	// margin-left: auto;
+	// margin-right: auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: baseline;
+	align-items: center;
+	position: relative;
+	border: 1px solid $color_3;
+}
+.arrow-section {
+	z-index: 1;
+	display: flex;
+	width: 100%;
+	position: sticky;
+	bottom: 40%;
+	justify-content: space-around;
+}
+.prev-arrow-section, .next-arrow-section {
+	display: flex;
+	position: sticky;
+	cursor: pointer;
+	width: 80px;
+	height: 80px;
+	border-radius: 50%;
+	overflow: hidden;
+	&:active {
+		outline: 4px solid white;
+	}
+}
+.prev-arrow-section {
+	right: 82%;
+}
+.next-arrow-section {
+	left: 82%;
+}
+.arrows {
+	width: 100%;
+	height: 100%;
+}
+.page-content {
+	position: relative;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background: url(../../assets/images/background03.webp) no-repeat center center;
+	-webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+	h1 {
+		z-index: 2;
+		margin-top: 50px;
+		color: $color_1;
+		cursor: default;
+	}
+}
+.dozen-indicator {
+	position: sticky;
+	// bottom: 50px;
+	// margin-bottom: 50px;
+	// top: 88%;
+	bottom: 8%;
+	margin-bottom: 50px;
+	z-index: 2;
+	background-color: $background-color_1;
+	color: $color_1;
+	font-size: 20px;
+	font-weight: bold;
+	border-radius: 14px;
+	width: 11%;
+	min-width: 140px;
+	height: 40px;
+	outline: 2px solid white;
+	text-align: center;
+	line-height: 36px;
+	cursor: default;
+	.dozen-indicator-text {
+		text-align: center;
+		animation: fadein 3s;
+	}
+}
+.card-list {
+	width: calc(80% - 160px);
+	padding: 5%;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	justify-content: space-evenly;
+	align-items: flex-start;
+	z-index: 2;
+}
+.card-list-spinner {
+	position: absolute;
+	z-index: 3;
+	width: 300px;
+	height: 300px;
+}
+.spinner-1 {
+	top: 300px;
+}
+.spinner-2 {
+	top: 700px;
+}
+.spinner-3 {
+	top: 1100px;
+}
+/* Ici : media queries pour la seconde partie desktop */
+@media screen and (max-width: 1380px) {
+	.prev-arrow-section, .next-arrow-section {
+		width: 60px;
+		height: 60px;
+	}
+	.card-list {
+		width: calc(80% - 120px) !important;
+	}
+}
+/* Ici : media queries pour la première partie tablette */
+@media screen and (max-width: 1023px) {
+	.card-list {
+		width: calc(80% - 200px) !important;
+	}
+}
+/* Ici : media queries pour la seconde partie tablette */
+@media screen and (max-width: 991px) {
+	.app-category {
+		width: calc(100% - 2px);
+	}
+	.arrow-section {
+		bottom: 50%;
+		display: block;
+	}
+	.prev-arrow-section, .next-arrow-section {
+		width: 50px;
+		height: 50px;
+		position: absolute;
+	}
+	.prev-arrow-section {
+		margin-right: 10px;
+	}
+	.next-arrow-section {
+		margin-left: 10px;
+	}
+	.card-list {
+		width: 55% !important;
+	}
+}
+/* Ici : media queries pour la troisième partie tablette */
+@media screen and (max-width: 767px) {
+	.page-content h1 {
+		font-size: 22px;
+	}
+	.dozen-indicator {
+		font-size: 16px;
+		width: 8%;
+		min-width: 100px;
+		height: 30px;
+		line-height: 27px;
+	}
+	.card-list-spinner {
+		width: 200px;
+		height: 200px;
+	}
+	.card-list {
+		width: 53% !important;
+		justify-content: center;
+	}
+}

@@ -1,0 +1,85 @@
+$color_1: white;
+$color_2: rgb(53, 155, 155);
+$background-color_1: rgba(255, 255, 255, .8);
+
+.post-form-wrapper {
+    position: relative; 
+    width: 100%; 
+    margin: 0, auto;
+    display: flex;
+    justify-content: center;
+    .post-form-textarea {
+        width: 90%;
+        height: 150px;
+        border-radius: 10px;
+        background-color: $background-color_1;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        padding-left: 15px;
+        padding-right: 15px;
+        font-size: 16px;
+        box-sizing: border-box;
+        &:focus {
+            outline: 4px solid $color_2;
+            border: none;
+        }
+    }
+    .post-form-textarea::placeholder {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 14px;
+    }
+    .post-form-textarea__input:focus {
+        outline: 4px solid $color_2;
+    }
+    .post-form-textarea:focus-visible {
+        outline: 4px solid $color_2;
+    }
+}
+.post-form-suggestions-list {
+    font-family: Arial, Helvetica, sans-serif;
+    position: absolute;
+    border: 1px solid #ccc;
+    background-color: $color_1;
+    z-index: 1000;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    max-height: 150px;
+    overflow-y: auto;
+    .post-form-suggestion-item {
+        cursor: pointer;
+        padding: 5px 10px;
+        border-bottom: 1px solid #eee;
+    }
+}
+/* Ici : media queries pour la seconde partie tablette */
+@media screen and (max-width: 991px) {
+    .post-form-textarea {
+		width: 90% !important;
+		height: 120px !important;
+		padding-left: 10px !important;
+		padding-right: 10px !important;
+		font-size: 12px !important;
+		&:focus {
+			outline: 3px solid $color_2 !important;
+		}
+	}
+    .post-form-textarea::placeholder {
+        font-size: 12px !important;
+    }
+    .post-form-textarea__input:focus {
+        outline: 3px solid $color_2;
+    }
+    .post-form-textarea:focus-visible {
+        outline: 3px solid $color_2;
+    }
+    .post-form-suggestions-list {
+        font-size: 12px;
+        .post-form-suggestion-item {
+            cursor: pointer;
+            padding: 3px 6px;
+            border-bottom: 1px solid #eee;
+        }
+    }
+}

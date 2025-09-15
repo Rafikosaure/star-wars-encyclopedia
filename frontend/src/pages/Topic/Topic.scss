@@ -1,0 +1,325 @@
+$color_1: white;
+$color_2: rgb(53, 155, 155);
+$font-family_1: 'Starjedi';
+$background-color_1: transparent;
+$background-color_2: black;
+$background-color_3: rgba(255, 255, 255, .8);
+
+.topic {
+	background: url(../../assets/images/star-wars-dialog.webp) no-repeat center center fixed;
+	background-size: cover;
+	position: relative;
+	height: fit-content;
+	display: flex;
+	flex-direction: column;
+	width: calc(80% - 2px);
+	border: 1px solid $color_1;
+}
+.topic-div-return {
+	position: absolute;
+	z-index: 2;
+	display: flex;
+	width: 100%;
+	justify-content: flex-start;
+}
+.topic-arrow-link {
+	position: absolute;
+	margin-left: 15px;
+	margin-top: 20px;
+	width: 80px;
+	height: 80px;
+	border-radius: 50%;
+	background-color: $background-color_1;
+	transition-property: all;
+	transition-duration: .2s;
+	&:hover { 
+		background-color: black;
+		filter: invert(1);
+	}
+	img {
+		width: 80px;
+		height: 80px;
+	}
+}
+.topic-overlay {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-color: $background-color_2;
+	opacity: 0.6;
+}
+.topic-content {
+	z-index: 1;
+	width: 100%;
+	height: fit-content;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	.topic-page-buttons {
+		position: relative;
+		display: flex;
+		align-items: center;
+		max-width: 600px;
+		min-width: 300px;
+		width: 40%;
+		height: 80px;
+		margin-bottom: 50px;
+		margin-top: 20px;
+		.topic-page-counter {
+			position: absolute;
+			left: calc(50% - 72px);
+			width: 140px;
+			height: 40px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			color: $color_1;
+			font-family: Arial, Helvetica, sans-serif;
+			font-size: 20px;
+			font-weight: bold;
+			padding: 4px;
+			border: 2px solid $color_1;
+			border-radius: 10px;
+			cursor: default;
+		}
+		.topic-prev-button {
+			left: 0;
+		}
+		.topic-next-button {
+			right: 0;
+		}
+		.topic-prev-button, .topic-next-button {
+			position: absolute;
+			width: 70px;
+			height: 70px;
+			outline: 1px solid $color_1;
+			border-radius: 50%;
+			cursor: pointer;
+			overflow: hidden;
+			&:active, &:focus {
+				outline: 4px solid white;
+			}
+			.topic-button-next-page, .topic-button-prev-page {
+				width: 100%;
+				height: 100%;
+			}
+		}
+	}
+}
+.topic-title {
+	color: $color_1;
+	height: fit-content;
+	font-family: $font-family_1;
+	margin-top: 50px;
+	cursor: default;
+	width: 60%;
+	text-align: center;
+	text-transform: lowercase;
+}
+.topic-list {
+	margin-top: 50px;
+	gap: 30px;
+	margin-bottom: 50px;
+	height: fit-content;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.creation-post-form {
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+	max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+	margin-top: 30px;
+	margin-bottom: 60px;
+    gap: 15px;
+    background-color: rgba(240,255,255,0.2);
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    border-radius: 10px;
+	.creation-post-form-title {
+		color: $color_1;
+		margin-top: 0;
+		font-size: 22px;
+	}
+}
+.citation-div {
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	outline: 1px solid $color_1;
+	color: $color_1;
+	width: 90%;
+	height: fit-content;
+    border-radius: 10px;
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.citation-content {
+	text-align: justify;
+	width: 90%;
+	max-width: 620px;
+	margin-left: auto;
+	margin-right: auto;
+}
+.citation-cancel {
+	position: absolute;
+	right: 20px;
+	margin-top: 5px;
+	cursor: pointer;
+}
+.creation-post-textarea-description {
+	width: 90%;
+	height: 150px;
+    border-radius: 10px;
+	background-color: $background-color_3;
+	padding-top: 5px;
+	padding-bottom: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    font-size: 16px;
+    box-sizing: border-box;
+	&:focus {
+		outline: 4px solid $color_2;
+		border: none;
+	}
+}
+.creation-post-textarea-description::placeholder {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+}
+.creation-post-textarea-description__input:focus {
+    outline: 4px solid $color_2;
+}
+.creation-post-textarea-description:focus-visible {
+	outline: 4px solid $color_2;
+}
+.creation-post-form-submit {
+	background-color: $background-color_3;
+	margin-top: 0;
+	width: 40%;
+}
+.creation-post-form-submit:hover {
+	outline: none;
+	border: 4px solid $color_2;
+}
+.creation-post-form-submit:active {
+	border: 4px solid lightskyblue;
+	outline: none;
+	background-color: lightskyblue;
+}
+/* Ici : media queries pour la seconde partie tablette */
+@media screen and (max-width: 991px) {
+	.topic {
+		width: calc(100% - 2px);
+	}
+	.topic-title {
+		margin-top: 60px;
+		width: 80%;
+		font-size: 22px;
+	}
+	.topic-arrow-link {
+		width: 60px;
+		height: 60px;
+		img {
+			width: 60px;
+			height: 60px;
+		}
+	}
+	.topic-page-counter {
+		left: calc(50% - 62px) !important;
+		width: 120px !important;
+		height: 35px !important;
+		font-size: 16px !important;
+		padding: 3px !important;
+	}
+	.topic-prev-button, .topic-next-button {
+		width: 55px !important;
+		height: 55px !important;
+	}
+	.creation-post-form {
+		width: 92%;
+		margin-top: 15px;
+		margin-bottom: 40px;
+		gap: 10px;
+		padding-left: 3px;
+		padding-right: 3px;
+		padding-top: 5px;
+		padding-bottom: 10px;
+		border-radius: 10px;
+		.creation-post-form-title {
+			font-size: 16px;
+			margin-top: 10px;
+		}
+	}
+	.citation-content {
+		width: 90%;
+		max-width: 620px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	.citation-cancel {
+		right: 12px;
+		margin-top: 5px;
+		font-size: 12px;
+	}
+	.creation-post-textarea-description {
+		width: 90%;
+		height: 120px;
+		padding-left: 10px;
+		padding-right: 10px;
+		font-size: 12px;
+		&:focus {
+			outline: 3px solid $color_2;
+		}
+	}
+	.creation-post-textarea-description::placeholder {
+		font-size: 12px;
+	}
+	.creation-post-textarea-description__input:focus {
+		outline: 3px solid $color_2;
+	}
+	.creation-post-textarea-description:focus-visible {
+		outline: 3px solid $color_2;
+	}
+	.creation-post-form-submit:hover {
+		border: 3px solid $color_2;
+	}
+	.creation-post-form-submit:active {
+		border: 3px solid lightskyblue;
+	}
+	.citation-div {
+		font-size: 12px;
+	}
+	.citation-content {
+		width: 84%;
+	}
+}
+/* Ici : media queries pour la première partie smartphone */
+@media screen and (max-width: 660px) {
+	.topic-arrow-link {
+		width: 40px;
+		height: 40px;
+		img {
+			width: 40px;
+			height: 40px;
+		}
+	}
+	.topic-page-counter {
+		left: calc(50% - 52px) !important;
+		width: 100px !important;
+		height: 30px !important;
+		font-size: 12px !important;
+		padding: 2px !important;
+	}
+	.topic-prev-button, .topic-next-button {
+		width: 45px !important;
+		height: 45px !important;
+	}
+}

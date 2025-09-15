@@ -1,0 +1,57 @@
+$color_1: rgb(14, 14, 77);
+$color_2: white;
+$color_3: #5286b4;
+
+.sell-page {
+	background: url(../../assets/images/success.webp) no-repeat center center fixed;
+	background-size: cover;
+	position: relative;
+	width: calc(80% - 2px);
+	border: 1px solid $color_2;
+}
+.sell-overlay {
+	position: absolute;
+	background: rgba($color: $color_3, $alpha: .5);
+	width: 100%;
+	height: 100%;
+}
+.sell-div {
+	position: absolute;
+	width: 80%;
+	min-height: 100vh;
+	padding-right: 10%;
+	padding-left: 10%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 80px;
+	overflow: hidden;
+	h1 {
+		text-align: center;
+		font-size: 36px;
+		cursor: default;
+		text-transform: lowercase;
+	}
+	a {
+		text-align: center;
+		font-size: 32px;
+		color: $color_1;
+		text-decoration: underline;
+		text-transform: lowercase;
+	}
+}
+/* Ici : media queries pour la seconde partie tablette */
+@media screen and (max-width: 991px) {
+	.sell-page {
+		width: calc(100% - 2px);
+	}
+	.sell-div {
+		h1 {
+			font-size: 22px;
+		}
+		a {
+			font-size: 18px;
+		}
+	}
+}
