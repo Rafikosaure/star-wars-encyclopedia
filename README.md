@@ -76,7 +76,7 @@ Les produits sont actuellement chargés depuis un fichier JSON local 📂, mais 
 - backend: Node JS, Express; 
 - base de données: MongoDB; 
 - ORM: Mongoose; 
-- APIs frontend: Star Wars Databank, Deepl API, TMDB API; 
+- APIs frontend: Star Wars Databank, Deepl API, TMDB API, Star-Wars-Artefacts-API; 
 - Paiement: Stripe en mode bac à sable;
 - Hébergement: https://vercel.com/
 - Service d'emailing utilisé: Gmail
