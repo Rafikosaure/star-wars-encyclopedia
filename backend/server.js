@@ -49,7 +49,7 @@ server.on('listening', () => {
 })
 
 app.get('/home', (req, res) => {
-    res.status(200).json('Welcome, your app is working well');
-})
+    res.status(200).json({ status: 'ok', message: 'App is working well' });
+});
 
 server.listen(port)
