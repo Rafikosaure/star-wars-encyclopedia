@@ -1,5 +1,5 @@
 # Utilise l'image officielle
-FROM node:alpine
+FROM node:22.18.0-alpine
 
 # Définit le répertoire de travail dans le conteneur
 # On l'écrit souvent avec ces deux syntaxes : "/usr/src/app" ou "/www"
