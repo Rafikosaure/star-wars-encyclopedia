@@ -48,6 +48,10 @@ app.use(cors({
 app.use(cookieParser())
 
 
+// Gestion du proxy de Coolify
+app.set('trust proxy', 1)
+
+
 // Application d'un rate-limit
 app.use(
     rateLimit({
