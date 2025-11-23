@@ -52,4 +52,5 @@ app.get('/home', (req, res) => {
     res.status(200).json({ status: 'ok', message: 'App is working well' });
 });
 
-server.listen(port)
+// Écouteur d'évènements HTTP, sur le port défini
+server.listen(port, '0.0.0.0') // Écoute sur toutes les interfaces réseau
