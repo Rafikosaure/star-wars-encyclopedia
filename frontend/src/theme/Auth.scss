@@ -38,7 +38,7 @@ $background-color_2: transparent;
 	font-weight: bold;
 	display: flex;
 	flex-direction: column;
-	gap: 50px;
+	gap: 40px;
 	align-items: center;
 	justify-content: center;
 	width: 100%;
@@ -103,6 +103,7 @@ button {
 	margin-top: 50px;
 	font-size: 16px;
 	font-weight: bold;
+	background-color: $background-color_1 !important;
 	&:active {
 		border: none;
 		outline: 4px solid $color_2;
@@ -171,6 +172,14 @@ input[type="file"] {
 	cursor: pointer;
 	background-color: $background-color_2;
 }
+.login-form-label {
+	font-size: 14px;
+	color: $color_1;
+	font-family: $font-family_1;
+	font-weight: bold;
+	margin-bottom: -30px;
+	margin-top: -10px;
+}
 /* Ici : media queries pour la première partie tablette */
 @media screen and (max-width: 1023px) {
 	.div-register-input-file-wrapper {
@@ -180,6 +189,9 @@ input[type="file"] {
 			height: 25px !important;
 			margin-left: 4px;
 		}
+	}
+	.login-form {
+		gap: 30px;
 	}
 	.login-form-input {
 		font-size: 12px;
@@ -209,11 +221,17 @@ input[type="file"] {
 		height: 10px;
 		margin-left: 0;
 	}
+	.login-form-label {
+		margin-bottom: -22px;
+	}
 }
 /* Ici : media queries pour la seconde partie tablette */
 @media screen and (max-width: 991px) {
 	.auth-page {
 		width: calc(100% - 2px);
+	}
+	.login-form {
+		gap: 30px;
 	}
 	.login-page-content {
 		h1 {
@@ -247,5 +265,9 @@ input[type="file"] {
 			height: 15px;
 			margin-left: 3px;
 		}
+	}
+	.login-form-label {
+		margin-bottom: -22px;
+		font-size: 12px;
 	}
 }
