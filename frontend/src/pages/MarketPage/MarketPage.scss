@@ -33,22 +33,18 @@ $font-family_2: 'Starjedi';
             width: 123px;
             height: 45px;
             background-color: $background-color_1;
-            color: $color_1;
             border: none;
-            outline: 3px solid $color_2;
+            color: $color_3;
             .market-filter-currency {
                 width: 10px;
                 height: 16px;
-            }
-            &:focus {
-                outline: 3px solid $color_1;
+                filter: invert(1);
             }
         }
         .empire-filter-button {
             font-size: 14px;
         }
         .active {
-            background-color: $color_1;
             color: $color_3;
             outline: 3px solid $color_2;
             .market-filter-currency {

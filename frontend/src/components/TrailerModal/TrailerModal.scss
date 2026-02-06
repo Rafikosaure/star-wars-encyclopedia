@@ -60,17 +60,16 @@ $font-family_1: Arial, Helvetica, sans-serif;
         right: 22px;
         width: 40px;
         height: 40px;
-        background-color: #dc2626;
+        background-color: #dc2626 !important;
         color: white;
-        padding: 10px;
-        // border-radius: 50%;
+        padding: 1px;
         border-radius: 10px;
         border: none;
         cursor: pointer;
         outline: none;
     
         &:hover {
-            background-color: #b91c1c;
+            background-color: #b91c1c !important;
             outline: none;
             border: none;
         }

@@ -47,6 +47,7 @@ const TrailerModal = ({ videoLink }) => {
     // Fonction pour extraire l'ID de la vidéo depuis une URL complète
     const extractVideoId = useCallback((url) => {
         const regex = /www\.youtube-nocookie\.com\/embed\/([a-zA-Z0-9_-]+)/;
+        // const regex = /www\.youtube\.com\/embed\/([a-zA-Z0-9_-]+)/; // Si vous utilisez youtube.com au lieu de youtube-nocookie.com
         const match = url.match(regex);
         return match ? match[1] : null;
     }, []);
@@ -119,7 +120,8 @@ const TrailerModal = ({ videoLink }) => {
                 <button 
                 className="trailer-modal__close-button" 
                 onClick={(e) => closeModal(e)}
-                onKeyDown={(e) => e.key === ("Enter" || "Escape") && closeModal(e)}
+                onKeyDown={(e) => (e.key === "Enter" || e.key === "Escape") && closeModal(e)}
+
                 >
                     ✖
                 </button>
@@ -135,7 +137,15 @@ const TrailerModal = ({ videoLink }) => {
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowFullScreen
                         referrerPolicy="strict-origin-when-cross-origin"
-                        sandbox="allow-scripts allow-same-origin allow-popups"
+                        sandbox="
+                                allow-scripts
+                                allow-same-origin
+                                allow-forms
+                                allow-popups
+                                allow-popups-to-escape-sandbox
+                                allow-top-navigation-by-user-activation
+                                allow-presentation
+                                "
                         className={`trailers-iframe`}
                     />
                 )
