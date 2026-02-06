@@ -56,15 +56,15 @@ export default function SearchBar({ category }) {
   }, [search, dispatch, article, articlesList])
 
 
-  // Traductions
+  // Traduction de la recherche en anglais
   const translateSearch = async (text) => {
     const translation = await translateText("FR", "EN-US", text);
     if (translation) {
       setSearch(translation);
     }
   };
-
   
+
   // Validation du formulaire (redirection vers la page article concernée)
   const onFormSubmit = (e) => {
     e.preventDefault()

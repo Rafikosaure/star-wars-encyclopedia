@@ -4,7 +4,6 @@ $color_3: white;
 $font-family_1: Arial, Helvetica, sans-serif;
 
 
-
 .return-to-top-content {
     position: fixed;
     bottom: 50px;
@@ -35,7 +34,7 @@ $font-family_1: Arial, Helvetica, sans-serif;
         }
         .arrow-to-top {
             width: 25px;
-            height: auto;
+            height: 25px;
             border-radius: 50%;
         }
     }
@@ -49,5 +48,6 @@ $font-family_1: Arial, Helvetica, sans-serif;
             width: 100% !important;
             height: 100% !important;
         }
+        display: none;
     }
 }

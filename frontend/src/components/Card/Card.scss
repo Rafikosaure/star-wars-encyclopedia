@@ -38,7 +38,7 @@ $background-color_1: black;
 	background-color: $background-color_1;
 	display: flex;
 	justify-content: center;
-	align-items: flex-start;
+	align-items: center;
 }
 .card-content {
 	position: relative;
@@ -56,7 +56,7 @@ $background-color_1: black;
 }
 .card-name {
 	text-align: center;
-	font-size: 22px;
+	font-size: 18px;
 	text-transform: lowercase;
 	width: 85%;
 	height: fit-content;
@@ -69,13 +69,13 @@ $background-color_1: black;
 	.card {
 		margin-bottom: 10px;
 		width: 240px;
-		height: 100px;
+		height: 120px;
 	}
 	.card-name-div {
 		min-height: 0;
 	}
 	.card-name {
-		font-size: 16px;
+		font-size: 14px;
 		height: fit-content;
 	}
 }

@@ -12,6 +12,7 @@ $font-family_1: Arial, Helvetica, sans-serif;
     height: fit-content;
 }
 .trailer-modal {
+    animation: modalAppears 0.4s;
     border: none;
     padding: 0;
     background-color: $background-color_1;
@@ -52,7 +53,7 @@ $font-family_1: Arial, Helvetica, sans-serif;
             height: 500px;
         }
     }
-  
+
     &__close-button {
         position: absolute;
         top: 10px;
@@ -73,6 +74,29 @@ $font-family_1: Arial, Helvetica, sans-serif;
             outline: none;
             border: none;
         }
+    }
+}
+.closing-animation {
+    animation: modalDisappears 0.4s forwards;
+}
+@keyframes modalAppears {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+@keyframes modalDisappears {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: scale(0.8);
     }
 }
 

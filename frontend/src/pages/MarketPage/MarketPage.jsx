@@ -15,23 +15,24 @@ import {
 import Currency from '../../assets/images/credit_white.webp'
 import BackArrow from '../../assets/images/back-arrow.webp'
 import NextArrow from '../../assets/images/next-arrow.webp'
+import Spinner from '../../assets/images/spinner.svg'
 
 
 function MarketPage() {
 
     const dispatch = useDispatch()
-    const currentPage = useSelector(selectShoppingPage)
-    const storedProducts = useSelector(selectProducts)
+    const currentPage = useSelector(selectShoppingPage);
+    const storedProducts = useSelector(selectProducts);
     const productsStatus = useSelector(selectProductsStatus);
-    const [filteredProducts, setFilteredProducts] = useState()
-    const [filterCategory, setFilterCategory] = useState('all')
-    const [filterButtonsActive, setFilterButtonsActive] = useState('1')
+    const [filteredProducts, setFilteredProducts] = useState();
+    const [filterCategory, setFilterCategory] = useState('all');
+    const [filterButtonsActive, setFilterButtonsActive] = useState('1');
     
     // Supprimer le jeton de transaction dans le stockage de session
-    sessionStorage.removeItem('shoppingStringSession')
+    sessionStorage.removeItem('shoppingStringSession');
 
     // Variables de pagination
-    const productsPerPage = 6
+    const productsPerPage = 6;
 
     // Calculer les bornes de pagination
     const indexOfLastProduct = currentPage * productsPerPage
@@ -130,7 +131,6 @@ function MarketPage() {
 
 
     // Gestion de l'affichage asynchrone
-    if (productsStatus === 'loading') return <p>Chargement...</p>;
     if (productsStatus === 'failed') return <p>Erreur lors du chargement.</p>;
 
 
@@ -234,6 +234,9 @@ function MarketPage() {
                         currentProducts.map((product) => (
                             <ShoppingCard key={product.id} product={product} />
                         ))
+                    )}
+                    {productsStatus === 'loading' && (
+                        <img src={Spinner} className='loading-spinner-style' alt="Chargement des articles..." />
                     )}
                 </div>
                 </>

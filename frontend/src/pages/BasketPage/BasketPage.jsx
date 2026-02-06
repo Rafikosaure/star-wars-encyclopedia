@@ -12,6 +12,7 @@ import { selectBasket } from '../../redux/slices/shoppingBasket'
 import { useSelector, useDispatch } from 'react-redux'
 import { emptyBasket } from '../../redux/slices/shoppingBasket.js'
 import BasketCard from '../../components/BasketCard/BasketCard'
+import SimulatedMarketBanner from '../../components/SimulatedMarketBanner/SimulatedMarketBanner.jsx'
 import { 
     convertDatariesToEuro,
     mergeBasketWithCatalog,
@@ -112,8 +113,8 @@ function BasketPage() {
 
     return (
         <div className='app basket-page-wrapper'>
-            <div className='basket-page-maintenance'>Service de shopping expérimental : achats simulés</div>
             <div className='basket-page-background' />
+            <SimulatedMarketBanner />
             <h1 className='basket-page-title'>Panier</h1>
             <div className='basket-page-return-arrow-wrapper'>
                 <div 

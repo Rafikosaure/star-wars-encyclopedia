@@ -99,6 +99,7 @@ $font-family_2: 'Starjedi';
                     &:hover {
                         color: $color_2;
                     }
+                    animation: fadein 1s;
                 }
             }
             .listing-content-open {
@@ -134,7 +135,7 @@ $font-family_2: 'Starjedi';
             height: 560px;
             display: flex;
             cursor: default;
-            animation: fadein 1s;
+            animation: dataAppears 0.6s;
             .movies-page-data-section-text-wrapper {
                 position: relative;
                 display: flex;
@@ -248,9 +249,9 @@ $font-family_2: 'Starjedi';
     }
 }
 
-@keyframes fadein {
-	0% {opacity: 0}
-    100% {opacity: 1}
+@keyframes dataAppears {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
 }
 
 /* Ici : media queries pour la seconde partie desktop */

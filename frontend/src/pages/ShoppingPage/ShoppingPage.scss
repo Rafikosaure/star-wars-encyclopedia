@@ -15,20 +15,6 @@ $font-family_2: 'Starjedi';
     align-items: center;
     background-color: $background-color_1;
     cursor: default;
-    .shopping-page-maintenance {
-        background-color: lightgreen;
-        width: 100%;
-        height: 40px;
-        position: absolute;
-        top: 0;
-        color: black;
-        font-family: $font-family_1;
-        font-size: 16px;
-        text-align: center;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
     .shopping-page-background {
         position: absolute;
         width: 100%;
@@ -74,10 +60,6 @@ $font-family_2: 'Starjedi';
         .shopping-page-title {
             font-size: 22px;
             margin-top: 60px;
-        }
-        .shopping-page-maintenance {
-            font-size: 12px;
-            height: 30px;
         }
         .shopping-basket-wrapper {
             margin-right: 3%;

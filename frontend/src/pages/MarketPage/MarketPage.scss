@@ -65,6 +65,11 @@ $font-family_2: 'Starjedi';
         align-items: flex-start;
         flex-wrap: wrap;
         margin-bottom: 100px;
+        .loading-spinner-style {
+            width: 300px;
+            height: 300px;
+            margin-top: 100px;
+        }
     }
     .market-arrows-section {
         display: flex;

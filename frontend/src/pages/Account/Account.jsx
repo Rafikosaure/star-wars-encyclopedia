@@ -217,23 +217,25 @@ export default function Account() {
                 <h2>Mettre à jour vos infos ?</h2>
                 <div>
                   <form className='account-form-update' autoComplete='off' onSubmit={handleSubmit(modifyData)} >
-                    <input type="text" className='account-input-text-data' name='name' placeholder='Modifiez votre nom...' {...register("name", {required: false})} onFocus={(e) => e.target.placeholder = ""} onBlur={(e) => e.target.placeholder = 'Modifiez votre nom...'} />
-                    <input type="email" className='account-input-text-data' name='email' placeholder='Modifiez votre email...' {...register("email", {required: false})} onFocus={(e) => e.target.placeholder = ""} onBlur={(e) => e.target.placeholder = 'Modifiez votre email...'} />
-                    
+                    <label className='account-label' htmlFor="name">Nom</label>
+                    <input type="text" id='name' className='account-input-text-data' name='name' placeholder='Modifiez votre nom...' {...register("name", {required: false})} onFocus={(e) => e.target.placeholder = ""} onBlur={(e) => e.target.placeholder = 'Modifiez votre nom...'} />
+                    <label className='account-label' htmlFor="email">Email</label>
+                    <input type="email" id='email' className='account-input-text-data' name='email' placeholder='Modifiez votre email...' {...register("email", {required: false})} onFocus={(e) => e.target.placeholder = ""} onBlur={(e) => e.target.placeholder = 'Modifiez votre email...'} />
+                    <label className='account-label' htmlFor="password">Mot de passe</label>
                     <div className='account-input-password-div'>
-                      <input type="password" className='account-input-text-data' name='password' placeholder='Modifiez votre mot de passe...' {...register ("password", {required: false})} onFocus={(e) => e.target.placeholder = ""} onBlur={(e) => e.target.placeholder = 'Modifiez votre mot de passe...'} />
+                      <input type="password" id='password' className='account-input-text-data' name='password' placeholder='Modifiez votre mot de passe...' {...register ("password", {required: false})} onFocus={(e) => e.target.placeholder = ""} onBlur={(e) => e.target.placeholder = 'Modifiez votre mot de passe...'} />
                       <PasswordValidatorBar password={passwordTypeManagment(initialPasswordValue)} />
                     </div>
                     
                     <p className='unvalid-password-text' style={{display: unvalidPassword}}>Votre mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caracère spécial.</p>
 
                     <div className='div-input-file-wrapper'>
-                      <div id='div-input-file'>
+                      <label htmlFor='file' id='div-input-file'>
                         <div className='div-input-file-image'>Avatar (facultatif)
                           <img src={PictureIsValid} alt="Upload is valid" className={`input-valid-img ${fileIsLoad}`} />
                         </div>
                         <input className='account-file-input' type="file" id="file" name="picture" accept=".png, .jpg, .jpeg" {...register("picture")} onChange={(e) => setInputPictureValue(e.target.value)} />
-                      </div>
+                      </label>
                       <div className={`input-file-undo-upload ${fileIsLoad}`} title="Décharger l'avatar de profil" onClick={(e) => resetProfilePicture(e)} />
                     </div>
 
@@ -248,6 +250,7 @@ export default function Account() {
                   <h2 className='account-profile-title'>Suppression du compte</h2>
                   <div className='account-delete-section'>
                     <form className='account-form-delete-section' onSubmit={(e) => e.preventDefault()}>
+                      <label className='account-form-delete-label' htmlFor="email">Confirmez votre email pour supprimer votre compte :</label>
                       <input className='account-form-delete-input' type="text" onChange={(e) => validateEmail(e.target.value)} placeholder='Entrez votre email...' onFocus={(e) => e.target.placeholder = ""} onBlur={(e) => e.target.placeholder = 'Entrez votre email...'} />
                     </form>
                     {allowDeletion ? (

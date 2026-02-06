@@ -12,6 +12,7 @@ const TrailerModal = ({ videoLink }) => {
     const modalContentRef = useRef(null);
     const [iframeSrc, setIframeSrc] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
+    const [closeAnim, setCloseAnim] = useState('');
     const videoURL = `${config.youtubeTrailersEndpoint}/${videoLink}`
 
 
@@ -19,7 +20,7 @@ const TrailerModal = ({ videoLink }) => {
     useClickOutside([modalContentRef], () => {
         if (dialogRef.current?.open) {
             setIframeSrc('');
-            dialogRef.current.close();
+            handleCloseWithAnimation();
         }
     });
 
@@ -28,10 +29,20 @@ const TrailerModal = ({ videoLink }) => {
     useEscapeKey(() => {
         if (dialogRef.current?.open) {
             setIframeSrc('');
-            dialogRef.current.close();
+            handleCloseWithAnimation();
         }
     });
 
+
+    // Instructions pour fermer la modale avec l'animation
+    const handleCloseWithAnimation = () => {
+        setCloseAnim('closing-animation');
+        setTimeout(() => {
+            dialogRef.current.close();
+            setCloseAnim(''); // Réinitialise l'animation pour la prochaine ouverture
+        }, 400); // Délai pour permettre à l'animation de démarrer
+    };
+    
 
     // Fonction pour extraire l'ID de la vidéo depuis une URL complète
     const extractVideoId = useCallback((url) => {
@@ -88,7 +99,7 @@ const TrailerModal = ({ videoLink }) => {
         e.preventDefault();
         if (dialogRef.current) {
             setIframeSrc(""); // Vide l'iframe pour stopper la vidéo
-            dialogRef.current.close();
+            handleCloseWithAnimation();
         }
     };
 
@@ -103,7 +114,7 @@ const TrailerModal = ({ videoLink }) => {
             Voir le trailer
         </p>
 
-        <dialog ref={dialogRef} className="trailer-modal">
+        <dialog ref={dialogRef} className={`trailer-modal ${closeAnim}`}>
             <div className="trailer-modal__content" ref={modalContentRef}>
                 <button 
                 className="trailer-modal__close-button" 
@@ -125,7 +136,7 @@ const TrailerModal = ({ videoLink }) => {
                         allowFullScreen
                         referrerPolicy="strict-origin-when-cross-origin"
                         sandbox="allow-scripts allow-same-origin allow-popups"
-                        className="trailers-iframe"
+                        className={`trailers-iframe`}
                     />
                 )
             )}

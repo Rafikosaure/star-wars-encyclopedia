@@ -1,0 +1,47 @@
+$font-family_1: Arial, Helvetica, sans-serif;
+
+.shopping-page-maintenance {
+    background-color: mediumturquoise;
+    overflow: hidden;
+    width: 100%;
+    height: 30px;
+    position: absolute;
+    top: 0;
+    color: black;
+    font-family: $font-family_1;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .banner-moving-text {
+        animation: moveText 8s linear infinite;
+    }
+}
+/* Ici : media queries pour la première partie tablette */
+@media screen and (max-width: 1023px) {
+    .shopping-page-maintenance {
+        font-size: 12px;
+        .banner-moving-text {
+            animation: moveText 6s linear infinite;
+        }
+    }
+}
+/* Ici : media queries pour la seconde partie tablette */
+@media screen and (max-width: 991px) {
+    .shopping-page-maintenance {
+        font-size: 12px;
+        .banner-moving-text {
+            animation: moveText 6s linear infinite;
+        }
+    }
+}
+@keyframes moveText {
+    0% {
+        transform: translateX(240%);
+    }
+    100% {
+        transform: translateX(-240%);
+    }
+}
