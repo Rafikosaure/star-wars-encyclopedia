@@ -107,7 +107,11 @@ export const ServerServices = {
                     description: result.description.text.replace(/^"|"$/g, "")
                 }
             }
-            return result.name.text.replace(/^"|"$/g, ""); // Nettoyage des guillemets inutiles
+            if (result.name) {
+                return result.name.text.replace(/^"|"$/g, ""); // Nettoyage des guillemets inutiles
+            } else {
+                return result;
+            }
         } catch (error) {
             console.error("Erreur de traduction :", error);
             return null;
