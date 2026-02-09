@@ -167,11 +167,11 @@ export default function BurgerMenu() {
                     ? 'navlink-display-none'
                     : 'navlink-display-flex'
                     } to="/forum" onClick={() => {dispatch(reinitializeDozen()); setIsOpen(false); setOpenWikiLinks('none'); setWikiButtonActive('')}}>Forum</NavLink>
-                <NavLink className={({ isActive }) =>
+                {/* <NavLink className={({ isActive }) =>
                     isActive
                     ? 'navlink-display-none'
                     : 'navlink-display-flex'
-                    } to="/movies" onClick={() => {dispatch(reinitializeDozen()); setIsOpen(false); setOpenWikiLinks('none'); setWikiButtonActive('')}}>Vidéothèque</NavLink>
+                    } to="/movies" onClick={() => {dispatch(reinitializeDozen()); setIsOpen(false); setOpenWikiLinks('none'); setWikiButtonActive('')}}>Vidéothèque</NavLink> */}
                 <NavLink className={({ isActive }) =>
                     isActive
                     ? 'navlink-display-none'

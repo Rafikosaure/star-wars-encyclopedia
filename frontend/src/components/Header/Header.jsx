@@ -116,13 +116,13 @@ export default function Header() {
                         } to="/forum" 
                         // onClick={() => dispatch(reinitializeDozen())}
                         >Forum</NavLink>
-            <NavLink className={({ isActive }) =>
+            {/* <NavLink className={({ isActive }) =>
                         isActive
                         ? 'navlink-active'
                         : 'navlink-inactive'
                         } to="/movies" 
                         // onClick={() => dispatch(reinitializeDozen())}
-                        >Vidéothèque</NavLink>
+                        >Vidéothèque</NavLink> */}
             <NavLink className={({ isActive }) =>
                         isActive
                         ? 'navlink-active'
