@@ -6,7 +6,8 @@
 		"realisedBy": ["J.J. Abrams"],
 		"actors": ["Daisy Ridley", "Adam Driver", "Oscar Isaac"],
 		"disneyPlusUrl": "fr-fr/movies/star-wars-lascension-de-skywalker-episode-ix/5e8JThYwCYgw",
-		"trailerURL": "embed/pHgwf2eMFnA?si=1qBgCumbfvu0sADa"
+		"iframeTrailerURL": "embed/pHgwf2eMFnA?si=1qBgCumbfvu0sADa",
+		"youtubeTrailerURL": "watch?v=pHgwf2eMFnA"
 	},
 	{
 		"id": 348350,
@@ -15,7 +16,8 @@
 		"realisedBy": ["Ron Howard"],
 		"actors": ["Alden Ehrenreich", "Woody Harrelson", "Emilia Clarke"],
 		"disneyPlusUrl": "fr-fr/movies/solo-a-star-wars-story/7ks3IYr1eU2P",
-		"trailerURL": "embed/mJUsd9D9NW0?si=aWGghd36ui9QzOS6"
+		"iframeTrailerURL": "embed/mJUsd9D9NW0?si=aWGghd36ui9QzOS6",
+		"youtubeTrailerURL": "watch?v=mJUsd9D9NW0&t=3s"
 	},
 	{
 		"id": 181808,
@@ -24,7 +26,8 @@
 		"realisedBy": ["Rian Johnson"],
 		"actors": ["Daisy Ridley", "John Boyega", "Oscar Isaac"],
 		"disneyPlusUrl": "fr-fr/movies/star-wars-les-derniers-jedi-episode-viii/1nCWFK1pmAI0",
-		"trailerURL": "embed/wY708Ky2SG8?si=kBPUhO5GsD-lmLol"
+		"iframeTrailerURL": "embed/wY708Ky2SG8?si=kBPUhO5GsD-lmLol",
+		"youtubeTrailerURL": "watch?v=wY708Ky2SG8"
 	},
 	{
 		"id": 330459,
@@ -33,7 +36,8 @@
 		"realisedBy": ["Gareth Edwards"],
 		"actors": ["Felicity Jones", "Diego Luna", "Ben Mendelsohn"],
 		"disneyPlusUrl": "fr-fr/movies/rogue-one-a-star-wars-story/14CV6eSbygOA",
-		"trailerURL": "embed/ox6Dsbvp7ng?si=k5VqWHewIRdb1zhh"
+		"iframeTrailerURL": "embed/ox6Dsbvp7ng?si=k5VqWHewIRdb1zhh",
+		"youtubeTrailerURL": "watch?v=ox6Dsbvp7ng"
 	},
     {
 		"id": 140607,
@@ -42,7 +46,8 @@
 		"realisedBy": ["J.J. Abrams"],
 		"actors": ["Daisy Ridley", "John Boyega", "Adam Driver"],
 		"disneyPlusUrl": "fr-fr/movies/star-wars-le-reveil-de-la-force-episode-vii/1LEKJPDPeMr7",
-		"trailerURL": "embed/mH9Ygfs5avo?si=7zJR5z6MdYrAswhW"
+		"iframeTrailerURL": "embed/mH9Ygfs5avo?si=7zJR5z6MdYrAswhW",
+		"youtubeTrailerURL": "watch?v=mH9Ygfs5avo"
 	},
     {
 		"id": 1895,
@@ -51,7 +56,8 @@
 		"realisedBy": ["George Lucas"],
 		"actors": ["Hayden Christensen", "Ewan McGregor", "Natalie Portman"],
 		"disneyPlusUrl": "fr-fr/movies/star-wars-la-revanche-des-sith-episode-iii/4WvbqLFumNvi",
-		"trailerURL": "embed/IRE3T_VTeLM?si=KkwmeG_YqeMQDZYY"
+		"iframeTrailerURL": "embed/IRE3T_VTeLM?si=KkwmeG_YqeMQDZYY",
+		"youtubeTrailerURL": "watch?v=IRE3T_VTeLM"
 	},
     {
 		"id": 1894,
@@ -60,7 +66,8 @@
 		"realisedBy": ["George Lucas"],
 		"actors": ["Ewan McGregor", "Natalie Portman", "Hayden Christensen"],
 		"disneyPlusUrl": "fr-fr/movies/star-wars-lattaque-des-clones-episode-ii/mgpYHGnzZW6N",
-		"trailerURL": "embed/x1ZeDI-SOPY?si=ipmVi2cK1Klnn1Gw"
+		"iframeTrailerURL": "embed/x1ZeDI-SOPY?si=ipmVi2cK1Klnn1Gw",
+		"youtubeTrailerURL": "watch?v=x1ZeDI-SOPY"
 	},
     {
         "id": 1893,
@@ -69,7 +76,8 @@
 		"realisedBy": ["George Lucas"],
 		"actors": ["Liam Neeson", "Ewan McGregor", "Natalie Portman"],
 		"disneyPlusUrl": "fr-fr/movies/star-wars-la-menace-fantome-episode-i/2ezYynkgW1AH",
-		"trailerURL": "embed/ACvjzXOj-Dc?si=z40CAHIwoDtf2f18"
+		"iframeTrailerURL": "embed/ACvjzXOj-Dc?si=z40CAHIwoDtf2f18",
+		"youtubeTrailerURL": "watch?v=ACvjzXOj-Dc"
     },
     {
         "id": 1892,
@@ -78,7 +86,8 @@
 		"realisedBy": ["Richard Marquand"],
 		"actors": ["Mark Hamill", "Harrison Ford", "Carrie Fisher"],
 		"disneyPlusUrl": "fr-fr/movies/star-wars-le-retour-du-jedi-episode-vi/6QGKo5mjDBS8",
-		"trailerURL": "embed/VUgIH6fyDvs?si=7dUjwi1VXqBBKy3F"
+		"iframeTrailerURL": "embed/VUgIH6fyDvs?si=7dUjwi1VXqBBKy3F",
+		"youtubeTrailerURL": "watch?v=VUgIH6fyDvs"
     },
     {
         "id": 1891,
@@ -87,7 +96,8 @@
 		"realisedBy": ["Irvin Kershner"],
 		"actors": ["Mark Hamill", "Harrison Ford", "Carrie Fisher"],
 		"disneyPlusUrl": "fr-fr/movies/star-wars-lempire-contre-attaque-episode-v/iqtDTZAewwYl",
-		"trailerURL": "embed/mdrcnZNXmTM?si=GCmgp9TnVZwvfHcx"
+		"iframeTrailerURL": "embed/mdrcnZNXmTM?si=GCmgp9TnVZwvfHcx",
+		"youtubeTrailerURL": "watch?v=mdrcnZNXmTM"
     },
     {
         "id": 11,
@@ -96,7 +106,8 @@
 		"realisedBy": ["George Lucas"],
 		"actors": ["Mark Hamill", "Harrison Ford", "Carrie Fisher"],
 		"disneyPlusUrl": "fr-fr/movies/star-wars-un-nouvel-espoir-episode-iv/12fVeZxD2fWJ",
-		"trailerURL": "embed/HKQgMXvgxsM?si=aDb2sv-8BBj4bpjb"
+		"iframeTrailerURL": "embed/HKQgMXvgxsM?si=aDb2sv-8BBj4bpjb",
+		"youtubeTrailerURL": "watch?v=HKQgMXvgxsM"
     },
 	{
 		"id": 202879,
@@ -105,7 +116,8 @@
 		"createdBy": ["Christopher Ford", "Jon Watts"],
 		"actors": ["Ravi Cabot-Conyers", "Ryan Kiera Armstrong", "Kyriana Kratter"],
 		"disneyPlusUrl": "fr-fr/series/star-wars-skeleton-crew/5V2Mi4qOaO77",
-		"trailerURL": "embed/Urrwgk5af6k?si=zurgsZLEbcIyk1Zi"
+		"iframeTrailerURL": "embed/Urrwgk5af6k?si=zurgsZLEbcIyk1Zi",
+		"youtubeTrailerURL": "watch?v=Urrwgk5af6k"
 	},
 	{
 		"id": 114479,
@@ -114,7 +126,8 @@
 		"createdBy": ["Leslye Headland"],
 		"actors": ["Jung-jae Lee", "Amandla Stenberg", "Manny Jacinto"],
 		"disneyPlusUrl": "fr-fr/series/the-acolyte/39RAA0bOYXQ0",
-		"trailerURL": "embed/6hEZHyf9iKU?si=RxTRxsrM3mIiPbHm"
+		"iframeTrailerURL": "embed/6hEZHyf9iKU?si=RxTRxsrM3mIiPbHm",
+		"youtubeTrailerURL": "watch?v=6hEZHyf9iKU"
 	},
 	{
 		"id": 114461,
@@ -123,7 +136,8 @@
 		"createdBy": ["Jon Favreau", "Dave Filoni"],
 		"actors": ["Rosario Dawson", "Natasha Liu Bordizzo", "Mary Elizabeth Winstead"],
 		"disneyPlusUrl": "fr-fr/series/ahsoka/pdpjs2TO4zJ4",
-		"trailerURL": "embed/HrygRezBECc?si=4JdHwQeNVSnEv9HH"
+		"iframeTrailerURL": "embed/HrygRezBECc?si=4JdHwQeNVSnEv9HH",
+		"youtubeTrailerURL": "watch?v=HrygRezBECc"
 	},
 	{
 		"id": 83867,
@@ -132,7 +146,8 @@
 		"createdBy": ["Tony Gilroy"],
 		"actors": ["Diego Luna", "Stellan Skarsgård", "Genevieve O'Reilly"],
 		"disneyPlusUrl": "fr-fr/series/star-wars-andor/3xsQKWG00GL5",
-		"trailerURL": "embed/LBml3HYcehg?si=S2PK2J5HnP_gMurp"
+		"iframeTrailerURL": "embed/LBml3HYcehg?si=S2PK2J5HnP_gMurp",
+		"youtubeTrailerURL": "watch?v=LBml3HYcehg"
 	},
     {
 		"id": 92830,
@@ -141,7 +156,8 @@
 		"createdBy": ["Hossein Amini", "Joby Harold"],
 		"actors": ["Ewan McGregor", "Hayden Christensen", "Moses Ingram"],
 		"disneyPlusUrl": "fr-fr/series/obi-wan-kenobi/2JYKcHv9fRJb",
-		"trailerURL": "embed/XPW35g3U-f8?si=PKyRISrJHEpNkMOq"
+		"iframeTrailerURL": "embed/XPW35g3U-f8?si=PKyRISrJHEpNkMOq",
+		"youtubeTrailerURL": "watch?v=XPW35g3U-f8"
 	},
     {
 		"id": 105971,
@@ -150,7 +166,8 @@
 		"createdBy": ["Jennifer Corbett", "Dave Filoni"],
 		"actors": ["Dee Bradley Baker", "Michelle Ang", "Rhea Perlman"],
 		"disneyPlusUrl": "fr-fr/series/star-wars-the-bad-batch/4gMliqFxxqXC",
-		"trailerURL": "embed/fsHsSsKFZdw?si=RV5ayNYcCAn2MtgL"
+		"iframeTrailerURL": "embed/fsHsSsKFZdw?si=RV5ayNYcCAn2MtgL",
+		"youtubeTrailerURL": "watch?v=fsHsSsKFZdw"
 	},
     {
 		"id": 82856,
@@ -159,7 +176,8 @@
 		"createdBy": ["Jon Favreau"],
 		"actors": ["Pedro Pascal", "Katee Sackhoff"],
 		"disneyPlusUrl": "fr-fr/series/the-mandalorian/3jLIGMDYINqD",
-		"trailerURL": "embed/3QJypub6Yag?si=iVyh_QEDQnhdeuGP"
+		"iframeTrailerURL": "embed/3QJypub6Yag?si=iVyh_QEDQnhdeuGP",
+		"youtubeTrailerURL": "watch?v=3QJypub6Yag"
 	},
     {
         "id": 60554,
@@ -168,7 +186,8 @@
 		"createdBy": ["Simon Kinberg", "Dave Filoni"],
 		"actors": ["Antonio Le Presti", "Taylor Gray", "Mathieu Moreau"],
 		"disneyPlusUrl": "fr-fr/series/star-wars-rebels/64MCZgAzY0Zw",
-		"trailerURL": "embed/W-UmFkZ7BYo?si=_kjZIzNWydQUf4p8"
+		"iframeTrailerURL": "embed/W-UmFkZ7BYo?si=_kjZIzNWydQUf4p8",
+		"youtubeTrailerURL": "watch?v=W-UmFkZ7BYo"
     },
     {
         "id": 4194,
@@ -177,6 +196,7 @@
 		"createdBy": [" George Lucas"],
 		"actors": ["Matt Lanter", "Ashley Eckstein", "Dee Bradley Baker"],
 		"disneyPlusUrl": "fr-fr/series/star-wars-the-clone-wars/1wYXzjabXGVZ",
-		"trailerURL": "embed/OMHXnDlG-kY?si=PAX6dFB9iFdwqAM9"
+		"iframeTrailerURL": "embed/OMHXnDlG-kY?si=PAX6dFB9iFdwqAM9",
+		"youtubeTrailerURL": "watch?v=OMHXnDlG-kY"
     }
 ]
