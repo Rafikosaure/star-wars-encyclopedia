@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState, useRef, use } from 'react'
 import './MoviesPage.scss'
 import '../../theme/index.scss'
 import BackArrow from '../../assets/images/back-arrow.webp'
@@ -28,7 +28,7 @@ function MoviesPage() {
     const [currentMovieURL, setCurrentMovieURL] = useState()
     const [currentMovieCreators, setCurrentMovieCreators] = useState()
     const [currentMovieActors, setCurrentMovieActors] = useState()
-    const [currentMovieTrailerURL, setCurrentMovieTrailerURL] = useState()
+    const [currentMovieTrailerURL, setCurrentMovieTrailerURL] = useState(["", ""])
     const [datetime, setDatetime] = useState(new Date())
     const { fetchStarWarsMovies } = TmdbApiServices
     const listingImageWrapperRef = useRef(null);
@@ -87,12 +87,15 @@ function MoviesPage() {
                 setCurrentMovieURL(disneyPlusObject.disneyPlusUrl)
                 setCurrentMovieCreators(disneyPlusObject.realisedBy || disneyPlusObject.createdBy)
                 setCurrentMovieActors(disneyPlusObject.actors)
-                setCurrentMovieTrailerURL(disneyPlusObject.trailerURL)
+                setCurrentMovieTrailerURL({
+                    iframeTrailerURL: disneyPlusObject.iframeTrailerURL || "",
+                    youtubeTrailerURL: disneyPlusObject.youtubeTrailerURL || ""
+                })
             }
         }
     }, [currentMediaId])
 
-    
+
     // Détecter le début du toucher
     const handleTouchStart = (e) => {
         if (window.innerWidth > 660) return; // Désactiver le swipe si on n'est pas sur mobile
@@ -261,9 +264,9 @@ function MoviesPage() {
                             `}
                         </p>
                         <p className='movies-page-data-section-text-content'>{currentMovie.overview}</p>
-                        {currentMovieTrailerURL !== "" && (
+                        {currentMovieTrailerURL.iframeTrailerURL.length > 0 && (
                             <div className='movies-page-data-section-trailer'>
-                                <TrailerModal videoLink={currentMovieTrailerURL} />
+                                <TrailerModal videoLinks={currentMovieTrailerURL} />
                             </div>
                         )}
                         {currentMovieURL && (
