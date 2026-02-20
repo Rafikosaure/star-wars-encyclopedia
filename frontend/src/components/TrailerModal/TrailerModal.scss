@@ -1,6 +1,10 @@
 $color_1: white;
-$background-color_1: rgba(0, 0, 0, 0.7);
+$color_2: rgb(50, 50, 50);
+$color_3: rgba(0, 0, 0, 0.1);
+$background-color_1: rgba(0, 0, 0, 0.8);
 $background-color_2: white;
+$background-color_3: #dc2626;
+$background-color_4: #b91c1c;
 $font-family_1: Arial, Helvetica, sans-serif;
 
 
@@ -29,49 +33,64 @@ $font-family_1: Arial, Helvetica, sans-serif;
   
     &__content {
         position: relative;
-        background-color: $background-color_2;
+        background-color: $background-color_1;
+        border: 1px solid $color_2;
         padding-top: 5px;
         padding-left: 5px;
         padding-right: 5px;
         border-radius: 2px;
-        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        box-shadow: 0px 4px 6px $color_3;
         width: 100%;
         min-width: 900px;
         height: 100%;
         min-height: 500px;
-        .trailer-modal__error {
-            color: red;
-            font-weight: bold;
-            text-align: center;
-            padding: 1rem;
-            font-family: $font-family_1;
-            font-size: 22px;
-            cursor: default;
-        }
-        .trailers-iframe {
-            width: 900px;
-            height: 500px;
-        }
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
     }
-
+    &__error {
+        color: $background-color_3;
+        font-weight: bold;
+        text-align: center;
+        padding: 1rem;
+        font-family: $font-family_1;
+        font-size: 22px;
+        cursor: default;
+    }
+    &__iframe {
+        width: 900px;
+        height: 500px;
+        background-color: $background-color_1;
+    }
     &__close-button {
         position: absolute;
         top: 10px;
         right: 22px;
         width: 40px;
         height: 40px;
-        background-color: #dc2626 !important;
+        background-color: $background-color_3 !important;
         color: white;
-        padding: 1px;
+        padding: none !important;
         border-radius: 10px;
-        border: none;
+        border: none !important;
+        outline: none !important;
         cursor: pointer;
-        outline: none;
     
         &:hover {
-            background-color: #b91c1c !important;
-            outline: none;
+            background-color: $background-color_4 !important;
             border: none;
+        }
+    }
+    &__youtube-link {
+        margin: 5px auto 5px auto;
+        font-family: $font-family_1;
+        color: $color_1;
+        background-color: $background-color_3 !important;
+        cursor: pointer;
+        outline: none !important;
+        border: none !important;
+        &:hover {
+            background-color: $background-color_4 !important;
         }
     }
 }
@@ -116,10 +135,10 @@ $font-family_1: Arial, Helvetica, sans-serif;
             min-width: 600px;
             height: 100%;
             min-height: 330px;
-            .trailers-iframe {
-                width: 600px;
-                height: 330px;
-            }
+        }
+        &__iframe {
+            width: 600px;
+            height: 330px;
         }
         &__close-button {
             font-size: 12px !important;
@@ -137,10 +156,10 @@ $font-family_1: Arial, Helvetica, sans-serif;
             min-width: 500px;
             height: 100%;
             min-height: 280px;
-            .trailers-iframe {
-                width: 500px;
-                height: 280px;
-            }
+        }
+        &__iframe {
+            width: 500px;
+            height: 280px;
         }
     }
 }
@@ -152,10 +171,10 @@ $font-family_1: Arial, Helvetica, sans-serif;
             min-width: 310px;
             height: 100%;
             min-height: 172px;
-            .trailers-iframe {
+        }
+        &__iframe {
                 width: 310px;
-                height: 172px;
-            }
+                height: 172px; 
         }
     }
 }

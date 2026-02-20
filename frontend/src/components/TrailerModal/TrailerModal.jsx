@@ -6,14 +6,19 @@ import "./TrailerModal.scss";
 
 
 
-const TrailerModal = ({ videoLink }) => {
+const TrailerModal = ({ videoLinks }) => {
     
     const dialogRef = useRef(null);
     const modalContentRef = useRef(null);
     const [iframeSrc, setIframeSrc] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
     const [closeAnim, setCloseAnim] = useState('');
-    const videoURL = `${config.youtubeTrailersEndpoint}/${videoLink}`
+
+    // Utilise le premier lien de l'objet videoLinks pour l'iframe de la modale
+    const videoURL = `${config.youtubeTrailersEndpoint}/${videoLinks.iframeTrailerURL}`;
+
+    // Utilise le second lien de l'objet videoLinks pour le bouton "Voir sur YouTube"
+    const youtubeTrailerURL = `${config.youtubeBaseURL}/${videoLinks.youtubeTrailerURL}`;
 
 
     // Fermer la modale si l'utilisateur clique en dehors
@@ -105,6 +110,12 @@ const TrailerModal = ({ videoLink }) => {
     };
 
 
+    // Ouvrir la vidéo directement sur YouTube si l'utilisateur clique sur le bouton
+    const openOnYouTube = useCallback(() => {
+        window.open(youtubeTrailerURL, '_blank', 'noopener,noreferrer'); // Ouvre le lien dans un nouvel onglet
+    }, [youtubeTrailerURL]);
+
+
     return (
         <>
         <p 
@@ -126,31 +137,33 @@ const TrailerModal = ({ videoLink }) => {
                     ✖
                 </button>
 
-            {errorMessage ? (
-                <p className="trailer-modal__error">{errorMessage}</p>
-            ) : (
-                iframeSrc && (
-                    <iframe
-                        key={iframeSrc} // Force le re-render immédiat de l'iframe
-                        src={iframeSrc}
-                        title="YouTube video player"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                        referrerPolicy="strict-origin-when-cross-origin"
-                        sandbox="
-                                allow-scripts
-                                allow-same-origin
-                                allow-forms
-                                allow-popups
-                                allow-popups-to-escape-sandbox
-                                allow-top-navigation-by-user-activation
-                                allow-presentation
-                                "
-                        className={`trailers-iframe`}
-                    />
-                )
-            )}
-                
+                {errorMessage ? (
+                    <p className="trailer-modal__error">{errorMessage}</p>
+                ) : (
+                    iframeSrc && (
+                        <iframe
+                            key={iframeSrc} // Force le re-render immédiat de l'iframe
+                            src={iframeSrc}
+                            title="YouTube video player"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                            referrerPolicy="strict-origin-when-cross-origin"
+                            sandbox="
+                                    allow-scripts
+                                    allow-same-origin
+                                    allow-forms
+                                    allow-popups
+                                    allow-popups-to-escape-sandbox
+                                    allow-top-navigation-by-user-activation
+                                    allow-presentation
+                                    "
+                            className='trailer-modal__iframe'
+                        />
+                    )
+                )}
+                {youtubeTrailerURL && youtubeTrailerURL.length > 0 && videoLinks.youtubeTrailerURL.length > 0 && (
+                    <button className='trailer-modal__youtube-link' onClick={openOnYouTube}>Regarder sur YouTube</button>
+                )}
             </div>
         </dialog>
         </>
