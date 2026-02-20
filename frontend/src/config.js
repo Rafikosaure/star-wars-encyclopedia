@@ -10,6 +10,7 @@ const config = {
   tmdbMovieImagePath: import.meta.env.VITE_TMDB_MOVIE_IMAGE_PATH,
   tmdbApiEndpoint: import.meta.env.VITE_TMDB_API_ENDPOINT,
   youtubeTrailersEndpoint: import.meta.env.VITE_YOUTUBE_TRAILERS_ENDPOINT,
+  youtubeBaseURL: import.meta.env.VITE_YOUTUBE_BASE_URL,
   youtubeImgThumbnailEndpoint: import.meta.env.VITE_YOUTUBE_IMG_THUMBNAIL_ENDPOINT,
   disneyPlusEndpoint: import.meta.env.VITE_DISNEY_PLUS_ENDPOINT,
   starWarsShoppingApi: import.meta.env.VITE_STAR_WARS_SHOPPING_API,
