@@ -58,9 +58,15 @@ export default function SearchBar({ category }) {
 
   // Traduction de la recherche en anglais
   const translateSearch = async (text) => {
-    const translation = await translateText("FR", "EN-US", text);
-    if (translation) {
-      setSearch(translation);
+
+    // Vérifier si le texte a le bon type, et si la chaîne n'est pas vide
+    if (typeof text === "string" && text !== "") {
+      const translation = await translateText("FR", "EN-US", text);
+
+      // Vérifier si la traduction est bien une chaîne de caractères
+      if (translation && typeof translation === "string") {
+        setSearch(translation);
+      }
     }
   };
   
